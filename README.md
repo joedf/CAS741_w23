@@ -1,10 +1,10 @@
-# Project Name
+# ImgBeamer (CAS741 Edition)
 
-Developer Names:
+Developer Name: Joachim de Fourestier
 
-Date of project start:
+Date of project/course start: January 11th, 2023
 
-This project is ...
+This project is a basic simulation and learning tool of the Scanning Electron Microscopy (SEM) image formation process.
 
 The folders and files for this project are as follows:
 
