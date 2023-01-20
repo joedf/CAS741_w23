@@ -30,7 +30,7 @@ points can be distinguished, known as the Rayleigh criterion
 \cite{blackburn_microscopy_2020}.The meaning of the term “image resolution” can
 be ambiguous since there are many “types” of image resolutions. The main two
 types of concern are spatial resolution and pixel resolution (or pixel count).
-Spatial resolution of an imagepertains to the actual physical dimensions of an
+Spatial resolution of an image pertains to the actual physical dimensions of an
 image where the size of the pixels can be expressed in physical units such as
 micrometers or nanometers. Conversely, “image resolution” may be used to simply
 express the “image size” (such width and height) in terms of {\it virtual} units
@@ -38,8 +38,8 @@ express the “image size” (such width and height) in terms of {\it virtual} u
 
 Images in an SEM are produced using electron optics where electromagnetism is
 used to deflect and focus a very fine and continuous beam of electrons
-(producedby an electron gun) within a vacuum chamber over a sample surface. This
-electronbeam is then {\it raster scanned} over discrete locations on the surface
+(produced by an electron gun) within a vacuum chamber over a sample surface. This
+electron beam is then {\it raster scanned} over discrete locations on the surface
 and interacts with a volume within the sample (called interaction
 volume)\cite{goldstein_image_2018}. From this interaction volume, different
 types of radiation are generated, such as Backscattered Electrons (BSE) and
@@ -53,7 +53,7 @@ apparatus leading to {\it noise}.
 
 The resolution of a Scanning Electron Microscope (SEM) can be improved by
 aberration corrections and other advanced techniques \cite{joy_dc_2005}.
-Besidesaberrations and many other factors, the resolution and quality of an SEM
+Besides aberrations and many other factors, the resolution and quality of an SEM
 image is inherently limited by the beam spot size, the interaction volume, and
 the Signal-to-Noise Ratio (SNR). There is a general inverse relationship between
 resolution and SNR. For example, an image with a finer beam will produce an
@@ -63,14 +63,14 @@ signal(higher SNR), but this image will be of lower resolution
 \cite{jeol_scanning_2013}.
 
 Apart from resolution, the sampling pattern also affects the image quality.
-Eachdiscrete location over which the beam scans, the spot profile (size and
+Each discrete location over which the beam scans, the spot profile (size and
 shape ofbeam) with respect to the pixel size (discrete location with the raster
 grid) may overlap already covered areas of the sample as it travels between each
 discrete location. This may result in over-sampling, producing a blurrier
 image.If the spot is too small, there is little or no overlap, the sample is
 under-sampled and the resulting image may look sharper (or sometimes more
 pixelated), but there can be a significant loss of information. Some may want
-tounder-sample to make the image to make it look sharper, but this may lead to a
+to under-sample to make the image to make it look sharper, but this may lead to a
 loss of information.
 
 The quality and information content of an image is important because the lack of
@@ -79,7 +79,7 @@ it may ultimately lead to misinterpretation or flawed research.
 \subsection{Inputs and Outputs}
 \subsubsection{Inputs}
 The inputs will be given or preloaded images (representing sample surface
-groundtruth), the spot profile (shape and relative size with respect to the
+ground truth), the spot profile (shape and relative size with respect to the
 output pixel or cell size), the raster grid parameters (split the image into how
 many cells or pixels, i.e., rows and columns), and optional subregion of the
 full image.
@@ -114,7 +114,7 @@ on any modern laptop or desktop computer.
     \item This could be used to simulate defocus and astigmatism.
   \end{itemize}
   \item Better elucidate the issue of oversampling vs. undersampling, similarly
-  tothe Nyquist sampling rate where:
+  to the Nyquist sampling rate where:
   \begin{itemize}
     \item Undersampling may lead to missed or last information.
     \item Oversampling may lead to over-averaging or obscuring information.
