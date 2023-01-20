@@ -1,56 +1,158 @@
 \documentclass{article}
 
-\usepackage{tabularx}
-\usepackage{booktabs}
-
+\usepackage{tabularx} \usepackage{booktabs}
 \title{Problem Statement and Goals\\\progname}
 
 \author{\authname}
 
 \date{}
 
-\input{../Comments}
-\input{../Common}
-
+\input{../Comments} \input{../Common}
 \begin{document}
 
 \maketitle
 
-\begin{table}[hp]
-\caption{Revision History} \label{TblRevisionHistory}
-\begin{tabularx}{\textwidth}{llX}
-\toprule
-\textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
-\midrule
-Date1 & Name(s) & Description of changes\\
-Date2 & Name(s) & Description of changes\\
-... & ... & ...\\
-\bottomrule
-\end{tabularx}
-\end{table}
+\begin{table}[hp] \caption{Revision History} \label{TblRevisionHistory}
+\begin{tabularx}{\textwidth}{llX} \toprule \textbf{Date} & \textbf{Developer(s)}& \textbf{Change}\\ \midrule 2023/01/20 & Joachim de Fourestier & First
+version\\ %Date2 & Name(s) & Description of changes\\ ... & ... & ...\\
+\bottomrule \end{tabularx} \end{table}
 
 \section{Problem Statement}
-
-\wss{You should check your problem statement with the
-\href{https://github.com/smiths/capTemplate/blob/main/docs/Checklists/ProbState-Checklist.pdf}
-{problem statement checklist}.}
-\wss{You can change the section headings, as long as you include the required information.}
-
 \subsection{Problem}
+In the realm of Electron Microscopy (EM), or even images in general, there is a
+common misconception that a sharper image is generally more desirable or better
+because it gives the impression of better “resolution” or {\it clarity}.
+However, that is not always the case.
+
+The concern is with the perceived image {\it quality} and sampling, not
+resolution. Resolution can be defined as the minimum distance by which two
+points can be distinguished, known as the Rayleigh criterion
+\cite{blackburn_microscopy_2020}.The meaning of the term “image resolution” can
+be ambiguous since there are many “types” of image resolutions. The main two
+types of concern are spatial resolution and pixel resolution (or pixel count).
+Spatial resolution of an imagepertains to the actual physical dimensions of an
+image where the size of the pixels can be expressed in physical units such as
+micrometers or nanometers. Conversely, “image resolution” may be used to simply
+express the “image size” (such width and height) in terms of {\it virtual} units
+(e.g., number of “pixels”).
+
+Images in an SEM are produced using electron optics where electromagnetism is
+used to deflect and focus a very fine and continuous beam of electrons
+(producedby an electron gun) within a vacuum chamber over a sample surface. This
+electronbeam is then {\it raster scanned} over discrete locations on the surface
+and interacts with a volume within the sample (called interaction
+volume)\cite{goldstein_image_2018}. From this interaction volume, different
+types of radiation are generated, such as Backscattered Electrons (BSE) and
+Secondary Electrons (SEs). Based on the electron beam’s energy and the sample
+nature, the interaction volume may grow larger or smaller depending how much the
+electrons scatter. Detectors then collect the electrons and convert them into
+{\it signals} based on their energy and count. That said, “extra” electrons (of
+generally lower energy) may be produced by cascading interactions as they
+scatter around against the sample, the chamberwalls, the sample stage, and other
+apparatus leading to {\it noise}.
+
+The resolution of a Scanning Electron Microscope (SEM) can be improved by
+aberration corrections and other advanced techniques \cite{joy_dc_2005}.
+Besidesaberrations and many other factors, the resolution and quality of an SEM
+image is inherently limited by the beam spot size, the interaction volume, and
+the Signal-to-Noise Ratio (SNR). There is a general inverse relationship between
+resolution and SNR. For example, an image with a finer beam will produce an
+image of higher resolution but will have less signal resulting in a noisier
+image (low SNR). An image with a larger beam diameter will result in more
+signal(higher SNR), but this image will be of lower resolution
+\cite{jeol_scanning_2013}.
+
+Apart from resolution, the sampling pattern also affects the image quality.
+Eachdiscrete location over which the beam scans, the spot profile (size and
+shape ofbeam) with respect to the pixel size (discrete location with the raster
+grid) may overlap already covered areas of the sample as it travels between each
+discrete location. This may result in over-sampling, producing a blurrier
+image.If the spot is too small, there is little or no overlap, the sample is
+under-sampled and the resulting image may look sharper (or sometimes more
+pixelated), but there can be a significant loss of information. Some may want
+tounder-sample to make the image to make it look sharper, but this may lead to a
+loss of information.
+
+The quality and information content of an image is important because the lack of
+it may ultimately lead to misinterpretation or flawed research.
 
 \subsection{Inputs and Outputs}
-
-\wss{Characterize the problem in terms of ``high level'' inputs and outputs.  
-Use abstraction so that you can avoid details.}
+\subsubsection{Inputs}
+The inputs will be given or preloaded images (representing sample surface
+groundtruth), the spot profile (shape and relative size with respect to the
+output pixel or cell size), the raster grid parameters (split the image into how
+many cells or pixels, i.e., rows and columns), and optional subregion of the
+full image.
+\subsubsection{Outputs} The outputs will be two generated images
+from resampling based the given image and parameters: a subregion preview and
+the resampled full image.
 
 \subsection{Stakeholders}
+The stakeholder or interested parties may include
+students, professors, and researchers that are involved with SEM. This may
+include disciplines such as materials science, biology, geology, and
+semiconductors.
 
 \subsection{Environment}
-
-\wss{Hardware and software}
+Web-based (Cross platform i.e., Windows, Linux, or Mac)
+on any modern laptop or desktop computer.
 
 \section{Goals}
+\begin{itemize}
+  \item Easy-to-use (for anyone with basic EM knowledge) and accessible (no
+  installer or initial setup needed) tool to help understand the interplay between
+  \begin{itemize}
+  \item Imaging parameters: spot size, shape, overlap, pixel size, and resolution
+  (pixel count).
+  \item Information content (type of image, e.g., grayscale, brightness and
+  contrast, bit depth)
+  \end{itemize}
+  \item Show how (relatively) the spot profile (size and shape) vs.\ pixel size
+  can affect the resulting image.
+  \begin{itemize}
+    \item This could be used to simulate defocus and astigmatism.
+  \end{itemize}
+  \item Better elucidate the issue of oversampling vs. undersampling, similarly
+  tothe Nyquist sampling rate where:
+  \begin{itemize}
+    \item Undersampling may lead to missed or last information.
+    \item Oversampling may lead to over-averaging or obscuring information.
+  \end{itemize}
+  \item Different spot profiles
+  \begin{itemize}
+    \item Intensities
+    \begin{itemize}
+    \item Uniform / Flat distribution
+    \item Normal / Gaussian distribution
+    \end{itemize}
+    \item Shapes and size
+    \begin{itemize}
+    \item Circle
+    \item Ellipse
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
 
 \section{Stretch Goals}
+\begin{itemize}
+  \item Concept of scale in physical units (e.g., mm, µm, nm)
+  \item Support multiple channels simultaneously, such both an image for BSE
+  and SE signals.
+  \item Additional spot shapes
+  \begin{itemize}
+  \item Rings
+  \item Halo shaped beam with “bright” middle
+  \end{itemize}
+  \item Simulate simplified physics of sample and beam interactions.
+  \begin{itemize}
+  \item Simulate basic noise or SNR.
+  \item Charging effects
+  \item Sample topography and “Edge effect” from SEs
+  \item Different classes or nature of samples, e.g., alloys, polymers,
+  resin-embedded bacteria, integrated circuits
+  \end{itemize}
+\end{itemize}
 
+\bibliographystyle {abbrv}
+\bibliography{../../refs/SEM_Image_chapter}
 \end{document}

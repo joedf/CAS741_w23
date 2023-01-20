@@ -13,7 +13,7 @@ all:
 	$(BUILDTEX)
 
 clean-all:
-	rm -f *.dvi *.log *.bak *.aux *.bbl *.blg *.idx *.ps *.eps *.pdf *.toc *.out *~
+	rm -f *.dvi *.log *.bak *.aux *.bbl *.blg *.idx *.ps *.eps *.pdf *.toc *.out *.gz *~
 
 clean:
-	rm -f *.log *.bak *.aux *.bbl *.blg *.idx *.toc *.out *~
+	rm -f *.log *.bak *.aux *.bbl *.blg *.idx *.toc *.out *.gz *~
