@@ -1,4 +1,4 @@
-# ImgBeamer (CAS741 Edition)
+# ImgBeamer (CAS741)
 
 Developer Name: Joachim de Fourestier
 
