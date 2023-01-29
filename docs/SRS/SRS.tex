@@ -328,57 +328,42 @@ $R_{n\times m}$ & 8-bit gray level & Resulting image intensity matrix that has $
 
 \section{Introduction}
 
-\plt{The introduction section is written to introduce the problem.  It starts
-  general and focuses on the problem domain. The general advice is to start with
-a paragraph or two that describes the problem, followed by a ``roadmap''
-paragraph.  A roadmap orients the reader by telling them what sub-sections to
-expect in the Introduction section.}
+Images formed by Scanning Electron Microscope (SEM) are created using a 
+specific process where the image quality can be greatly influenced by the 
+imaging parameters given by the user, aside from any inherent electron 
+optics limitation of a given instrument. The motivation of this project is 
+to be able visualize qualitatively the influence of the spot profile 
+(shape and size) and the rastering parameters (such as pixel size). Since the 
+quality of an image is very often evaluated subjectively by an experienced 
+microscope user, the idea behind this software is provide a way to show 
+that adjusting the imaging parameters could lead to a loss of information 
+or misinterpretation. Is is also to prove or disprove if there is a "rule 
+of thumb" for the optimal spot-to-pixel size ratio.
 
 \subsection{Purpose of Document}
 
-\plt{This section summarizes the purpose of the SRS document.  It does not focus
-  on the problem itself.  The problem is described in the ``Problem
-  Description'' section (Section~\ref{Sec_pd}).  The purpose is for the document
-  in the context of the project itself, not in the context of this course.
-  Although the ``purpose'' of the document is to get a grade, you should not
-  mention this.  Instead, ``fake it'' as if this is a real project.  The purpose
-  section will be similar between projects.  The purpose of the document is the
-  purpose of the SRS, including communication, planning for the design stage,
-  etc.}
+This document serves as the software specification. The details of the 
+requirements, limitations, definitions, models to be used are laid explicitly 
+within this document.
 
 \subsection{Scope of Requirements} 
 
-\plt{Modelling the real world requires simplification.  The full complexity of
-  the actual physics, chemistry, biology is too much for existing models, and
-  for existing computational solution techniques.  Rather than say what is in
-  the scope, it is usually easier to say what is not.  You can think of it as
-  the scope is initially everything, and then it is constrained to create the
-  actual scope.  For instance, the problem can be restricted to 2 dimensions, or
-  it can ignore the effect of temperature (or pressure) on the material
-  properties, etc.}  
-
-\plt{The scope section is related to the assumptions section
-  (Section~\ref{sec_assumpt}).  However, the scope and the assumptions are not
-  at the same level of abstraction.  The scope is at a high level.  The focus is
-  on the ``big picture'' assumptions.  The assumptions section lists, and
-  describes, all of the assumptions.}
+The scope of the requirements of this software is restricted to only the image 
+formation process used in SEMs, more specifically the image processing from 
+signal to an image or visual representions. It does not cover election-sample 
+interactions or CCD (charge coupled device) detector voltage to signal value 
+conversion. See the assumptions section (Section~\ref{sec_assumpt}) for further 
+details.
 
 \subsection{Characteristics of Intended Reader} \label{sec_IntendedReader}
 
-\plt{This section summarizes the skills and knowledge of the readers of the
-  SRS.  It does NOT have the same purpose as the ``User Characteristics''
-  section (Section~\ref{SecUserCharacteristics}).  The intended readers are the
-  people that will read, review and maintain the SRS.  They are the people that
-  will conceivably design the software that is intended to meet the
-  requirements.  The user, on the other hand, is the person that uses the
-  software that is built.  They may never read this SRS document.  Of course,
-  the same person could be a ``user'' and an ``intended reader.''}
-
-\plt{The intended reader characteristics should be written as unambiguously and
-  as specifically as possible.  Rather than say, the user should have an
-  understanding of physics, say what kind of physics and at what level.  For
-  instance, is high school physics adequate, or should the reader have had a
-  graduate course on advanced quantum mechanics?}
+The intended reader of this document should have a basic understanding of 
+electron-optics concepts used in an SEM. This can be equated to a standard level 
+two university physics (optics, electricity, magnetism, thermodynamics and 
+modern physics) along with a standard undergraduate course related to materials 
+characterization (concepts such as backscattered electrons, mean free path, and 
+electron density). The reader should have a basic understanding of 2 dimensional 
+image processing techniques.
 
 \subsection{Organization of Document}
 
