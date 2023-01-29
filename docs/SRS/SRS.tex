@@ -18,6 +18,7 @@
 \usepackage{caption}
 \usepackage{pdflscape}
 \usepackage{afterpage}
+\usepackage{hyperref}
 
 \usepackage[round]{natbib}
 
@@ -173,15 +174,28 @@ description of the unit and the SI name.
     \textbf{symbol} & \textbf{unit} & \textbf{SI}\\
     \midrule 
     \si{\metre} & length & metre\\
-    \si{\nm} & length & nanometre (\num{d-9} m)\\
-    \si{\um} & length & micrometre (\num{d-6} m)\\
     \si{\second} & time & second\\
-    \si{\joule} & energy & joule\\
-    \si{\watt} & power & watt (W = \si{\joule\per\second})\\
-    px & pixel & ?\\
     \bottomrule
   \end{tabular}
-  %	\caption{Provide a caption}
+  %	\caption{SI Units}
+%\end{table}
+~\newline
+ 
+~\newline
+Additional units used:
+~\newline
+
+%\begin{table}[ht]
+  \noindent \begin{tabular}{l l l} 
+    \toprule		
+    \textbf{symbol} & \textbf{unit} & \textbf{name}\\
+    \midrule
+    px & pixel & picture element ?\\
+    \si{\nm} & length & nanometre (\num{d-9} m)\\
+    \si{\um} & length & micrometre (\num{d-6} m)\\
+    \bottomrule
+  \end{tabular}
+  %	\caption{SI Units}
 %\end{table}
 
 \plt{Only include the units that your SRS actually uses.}
@@ -214,13 +228,12 @@ systems.  The symbols are listed in alphabetical order.
 \noindent \begin{longtable*}{l l p{12cm}} \toprule
 \textbf{symbol} & \textbf{unit} & \textbf{description}\\
 \midrule 
-$A_C$ & \si[per-mode=symbol] {\square\metre} & coil surface area
-\\
-$A_\text{in}$ & \si[per-mode=symbol] {\square\metre} & surface area over 
-which heat is transferred in
-\\ 
-$d_p$ & \si[per-mode=symbol] {\nm} & probe diameter (size)
-\\
+$d_p$ & \si[per-mode=symbol] {\nm} & probe diameter (size)\\
+$d_i$ & \si[per-mode=symbol] {\nm} & probe step size in image space\\
+$d_o$ & \si[per-mode=symbol] {\nm} & probe step size in object space\\
+$I_{n\times m}$ & 8-bit gray level & Image intensity matrix that has $n$ rows and $m$ columns.\\
+$M_{n\times m}$ & boolean & Mask / stencil matrix that has $n$ rows and $m$ columns.\\
+$R_{n\times m}$ & 8-bit gray level & Resulting image intensity matrix that has $n$ rows and $m$ columns.\\
 \bottomrule
 \end{longtable*}
 \plt{Use your problems actual symbols.  The si package is a good idea to use for
@@ -256,22 +269,6 @@ $d_p$ & \si[per-mode=symbol] {\nm} & probe diameter (size)
 
 \plt{Add any other abbreviations or acronyms that you add}
 
-\subsection{Mathematical Notation}
-
-\plt{This section is optional, but should be included for projects that make use
-  of notation to convey mathematical information.  For instance, if typographic
-  conventions (like bold face font) are used to distinguish matrices, this
-  should be stated here.  If symbols are used to show mathematical operations,
-  these should be summarized here.  In some cases the easiest way to summarize
-  the notation is to point to a text or other source that explains the
-  notation.}
-
-\plt{This section was added to the template because some students use very
-  domain specific notation.  This notation will not be readily understandable to
-  people outside of your domain.  It should be explained.}
-
-\newpage
-
 \pagenumbering{arabic}
 
 \plt{This SRS template is based on \citet{SmithAndLai2005, SmithEtAl2007}.  It
@@ -284,14 +281,6 @@ $d_p$ & \si[per-mode=symbol] {\nm} & probe diameter (size)
 
 \plt{Feel free to change the appearance of the report by modifying the LaTeX
   commands.}
-
-\plt{This template document assumes that a single program is being documented.
-  If you are documenting a family of models, you should start with a commonality
-  analysis.  A separate template is provided for this.  For program
-  families you should look at \cite{Smith2006, SmithMcCutchanAndCarette2017}.
-  Single family member programs are often programs based on a single physical
-  model.  General purpose tools are usually documented as a family.  Families of
-  physical models also come up.}
 
 \plt{The SRS is not generally written, or read, sequentially.  The SRS is a
   reference document.  It is generally read in an ad hoc order, as the need
@@ -553,23 +542,21 @@ includes the following elements:
 
 \subsubsection{Goal Statements}
 
-\plt{The goal statements refine the ``Problem Description''
-  (Section~\ref{Sec_pd}).  A goal is a functional objective the system under
-  consideration should achieve. Goals provide criteria for sufficient
-  completeness of a requirements specification and for requirements
-  pertinence. Goals will be refined in Section “Instanced Models”
-  (Section~\ref{sec_instance}). Large and complex goals should be decomposed
-  into smaller sub-goals.  The goals are written abstractly, with a minimal
-  amount of technical language.  They should be understandable by non-domain
-  experts.}
-
-\noindent Given the \plt{inputs}, the goal statements are:
+\noindent Given an image, the goal statements are:
 
 \begin{itemize}
 
-\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_meaningfulLabel}:] \plt{One
-    sentence description of the goal.  There may be more than one.  Each Goal
-    should have a meaningful label.}
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_easeofuse}:] {
+A user-friendly straight forward tool to load and reprocess an image with options following the SEM image formation process.
+}
+
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_metric}:] {
+Provide a quantitative metric of relative image quality of the resulting image created from the given parameters and input image (as ground truth).
+}
+
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_visualize}:] {
+The ability to visualize and export the reprocessed images.
+}
 
 \end{itemize}
 
@@ -872,21 +859,12 @@ models. \plt{Modify the examples below for your problem, and add additional
 
 \subsubsection{Instance Models} \label{sec_instance}    
 
-\plt{The motivation for this section is to reduce the problem defined in
-  ``Physical System Description'' (Section~\ref{sec_phySystDescrip}) to one
-  expressed in mathematical terms. The IMs are built by refining the TMs and/or
-  GDs.  This section should remain abstract.  The SRS should specify the
-  requirements without considering the implementation.}
-
 This section transforms the problem defined in Section~\ref{Sec_pd} into 
 one which is expressed in mathematical terms. It uses concrete symbols defined 
 in Section~\ref{sec_datadef} to replace the abstract symbols in the models 
 identified in Sections~\ref{sec_theoretical} and~\ref{sec_gendef}.
 
-The goals \plt{reference your goals} are solved by \plt{reference your instance
-  models}.  \plt{other details, with cross-references where appropriate.}
-\plt{Modify the examples below for your problem, and add additional models as
-  appropriate.}
+The goal of reprocessing an image \gsref{G_easeofuse} will be solved by \iref{bitblt}. The goal of providing an image quality metric will be solved by \iref{qmetric}.  
 
 ~\newline
 
@@ -898,31 +876,62 @@ The goals \plt{reference your goals} are solved by \plt{reference your instance
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   \hline
   \rowcolor[gray]{0.9}
-  Number& IM\refstepcounter{instnum}\theinstnum \label{ewat}\\
+  Number& IM\refstepcounter{instnum}\theinstnum \label{bitblt}\\
   \hline
-  Label& \bf Energy balance on water to find $T_W$\\
+  Label& \bf Bit blit (as known as Bit Block Transfer) \\
   \hline
-  Input&$m_W$, $C_W$, $h_C$, $A_C$, $h_P$, $A_P$, $t_\text{final}$, $T_C$, 
-  $T_\text{init}$, $T_P(t)$ from \iref{epcm}\\
-  & The input is constrained so that $T_\text{init} \leq T_C$ (\aref{A_charge})\\
+  Input& an image $I_{n \times m}$ and a mask $M_{n \times m}$\\
   \hline
-  Output&$T_W(t)$, $0\leq t \leq t_\text{final}$, such that\\
-  &$\frac{dT_W}{dt} = \frac{1}{\tau_W}[(T_C - T_W(t)) + {\eta}(T_P(t) - T_W(t))]$,\\
-  &$T_W(0) = T_P(0) = T_\text{init}$ (\aref{A_InitTemp}) and $T_P(t)$ from \iref{epcm} \\
+  Output& reprocessed image $R_{n \times m}$ \\
   \hline
-  Description&$T_W$ is the water temperature (\si{\celsius}).\\
-  &$T_P$ is the PCM temperature (\si{\celsius}).\\
-  &$T_C$ is the coil temperature (\si{\celsius}).\\
-  &$\tau_W = \frac{m_W C_W}{h_C A_C}$ is a constant (\si{\second}).\\
-  &$\eta = \frac{h_P A_P}{h_C A_C}$ is a constant (dimensionless).\\
-  & The above equation applies as long as the water is in liquid form,
-  $0<T_W<100^o\text{C}$, where $0^o\text{C}$ and $100^o\text{C}$ are the melting
-  and boiling points of water, respectively (\aref{A_OpRange}, \aref{A_Pressure}).
-  \\
+  Description
+  & Given an image and mask (or stencil), a boolean operation is performed iteratively
+  on each cell of the image matrix, based on the corresponding cell value found in the mask
+  matrix at row $i$ and column $j$.\\
+  
+  & If the mask cell value (at $i$, $j$) is true (or any non-zero value), the corresponding image
+  cell value is transfered/kept in the resulting/destination matrix.\\
+
+  & Otherwise, if the corresponding
+  matrix cell (at $i$, $j$) is false (zero), then no value is transfered, and zero will inserted
+  at $i$, $j$ in the destination image matrix. \\
   \hline
-  Sources& Citation here \\
+  Sources& \url{https://en.wikipedia.org/wiki/Bit\_blit} \\
   \hline
-  Ref.\ By & \iref{epcm}\\
+  Ref.\ By & \\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+%Instance Model 2
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& IM\refstepcounter{instnum}\theinstnum \label{bitblt}\\
+  \hline
+  Label& \bf Image quality evaluation \\
+  \hline
+  Input& a image $I_{n \times m}$ serving as ground truth and the image $R_{n \times m}$ to compare\\
+  \hline
+  Output& a positive ratio value ranging from $0$ to $1.00$.\\
+  \hline
+  Description
+  & Given the original image (ground truth) and a reprocessed image, a 
+  metric must be calculated to express image similarity where $1.00$ means
+  a perfect match and $0.00$ means absolutely no correlation or similarity found.\\
+
+  & If the images do no match in size, the smaller image shall be scaled up to match.\\
+
+  & The values do not need to be absolutely quantitative. They only need to 
+  be relatively comparable when only changing $d_p$ or the spot shape.\\
+  \hline
+  Sources& \\
+  \hline
+  Ref.\ By & \\
   \hline
 \end{tabular}
 \end{minipage}\\
