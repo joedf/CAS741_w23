@@ -128,7 +128,7 @@
 
 \begin{document}
 
-\title{Software Requirements Specification for \progname: subtitle describing software} 
+\title{Software Requirements Specification for \progname: SEM Image Formation} 
 \author{\authname}
 \date{\today}
 	
@@ -147,7 +147,7 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
+2023/02/03 & 1.0 & First version\\
 Date 2 & 1.1 & Notes\\
 \bottomrule
 \end{tabularx}
@@ -173,11 +173,12 @@ description of the unit and the SI name.
     \textbf{symbol} & \textbf{unit} & \textbf{SI}\\
     \midrule 
     \si{\metre} & length & metre\\
-    \si{\kilogram} & mass	& kilogram\\
+    \si{\nm} & length & nanometre (\num{d-9} m)\\
+    \si{\um} & length & micrometre (\num{d-6} m)\\
     \si{\second} & time & second\\
-    \si{\celsius} & temperature & centigrade\\
     \si{\joule} & energy & joule\\
     \si{\watt} & power & watt (W = \si{\joule\per\second})\\
+    px & pixel & ?\\
     \bottomrule
   \end{tabular}
   %	\caption{Provide a caption}
@@ -218,6 +219,8 @@ $A_C$ & \si[per-mode=symbol] {\square\metre} & coil surface area
 $A_\text{in}$ & \si[per-mode=symbol] {\square\metre} & surface area over 
 which heat is transferred in
 \\ 
+$d_p$ & \si[per-mode=symbol] {\nm} & probe diameter (size)
+\\
 \bottomrule
 \end{longtable*}
 \plt{Use your problems actual symbols.  The si package is a good idea to use for
@@ -239,8 +242,15 @@ which heat is transferred in
   PS & Physical System Description\\
   R & Requirement\\
   SRS & Software Requirements Specification\\
-  \progname{} & \plt{put an expanded version of your program name here (as appropriate)}\\
-  T & Theoretical Model\\
+  TM & Theoretical Model\\
+  SEM & Scanning Electron Microscope\\
+  EM & Electron Microscopy\\
+  LM & Light Microscopy\\
+  BSE & Backscattered Electron\\
+  SE & Secondary Electron\\
+  ROI & Region of Interest\\
+  FOV & Field of View\\
+  \progname{} & SEM image formation demo tool\\
   \bottomrule
 \end{tabular}\\
 
