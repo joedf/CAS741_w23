@@ -198,24 +198,6 @@ Additional units used:
   %	\caption{SI Units}
 %\end{table}
 
-\plt{Only include the units that your SRS actually uses.}
-
-\plt{Derived units, like newtons, pascal, etc, should show their derivation
-    (the units they are derived from) if their constituent units are in the
-    table of units (that is, if the units they are derived from are used in the
-    document).  For instance, the derivation of pascals as
-    $\si{\pascal}=\si{\newton\per\square\meter}$ is shown if newtons and m are
-    both in the table.  The derivations of newtons would not be shown if kg and
-    s are not both in the table.}
-
-\plt{The symbol for units named after people use capital letters, but the name
-  of the unit itself uses lower case.  For instance, pascals use the symbol Pa,
-  watts use the symbol W, teslas use the symbol T, newtons use the symbol N,
-  etc.  The one exception to this is degree Celsius.  Details on writing metric
-  units can be found on the 
-  \href{https://www.nist.gov/pml/weights-and-measures/writing-metric-units}
-  {NIST} web-page.}
-
 \subsection{Table of Symbols}
 
 The table that follows summarizes the symbols used in this document along with
@@ -270,16 +252,6 @@ $R_{n\times m}$ & 8-bit gray level & Resulting image intensity matrix that has $
 \plt{Add any other abbreviations or acronyms that you add}
 
 \pagenumbering{arabic}
-
-This SRS template is based on \citet{SmithAndLai2005, SmithEtAl2007}. 
-
-\plt{It
-  will get you started.  You should not modify the section headings, without
-  first discussing the change with the course instructor.  Modification means
-  you are not following the template, which loses some of the advantage of a
-  template, especially standardization.  Although the bits shown below do not
-  include type information, you may need to add this information for your
-  problem.  If you are unsure, please can ask the instructor.}
 
 \plt{Feel free to change the appearance of the report by modifying the LaTeX
   commands.}
@@ -346,7 +318,7 @@ of thumb" for the optimal spot-to-pixel size ratio.
 
 This document serves as the software specification. The details of the 
 requirements, limitations, definitions, models to be used are laid explicitly 
-within this document.
+within this document. This document is based on a SRS template from \citet{SmithAndLai2005, SmithEtAl2007}. 
 
 \subsection{Scope of Requirements} 
 
@@ -369,7 +341,12 @@ image processing techniques.
 
 \subsection{Organization of Document}
 
-This document contains an introduction to the software and its goals. It is meant to be a reference document to the readers. The document include a description of the scope, a detailed list of the terminology, definitions, and models used, as well as a more specific and detailed description of the problem and its solutions. This document also defines the requirements, as well as the likely changes and traceability details.
+This document contains an introduction to the software and its goals. It is 
+meant to be a reference document to the readers. The document include a 
+description of the scope, a detailed list of the terminology, definitions, and 
+models used, as well as a more specific and detailed description of the problem 
+and its solutions. This document also defines the requirements, as well as the  
+likely changes and traceability details.
 
 \section{General System Description}
 
@@ -1034,13 +1011,14 @@ image in the following formats:
   \end{itemize}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_userSpotProfile}:] Accept user 
-input of the size and shape of the spot profile and ensure that all its defining values are positive real numbers.
+input of the size and shape of the spot profile and ensure that all its defining 
+values are positive real numbers.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_userPixelSize}:] Accept user 
 input of pixel size and ensure it is a positive real number.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_subregion}:] Accept user
-input to specify a subregion for processing.
+input to specify a subregion (FOV) for processing.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_easySetup}:] Be easy to use 
 with little to no setup required.
@@ -1048,8 +1026,8 @@ with little to no setup required.
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_spotLayout}:] Display a 
 representative spot layout used for processing the image.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_resultImage}:] Reprocess (using \iref{IM_bitblt}) and 
-display the resulting image to the user.
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_resultImage}:] Reprocess (
+using \iref{IM_bitblt}) and display the resulting image to the user.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_imageMetric}:] Calculate and 
 display an image quality metric (according to \iref{IM_imageMetric}) to the user.
@@ -1064,7 +1042,11 @@ maintainability, and portability. These are listed below in detail:
 \noindent \begin{itemize}
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Accuracy}:]
-  \textbf{Accuracy} The images produced should be not manipulated to produce results that subjectively represent the opinions of the author(s) or developer(s). Thus, the software should transparently follow the specifications and be verifiable by an expert in field. The trends in image quality metric are more important the metric values themselves.
+  \textbf{Accuracy} The images produced should be not manipulated to produce 
+  results that subjectively represent the opinions of the author(s) or 
+  developer(s). Thus, the software should transparently follow the 
+  specifications and be verifiable by an expert in field. The trends in image 
+  quality metric are more important the metric values themselves.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:] \textbf{Usability} The user should be able to intuitively use the 
   software and quickly understand what is being displayed. Although the intended 
@@ -1075,10 +1057,15 @@ maintainability, and portability. These are listed below in detail:
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Maintainability}:]
   \textbf{Maintainability} The code should follow a consistent style and
-  be reasonably separated in multiple files were it makes sense. Function names should be no longer than 40 characters. Duplicate code should be avoided wherever possible. Comments should be plentiful, but short, and avoid any unnecessary use jargon or domain-specific terms.
+  be reasonably separated in multiple files were it makes sense. Function names 
+  should be no longer than 40 characters. Duplicate code should be avoided 
+  wherever possible. Comments should be plentiful, but short, and avoid any 
+  unnecessary use jargon or domain-specific terms.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Portability}:]
-  \textbf{Portability} The software should be cross-platorm (Windows, Linux, MacOS) with little to no setup required. This can be in the form of a web-application in an HTML5 compliant web-browser.
+  \textbf{Portability} The software should be cross-platorm (Windows, Linux, 
+  MacOS) with little to no setup required. This can be in the form of a 
+  web-application in an HTML5 compliant web-browser.
 
 \end{itemize}
 
