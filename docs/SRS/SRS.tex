@@ -271,7 +271,9 @@ $R_{n\times m}$ & 8-bit gray level & Resulting image intensity matrix that has $
 
 \pagenumbering{arabic}
 
-\plt{This SRS template is based on \citet{SmithAndLai2005, SmithEtAl2007}.  It
+This SRS template is based on \citet{SmithAndLai2005, SmithEtAl2007}. 
+
+\plt{It
   will get you started.  You should not modify the section headings, without
   first discussing the change with the course instructor.  Modification means
   you are not following the template, which loses some of the advantage of a
@@ -498,7 +500,7 @@ easier to correctly understand the requirements:
   interactions between the elements and their physical environment; ii) the
   interactions between elements; and, iii) the initial or boundary conditions.}
 
-The physical system of \progname{}, as shown in Figure~?,
+The physical system of \progname{}, as shown in Figure \ref{fig_ebeam} and \ref{fig_sampling},
 includes the following elements:
 
 \begin{itemize}
@@ -511,15 +513,25 @@ includes the following elements:
 
 \plt{A figure here makes sense for most SRS documents}
 
-% \begin{figure}[h!]
-% \begin{center}
-% %\rotatebox{-90}
-% {
-%  \includegraphics[width=0.5\textwidth]{<FigureName>}
-% }
-% \caption{\label{<Label>} <Caption>}
-% \end{center}
-% \end{figure}
+\begin{figure}[h!]
+\begin{center}
+%\rotatebox{-90}
+{
+ \includegraphics[width=0.3\textwidth]{figures/e_beam.png}
+}
+\caption{\label{fig_ebeam} Schematic drawing of an electron beam hitting the sample surface with an SEM chamber.}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+%\rotatebox{-90}
+{
+ \includegraphics[width=0.8\textwidth]{figures/sampling.png}
+}
+\caption{\label{fig_sampling} Schematic of the three sampling scenarios (under-sampling, exact-sampling, and over-sampling) and a visual representation of the pixel grid, $d_p$, and $d_o$. Adapted from \citet{lifshin_improving_2014}}
+\end{center}
+\end{figure}
 
 \subsubsection{Goal Statements}
 
@@ -1280,7 +1292,7 @@ Their values are defined in this section for easy maintenance.}
 \newpage
 
 \bibliographystyle {plainnat}
-\bibliography {../../refs/References}
+\bibliography {../../refs/References,../../refs/SEM_Image_chapter}
 
 \newpage
 
