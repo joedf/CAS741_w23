@@ -857,7 +857,7 @@ The goal of reprocessing an image \gsref{G_easeofuse} will be solved by \iref{bi
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   \hline
   \rowcolor[gray]{0.9}
-  Number& IM\refstepcounter{instnum}\theinstnum \label{bitblt}\\
+  Number& IM\refstepcounter{instnum}\theinstnum \label{IM_bitblt}\\
   \hline
   Label& \bf Bit blit (as known as Bit Block Transfer) \\
   \hline
@@ -892,7 +892,7 @@ The goal of reprocessing an image \gsref{G_easeofuse} will be solved by \iref{bi
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   \hline
   \rowcolor[gray]{0.9}
-  Number& IM\refstepcounter{instnum}\theinstnum \label{bitblt}\\
+  Number& IM\refstepcounter{instnum}\theinstnum \label{IM_imageMetric}\\
   \hline
   Label& \bf Image quality evaluation \\
   \hline
@@ -1000,10 +1000,8 @@ A correct solution must exhibit \plt{fill in the details}.  \plt{These
   validation.  Those topics will be addressed in the Verification and Validation
   plan.}
 
+\newpage
 \section{Requirements}
-
-\plt{The requirements refine the goal statement.  They will make heavy use of
-  references to the instance models.}
 
 This section provides the functional requirements, the business tasks that the
 software is expected to complete, and the nonfunctional requirements, the
@@ -1013,27 +1011,38 @@ qualities that the software is expected to exhibit.
 
 \noindent \begin{itemize}
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] \plt{Requirements
-    for the inputs that are supplied by the user.  This information has to be
-    explicit.}
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] Accept an input 
+image in the following formats:
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_OutputInputs}:] \plt{It isn't
-    always required, but often echoing the inputs as part of the output is a
-    good idea.}
+  \noindent \begin{itemize}
+    \item PNG (Portable Net Graphics)
+    \item JPG (Joint Photographic Experts Group)
+    \item BMP (Bitmap)
+    \item preloaded example images
+  \end{itemize}
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Calculate}:] \plt{Calculation
-    related requirements.}
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_userSpotProfile}:] Accept user 
+input of the size and shape of the spot profile and ensure that all its defining values are positive real numbers.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:]
-  \plt{Verification related requirements.}
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_userPixelSize}:] Accept user 
+input of pixel size and ensure it is a positive real number.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Output}:] \plt{Output related
-    requirements.}
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_subregion}:] Accept user
+input to specify a subregion for processing.
+
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_easySetup}:] Be easy to use 
+with little to no setup required.
+
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_spotLayout}:] Display a 
+representative spot layout used for processing the image.
+
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_resultImage}:] Reprocess (using \iref{IM_bitblt}) and 
+display the resulting image to the user.
+
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_imageMetric}:] Calculate and 
+display an image quality metric (according to \iref{IM_imageMetric}) to the user.
 
 \end{itemize}
-
-\plt{Every IM should map to at least one requirement, but not every requirement
-  has to map to a corresponding IM.}
 
 \subsection{Nonfunctional Requirements}
 
