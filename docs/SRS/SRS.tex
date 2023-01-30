@@ -245,6 +245,7 @@ $R_{n\times m}$ & 8-bit gray level & Resulting image intensity matrix that has $
   SE & Secondary Electron\\
   ROI & Region of Interest\\
   FOV & Field of View\\
+  CCD & Charge Coupled Device\\
   \progname{} & SEM image formation demo tool\\
   \bottomrule
 \end{tabular}\\
@@ -318,7 +319,7 @@ of thumb" for the optimal spot-to-pixel size ratio.
 
 This document serves as the software specification. The details of the 
 requirements, limitations, definitions, models to be used are laid explicitly 
-within this document. This document is based on a SRS template from \citet{SmithAndLai2005, SmithEtAl2007}. 
+within this document.
 
 \subsection{Scope of Requirements} 
 
@@ -342,7 +343,7 @@ image processing techniques.
 \subsection{Organization of Document}
 
 This document contains an introduction to the software and its goals. It is 
-meant to be a reference document to the readers. The document include a 
+meant to be a reference document to the readers and is based on a SRS template from \citet{SmithAndLai2005, SmithEtAl2007}. The document include a 
 description of the scope, a detailed list of the terminology, definitions, and 
 models used, as well as a more specific and detailed description of the problem 
 and its solutions. This document also defines the requirements, as well as the  
@@ -507,7 +508,7 @@ includes the following elements:
 {
  \includegraphics[width=0.8\textwidth]{figures/sampling.png}
 }
-\caption{\label{fig_sampling} Schematic of the three sampling scenarios (under-sampling, exact-sampling, and over-sampling) and a visual representation of the pixel grid, $d_p$, and $d_o$. Adapted from \citet{lifshin_improving_2014}}
+\caption{\label{fig_sampling} Schematic of the three sampling scenarios (under-sampling, exact-sampling, and over-sampling) and a visual representation of the pixel grid, $d_p$, and $d_o$. The dashed lines are to help visualize the center of each pixel cell. Adapted from \citet{lifshin_improving_2014}}
 \end{center}
 \end{figure}
 
