@@ -889,7 +889,7 @@ The goal of reprocessing an image \gsref{G_easeofuse} will be solved by \iref{IM
   \hline
   Sources& \url{https://en.wikipedia.org/wiki/Bit\_blit} \\
   \hline
-  Ref.\ By & \\
+  Ref.\ By & \rref{R_resultImage} \\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -1035,14 +1035,11 @@ input of pixel size and ensure it is a positive real number.
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_subregion}:] Accept user
 input to specify a subregion (FOV) for processing.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_easySetup}:] Be easy to use 
-with little to no setup required.
-
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_spotLayout}:] Display a 
 representative spot layout used for processing the image.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_resultImage}:] Reprocess (
-using \iref{IM_bitblt}) and display the resulting image to the user.
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_resultImage}:] Reprocess 
+(using \iref{IM_bitblt}) and display the resulting image to the user.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_imageMetric}:] Calculate and 
 display an image quality metric (according to \iref{IM_imageMetric}) to the user.
@@ -1064,7 +1061,8 @@ maintainability, and portability. These are listed below in detail:
   quality metric are more important the metric values themselves.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:] \textbf{Usability} The user should be able to intuitively use the 
-  software and quickly understand what is being displayed. Although the intended 
+  software and quickly understand what is being displayed. There should be 
+  little to no setup required. Although the intended 
   use is more of a qualitative nature, the user should be able to grasp any 
   trends in the change of the image quality metric when the input parameters are 
   changed. The software should have a simple user interface and be responsive 
@@ -1085,8 +1083,11 @@ maintainability, and portability. These are listed below in detail:
 \end{itemize}
 
 \section{Likely Changes}    
+Here are changes listed that will likely be implemented as the software is improved.
 
 \noindent \begin{itemize}
+
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel0}:] Unknown for now...
 
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] \plt{Give
     the likely changes, with a reference to the related assumption (aref), as appropriate.}
