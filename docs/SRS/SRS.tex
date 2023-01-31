@@ -236,14 +236,16 @@ $R_{n\times m}$ & 8-bit gray level & Resulting image intensity matrix that has $
   R & Requirement\\
   SRS & Software Requirements Specification\\
   TM & Theoretical Model\\
-  SEM & Scanning Electron Microscope\\
-  EM & Electron Microscopy\\
-  LM & Light Microscopy\\
+  2D & two-dimensional\\
+  3D & three-dimensional\\
   BSE & Backscattered Electron\\
-  SE & Secondary Electron\\
-  ROI & Region of Interest\\
-  FOV & Field of View\\
   CCD & Charge Coupled Device\\
+  EM & Electron Microscopy\\
+  FOV & Field of View\\
+  LM & Light Microscopy\\
+  ROI & Region of Interest\\
+  SEM & Scanning Electron Microscope\\
+  SE & Secondary Electron\\
   \progname{} & SEM image formation demo tool\\
   \bottomrule
 \end{tabular}\\
@@ -434,9 +436,9 @@ easier to correctly understand the requirements:
         
         Electron Microscopy & The practice of microscopes that specifically use electrons as the source of illumination to produce an image or signal.  \\
         
-        Exact-sampling & -- \\
+        Exact-sampling & The sampling size or rate that matches the specificity of the targeted resolution. In the context of this document, this is when the size of the probe that matches the size of the pixel. \\
         
-        Field of View & -- \\
+        Field of View & The observable or visible extent given by the microscope and varies with magnification. \\
         
         Ground Truth & The data or information that is considered as the source or reference standard of truth. \\
         
@@ -454,13 +456,13 @@ easier to correctly understand the requirements:
         
         Over-sampling & This is a sampling rate or size that is too large where the specificity or origin of the information is lost. This generally results in increased confidence, but at a loss of precision.\\
         
-        Pixel Size & -- \\
+        Pixel Size & The size or dimensions of one cell within a raster grid. \\
         
         Probe & Generally interchangeable with "beam". Contextually within this document, it is the final part of the beam that comes into contact with the surface of the sample (being analysed within the microscope) forming a "spot" with a targeted size and shape. \\
         
-        Raster Grid & -- \\
+        Raster Grid & A scanning pattern with a defined and repeated cell size. \\
         
-        Region of Interest & -- \\
+        Region of Interest & A defined 2D area in both position, size, and shape on a sample. \\
         
         Resolution & As defined by the Rayleigh criterion, it is the minimum distance by which two points or features can be distinguished. \\
         
