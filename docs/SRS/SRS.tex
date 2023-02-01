@@ -545,24 +545,35 @@ likely change [LC], in which the respective assumption is used.
 \begin{itemize}
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sample}:] The sample 
-surface is solid, flat (meaning no topography), orthogonal to the beam, and 
-conductive (meaning no charge build up from electrons). The material is made of 
-atoms with atomic numbers greater than 3 (lithium).
+surface is solid.
+
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sample}:] The sample 
+surface is flat (meaning no topography).
+
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sample}:] The sample 
+surface is conductive (meaning no charge build up from electrons).
+
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sample}:] The sample 
+material is made of atoms with atomic numbers greater than 3 (lithium and lighter elements are not detectable in SEM).
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_beam}:] The electron 
-beam is ideal: meaning stable and colliminated meaning all the electrons are 
+beam is ideal (meaning stable and colliminated meaning all the electrons are 
 traveling parallel to each other down towards the sample surface within high 
-vacuum (optimal mean free path). The beam intensity or current is considered 
-uniform throughout the beam.
+vacuum for optimal mean free path).
+
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_beam1}:] The beam 
+intensity or current is considered uniform throughout the beam.
+
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_beam2}:] The beam is orthogonal to the sample surface.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_inputImage}:] The input 
 image of the sample is considered to have infinite resolution representive of reality: ground truth.
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_yield}:] The BSEs and SEs
-yields are high enough to produce enough signal and noise is low, meaning optimal SNR.
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_yield}:] The signal yields (such as BSEs and SEs) are high enough to produce meaning optimal SNR (enough signal and noise is low).
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_environment}:] The SEM 
-is within a climate controlled (temperature and humidity) and low vibration room.
+is within a controlled environment: climate controlled (temperature and 
+humidity) and low vibration room.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_reality}:] The image 
 produced by the SEM as the electron raster scan the sample surface is an 
@@ -645,8 +656,8 @@ on.
   \hline
   Description
     & $M$ is the magnification ratio (unitless) \\
-    & $d_i$ is the probe step size in image space. \\
-    & $d_o$ is the probe step size in object space. \\
+    & $d_i$ is the probe step size in image space \\
+    & $d_o$ is the probe step size in object space \\
   \hline
   Notes & -- \\
   \hline
