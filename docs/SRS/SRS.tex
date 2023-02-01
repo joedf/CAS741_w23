@@ -446,6 +446,8 @@ easier to correctly understand the requirements:
         Interaction Volume & The volume within the sample in which there are electron-sample interactions caused by the beam coming into contact with the surface of the sample. \\
         
         Light Microscopy & The practice of microscopes that specifically use light as the source of illumination to produce an image or signal. \\
+
+        Mean Free Path & The average distance within a system that a particle can travel before it collides with other particles.\\
         
         Nyquist Limit & More formally known as the "Nyquist-Shannon" sampling limit is the minimum sampling rate at which all the essential information is captured when discretizing a continous signal, resulting in little to no distortions. \\
         
@@ -490,6 +492,7 @@ includes the following elements:
 \item[PS2:] An SEM which includes a BSE and/or SE detector. The electron beam interacts with the sample surface in high-vacuum producing various signals.
 
 \end{itemize}
+
 \setlength{\belowcaptionskip}{-30pt}
 \begin{figure}[h!]
 \begin{center}
@@ -533,32 +536,6 @@ The ability to visualize and export the reprocessed images.
 
 This section provides the assumptions, instance models, theoretical models, general definitions, and the data constraints. The information specfied in this section is intended to reduce ambiguities and reduce the problem into clear logical or mathematical terms.
 
-\plt{This section presents the solution characteristics by successively refining
-  models.  It starts with the abstract/general Theoretical Models (TMs) and
-  refines them to the concrete/specific Instance Models (IMs).  If necessary
-  there are intermediate refinements to General Definitions (GDs).  All of these
-  refinements can potentially use Assumptions (A) and Data Definitions (DD).
-  TMs are refined to create new models, that are called GMs or IMs. DDs are not
-  refined; they are just used. GDs and IMs are derived, or refined, from other
-  models. DDs are not derived; they are just given. TMs are also just given, but
-  they are refined, not used.  If a potential DD includes a derivation, then
-  that means it is refining other models, which would make it a GD or an IM.}
-
-\plt{The same information can be a TM in one problem and a DD in another.  It is
-  about how the information is used.  In one problem the definition of
-  acceleration can be a TM, in another it would be a DD.}
-
-\plt{There is repetition between the information given in the different chunks
-  (TM, GDs etc) with other information in the document.  For instance, the
-  meaning of the symbols, the units etc are repeated.  This is so that the
-  chunks can stand on their own when being read by a reviewer/user.  It also
-  facilitates reuse of the models in a different context.}
-
-\noindent \plt{The relationships between the parts of the document are show in
-  the following figure.  In this diagram ``may ref'' has the same role as
-  ``uses'' above.  The figure adds ``Likely Changes,'' which are able to
-  reference (use) Assumptions.}
-
 \begin{figure}[H]
   \includegraphics[scale=0.9]{RelationsBetweenTM_GD_IM_DD_A.pdf}
 \end{figure}
@@ -585,6 +562,10 @@ system. The numbers given in the square brackets refer to the theoretical model
 likely change [LC], in which the respective assumption is used.
 
 \begin{itemize}
+
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_label1}:] The sample surface is solid, flat (meaning no topography), and conductive (meaning no charge build up from electrons).
+
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_label2}:] The electron beam is colliminated meaning all the electrons traveling parallel to each other down towards the sample surface within high vacuum (optimal mean free path).
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_meaningfulLabel}:]
   \plt{Short description of each assumption.  Each assumption
