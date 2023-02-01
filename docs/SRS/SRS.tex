@@ -631,7 +631,7 @@ on.
   Notes
     & $S_{max} > S_{min}$ \\
   \hline
-  Sources& \cite{goldstein_image_2018}, \cite{lifshin_improving_2014} \\
+  Sources& \cite{goldstein_textbook_2018}, \cite{lifshin_improving_2014} \\
   \hline
   Ref.\ By & -- \\
   \hline
@@ -677,18 +677,44 @@ instance models.
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.5}
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-\hline
-\rowcolor[gray]{0.9}
-Number& GD\refstepcounter{defnum}\thedefnum \label{GD_grid}\\
-\hline
-Label &\bf Scan or Raster Grid / Deflection Space\\
-\hline
-Units & \si{\nm}, \si{\um}, or px (pixels) \\
-\hline
-Equation & $G(x,y)$ where x and y range from 0 to inf. \\
-\hline
-Description & Scan grid...? \\
-\hline
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& GD\refstepcounter{defnum}\thedefnum \label{GD_grid}\\
+  \hline
+  Label &\bf Scan or Raster Grid\\
+  \hline
+  Units & \si{\nm}, \si{\um}, or px (pixels) \\
+  \hline
+  Equation & $G(x,y)$ where x and y range from 0 to inf. \\
+  \hline
+  Description & Scan grid...? \\
+  \hline
+  Source & -- \\
+  \hline
+  Ref.\ By & -- \\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& GD\refstepcounter{defnum}\thedefnum \label{GD_deflectionSpace}\\
+  \hline
+  Label &\bf Deflection Space (or area / field)\\
+  \hline
+  Description
+    & The deflection space is the area bounds in which the beam can be redirect 
+    or oriented using deflection coils. It can be expressed in real world units, 
+    but this can vary between SEMs. \\
+    & From an imaging perspective, it can be generalized as a normalized unit 
+    square coordinate system where the top left is (-0.5, -0.5), the center is 
+    (0.0, 0.0), and the bottom right is (0.5, 0.5).
+    \\
+  \hline
   Source & Citation here \\
   \hline
   Ref.\ By & -- \\
@@ -743,7 +769,7 @@ models. The dimension of each quantity is also given.  \plt{Modify the examples
   Notes
     & The $signal$ can BSE or SE. \\
   \hline
-  Sources& \cite{goldstein_image_2018} \\
+  Sources& \cite{goldstein_textbook_2018} \\
   \hline
   Ref.\ By & \aref{A_yield} \\
   \hline
