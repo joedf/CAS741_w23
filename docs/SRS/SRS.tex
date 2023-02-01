@@ -623,33 +623,6 @@ on.
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   \hline
   \rowcolor[gray]{0.9}
-  Number& TM\refstepcounter{theorynum}\thetheorynum \label{T_yield}\\
-  \hline
-  Label& \bf Signal yield / intensity\\
-  \hline
-  Equation & $Y_{signal} = N_{signal} / S_{B}$ \\
-  \hline
-  Description
-    & $Y_{signal}$ is the intensity relative to the incident beam. \\
-    & $N_{signal}$ is the number of scattered or emitted electrons. \\
-    & $N_{B}$ is the number of (primary) incident electrons from the beam. \\
-  \hline
-  Notes
-    & The $signal$ can BSE or SE. \\
-  \hline
-  Sources& \cite{goldstein_image_2018} \\
-  \hline
-  Ref.\ By & -- \\
-  \hline
-\end{tabular}
-\end{minipage}\\
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-  \hline
-  \rowcolor[gray]{0.9}
   Number& TM\refstepcounter{theorynum}\thetheorynum \label{T_contrast}\\
   \hline
   Label& \bf Contrast\\
@@ -720,31 +693,19 @@ instance models.
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
 \hline
 \rowcolor[gray]{0.9}
-Number& GD\refstepcounter{defnum}\thedefnum \label{NL}\\
+Number& GD\refstepcounter{defnum}\thedefnum \label{GD_grid}\\
 \hline
-Label &\bf Newton's law of cooling \\
+Label &\bf Scan or Raster Grid / Deflection Space\\
 \hline
-% Units&$MLt^{-3}T^0$\\
-% \hline
-SI Units&\si{\watt\per\square\metre}\\
+Units & \si{\nm}, \si{\um}, or px (pixels) \\
 \hline
-Equation&$ q(t) = h \Delta T(t)$  \\
+Equation & $G(x,y)$ where x and y range from 0 to inf. \\
 \hline
-Description &
-Newton's law of cooling describes convective cooling from a surface.  The law is
-stated as: the rate of heat loss from a body is proportional to the difference
-in temperatures between the body and its surroundings.
-\\
-& $q(t)$ is the thermal flux (\si{\watt\per\square\metre}).\\
-& $h$ is the heat transfer coefficient, assumed independent of $T$ (\aref{A_hcoeff})
-	(\si{\watt\per\square\metre\per\celsius}).\\
-&$\Delta T(t)$= $T(t) - T_{\text{env}}(t)$ is the time-dependent thermal gradient
-between the environment and the object (\si{\celsius}).
-\\
+Description & Scan grid...? \\
 \hline
   Source & Citation here \\
   \hline
-  Ref.\ By & \ddref{FluxCoil}, \ddref{FluxPCM}\\
+  Ref.\ By & -- \\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -777,35 +738,28 @@ models. The dimension of each quantity is also given.  \plt{Modify the examples
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.5}
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-\hline
-\rowcolor[gray]{0.9}
-Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{FluxCoil}\\
-\hline
-Label& \bf Heat flux out of coil\\
-\hline
-Symbol &$q_C$\\
-\hline
-% Units& $Mt^{-3}$\\
-% \hline
-  SI Units & \si{\watt\per\square\metre}\\
   \hline
-  Equation&$q_C(t) = h_C (T_C - T_W(t))$, over area $A_C$\\
+  \rowcolor[gray]{0.9}
+  Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_yield}\\
   \hline
-  Description & 
-                $T_C$ is the temperature of the coil (\si{\celsius}).  $T_W$ is the temperature of the water (\si{\celsius}).  
-                The heat flux out of the coil, $q_C$ (\si{\watt\per\square\metre}), is found by
-                assuming that Newton's Law 
-                of Cooling applies (\aref{A_Newt_coil}).  This law (\dref{NL}) is used on the surface of
-                the coil, which has area $A_C$ (\si{\square\metre}) and heat 
-                transfer coefficient $h_C$
-                (\si{\watt\per\square\metre\per\celsius}).  This equation
-                assumes that the temperature of the coil is constant over time (\aref{A_tcoil}) and that it does not vary along the length
-                of the coil (\aref{A_tlcoil}).
-  \\
+  Label& \bf Signal yield / intensity \\
   \hline
-  Sources& Citation here \\
+  Symbol & $\eta$ (for BSE), $\delta$ (for SE), $Y$ (for general) \\
   \hline
-  Ref.\ By & \iref{ewat}\\
+  Units & ratio - unitless \\
+  \hline
+  Equation & $Y_{signal} = N_{signal} / N_{B}$ \\
+  \hline
+  Description
+    & $Y_{signal}$ is the intensity relative to the incident beam. \\
+    & $N_{signal}$ is the number of scattered or emitted electrons. \\
+    & $N_{B}$ is the number of (primary) incident electrons from the beam. \\
+  Notes
+    & The $signal$ can BSE or SE. \\
+  \hline
+  Sources& \cite{goldstein_image_2018} \\
+  \hline
+  Ref.\ By & -- \\
   \hline
 \end{tabular}
 \end{minipage}\\
