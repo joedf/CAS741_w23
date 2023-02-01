@@ -175,6 +175,10 @@ description of the unit and the SI name.
     \midrule 
     \si{\metre} & length & metre\\
     \si{\second} & time & second\\
+    \si{Pa} & pressure & pascal\\
+    \si{J} & energy & joule\\
+    \si{K} & temperature & kelvin\\
+    \si{mol} & substance & mole\\
     \bottomrule
   \end{tabular}
   %	\caption{SI Units}
@@ -251,22 +255,6 @@ $R_{n\times m}$ & 8-bit gray level & Resulting image intensity matrix that has $
 \end{tabular}\\
 
 \pagenumbering{arabic}
-
-\plt{The SRS is not generally written, or read, sequentially.  The SRS is a
-  reference document.  It is generally read in an ad hoc order, as the need
-  arises.  For writing an SRS, and for reading one for the first time, the
-  suggested order of sections is:
-\begin{itemize}
-\item Goal Statement
-\item Instance Models
-\item Requirements
-\item Introduction
-\item Specific System Description
-\end{itemize}
-}
-
-\plt{The template description comments should be disabled before submitting this
-  document for grading.}
 
 \section{Introduction}
 
@@ -547,14 +535,6 @@ models can be verified.
 
 \subsubsection{Assumptions} \label{sec_assumpt}
 
-\plt{The assumptions are a refinement of the scope.  The scope is general, where
-  the assumptions are specific.  All assumptions should be listed, even those
-  that domain experts know so well that they are rarely (if ever) written down.}
-\plt{The document should not take for granted that the reader knows which
-  assumptions have been made. In the case of unusual assumptions, it is
-  recommended that the documentation either include, or point to, an explanation
-  and justification for the assumption.}
-
 This section simplifies the original problem and helps in developing the
 theoretical model by filling in the missing information for the physical
 system. The numbers given in the square brackets refer to the theoretical model
@@ -569,15 +549,16 @@ conductive (meaning no charge build up from electrons). The material is made of
 atoms with atomic numbers greater than 3 (lithium).
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_beam}:] The electron 
-beam is stable and colliminated meaning all the electrons are traveling parallel 
-to each other down towards the sample surface within high vacuum (optimal mean free path). The beam intensity or current is considered uniform throughout the beam.
+beam is ideal: meaning stable and colliminated meaning all the electrons are 
+traveling parallel to each other down towards the sample surface within high 
+vacuum (optimal mean free path). The beam intensity or current is considered 
+uniform throughout the beam.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_inputImage}:] The input 
-image of the sample is considered to have infinite resolution representive the 
-ground truth and reality.
+image of the sample is considered to have infinite resolution representive of reality: ground truth.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_yield}:] The BSEs and SEs
-yield is high enough and noise is low, meaning optimal SNR.
+yields are high enough to produce enough signal and noise is low, meaning optimal SNR.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_environment}:] The SEM 
 is within a climate controlled (temperature and humidity) and low vibration room.
@@ -585,13 +566,6 @@ is within a climate controlled (temperature and humidity) and low vibration room
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_reality}:] The image 
 produced by the SEM as the electron raster scan the sample surface is an 
 approximate representation of reality.
-
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_meaningfulLabel}:]
-  \plt{Short description of each assumption.  Each assumption
-    should have a meaningful label.  Use cross-references to identify the
-    appropriate traceability to TM, GD, DD etc., using commands like dref, ddref
-    etc.  Each assumption should be atomic - that is, there should not be an
-    explicit (or implicit) ``and'' in the text of an assumption.}
 
 \end{itemize}
 
@@ -609,15 +583,45 @@ on.
   \rowcolor[gray]{0.9}
   Number& TM\refstepcounter{theorynum}\thetheorynum \label{T_label1}\\
   \hline
-  Label& \bf Name of theoretical model\\
+  Label& \bf Mean Free Path\\
   \hline
-  Equation & -- \\
+  Equation &
+    $\lambda = \frac{RT}{\sqrt{2}\pi d^{2}N_AP}$ \\[3pt]
+  \hline
+  Description
+    & $\lambda$ is the mean free path (\si{m}) \\
+    & $R$ is the universal gas constant = $8.3145$ \si{J/mol.K} \\
+    & $T$ is the temperature (\si{K}) \\
+    & $d$ is the molecular diameter (\si{m}) \\
+    & $P$ is the pressure (\si{Pa}) \\
+    & $N_A$ is Avogadro's number = $6.0221 \times 10^{23}$ \si{\per\mol} \\
+  \hline
+  Notes & -- \\
+  \hline
+  Sources& \url{http://hyperphysics.phy-astr.gsu.edu/hbase/Kinetic/menfre.html} \\
+  \hline
+  Ref.\ By & \aref{A_beam} \\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& TM\refstepcounter{theorynum}\thetheorynum \label{T_label2}\\
+  \hline
+  Label& \bf Contrast\\
+  \hline
+  Equation & $C_{tr} = (S_{max} - S_{min}) / S_{max}$ \\
   \hline
   Description & -- \\
   \hline
   Notes & -- \\
   \hline
-  Sources& -- \\
+  Sources& \cite{goldstein_image_2018} \\
   \hline
   Ref.\ By & -- \\
   \hline
