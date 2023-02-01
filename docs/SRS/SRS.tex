@@ -217,6 +217,8 @@ systems.  The symbols are listed in alphabetical order.
 $d_p$ & \si[per-mode=symbol] {\nm} & probe diameter (size)\\
 $d_i$ & \si[per-mode=symbol] {\nm} & probe step size in image space\\
 $d_o$ & \si[per-mode=symbol] {\nm} & probe step size in object space\\
+$\eta$ & ratio & BSE yield \\
+$\delta$ & ratio & SE yield \\
 $I_{n\times m}$ & 8-bit gray level & Image intensity matrix that has $n$ rows and $m$ columns.\\
 $M_{n\times m}$ & boolean & Mask / stencil matrix that has $n$ rows and $m$ columns.\\
 $R_{n\times m}$ & 8-bit gray level & Resulting image intensity matrix that has $n$ rows and $m$ columns.\\
@@ -681,15 +683,23 @@ instance models.
   \rowcolor[gray]{0.9}
   Number& GD\refstepcounter{defnum}\thedefnum \label{GD_grid}\\
   \hline
-  Label &\bf Scan or Raster Grid\\
+  Label &\bf Raster or Scan Grid\\
   \hline
   Units & \si{\nm}, \si{\um}, or px (pixels) \\
   \hline
-  Equation & $G(x,y)$ where x and y range from 0 to inf. \\
+  Equation & $G(x,y): \{ x \ge 0, y \ge 0 \}$ \\
   \hline
-  Description & Scan grid...? \\
+  Description
+    & This is a grid pattern applied to the sample surface within the FOV and 
+    spanning within deflection space (\dref{GD_deflectionSpace}) of the SEM. \\
+    & Each cell is a discrete x-y location over which the beam scans over to 
+    produce a signal. These signals are then collected by detectors to generate 
+    an image. \\
+    & Each cell represents a picture element or "pixel" that is by convention 
+    square. \\
+    & Non-square pixels may lead to unfaithful or distorted representions. \\
   \hline
-  Source & -- \\
+  Source & \cite{goldstein_image_2018} \\
   \hline
   Ref.\ By & -- \\
   \hline
@@ -715,34 +725,17 @@ instance models.
     (0.0, 0.0), and the bottom right is (0.5, 0.5).
     \\
   \hline
-  Source & Citation here \\
+  Source & \cite{goldstein_image_2018} \\
   \hline
   Ref.\ By & -- \\
   \hline
 \end{tabular}
 \end{minipage}\\
 
-\subsubsection*{Detailed derivation of simplified rate of change of temperature}
-
-\plt{This may be necessary when the necessary information does not fit in the
-  description field.}
-\plt{Derivations are important for justifying a given GD.  You want it to be
-  clear where the equation came from.}
-
 \subsubsection{Data Definitions}\label{sec_datadef}
 
-\plt{The Data Definitions are definitions of symbols and equations that are
-  given for the problem.  They are not derived; they are simply used by other
-  models.  For instance, if a problem depends on density, there may be a data
-  definition for the equation defining density.  The DDs are given information
-  that you can use in your other modules.}
-
-\plt{All Data Definitions should be used (referenced) by at least one other
-  model.}
-
 This section collects and defines all the data needed to build the instance
-models. The dimension of each quantity is also given.  \plt{Modify the examples
-  below for your problem, and add additional definitions as appropriate.}
+models. The dimension of each quantity is also given.
 
 ~\newline
 
@@ -768,6 +761,32 @@ models. The dimension of each quantity is also given.  \plt{Modify the examples
     & $N_{B}$ is the number of (primary) incident electrons from the beam. \\
   Notes
     & The $signal$ can BSE or SE. \\
+  \hline
+  Sources& \cite{goldstein_textbook_2018} \\
+  \hline
+  Ref.\ By & \aref{A_yield} \\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_signalImage}\\
+  \hline
+  Label& \bf Signal Image \\
+  \hline
+  Symbol & $I_{n\times m}$ \\
+  \hline
+  Units & intensity / ratio - unitless \\
+  \hline
+  Description
+    & Each cell represents a pixel with an signal intensity or brightness value 
+    where the range depends a the bit depth. \\
+    & A bit depth of 8 is 0 to 255 (0xFF), and 16 is 0 to 65535 (0xFFFF). \\
   \hline
   Sources& \cite{goldstein_textbook_2018} \\
   \hline
