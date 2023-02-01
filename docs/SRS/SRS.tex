@@ -480,35 +480,19 @@ easier to correctly understand the requirements:
 
 \subsubsection{Physical System Description} \label{sec_phySystDescrip}
 
-\plt{The purpose of this section is to clearly and unambiguously state the
-  physical system that is to be modelled. Effective problem solving requires a
-  logical and organized approach. The statements on the physical system to be
-  studied should cover enough information to solve the problem. The physical
-  description involves element identification, where elements are defined as
-  independent and separable items of the physical system. Some example elements
-  include acceleration due to gravity, the mass of an object, and the size and
-  shape of an object. Each element should be identified and labelled, with their
-  interesting properties specified clearly. The physical description can also
-  include interactions of the elements, such as the following: i) the
-  interactions between the elements and their physical environment; ii) the
-  interactions between elements; and, iii) the initial or boundary conditions.}
-
 The physical system of \progname{}, as shown in Figure \ref{fig_ebeam} and \ref{fig_sampling},
 includes the following elements:
 
 \begin{itemize}
 
-\item[PS1:] 
+\item[PS1:] The sample that is being imaged or studied.
 
-\item[PS2:] ...
+\item[PS2:] An SEM which includes a BSE and/or SE detector. The electron beam interacts with the sample surface in high-vacuum producing various signals.
 
 \end{itemize}
-
-\plt{A figure here makes sense for most SRS documents}
-
+\setlength{\belowcaptionskip}{-30pt}
 \begin{figure}[h!]
 \begin{center}
-%\rotatebox{-90}
 {
  \includegraphics[width=0.3\textwidth]{figures/e_beam.png}
 }
@@ -518,7 +502,6 @@ includes the following elements:
 
 \begin{figure}[h!]
 \begin{center}
-%\rotatebox{-90}
 {
  \includegraphics[width=0.8\textwidth]{figures/sampling.png}
 }
@@ -548,14 +531,7 @@ The ability to visualize and export the reprocessed images.
 
 \subsection{Solution Characteristics Specification}
 
-\plt{This section specifies the information in the solution domain of the system
-  to be developed. This section is intended to express what is required in
-  such a way that analysts and stakeholders get a clear picture, and the
-  latter will accept it. The purpose of this section is to reduce the problem
-  into one expressed in mathematical terms. Mathematical expertise is used to
-  extract the essentials from the underlying physical description of the
-  problem, and to collect and substantiate all physical data pertinent to the
-  problem.}
+This section provides the assumptions, instance models, theoretical models, general definitions, and the data constraints. The information specfied in this section is intended to reduce ambiguities and reduce the problem into clear logical or mathematical terms.
 
 \plt{This section presents the solution characteristics by successively refining
   models.  It starts with the abstract/general Theoretical Models (TMs) and
@@ -567,13 +543,6 @@ The ability to visualize and export the reprocessed images.
   models. DDs are not derived; they are just given. TMs are also just given, but
   they are refined, not used.  If a potential DD includes a derivation, then
   that means it is refining other models, which would make it a GD or an IM.}
-
-\plt{The above makes a distinction between ``refined'' and ``used.'' A model is
-  refined to another model if it is changed by the refinement. When we change a
-  general 3D equation to a 2D equation, we are making a refinement, by applying
-  the assumption that the third dimension does not matter. If we use a
-  definition, like the definition of density, we aren't refining, or changing
-  that definition, we are just using it.}
 
 \plt{The same information can be a TM in one problem and a DD in another.  It is
   about how the information is used.  In one problem the definition of
