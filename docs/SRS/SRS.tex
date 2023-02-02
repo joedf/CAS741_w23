@@ -129,6 +129,8 @@
 
 \begin{document}
 
+\pagenumbering{gobble} % avoid page number on title page
+
 \title{Software Requirements Specification for \progname: SEM Image Formation} 
 \author{\authname}
 \date{\today}
@@ -255,6 +257,8 @@ $R_{n\times m}$ & 8-bit gray level & Resulting image intensity matrix that has $
   \progname{} & SEM image formation demo tool\\
   \bottomrule
 \end{tabular}\\
+
+\newpage
 
 \pagenumbering{arabic}
 
