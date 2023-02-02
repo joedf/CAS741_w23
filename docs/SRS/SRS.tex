@@ -910,6 +910,10 @@ Table~\ref{TblSpecParams}.
   \midrule 
   $d_{min}$ & 0.4 \si{\nm}\\
   $d_{max}$ & 1000 \si{\nm}\\
+  $n_{min}$ & 256 px\\
+  $m_{min}$ & 256 px\\
+  $n_{max}$ & 4096 px\\
+  $m_{max}$ & 4096 px\\
   $I_{max}$ & 255 (8 bit depth)\\
   \bottomrule
 \end{longtable*}
@@ -918,29 +922,8 @@ Table~\ref{TblSpecParams}.
 \subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
 
 \noindent
-A correct solution must exhibit \plt{fill in the details}.  \plt{These
-  properties are in addition to the stated requirements.  There is no need to
-  repeat the requirements here.  These additional properties may not exist for
-  every problem.  Examples include conservation laws (like conservation of
-  energy or mass) and known constraints on outputs, which are usually summarized
-  in tabular form.  A sample table is shown in Table~\ref{TblOutputVar}}
-
-\begin{table}[!h]
-\caption{Output Variables} \label{TblOutputVar}
-\renewcommand{\arraystretch}{1.2}
-\noindent \begin{longtable*}{l l} 
-  \toprule
-  \textbf{Var} & \textbf{Physical Constraints} \\
-  \midrule 
-  $T_W$ & $T_\text{init} \leq T_W \leq T_C$ (by~\aref{A_charge})
-  \\
-  \bottomrule
-\end{longtable*}
-\end{table}
-
-\plt{This section is not for test cases or techniques for verification and
-  validation.  Those topics will be addressed in the Verification and Validation
-  plan.}
+Not applicable, as this is visualization software where the correct or 
+appropriate solution is determined by the user's satisfaction and desired results.
 
 \newpage
 \section{Requirements}
@@ -1025,16 +1008,24 @@ Here are changes listed that will likely be implemented as the software is impro
 
 \noindent \begin{itemize}
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel0}:] Unknown for now...
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_realUnits}:] Give a sense of scale in real world units such as \si{nm}. The user have to provide the physical dimension of the input image.
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] \plt{Give
-    the likely changes, with a reference to the related assumption (aref), as appropriate.}
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_simNoise}:] Simulate basic noise (such as Gaussian or Poisson) at an intensity defined by the user.
+
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_imgMetricAlgos}:] Provide the choice of different image quality metric algorithms.
 
 \end{itemize}
 
 \section{Unlikely Changes}    
 
-...?\\
+\noindent \begin{itemize}
+
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] Processing multi-spectrum or multi-channel images.
+
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] Simulate electron beam physics, collision cascades, sample nature, topography, or electron-sample interactions.
+
+\end{itemize}
+
 
 \section{Traceability Matrices and Graphs}
 
