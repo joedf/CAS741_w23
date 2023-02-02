@@ -318,6 +318,7 @@ The general input and output pattern of the \progname{} software is shown in the
 system context diagram (figure \ref{Fig_SystemContext}). This section also 
 includes the responsibilities of the user and the software.
 
+\setlength{\belowcaptionskip}{-30pt}
 \begin{figure}[h!]
 \begin{center}
  \includegraphics[width=0.8\textwidth]{SystemContextFigure}
@@ -325,12 +326,14 @@ includes the responsibilities of the user and the software.
 \label{Fig_SystemContext} 
 \end{center}
 \end{figure}
+\setlength{\belowcaptionskip}{10pt}
 
 \begin{itemize}
 
   \item User Responsibilities:
   \begin{itemize}
     \item Provide an image of sufficient size, such that the is enough visible detail.
+    \item Provided a ground truth image that should be free of distortions (e.g., from FOV edges, depth of field, "charging", insufficient focus, astigmatism, etc.).
     \item Be able to interact with the software's graphical user interface using a computer mouse, keyboard and monitor.
     \item Provide realistic spot profiles (size and shape).
     \item Understand the basic concepts of the SEM image formation process.
