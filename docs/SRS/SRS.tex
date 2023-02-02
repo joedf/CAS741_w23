@@ -326,27 +326,28 @@ includes the responsibilities of the user and the software.
 \end{center}
 \end{figure}
 
-\plt{For each of the entities in the system context diagram its responsibilities
-  should be listed.  Whenever possible the system should check for data quality,
-  but for some cases the user will need to assume that responsibility.  The list
-  of responsibilites should be about the inputs and outputs only, and they
-  should be abstract.  Details should not be presented here.  However, the
-  information should not be so abstract as to just say ``inputs'' and
-  ``outputs''.  A summarizing phrase can be used to characterize the inputs.
-  For instance, saying ``material properties'' provides some information, but it
-  stays away from the detail of listing every required properties.}
+\begin{itemize}
 
-\begin{itemize}
-\item User Responsibilities:
-\begin{itemize}
-\item 
-\end{itemize}
-\item \progname{} Responsibilities:
-\begin{itemize}
-\item Detect data type mismatch, such as a string of characters instead of a
-  floating point number
-\item 
-\end{itemize}
+  \item User Responsibilities:
+  \begin{itemize}
+    \item Provide an image of sufficient size, such that the is enough visible detail.
+    \item Be able to interact with the software's graphical user interface using a computer mouse, keyboard and monitor.
+    \item Provide realistic spot profiles (size and shape).
+    \item Understand the basic concepts of the SEM image formation process.
+    \item Run the software on a plaform or system with sufficient resources to process computer graphics.
+  \end{itemize}
+
+  \item \progname{} Responsibilities:
+  \begin{itemize}
+    \item Provide the ability load or change the input ground truth image.
+    \item Detect and warn about invalid or corrupt image files.
+    \item Set reasonable limits (minimum and maximum dimensions) on the spot profile. 
+    \item Be responsive, taking user input at anytime and prevent locking or freezing of the graphical user interface as much as possible.
+    \item Have reasonable starting default inputs and values.
+    \item Display the image quality metric.
+    \item Provide the ability to export the resulting images.
+  \end{itemize}
+
 \end{itemize}
 
 \subsection{User Characteristics} \label{SecUserCharacteristics}
@@ -444,6 +445,8 @@ easier to correctly understand the requirements:
         \bottomrule
     \end{longtable} 
 \end{center}
+
+\newpage
 
 \subsubsection{Physical System Description} \label{sec_phySystDescrip}
 
@@ -589,6 +592,7 @@ on.
   \hline
 \end{tabular}
 \end{minipage}\\
+~\newline
 
 \noindent
 \begin{minipage}{\textwidth}
@@ -614,6 +618,7 @@ on.
   \hline
 \end{tabular}
 \end{minipage}\\
+~\newline
 
 \noindent
 \begin{minipage}{\textwidth}
@@ -640,8 +645,9 @@ on.
   \hline
 \end{tabular}
 \end{minipage}\\
-
 ~\newline
+
+\newpage
 
 \subsubsection{General Definitions}\label{sec_gendef}
 
@@ -680,6 +686,7 @@ instance models.
   \hline
 \end{tabular}
 \end{minipage}\\
+~\newline
 
 \noindent
 \begin{minipage}{\textwidth}
@@ -706,6 +713,9 @@ instance models.
   \hline
 \end{tabular}
 \end{minipage}\\
+~\newline
+
+\newpage
 
 \subsubsection{Data Definitions}\label{sec_datadef}
 
@@ -743,6 +753,7 @@ models. The dimension of each quantity is also given.
   \hline
 \end{tabular}
 \end{minipage}\\
+~\newline
 
 \noindent
 \begin{minipage}{\textwidth}
@@ -769,6 +780,9 @@ models. The dimension of each quantity is also given.
   \hline
 \end{tabular}
 \end{minipage}\\
+~\newline
+
+\newpage
 
 \subsubsection{Instance Models} \label{sec_instance}    
 
@@ -815,6 +829,7 @@ The goal of reprocessing an image \gsref{G_easeofuse} will be solved by \iref{IM
   \hline
 \end{tabular}
 \end{minipage}\\
+~\newline
 
 %Instance Model 2
 
@@ -848,6 +863,7 @@ The goal of reprocessing an image \gsref{G_easeofuse} will be solved by \iref{IM
   \hline
 \end{tabular}
 \end{minipage}\\
+~\newline
 
 %~\newline
 
@@ -863,7 +879,7 @@ flexibility to experiment with unusual situations.  The column of typical values
 is intended to provide a feel for a common scenario.  The uncertainty column
 provides an estimate of the confidence with which the physical quantities can be
 measured.  This information would be part of the input if one were performing an
-uncertainty quantification exercise.
+uncertainty quantification exercise. 
 
 The specification parameters in Table~\ref{TblInputVar} are listed in
 Table~\ref{TblSpecParams}.
@@ -876,16 +892,14 @@ Table~\ref{TblSpecParams}.
   \textbf{Var} & \textbf{Physical Constraints} & \textbf{Software Constraints} &
                              \textbf{Typical Value} & \textbf{Uncertainty}\\
   \midrule 
-  $L$ & $L > 0$ & $L_{\text{min}} \leq L \leq L_{\text{max}}$ & 1.5 \si[per-mode=symbol] {\metre} & 10\%
-  \\
+  $d_p$ & $d_p > 0.4$ \si{nm} & $d_{min} \leq d_p \leq d_{max}$ & 10 \si{nm} & 10\% \\
+  $d_i$ & $d_i > 0.4$ \si{nm} & $d_{min} \leq d_i \leq d_{max}$ & 150 \si{nm} & 10\% \\
+  $I_{n \times m}$ & -- & $n_{min} \leq n \leq n_{max}$ & 1024 & 10\% \\
+   ... & -- & $m_{min} \leq n \leq m_{max}$ & 1024 & 10\% \\
+  $I_{i,j}$ & -- & $0 \leq I_{i,j} \leq I_{max}$ & 128 & 10\% \\
   \bottomrule
 \end{longtable*}
 \end{table}
-
-\noindent 
-\begin{description}
-\item[(*)] \plt{you might need to add some notes or clarifications}
-\end{description}
 
 \begin{table}[!h]
 \caption{Specification Parameter Values} \label{TblSpecParams}
@@ -894,7 +908,9 @@ Table~\ref{TblSpecParams}.
   \toprule
   \textbf{Var} & \textbf{Value} \\
   \midrule 
-  $L_\text{min}$ & 0.1 \si{\metre}\\
+  $d_{min}$ & 0.4 \si{\nm}\\
+  $d_{max}$ & 1000 \si{\nm}\\
+  $I_{max}$ & 255 (8 bit depth)\\
   \bottomrule
 \end{longtable*}
 \end{table}
