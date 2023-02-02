@@ -268,13 +268,13 @@ Images formed by Scanning Electron Microscope (SEM) are created using a
 specific process where the image quality can be greatly influenced by the 
 imaging parameters given by the user, aside from any inherent electron 
 optics limitation of a given instrument. The motivation of this project is 
-to be able visualize qualitatively the influence of the spot profile 
-(shape and size) and the rastering parameters (such as pixel size). Since the 
+to be able to visualize qualitatively the influence of the spot profile 
+(shape and size) and the raster parameters (such as pixel size). Since the 
 quality of an image is very often evaluated subjectively by an experienced 
-microscope user, the idea behind this software is provide a way to show 
+microscope user, the idea behind this software is providing a way to show 
 that adjusting the imaging parameters could lead to a loss of information 
-or misinterpretation. Is is also to prove or disprove if there is a "rule 
-of thumb" for the optimal spot-to-pixel size ratio.
+or misinterpretation. An underlying goal is also to prove or disprove if 
+there is a "rule of thumb" for the optimal spot-to-pixel size ratio.
 
 \subsection{Purpose of Document}
 
@@ -286,7 +286,7 @@ within this document.
 
 The scope of the requirements of this software is restricted to only the image 
 formation process used in SEMs, more specifically the image processing from 
-signal to an image or visual representions. It does not cover election-sample 
+signal to an image or visual representations. It does not cover election-sample 
 interactions or CCD (charge coupled device) detector voltage to signal value 
 conversion. See the assumptions section (Section~\ref{sec_assumpt}) for further 
 details.
@@ -304,7 +304,7 @@ image processing techniques and level one university linear algebra (matrices).
 \subsection{Organization of Document}
 
 This document contains an introduction to the software and its goals. It is 
-meant to be a reference document to the readers and is based on a SRS template from \citet{SmithAndLai2005, SmithEtAl2007}. The document include a 
+meant to be a reference document to the readers and is based on an SRS template from \citet{SmithAndLai2005, SmithEtAl2007}. The document includes a 
 description of the scope, a detailed list of the terminology, definitions, and 
 models used, as well as a more specific and detailed description of the problem 
 and its solutions. This document also defines the requirements, as well as the  
@@ -341,7 +341,7 @@ includes the responsibilities of the user and the software.
     \item Be able to interact with the software's graphical user interface using a computer mouse, keyboard and monitor.
     \item Provide realistic spot profiles (size and shape).
     \item Understand the basic concepts of the SEM image formation process.
-    \item Run the software on a plaform or system with sufficient resources to process computer graphics.
+    \item Run the software on a platform or system with sufficient resources to process computer graphics.
   \end{itemize}
 
   \item \progname{} Responsibilities:
@@ -359,11 +359,16 @@ includes the responsibilities of the user and the software.
 
 \subsection{User Characteristics} \label{SecUserCharacteristics}
 
-The \progname{} software end user is anyone that has used an SEM or is learning about them. This ranges from a university undergraduate science student in which their curriculum includes electron microscopy (EM), to experienced SEM operators or even to experts in the field of EM. The software end users also includes those described in Section~\ref{sec_IntendedReader} (intender readers of this document). That said, image processing nor linear algebra knowledge is not required. 
+The \progname{} software end user is anyone that has used an SEM or is learning about them. 
+This ranges from a university undergraduate science student in which their curriculum includes 
+electron microscopy (EM), to experienced SEM operators or even to experts in the field of EM. 
+The software end users also include those described in Section~\ref{sec_IntendedReader} 
+(intended readers of this document). That said, image processing nor linear algebra knowledge 
+is not required. 
 
 \subsection{System Constraints}
 
-The real world design constraints are to be listed here, but currently this is none or it is unknown if there are any.
+The real world design constraints are to be listed here, but currently this is none, or it is unknown if there are any.
 
 \section{Specific System Description}
 
@@ -398,7 +403,7 @@ easier to correctly understand the requirements:
         
         Brightness & The intensity value (or perceived luminance for colours) of a signal, point (or pixel), or area within an image. \\
         
-        Contrast & The difference or distinguisable quality of an intensity (or colour) or brightness value of a point (or pixel) from another point in an image.\\
+        Contrast & The difference or distinguishable quality of an intensity (or colour) or brightness value of a point (or pixel) from another point in an image.\\
         
         Electron-Sample\newline Interactions & The interactions as a result of electrons from the beam hitting the sample surface leading to an electron collision cascade. This in produces various emissions such as x-rays, BSEs, and SEs. \\
         
@@ -422,13 +427,13 @@ easier to correctly understand the requirements:
 
         Mean Free Path & The average distance within a system that a particle can travel before it collides with other particles.\\
         
-        Nyquist Limit & More formally known as the "Nyquist-Shannon" sampling limit is the minimum sampling rate at which all the essential information is captured when discretizing a continous signal, resulting in little to no distortions. \\
+        Nyquist Limit & More formally known as the "Nyquist-Shannon" sampling limit is the minimum sampling rate at which all the essential information is captured when discretizing a continuous signal, resulting in little to no distortions. \\
         
         Over-sampling & This is a sampling rate or size that is too large where the specificity or origin of the information is lost. This generally results in increased confidence, but at a loss of precision.\\
         
         Pixel Size & The size or dimensions of one cell within a raster grid. \\
         
-        Probe & Generally interchangeable with "beam". Contextually within this document, it is the final part of the beam that comes into contact with the surface of the sample (being analysed within the microscope) forming a "spot" with a targeted size and shape. \\
+        Probe & Generally interchangeable with "beam". Contextually within this document, it is the final part of the beam that comes into contact with the surface of the sample (being analyzed within the microscope) forming a "spot" with a targeted size and shape. \\
         
         Raster Grid & A scanning pattern with a defined and repeated cell size. \\
         
@@ -510,7 +515,7 @@ The ability to visualize and export the reprocessed images.
 
 \subsection{Solution Characteristics Specification}
 
-This section provides the assumptions, instance models, theoretical models, general definitions, and the data constraints. The information specfied in this section is intended to reduce ambiguities and reduce the problem into clear logical or mathematical terms. \\
+This section provides the assumptions, instance models, theoretical models, general definitions, and the data constraints. The information specified in this section is intended to reduce ambiguities and reduce the problem into clear logical or mathematical terms. \\
 
 The instance models that govern \progname{} are presented in
 Subsection~\ref{sec_instance}.  The information to understand the meaning of the
@@ -540,7 +545,7 @@ surface is conductive (meaning no charge build up from electrons).
 material is made of atoms with atomic numbers greater than 3 (lithium and lighter elements are not detectable in SEM).
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_beam}:] The electron 
-beam is ideal (meaning stable and colliminated meaning all the electrons are 
+beam is ideal (meaning stable and collimated meaning all the electrons are 
 traveling parallel to each other down towards the sample surface within high 
 vacuum for optimal mean free path).
 
@@ -550,7 +555,7 @@ intensity or current is considered uniform throughout the beam.
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_beam2}:] The beam is orthogonal to the sample surface.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_inputImage}:] The input 
-image of the sample is considered to have infinite resolution representive of reality: ground truth.
+image of the sample is considered to have infinite resolution representative of reality: ground truth.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_yield}:] The signal yields (such as BSEs and SEs) are high enough to produce meaning optimal SNR (enough signal and noise is low).
 
@@ -685,7 +690,7 @@ instance models.
     an image. \\
     & Each cell represents a picture element or "pixel" that is by convention 
     square. \\
-    & Non-square pixels may lead to unfaithful or distorted representions. \\
+    & Non-square pixels may lead to unfaithful or distorted representations. \\
   \hline
   Source & \cite{goldstein_image_2018} \\
   \hline
@@ -706,7 +711,7 @@ instance models.
   Label &\bf Deflection Space (or area / field)\\
   \hline
   Description
-    & The deflection space is the area bounds in which the beam can be redirect 
+    & The deflection space is the area bounds in which the beam can be redirected 
     or oriented using deflection coils. It can be expressed in real world units, 
     but this can vary between SEMs. \\
     & From an imaging perspective, it can be generalized as a normalized unit 
@@ -777,8 +782,8 @@ models. The dimension of each quantity is also given.
   Units & intensity / ratio - unitless \\
   \hline
   Description
-    & Each cell represents a pixel with an signal intensity or brightness value 
-    where the range depends a the bit depth. \\
+    & Each cell represents a pixel with a signal intensity or brightness value 
+    where the range depends on the bit depth. \\
     & A bit depth of 8 is 0 to 255 (0xFF), and 16 is 0 to 65535 (0xFFFF). \\
   \hline
   Sources& \cite{goldstein_textbook_2018} \\
@@ -824,10 +829,10 @@ The goal of reprocessing an image \gsref{G_easeofuse} will be solved by \iref{IM
   matrix at row $i$ and column $j$.\\
   
   & If the mask cell value (at $i$, $j$) is true (or any non-zero value), the corresponding image
-  cell value is transfered/kept in the resulting/destination matrix.\\
+  cell value is transferred/kept in the resulting/destination matrix.\\
 
   & Otherwise, if the corresponding
-  matrix cell (at $i$, $j$) is false (zero), then no value is transfered, and zero will inserted
+  matrix cell (at $i$, $j$) is false (or zero), then no value is transferred, and zero will be inserted
   at $i$, $j$ in the destination image matrix. \\
   \hline
   Sources& \url{https://en.wikipedia.org/wiki/Bit\_blit} \\
@@ -850,7 +855,7 @@ The goal of reprocessing an image \gsref{G_easeofuse} will be solved by \iref{IM
   \hline
   Label& \bf Image quality metric / evaluation \\
   \hline
-  Input& a image $I_{n \times m}$ serving as ground truth and the image $R_{n \times m}$ to compare\\
+  Input& an image $I_{n \times m}$ serving as ground truth and the image $R_{n \times m}$ to compare\\
   \hline
   Output& a positive ratio value ranging from $0$ to $1.00$.\\
   \hline
@@ -1027,7 +1032,7 @@ Here are changes listed that will likely be implemented as the software is impro
 
 \noindent \begin{itemize}
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] Processing multi-spectrum or multi-channel images.
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] Processing multi-spectrum or multichannel images.
 
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] Simulate electron beam physics, collision cascades, sample nature, topography, or electron-sample interactions.
 
