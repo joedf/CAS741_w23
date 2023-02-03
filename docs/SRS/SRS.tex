@@ -536,16 +536,16 @@ likely change [LC], in which the respective assumption is used.
 
 \begin{itemize}
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sample}:] The sample 
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sampleSolid}:] The sample 
 surface is solid.
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sample}:] The sample 
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sampleTopo}:] The sample 
 surface is flat (meaning no topography).
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sample}:] The sample 
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sampleConductive}:] The sample 
 surface is conductive (meaning no charge build up from electrons).
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sample}:] The sample 
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sampleZ}:] The sample 
 material is made of atoms with atomic numbers greater than 3 (lithium and lighter elements are not detectable in SEM).
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_beam}:] The electron 
@@ -561,7 +561,7 @@ intensity or current is considered uniform throughout the beam.
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_inputImage}:] The input 
 image of the sample is considered to have infinite resolution representative of reality: ground truth.
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_yield}:] The signal yields (such as BSEs and SEs) are high enough to produce meaning optimal SNR (enough signal and noise is low).
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_yield}:] The signal yields (such as BSEs and SEs) are high enough to produce an image meaning optimal SNR (enough signal and noise is low).
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_environment}:] The SEM 
 is within a controlled environment: climate controlled (temperature and 
@@ -600,11 +600,11 @@ on.
     & $P$ is the pressure (\si{Pa}) \\
     & $N_A$ is Avogadro's number = $6.0221 \times 10^{23}$ \si{\per\mol} \\
   \hline
-  Notes & -- \\
+  Notes & See \aref{A_beam}. \\
   \hline
   Sources& \url{http://hyperphysics.phy-astr.gsu.edu/hbase/Kinetic/menfre.html} \\
   \hline
-  Ref.\ By & \aref{A_beam} \\
+  Ref.\ By & -- \\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -623,7 +623,7 @@ on.
   Equation & $C_{tr} = (S_{max} - S_{min}) / S_{max}$ \\
   \hline
   Description
-    & $S$ is the emitted signal strength or intensity \\
+    & $S$ is the emitted signal strength or intensity (see \ddref{DD_yield}). \\
   \hline
   Notes
     & $S_{max} > S_{min}$ \\
@@ -653,7 +653,7 @@ on.
     & $d_i$ is the probe step size in image space \\
     & $d_o$ is the probe step size in object space \\
   \hline
-  Notes & -- \\
+  Notes & The input (ground truth) should be large enough and sufficient detail, see \aref{A_inputImage}. \\
   \hline
   Sources& \cite{lifshin_improving_2014} \\
   \hline
@@ -694,7 +694,7 @@ instance models.
     an image. \\
     & Each cell represents a picture element or "pixel" that is by convention 
     square. \\
-    & Non-square pixels may lead to unfaithful or distorted representations. \\
+    & Non-square pixels may lead to unfaithful or distorted representations, see \aref{A_reality}. \\
   \hline
   Source & \cite{goldstein_image_2018} \\
   \hline
@@ -762,10 +762,11 @@ models. The dimension of each quantity is also given.
     & $N_{B}$ is the number of (primary) incident electrons from the beam. \\
   Notes
     & The $signal$ can BSE or SE. \\
+    & There assumptions related to the beam, the signal produced, and sample nature, see \aref{A_beam}, \aref{A_yield}, \aref{A_sampleZ}. \\
   \hline
   Sources& \cite{goldstein_textbook_2018} \\
   \hline
-  Ref.\ By & \aref{A_yield} \\
+  Ref.\ By & \ddref{DD_signalImage}, \tref{T_contrast} \\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -786,13 +787,15 @@ models. The dimension of each quantity is also given.
   Units & intensity / ratio - unitless \\
   \hline
   Description
-    & Each cell represents a pixel with a signal intensity or brightness value 
+    & Each cell represents a pixel with a signal intensity (see \ddref{DD_yield}) or brightness value 
     where the range depends on the bit depth. \\
     & A bit depth of 8 is 0 to 255 (0xFF), and 16 is 0 to 65535 (0xFFFF). \\
+    & We assume (see \aref{A_yield}) there's enough signal that can be detected, 
+    as a $0$ represents no or "undetected" signal.\\
   \hline
   Sources& \cite{goldstein_textbook_2018} \\
   \hline
-  Ref.\ By & \aref{A_yield} \\
+  Ref.\ By & \iref{IM_bitblt} \\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -828,7 +831,7 @@ The goal of reprocessing an image \gsref{G_reprocess} will be solved by \iref{IM
   Output& reprocessed image $R_{n \times m}$ \\
   \hline
   Description
-  & Given an image and mask (or stencil), a boolean operation is performed iteratively
+  & Given an image (see \ddref{DD_signalImage}) and mask (or stencil), a boolean operation is performed iteratively
   on each cell of the image matrix, based on the corresponding cell value found in the mask
   matrix at row $i$ and column $j$.\\
   
@@ -864,7 +867,7 @@ The goal of reprocessing an image \gsref{G_reprocess} will be solved by \iref{IM
   Output& a positive ratio value ranging from $0$ to $1.00$.\\
   \hline
   Description
-  & Given the original image (ground truth) and a reprocessed image, a 
+  & Given the original image (ground truth, see \aref{A_inputImage}) and a reprocessed image, a 
   metric must be calculated to express image similarity where $1.00$ means
   a perfect match and $0.00$ means absolutely no correlation or similarity found.\\
 
@@ -963,7 +966,7 @@ image in the following formats:
   \end{itemize}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_userSpotProfile}:] Accept user 
-input of the size and shape of the spot profile and ensure that all its defining 
+input of the spot profile (size and shape) and ensure that all its defining 
 values are positive real numbers.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_userPixelSize}:] Accept user 
@@ -994,16 +997,17 @@ maintainability, and portability. These are listed below in detail:
   \textbf{Accuracy} The images produced should be not manipulated to produce 
   results that subjectively represent the opinions of the author(s) or 
   developer(s). Thus, the software should transparently follow the 
-  specifications and be verifiable by an expert in field. The trends in image 
-  quality metric are more important the metric values themselves.
+  specifications and be verifiable by an expert (see \aref{A_reality}) in field. The trends in image 
+  quality metric (see \iref{IM_imageMetric}) are more important the metric values themselves.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:] \textbf{Usability} The user should be able to intuitively use the 
   software and quickly understand what is being displayed. There should be 
   little to no setup required. The software should be user-friendly and straight forward to use.
   Although the intended use is more of a qualitative nature, the user should be able to grasp any 
-  trends in the change of the image quality metric when the input parameters are 
+  trends in the change of the image quality metric (see \iref{IM_imageMetric}) when the input parameters are 
   changed. The software should have a simple user interface and be responsive 
-  when given a relatively small input image (ref to assumptions here?).
+  when given a relatively small input image (see \hyperref[sec_DataConstraints]{input data constraints}).
+  A user survey may be conducted to ascertain the software's usability.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Maintainability}:]
   \textbf{Maintainability} The code should follow a consistent style and
