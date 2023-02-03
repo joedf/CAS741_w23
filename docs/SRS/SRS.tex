@@ -1040,9 +1040,9 @@ Here are changes listed that will likely be implemented as the software is impro
 
 \noindent \begin{itemize}
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] Processing multi-spectrum or multichannel images.
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_multichannel}:] Processing multi-spectrum or multichannel images.
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] Simulate electron beam physics, collision cascades, sample nature, topography, or electron-sample interactions.
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_physics}:] Simulate electron beam physics, collision cascades, sample nature, topography, or electron-sample interactions.
 
 \end{itemize}
 
@@ -1064,30 +1064,34 @@ the assumptions.
 \begin{landscape}
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-	& \aref{A_OnlyThermalEnergy}& \aref{A_hcoeff}& \aref{A_mixed}& \aref{A_tpcm}& \aref{A_const_density}& \aref{A_const_C}& \aref{A_Newt_coil}& \aref{A_tcoil}& \aref{A_tlcoil}& \aref{A_Newt_pcm}& \aref{A_charge}& \aref{A_InitTemp}& \aref{A_OpRangePCM}& \aref{A_OpRange}& \aref{A_htank}& \aref{A_int_heat}& \aref{A_vpcm}& \aref{A_PCM_state}& \aref{A_Pressure} \\
+	& \aref{A_sampleSolid}
+	& \aref{A_sampleTopo}
+	& \aref{A_sampleConductive}
+	& \aref{A_sampleZ}
+	& \aref{A_beam}
+	& \aref{A_beam1}
+	& \aref{A_beam2}
+	& \aref{A_inputImage}
+	& \aref{A_yield}
+	& \aref{A_environment}
+	& \aref{A_reality} \\
 \hline
-\tref{T_COE}        & X& & & & & & & & & & & & & & & & & & \\ \hline
-\tref{T_SHE}        & & & & & & & & & & & & & & & & & & & \\ \hline
-\tref{T_LHE}        & & & & & & & & & & & & & & & & & & & \\ \hline
-\dref{NL}           & & X& & & & & & & & & & & & & & & & & \\ \hline
-\dref{ROCT}         & & & X& X& X& X& & & & & & & & & & & & & \\ \hline
-\ddref{FluxCoil}    & & & & & & & X& X& X& & & & & & & & & & \\ \hline
-\ddref{FluxPCM}     & & & X& X& & & & & & X& & & & & & & & & \\ \hline
-\ddref{D_HOF}       & & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{D_MF}        & & & & & & & & & & & & & & & & & & & \\ \hline
-\iref{ewat}         & & & & & & & & & & & X& X& & X& X& X& & & X \\ \hline
-\iref{epcm}         & & & & & & & & & & & & X& X& & & X& X& X& \\ \hline
-\iref{I_HWAT}       & & & & & & & & & & & & & & X& & & & & X \\ \hline
-\iref{I_HPCM}       & & & & & & & & & & & & & X& & & & & X & \\ \hline
-\lcref{LC_tpcm}     & & & & X& & & & & & & & & & & & & & & \\ \hline
-\lcref{LC_tcoil}    & & & & & & & & X& & & & & & & & & & & \\ \hline
-\lcref{LC_tlcoil}   & & & & & & & & & X& & & & & & & & & & \\ \hline
-\lcref{LC_charge}   & & & & & & & & & & & X& & & & & & & & \\ \hline
-\lcref{LC_InitTemp} & & & & & & & & & & & & X& & & & & & & \\ \hline
-\lcref{LC_htank}    & & & & & & & & & & & & & & & X& & & & \\
-\hline
+\tref{T_meanfreepath}      & & & & & & & & & & & \\ \hline
+\tref{T_contrast}          & & & & & & & & & & & \\ \hline
+\tref{T_mag}               & & & & & & & & & & & \\ \hline
+\dref{GD_grid}             & & & & & & & & & & & \\ \hline
+\dref{GD_deflectionSpace}  & & & & & & & & & & & \\ \hline
+\ddref{DD_yield}           & & & & & & & & & & & \\ \hline
+\ddref{DD_signalImage}     & & & & & & & & & & & \\ \hline
+\iref{IM_bitblt}           & & & & & & & & & & & \\ \hline
+\iref{IM_imageMetric}      & & & & & & & & & & & \\ \hline
+\lcref{LC_realUnits}       & & & & & & & & & & & \\ \hline
+\lcref{LC_simNoise}        & & & & & & & & & & & \\ \hline
+\lcref{LC_imgMetricAlgos}  & & & & & & & & & & & \\ \hline
+\lcref{LC_multichannel}    & & & & & & & & & & & \\ \hline
+\lcref{LC_physics}         & & & & & & & & & & & \\ \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Assumptions and Other Items}
 \label{Table:A_trace}
@@ -1097,24 +1101,27 @@ the assumptions.
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 \hline        
-	& \tref{T_COE}& \tref{T_SHE}& \tref{T_LHE}& \dref{NL}& \dref{ROCT} & \ddref{FluxCoil}& \ddref{FluxPCM} & \ddref{D_HOF}& \ddref{D_MF}& \iref{ewat}& \iref{epcm}& \iref{I_HWAT}& \iref{I_HPCM} \\
+	& \tref{T_meanfreepath}
+  & \tref{T_contrast}
+  & \tref{T_mag}
+  & \dref{GD_grid}
+  & \dref{GD_deflectionSpace}
+  & \ddref{DD_yield}
+  & \ddref{DD_signalImage}
+  & \iref{IM_bitblt}
+  & \iref{IM_imageMetric} \\
 \hline
-\tref{T_COE}     & & & & & & & & & & & & & \\ \hline
-\tref{T_SHE}     & & & X& & & & & & & & & & \\ \hline
-\tref{T_LHE}     & & & & & & & & & & & & & \\ \hline
-\dref{NL}        & & & & & & & & & & & & & \\ \hline
-\dref{ROCT}      & X& & & & & & & & & & & & \\ \hline
-\ddref{FluxCoil} & & & & X& & & & & & & & & \\ \hline
-\ddref{FluxPCM}  & & & & X& & & & & & & & & \\ \hline
-\ddref{D_HOF}    & & & & & & & & & & & & & \\ \hline
-\ddref{D_MF}     & & & & & & & & X& & & & & \\ \hline
-\iref{ewat}      & & & & & X& X& X& & & & X& & \\ \hline
-\iref{epcm}      & & & & & X& & X& & X& X& & & X \\ \hline
-\iref{I_HWAT}    & & X& & & & & & & & & & & \\ \hline
-\iref{I_HPCM}    & & X& X& & & & X& X& X& & X& & \\
-\hline
+\tref{T_meanfreepath}       & & & & & & & & & \\ \hline
+\tref{T_contrast}           & & & & & & & & & \\ \hline
+\tref{T_mag}                & & & & & & & & & \\ \hline
+\dref{GD_grid}              & & & & & & & & & \\ \hline
+\dref{GD_deflectionSpace}   & & & & & & & & & \\ \hline
+\ddref{DD_yield}            & & & & & & & & & \\ \hline
+\ddref{DD_signalImage}      & & & & & & & & & \\ \hline
+\iref{IM_bitblt}            & & & & & & & & & \\ \hline
+\iref{IM_imageMetric}       & & & & & & & & & \\ \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Items of Different Sections}
 \label{Table:trace}
@@ -1122,26 +1129,27 @@ the assumptions.
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 \hline
-	& \iref{ewat}& \iref{epcm}& \iref{I_HWAT}& \iref{I_HPCM}& \ref{sec_DataConstraints}& \rref{R_RawInputs}& \rref{R_MassInputs} \\
+	& \iref{IM_bitblt}
+  & \iref{IM_imageMetric}
+  & \rref{R_Inputs}
+  & \rref{R_userSpotProfile}
+  & \rref{R_userPixelSize}
+  & \rref{R_subregion}
+  & \rref{R_spotLayout}
+  & \rref{R_resultImage}
+  & \rref{R_imageMetric} \\
 \hline
-\iref{ewat}            & & X& & & & X& X \\ \hline
-\iref{epcm}            & X& & & X& & X& X \\ \hline
-\iref{I_HWAT}          & & & & & & X& X \\ \hline
-\iref{I_HPCM}          & & X& & & & X& X \\ \hline
-\rref{R_RawInputs}     & & & & & & & \\ \hline
-\rref{R_MassInputs}    & & & & & & X& \\ \hline
-\rref{R_CheckInputs}   & & & & & X& & \\ \hline
-\rref{R_OutputInputs}  & X& X& & & & X& X \\ \hline
-\rref{R_TempWater}     & X& & & & & & \\ \hline 
-\rref{R_TempPCM}       & & X& & & & & \\ \hline
-\rref{R_EnergyWater}   & & & X& & & & \\ \hline
-\rref{R_EnergyPCM}     & & & & X& & & \\ \hline
-\rref{R_VerifyOutput}  & & & X& X& & & \\ \hline
-\rref{R_timeMeltBegin} & & X& & & & & \\ \hline
-\rref{R_timeMeltEnd}   & & X& & & & & \\ 
-\hline
+\iref{IM_bitblt}          & & & & & & & & & \\ \hline
+\iref{IM_imageMetric}     & & & & & & & & & \\ \hline
+\rref{R_Inputs}           & & & & & & & & & \\ \hline
+\rref{R_userSpotProfile}  & & & & & & & & & \\ \hline
+\rref{R_userPixelSize}    & & & & & & & & & \\ \hline
+\rref{R_subregion}        & & & & & & & & & \\ \hline
+\rref{R_spotLayout}       & & & & & & & & & \\ \hline
+\rref{R_resultImage}      & & & & & & & & & \\ \hline
+\rref{R_imageMetric}      & & & & & & & & & \\ \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Requirements and Instance Models}
 \label{Table:R_trace}
