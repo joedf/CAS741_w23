@@ -1060,8 +1060,6 @@ other. Table~\ref{Table:A_trace} shows the dependencies of theoretical models,
 general definitions, data definitions, instance models, and likely changes on
 the assumptions.
 
-\afterpage{
-\begin{landscape}
 \begin{table}[h!]
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
@@ -1076,28 +1074,26 @@ the assumptions.
 	& \aref{A_inputImage}
 	& \aref{A_yield}
 	& \aref{A_environment}
-	& \aref{A_reality} \\
-\hline
-\tref{T_meanfreepath}      & & & & & & & & & & & \\ \hline
-\tref{T_contrast}          & & & & & & & & & & & \\ \hline
-\tref{T_mag}               & & & & & & & & & & & \\ \hline
-\dref{GD_grid}             & & & & & & & & & & & \\ \hline
-\dref{GD_deflectionSpace}  & & & & & & & & & & & \\ \hline
-\ddref{DD_yield}           & & & & & & & & & & & \\ \hline
-\ddref{DD_signalImage}     & & & & & & & & & & & \\ \hline
-\iref{IM_bitblt}           & & & & & & & & & & & \\ \hline
-\iref{IM_imageMetric}      & & & & & & & & & & & \\ \hline
-\lcref{LC_realUnits}       & & & & & & & & & & & \\ \hline
-\lcref{LC_simNoise}        & & & & & & & & & & & \\ \hline
-\lcref{LC_imgMetricAlgos}  & & & & & & & & & & & \\ \hline
-\lcref{LC_multichannel}    & & & & & & & & & & & \\ \hline
-\lcref{LC_physics}         & & & & & & & & & & & \\ \hline
+	& \aref{A_reality}
+\\ \hline
+\tref{T_meanfreepath}      & & & & &X& & & & & &  \\ \hline
+\tref{T_contrast}          & & & & & & & & & & &  \\ \hline
+\tref{T_mag}               & & & & & & & &X& & &  \\ \hline
+\dref{GD_grid}             & & & & & & & & & & &X \\ \hline
+\dref{GD_deflectionSpace}  & & & & & & & & & & &  \\ \hline
+\ddref{DD_yield}           & & & &X&X& & & &X& &  \\ \hline
+\ddref{DD_signalImage}     & & & & & & & & & & &  \\ \hline
+\iref{IM_bitblt}           & & & & & & & & & & &  \\ \hline
+\iref{IM_imageMetric}      & & & & & & & &X& & &  \\ \hline
+\lcref{LC_realUnits}       & & & & & & & & & & &  \\ \hline
+\lcref{LC_simNoise}        & & & & & & & & & & &  \\ \hline
+\lcref{LC_imgMetricAlgos}  & & & & & & & & & & &  \\ \hline
+\lcref{LC_multichannel}    & & & & & & & &X& & &  \\ \hline
+\lcref{LC_physics}         &X& & & & & & & & & &  \\ \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Assumptions and Other Items}
 \label{Table:A_trace}
 \end{table}
-\end{landscape}
-}
 
 \begin{table}[h!]
 \centering
@@ -1111,17 +1107,17 @@ the assumptions.
   & \ddref{DD_yield}
   & \ddref{DD_signalImage}
   & \iref{IM_bitblt}
-  & \iref{IM_imageMetric} \\
-\hline
-\tref{T_meanfreepath}       & & & & & & & & & \\ \hline
-\tref{T_contrast}           & & & & & & & & & \\ \hline
-\tref{T_mag}                & & & & & & & & & \\ \hline
-\dref{GD_grid}              & & & & & & & & & \\ \hline
-\dref{GD_deflectionSpace}   & & & & & & & & & \\ \hline
-\ddref{DD_yield}            & & & & & & & & & \\ \hline
-\ddref{DD_signalImage}      & & & & & & & & & \\ \hline
-\iref{IM_bitblt}            & & & & & & & & & \\ \hline
-\iref{IM_imageMetric}       & & & & & & & & & \\ \hline
+  & \iref{IM_imageMetric}
+\\ \hline
+\tref{T_meanfreepath}       & & & & & & & & &  \\ \hline
+\tref{T_contrast}           & & & & & & & & &  \\ \hline
+\tref{T_mag}                & & & & & & & & &  \\ \hline
+\dref{GD_grid}              & & & & & & & & &  \\ \hline
+\dref{GD_deflectionSpace}   & & & &X& & & & &  \\ \hline
+\ddref{DD_yield}            & & & & & & &X& &  \\ \hline
+\ddref{DD_signalImage}      & & & & & & & &X&  \\ \hline
+\iref{IM_bitblt}            & & & & & & &X& &  \\ \hline
+\iref{IM_imageMetric}       & & & & & & & & &  \\ \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Items of Different Sections}
 \label{Table:trace}
@@ -1139,17 +1135,17 @@ the assumptions.
   & \rref{R_subregion}
   & \rref{R_spotLayout}
   & \rref{R_resultImage}
-  & \rref{R_imageMetric} \\
-\hline
-\iref{IM_bitblt}          & & & & & & & & & \\ \hline
-\iref{IM_imageMetric}     & & & & & & & & & \\ \hline
-\rref{R_Inputs}           & & & & & & & & & \\ \hline
-\rref{R_userSpotProfile}  & & & & & & & & & \\ \hline
-\rref{R_userPixelSize}    & & & & & & & & & \\ \hline
-\rref{R_subregion}        & & & & & & & & & \\ \hline
-\rref{R_spotLayout}       & & & & & & & & & \\ \hline
-\rref{R_resultImage}      & & & & & & & & & \\ \hline
-\rref{R_imageMetric}      & & & & & & & & & \\ \hline
+  & \rref{R_imageMetric}
+\\ \hline
+\iref{IM_bitblt}          & & & & & & & & &  \\ \hline
+\iref{IM_imageMetric}     & & & & & & & & &  \\ \hline
+\rref{R_Inputs}           & & & & & & & & &  \\ \hline
+\rref{R_userSpotProfile}  & & & & & & & & &  \\ \hline
+\rref{R_userPixelSize}    & & & & & & & & &  \\ \hline
+\rref{R_subregion}        & & & & & & & & &  \\ \hline
+\rref{R_spotLayout}       & & & & & & & & &  \\ \hline
+\rref{R_resultImage}      & & & & & & & & &  \\ \hline
+\rref{R_imageMetric}      & & & & & & & & &  \\ \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Requirements and Instance Models}
 \label{Table:R_trace}
