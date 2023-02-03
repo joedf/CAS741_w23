@@ -495,12 +495,12 @@ includes the following elements:
 
 \subsubsection{Goal Statements}
 
-\noindent Given an image, the goal statements are:
+\noindent Given an image (ground truth) and imaging parameters (e.g., spot size, spot shape, pixel size), the goal statements are:
 
 \begin{itemize}
 
-\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_easeofuse}:] {
-A user-friendly straight forward tool to load and reprocess an image with options following the SEM image formation process.
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_reprocess}:] {
+Reprocess the image following the SEM image formation process.
 }
 
 \item[GS\refstepcounter{goalnum}\thegoalnum \label{G_metric}:] {
@@ -508,7 +508,11 @@ Provide a quantitative metric of relative image quality of the resulting image c
 }
 
 \item[GS\refstepcounter{goalnum}\thegoalnum \label{G_visualize}:] {
-The ability to visualize and export the reprocessed images.
+Visualize the effects of changing the imaging parameters.
+}
+
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_export}:] {
+Export the reprocessed images.
 }
 
 \end{itemize}
@@ -803,7 +807,7 @@ one which is expressed in mathematical terms. It uses concrete symbols defined
 in Section~\ref{sec_datadef} to replace the abstract symbols in the models 
 identified in Sections~\ref{sec_theoretical} and~\ref{sec_gendef}.
 
-The goal of reprocessing an image \gsref{G_easeofuse} will be solved by \iref{IM_bitblt}. The goal of providing an image quality metric will be solved by \iref{IM_imageMetric}.  
+The goal of reprocessing an image \gsref{G_reprocess} will be solved by \iref{IM_bitblt}. The goal of providing an image quality metric will be solved by \iref{IM_imageMetric}.  
 
 ~\newline
 
@@ -995,8 +999,8 @@ maintainability, and portability. These are listed below in detail:
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:] \textbf{Usability} The user should be able to intuitively use the 
   software and quickly understand what is being displayed. There should be 
-  little to no setup required. Although the intended 
-  use is more of a qualitative nature, the user should be able to grasp any 
+  little to no setup required. The software should be user-friendly and straight forward to use.
+  Although the intended use is more of a qualitative nature, the user should be able to grasp any 
   trends in the change of the image quality metric when the input parameters are 
   changed. The software should have a simple user interface and be responsive 
   when given a relatively small input image (ref to assumptions here?).
