@@ -1046,7 +1046,6 @@ Here are changes listed that will likely be implemented as the software is impro
 
 \end{itemize}
 
-
 \section{Traceability Matrices and Graphs}
 
 The purpose of the traceability matrices is to provide easy references on what
@@ -1125,7 +1124,7 @@ the assumptions.
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
 	& \iref{IM_bitblt}
   & \iref{IM_imageMetric}
@@ -1136,22 +1135,32 @@ the assumptions.
   & \rref{R_spotLayout}
   & \rref{R_resultImage}
   & \rref{R_imageMetric}
+  & \nfrref{NFR_Accuracy}
+  & \nfrref{NFR_Usability}
+  & \nfrref{NFR_Maintainability}
+  & \nfrref{NFR_Portability}
 \\ \hline
-\iref{IM_bitblt}          & & & & & & & & &  \\ \hline
-\iref{IM_imageMetric}     & & & & & & & & &  \\ \hline
-\rref{R_Inputs}           & & & & & & & & &  \\ \hline
-\rref{R_userSpotProfile}  & & & & & & & & &  \\ \hline
-\rref{R_userPixelSize}    & & & & & & & & &  \\ \hline
-\rref{R_subregion}        & & & & & & & & &  \\ \hline
-\rref{R_spotLayout}       & & & & & & & & &  \\ \hline
-\rref{R_resultImage}      & & & & & & & & &  \\ \hline
-\rref{R_imageMetric}      & & & & & & & & &  \\ \hline
+\iref{IM_bitblt}              & & & & & & & & & & & & &  \\ \hline
+\iref{IM_imageMetric}         & & & & & & & & &X&X&X& &  \\ \hline
+\rref{R_Inputs}               & & & & & & & & & & & & &  \\ \hline
+\rref{R_userSpotProfile}      & & & & & & & & & & & & &  \\ \hline
+\rref{R_userPixelSize}        & & & & & & & & & & & & &  \\ \hline
+\rref{R_subregion}            & & & & & & & & & & & & &  \\ \hline
+\rref{R_spotLayout}           & & & & & & & & & & & & &  \\ \hline
+\rref{R_resultImage}          &X& & & & & & & & & & & &  \\ \hline
+\rref{R_imageMetric}          &X& & & & & & & & & & & &  \\ \hline
+\nfrref{NFR_Accuracy}         & & & & & & & & & & & & &  \\ \hline
+\nfrref{NFR_Usability}        & & & & & & & & & & & & &  \\ \hline
+\nfrref{NFR_Maintainability}  & & & & & & & & & & & & &  \\ \hline
+\nfrref{NFR_Portability}      & & & & & & & & & & & & &  \\ \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Requirements and Instance Models}
 \label{Table:R_trace}
 \end{table}
 
 \newpage
+
+\clearpage
 
 \bibliographystyle {plainnat}
 \bibliography {../../refs/References,../../refs/SEM_Image_chapter}
