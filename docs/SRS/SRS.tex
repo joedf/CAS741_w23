@@ -462,6 +462,13 @@ easier to correctly understand the requirements:
 
 \subsubsection{Physical System Description} \label{sec_phySystDescrip}
 
+The basic principle of the SEM image formation process is to scan an electron beam over the surface 
+of the sample (fig. \ref{fig_ebeam}) at discrete locations: cells of a raster or scan grid. A signal (e.g., BSEs, SEs) is 
+produced as the beam dwells over each cell (representing a pixel in the resulting image). This 
+signal is then collected by detectors to calculate a value (or intensity) to fill the corresponding
+pixel in the resulting image. The area sampled depends on the spot's (produced by the beam) size and 
+shape (see fig \ref{fig_sampling}). \\
+
 The physical system of \progname{}, as shown in Figure \ref{fig_ebeam} and \ref{fig_sampling},
 includes the following elements:
 
@@ -482,6 +489,7 @@ includes the following elements:
 \caption{\label{fig_ebeam} Schematic drawing of an electron beam hitting the sample surface within an SEM chamber. (Image from: \url{https://github.com/joedf/ImgBeamer})}
 \end{center}
 \end{figure}
+\setlength{\belowcaptionskip}{10pt}
 
 \begin{figure}[h!]
 \begin{center}
@@ -491,7 +499,6 @@ includes the following elements:
 \caption{\label{fig_sampling} Schematic of the three sampling scenarios (under-sampling, exact-sampling, and over-sampling) and a visual representation of the pixel grid, $d_p$, and $d_o$. The dashed lines are to help visualize the center of each pixel cell. Adapted from \citet{lifshin_improving_2014}}
 \end{center}
 \end{figure}
-\setlength{\belowcaptionskip}{10pt}
 
 \subsubsection{Goal Statements}
 
