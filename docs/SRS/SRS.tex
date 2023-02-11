@@ -151,7 +151,7 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 2023/02/03 & 1.0 & First version\\
-Date 2 & 1.1 & Notes\\
+2023/02/11 & 1.1 & Changes after revsion from domain expert\\
 \bottomrule
 \end{tabularx}
 
@@ -569,14 +569,15 @@ intensity or current is considered uniform throughout the beam.
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_inputImage}:] The input 
 image of the sample is considered to have infinite resolution representative of reality: ground truth.
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_yield}:] The signal yields (such as BSEs and SEs) are high enough to produce an image meaning optimal SNR (enough signal and noise is low).
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_yield}:] The signal yields (such as BSEs and SEs, see \ddref{DD_yield})
+are high enough to produce an image meaning optimal SNR (enough signal and noise is low).
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_environment}:] The SEM 
 is within a controlled environment: climate controlled (temperature and 
 humidity) and low vibration room.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_reality}:] The image 
-produced by the SEM as the electron raster scan the sample surface is an 
+produced by the SEM (see \ddref{DD_signalImage}) as the electron raster scan the sample surface is an 
 approximate representation of reality.
 
 \end{itemize}
@@ -774,7 +775,7 @@ models. The dimension of each quantity is also given.
   \hline
   Sources& \cite{goldstein_textbook_2018} \\
   \hline
-  Ref.\ By & \ddref{DD_signalImage}, \tref{T_contrast} \\
+  Ref.\ By & \ddref{DD_signalImage}, \tref{T_contrast}, \aref{A_yield} \\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -803,7 +804,7 @@ models. The dimension of each quantity is also given.
   \hline
   Sources& \cite{goldstein_textbook_2018} \\
   \hline
-  Ref.\ By & \iref{IM_bitblt} \\
+  Ref.\ By & \iref{IM_bitblt}, \aref{A_reality} \\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -1090,7 +1091,7 @@ the assumptions.
 \dref{GD_grid}             & & & & & & & & & & &X \\ \hline
 \dref{GD_deflectionSpace}  & & & & & & & & & & &  \\ \hline
 \ddref{DD_yield}           & & & &X&X& & & &X& &  \\ \hline
-\ddref{DD_signalImage}     & & & & & & & & & & &  \\ \hline
+\ddref{DD_signalImage}     & & & & & & & & & & &X \\ \hline
 \iref{IM_bitblt}           & & & & & & & & & & &  \\ \hline
 \iref{IM_imageMetric}      & & & & & & & &X& & &  \\ \hline
 \lcref{LC_realUnits}       & & & & & & & & & & &  \\ \hline
