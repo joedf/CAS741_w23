@@ -831,7 +831,7 @@ The goal of reprocessing an image \gsref{G_reprocess} will be solved by \iref{IM
   \rowcolor[gray]{0.9}
   Number& IM\refstepcounter{instnum}\theinstnum \label{IM_bitblt}\\
   \hline
-  Label& \bf Bit blit (as known as Bit Block Transfer) \\
+  Label& \bf Bit BLT (as known as Bit Block Transfer) \\
   \hline
   Input& an image $I_{n \times m}$ and a mask $M_{n \times m}$\\
   \hline
@@ -849,7 +849,8 @@ The goal of reprocessing an image \gsref{G_reprocess} will be solved by \iref{IM
   matrix cell (at $i$, $j$) is false (or zero), then no value is transferred, and zero will be inserted
   at $i$, $j$ in the destination image matrix. \\
   \hline
-  Sources& \url{https://en.wikipedia.org/wiki/Bit\_blit} \\
+  Sources
+    & \cite{pike_bitmap_1984}, \url{https://en.wikipedia.org/wiki/Bit\_blit} \\
   \hline
   Ref.\ By & \rref{R_resultImage} \\
   \hline
@@ -1170,6 +1171,6 @@ the assumptions.
 \clearpage
 
 \bibliographystyle {plainnat}
-\bibliography {../../refs/References,../../refs/SEM_Image_chapter}
+\bibliography {../../refs/References,../../refs/SEM_Image_chapter,../../refs/algorithms}
 
 \end{document}
