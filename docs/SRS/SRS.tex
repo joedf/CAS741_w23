@@ -467,7 +467,7 @@ of the sample (fig. \ref{fig_ebeam}) at discrete locations: cells of a raster or
 produced as the beam dwells over each cell (representing a pixel in the resulting image). This 
 signal is then collected by detectors to calculate a value (or intensity) to fill the corresponding
 pixel in the resulting image. The area sampled depends on the spot's (produced by the beam) size and 
-shape (see fig \ref{fig_sampling}). \\
+shape (see fig. \ref{fig_sampling}). \\
 
 The physical system of \progname{}, as shown in Figure \ref{fig_ebeam} and \ref{fig_sampling},
 includes the following elements:
@@ -500,7 +500,59 @@ includes the following elements:
 \end{center}
 \end{figure}
 
+\begin{landscape}
+\setlength{\belowcaptionskip}{-30pt}
+\vspace*{\fill}
+\begin{figure}[h!]
+\begin{center}
+{
+ \includegraphics[width=1.3\textwidth]{figures/spot_ratio/sampling_ratios.pdf}
+}
+\caption{\label{fig_samp_ratios} Different scenarios of the spot sizes (represented by the red circles) are presented to show the area coverage and overlap that would occur in a raster scan. [A] represents exact-sampling (as explained in figure \ref{fig_sampling}), where there are considerable gaps between the spot locations. In [B], the gaps are small meaning little loss in area coverage, but there is some overlap. In [C], as we approach to a spot diameter that is equal to the square diagonal ($\sqrt{2} \approx 1.4142$), the gaps are significantly reduced as the overlap grows to geometric maximum.}
+\end{center}
+\end{figure}
+\vspace*{\fill}
+\setlength{\belowcaptionskip}{10pt}
+\end{landscape}
+
+Depending on how large the spot size is, the surface are coverage will vary. As shown in
+figure \ref{fig_samp_ratios}, a circular spot cannot cover the entire area without overlap. However,
+when the spot size is small, there is no overlap, but there are significant gaps where potentially 
+means a loss of in formation. There is a balance between the overlaps and the gaps. 
+In figure \ref{fig_samp_scenarios}, we can see how this balance can affect the reconstructed image's
+sharpness versus its amount of detail or visual information.
+
+~\newline
+
+\begin{figure}[h!]
+\begin{center}
+{
+ \includegraphics[width=0.8\textwidth]{figures/spot_ratio/sampling_scenarios.pdf}
+}
+\caption{\label{fig_samp_scenarios} Different sampling scenarios are presented here (A-D). The blue circles represent the imaging or beam spot. The notation C10 represents a square cell size of 10 by 10 pixels. The following numbers are percentages of the spot diameter size with respect to the cell width. For example in [D], we have a spot where its diameter is 130\% of the cell's width. [E] represents the original image that was resampled. It is a virtual BSE image representing a crystalline sample. [F] shows a "high-fidelity" reconstructed image meaning the pixel size is one-to-one with exact-sampling (100\%). There is no perceivable difference.}
+\end{center}
+\end{figure}
+
 \newpage
+
+In more extreme cases as shown in figure \ref{fig_samp_scenarios_extra} (exaggerated for clarity), 
+if there is over-sampling in one direction and under-sampling in another can create the effect of 
+astigmatism. Whereas in the scenario where we grossly over-sample in all directions, we obtain the 
+effect of an unfocused image.
+
+~\newline
+
+\begin{figure}[h!]
+\begin{center}
+{
+ \includegraphics[width=0.8\textwidth]{figures/spot_ratio/sampling_scenarios-extra.pdf}
+}
+\caption{\label{fig_samp_scenarios_extra} Following the same notation as explained in figure \ref{fig_samp_scenarios}, here are two extra examples (A and B). [A] represents the scenario of astigmatism that is dominant at a 45-degree angle. [B] represents the scenario of defocus (or insufficient focus).}
+\end{center}
+\end{figure}
+
+\newpage
+\clearpage
 
 \subsubsection{Goal Statements}
 
