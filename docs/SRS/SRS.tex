@@ -78,6 +78,9 @@
 \newcounter{lcnum} %Likely change number
 \newcommand{\lthelcnum}{LC\thelcnum}
 \newcommand{\lcref}[1]{LC\ref{#1}}
+\newcounter{ucnum} %Likely change number
+\newcommand{\ltheucnum}{UC\theucnum}
+\newcommand{\ucref}[1]{UC\ref{#1}}
 
 \usepackage{fullpage}
 
@@ -1104,9 +1107,9 @@ Here are changes listed that will likely be implemented as the software is impro
 
 \noindent \begin{itemize}
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_multichannel}:] Processing multi-spectrum or multichannel images.
+\item[UC\refstepcounter{ucnum}\theucnum\label{UC_multichannel}:] Processing multi-spectrum or multichannel images.
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_physics}:] Simulate electron beam physics, collision cascades, sample nature, topography, or electron-sample interactions.
+\item[UC\refstepcounter{ucnum}\theucnum\label{UC_physics}:] Simulate electron beam physics, collision cascades, sample nature, topography, or electron-sample interactions.
 
 \end{itemize}
 
@@ -1151,8 +1154,8 @@ the assumptions.
 \lcref{LC_realUnits}       & & & & & & & & & & &  \\ \hline
 \lcref{LC_simNoise}        & & & & & & & & & & &  \\ \hline
 \lcref{LC_imgMetricAlgos}  & & & & & & & & & & &  \\ \hline
-\lcref{LC_multichannel}    & & & & & & & &X& & &  \\ \hline
-\lcref{LC_physics}         &X& & & & & & & & & &  \\ \hline
+\ucref{UC_multichannel}    & & & & & & & &X& & &  \\ \hline
+\ucref{UC_physics}         &X& & & & & & & & & &  \\ \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Assumptions and Other Items}
 \label{Table:A_trace}
