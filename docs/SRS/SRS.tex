@@ -279,7 +279,7 @@ or misinterpretation. The issue is further explained in the
 Problem Statement document. Some figures expanding on the subject can be
 found in section \ref{sec_phySystDescrip}.
 An underlying goal is also to prove or disprove if 
-there is a "rule of thumb" for the optimal spot-to-pixel size ratio.
+there is a ``rule of thumb'' for the optimal spot-to-pixel size ratio.
 
 \subsection{Purpose of Document}
 
@@ -342,7 +342,7 @@ includes the responsibilities of the user and the software.
   \item User Responsibilities:
   \begin{itemize}
     \item Provide an image of sufficient size, such that the is enough visible detail.
-    \item Provided a ground truth image that should be free of distortions (e.g., from FOV edges, depth of field, "charging", insufficient focus, astigmatism, etc.).
+    \item Provided a ground truth image that should be free of distortions (e.g., from FOV edges, depth of field, ``charging'', insufficient focus, astigmatism, etc.).
     \item Be able to interact with the software's graphical user interface using a computer mouse, keyboard and monitor.
     \item Provide realistic spot profiles (size and shape).
     \item Understand the basic concepts of the SEM image formation process.
@@ -432,13 +432,13 @@ easier to correctly understand the requirements:
 
         Mean Free Path & The average distance within a system that a particle can travel before it collides with other particles.\\
         
-        Nyquist Limit & More formally known as the "Nyquist-Shannon" sampling limit is the minimum sampling rate at which all the essential information is captured when discretizing a continuous signal, resulting in little to no distortions. \\
+        Nyquist Limit & More formally known as the ``Nyquist-Shannon'' sampling limit is the minimum sampling rate at which all the essential information is captured when discretizing a continuous signal, resulting in little to no distortions. \\
         
         Over-sampling & This is a sampling rate or size that is too large where the specificity or origin of the information is lost. This generally results in increased confidence, but at a loss of precision.\\
         
         Pixel Size & The size or dimensions of one cell within a raster grid. \\
         
-        Probe & Generally interchangeable with "beam". Contextually within this document, it is the final part of the beam that comes into contact with the surface of the sample (being analyzed within the microscope) forming a "spot" with a targeted size and shape. \\
+        Probe & Generally interchangeable with ``beam''. Contextually within this document, it is the final part of the beam that comes into contact with the surface of the sample (being analyzed within the microscope) forming a ``spot'' with a targeted size and shape. \\
         
         Raster Grid & A scanning pattern with a defined and repeated cell size. \\
         
@@ -454,7 +454,7 @@ easier to correctly understand the requirements:
         
         Spot Size & The overall diameter or average feret/caliper diameter of the probe. \\
         
-        Step Size & The length or distance of a "pixel" by which the probe is moved or deflected when raster scanning the surface of a sample. \\
+        Step Size & The length or distance of a ``pixel'' by which the probe is moved or deflected when raster scanning the surface of a sample. \\
         
         Subregion & A region or area contained within the current FOV. \\
 
@@ -533,7 +533,7 @@ sharpness versus its amount of detail or visual information.
 {
  \includegraphics[width=0.8\textwidth]{figures/spot_ratio/sampling_scenarios.pdf}
 }
-\caption{\label{fig_samp_scenarios} Different sampling scenarios are presented here (A-D). The blue circles represent the imaging or beam spot. The notation C10 represents a square cell size of 10 by 10 pixels. The following numbers are percentages of the spot diameter size with respect to the cell width. For example in [D], we have a spot where its diameter is 130\% of the cell's width. [E] represents the original image that was resampled. It is a virtual BSE image representing a crystalline sample. [F] shows a "high-fidelity" reconstructed image meaning the pixel size is one-to-one with exact-sampling (100\%). There is no perceivable difference.}
+\caption{\label{fig_samp_scenarios} Different sampling scenarios are presented here (A-D). The blue circles represent the imaging or beam spot. The notation C10 represents a square cell size of 10 by 10 pixels. The following numbers are percentages of the spot diameter size with respect to the cell width. For example in [D], we have a spot where its diameter is 130\% of the cell's width. [E] represents the original image that was resampled. It is a virtual BSE image representing a crystalline sample. [F] shows a ``high-fidelity'' reconstructed image meaning the pixel size is one-to-one with exact-sampling (100\%). There is no perceivable difference.}
 \end{center}
 \end{figure}
 
@@ -757,7 +757,7 @@ instance models.
     & Each cell is a discrete x-y location over which the beam scans over to 
     produce a signal. These signals are then collected by detectors to generate 
     an image. \\
-    & Each cell represents a picture element or "pixel" that is by convention 
+    & Each cell represents a picture element or ``pixel'' that is by convention 
     square. \\
     & Non-square pixels may lead to unfaithful or distorted representations, see \aref{A_reality}. \\
   \hline
@@ -856,7 +856,7 @@ models. The dimension of each quantity is also given.
     where the range depends on the bit depth. \\
     & A bit depth of 8 is 0 to 255 (0xFF), and 16 is 0 to 65535 (0xFFFF). \\
     & We assume (see \aref{A_yield}) there's enough signal that can be detected, 
-    as a $0$ represents no or "undetected" signal.\\
+    as a $0$ represents no or ``undetected'' signal.\\
   \hline
   Sources& \cite{goldstein_textbook_2018} \\
   \hline
