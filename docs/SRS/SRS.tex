@@ -747,7 +747,7 @@ instance models.
   \hline
   Label &\bf Raster or Scan Grid\\
   \hline
-  Units & \si{\nm}, \si{\um}, or px (pixels) \\
+  Units & px (pixels) \\
   \hline
   Equation & $G(x,y): \{ x \ge 0, y \ge 0 \}$ \\
   \hline
@@ -760,6 +760,8 @@ instance models.
     & Each cell represents a picture element or ``pixel'' that is by convention 
     square. \\
     & Non-square pixels may lead to unfaithful or distorted representations, see \aref{A_reality}. \\
+    & The size of a pixel can be expressed in \si{\nm}, \si{\um}, or even a 
+    percentage of the FOV. \\
   \hline
   Source & \cite{goldstein_image_2018} \\
   \hline
