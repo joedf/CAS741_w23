@@ -627,7 +627,8 @@ intensity or current is considered uniform throughout the beam.
 image of the sample is considered to have infinite resolution representative of reality: ground truth.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_yield}:] The signal yields (such as BSEs and SEs, see \ddref{DD_yield})
-are high enough to produce an image meaning optimal SNR (enough signal and noise is low).
+are high enough to produce an image meaning optimal SNR (enough signal, 
+contrast [\tref{T_contrast}] and noise is low).
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_environment}:] The SEM 
 is within a controlled environment: climate controlled and low vibration.
@@ -635,6 +636,10 @@ is within a controlled environment: climate controlled and low vibration.
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_reality}:] The image 
 produced by the SEM (see \ddref{DD_signalImage}) as the electron raster scan the sample surface is an 
 approximate representation of reality.
+
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_deflectionLimit}:] The beam's deflection 
+space (\tref{T_deflectionSpace}) will not be a limiting factor in how wide the coverage area 
+of the sample surface.
 
 \end{itemize}
 
@@ -695,7 +700,7 @@ on.
   \hline
   Sources& \cite{goldstein_textbook_2018}, \cite{lifshin_improving_2014} \\
   \hline
-  Ref.\ By & -- \\
+  Ref.\ By & \aref{A_yield} \\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -728,6 +733,32 @@ on.
 \end{minipage}\\
 ~\newline
 
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& TM\refstepcounter{theorynum}\thetheorynum \label{T_deflectionSpace}\\
+  \hline
+  Label &\bf Deflection Space (or area / field)\\
+  \hline
+  Description
+    & The deflection space is the area bounds in which the beam can be redirected 
+    or oriented using deflection coils. It can be expressed in real world units, 
+    but this can vary between SEMs. \\
+    & From an imaging perspective, it can be generalized as a normalized unit 
+    square coordinate system where the top left is (-0.5, -0.5), the center is 
+    (0.0, 0.0), and the bottom right is (0.5, 0.5).
+    \\
+  \hline
+  Source & \cite{goldstein_image_2018} \\
+  \hline
+  Ref.\ By & \aref{A_deflectionLimit}, \dref{GD_grid} \\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
 \newpage
 
 \subsubsection{General Definitions}\label{sec_gendef}
@@ -753,7 +784,7 @@ instance models.
   \hline
   Description
     & This is a grid pattern applied to the sample surface within the FOV and 
-    spanning within deflection space (\dref{GD_deflectionSpace}) of the SEM. \\
+    spanning within deflection space (\tref{T_deflectionSpace}) of the SEM. \\
     & Each cell is a discrete x-y location over which the beam scans over to 
     produce a signal. These signals are then collected by detectors to generate 
     an image. \\
@@ -762,33 +793,6 @@ instance models.
     & Non-square pixels may lead to unfaithful or distorted representations, see \aref{A_reality}. \\
     & The size of a pixel can be expressed in \si{\nm}, \si{\um}, or even a 
     percentage of the FOV. \\
-  \hline
-  Source & \cite{goldstein_image_2018} \\
-  \hline
-  Ref.\ By & -- \\
-  \hline
-\end{tabular}
-\end{minipage}\\
-~\newline
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-  \hline
-  \rowcolor[gray]{0.9}
-  Number& GD\refstepcounter{defnum}\thedefnum \label{GD_deflectionSpace}\\
-  \hline
-  Label &\bf Deflection Space (or area / field)\\
-  \hline
-  Description
-    & The deflection space is the area bounds in which the beam can be redirected 
-    or oriented using deflection coils. It can be expressed in real world units, 
-    but this can vary between SEMs. \\
-    & From an imaging perspective, it can be generalized as a normalized unit 
-    square coordinate system where the top left is (-0.5, -0.5), the center is 
-    (0.0, 0.0), and the bottom right is (0.5, 0.5).
-    \\
   \hline
   Source & \cite{goldstein_image_2018} \\
   \hline
@@ -1129,7 +1133,7 @@ the assumptions.
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
 	& \aref{A_sampleSolid}
 	& \aref{A_sampleTopo}
@@ -1142,21 +1146,22 @@ the assumptions.
 	& \aref{A_yield}
 	& \aref{A_environment}
 	& \aref{A_reality}
+	& \aref{A_deflectionLimit}
 \\ \hline
-\tref{T_meanfreepath}      & & & & &X& & & & & &  \\ \hline
-\tref{T_contrast}          & & & & & & & & & & &  \\ \hline
-\tref{T_mag}               & & & & & & & &X& & &  \\ \hline
-\dref{GD_grid}             & & & & & & & & & & &X \\ \hline
-\dref{GD_deflectionSpace}  & & & & & & & & & & &  \\ \hline
-\ddref{DD_yield}           & & & &X&X& & & &X& &  \\ \hline
-\ddref{DD_signalImage}     & & & & & & & & & & &X \\ \hline
-\iref{IM_bitblt}           & & & & & & & & & & &  \\ \hline
-\iref{IM_imageMetric}      & & & & & & & &X& & &  \\ \hline
-\lcref{LC_realUnits}       & & & & & & & & & & &  \\ \hline
-\lcref{LC_simNoise}        & & & & & & & & & & &  \\ \hline
-\lcref{LC_imgMetricAlgos}  & & & & & & & & & & &  \\ \hline
-\ucref{UC_multichannel}    & & & & & & & &X& & &  \\ \hline
-\ucref{UC_physics}         &X& & & & & & & & & &  \\ \hline
+\tref{T_meanfreepath}      & & & & &X& & & & & & & \\ \hline
+\tref{T_contrast}          & & & & & & & & &X& & & \\ \hline
+\tref{T_mag}               & & & & & & & &X& & & & \\ \hline
+\tref{T_deflectionSpace}   & & & & & & & & & & & &X\\ \hline
+\dref{GD_grid}             & & & & & & & & & & &X& \\ \hline
+\ddref{DD_yield}           & & & &X&X& & & &X& & & \\ \hline
+\ddref{DD_signalImage}     & & & & & & & & & & &X& \\ \hline
+\iref{IM_bitblt}           & & & & & & & & & & & & \\ \hline
+\iref{IM_imageMetric}      & & & & & & & &X& & & & \\ \hline
+\lcref{LC_realUnits}       & & & & & & & & & & & & \\ \hline
+\lcref{LC_simNoise}        & & & & & & & & & & & & \\ \hline
+\lcref{LC_imgMetricAlgos}  & & & & & & & & & & & & \\ \hline
+\ucref{UC_multichannel}    & & & & & & & &X& & & & \\ \hline
+\ucref{UC_physics}         &X& & & & & & & & & & & \\ \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Assumptions and Other Items}
 \label{Table:A_trace}
@@ -1169,8 +1174,8 @@ the assumptions.
 	& \tref{T_meanfreepath}
   & \tref{T_contrast}
   & \tref{T_mag}
+  & \tref{T_deflectionSpace}
   & \dref{GD_grid}
-  & \dref{GD_deflectionSpace}
   & \ddref{DD_yield}
   & \ddref{DD_signalImage}
   & \iref{IM_bitblt}
@@ -1179,8 +1184,8 @@ the assumptions.
 \tref{T_meanfreepath}       & & & & & & & & &  \\ \hline
 \tref{T_contrast}           & & & & & & & & &  \\ \hline
 \tref{T_mag}                & & & & & & & & &  \\ \hline
+\tref{T_deflectionSpace}    & & & & &X& & & &  \\ \hline
 \dref{GD_grid}              & & & & & & & & &  \\ \hline
-\dref{GD_deflectionSpace}   & & & &X& & & & &  \\ \hline
 \ddref{DD_yield}            & & & & & & &X& &  \\ \hline
 \ddref{DD_signalImage}      & & & & & & & &X&  \\ \hline
 \iref{IM_bitblt}            & & & & & & &X& &  \\ \hline
