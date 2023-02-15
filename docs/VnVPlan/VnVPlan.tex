@@ -17,7 +17,7 @@
 
 \begin{document}
 
-\title{Project Title: System Verification and Validation Plan for \progname{}} 
+\title{System Verification and Validation Plan for \progname{}} 
 \author{\authname}
 \date{\today}
 	
@@ -30,7 +30,7 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
+2023/02/17 1 & 1.0 & First version \\
 Date 2 & 1.1 & Notes\\
 \bottomrule
 \end{tabularx}
@@ -54,12 +54,14 @@ Date 2 & 1.1 & Notes\\
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
+  SRS & Software Requirements Specification\\
   T & Test\\
+  VnV & Verification and Validation\\
   \bottomrule
 \end{tabular}\\
 
 \wss{symbols, abbreviations or acronyms --- you can simply reference the SRS
-  \citep{SRS} tables, if appropriate}
+\citep{SRS} tables, if appropriate}
 
 \wss{Remove this section if it isn't needed}
 
@@ -67,8 +69,11 @@ Date 2 & 1.1 & Notes\\
 
 \pagenumbering{arabic}
 
-This document ... \wss{provide an introductory blurb and roadmap of the
-  Verification and Validation plan}
+This document lays out the Verification and Validation (VnV) plan of the \progname{} (scanning electron 
+microscope image formation) as described by the Software Requirements Specification (SRS) 
+document \citep{SRS}.
+Testing of the software and its components is conducted to build confidence in its usability, 
+accuracy, and ultimately whether it meets the SRS.
 
 \section{General Information}
 
@@ -394,8 +399,7 @@ How test will be performed:
 \wss{Provide evidence that all of the modules have been considered.}
 				
 \bibliographystyle{plainnat}
-
-\bibliography{../../refs/References}
+\bibliography{../../refs/References,../../refs/cas741}
 
 \newpage
 
