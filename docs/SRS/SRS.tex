@@ -19,6 +19,7 @@
 \usepackage{pdflscape}
 \usepackage{afterpage}
 \usepackage{hyperref}
+\usepackage[flushleft]{threeparttable}
 
 \usepackage[round]{natbib}
 
@@ -168,31 +169,9 @@ This section records information for easy reference.
 \subsection{Table of Units}
 
 Throughout this document SI (Syst\`{e}me International d'Unit\'{e}s) is employed
-as the unit system.  In addition to the basic units, several derived units are
-used as described below.  For each unit, the symbol is given followed by a
-description of the unit and the SI name.
-~\newline
-
-\renewcommand{\arraystretch}{1.2}
-%\begin{table}[ht]
-  \noindent \begin{tabular}{l l l} 
-    \toprule		
-    \textbf{symbol} & \textbf{unit} & \textbf{SI}\\
-    \midrule 
-    \si{\metre} & length & metre\\
-    \si{\second} & time & second\\
-    \si{Pa} & pressure & pascal\\
-    \si{J} & energy & joule\\
-    \si{K} & temperature & kelvin\\
-    \si{mol} & substance & mole\\
-    \bottomrule
-  \end{tabular}
-  %	\caption{SI Units}
-%\end{table}
-~\newline
- 
-~\newline
-Additional units used:
+as the unit system. In addition to the basic units, several derived units are
+used as described below. For each unit, the symbol is given followed by a
+description of the unit and the name.
 ~\newline
 
 %\begin{table}[ht]
@@ -200,7 +179,7 @@ Additional units used:
     \toprule		
     \textbf{symbol} & \textbf{unit} & \textbf{name}\\
     \midrule
-    px & pixel & picture element ?\\
+    px & pixel & picture element \\
     \si{\nm} & length & nanometre (\num{d-9} m)\\
     \si{\um} & length & micrometre (\num{d-6} m)\\
     \bottomrule
@@ -211,7 +190,7 @@ Additional units used:
 \subsection{Table of Symbols}
 
 The table that follows summarizes the symbols used in this document along with
-their units.  The choice of symbols was made to be consistent with EM (Electron
+their units. The choice of symbols was made to be consistent with EM (Electron
 Microscopy) literature and with existing documentation for EM systems. 
 The symbols are listed in alphabetical order.
 
@@ -223,10 +202,10 @@ The symbols are listed in alphabetical order.
 $d_p$ & \si[per-mode=symbol] {\nm} & probe diameter (size)\\
 $d_i$ & \si[per-mode=symbol] {\nm} & probe step size in image space\\
 $d_o$ & \si[per-mode=symbol] {\nm} & probe step size in object space\\
-$\eta$ & ratio & BSE yield \\
-$\delta$ & ratio & SE yield \\
+$\eta$ & dimensionless & BSE yield \\
+$\delta$ & dimensionless & SE yield \\
 $I_{n\times m}$ & 8-bit gray level & Image intensity matrix that has $n$ rows and $m$ columns.\\
-$M_{n\times m}$ & boolean & Mask / stencil matrix that has $n$ rows and $m$ columns.\\
+$M_{n\times m}$ & Boolean & Mask / stencil matrix that has $n$ rows and $m$ columns.\\
 $R_{n\times m}$ & 8-bit gray level & Resulting image intensity matrix that has $n$ rows and $m$ columns.\\
 \bottomrule
 \end{longtable*}
@@ -272,7 +251,7 @@ Images formed by SEM (Scanning Electron Microscope) are created using a
 specific process where the image quality can be greatly influenced by the 
 imaging parameters (e.g., spot profile, pixel size). Since the quality of 
 an image is very often evaluated subjectively by an experienced microscope 
-user, the motivation of this project is to provide a way to visualize 
+user, the motivation of this software project ``\progname{}'' is to provide a way to visualize 
 qualitatively the said influence without the need of a physical instrument.
 Incorrectly adjusting the imaging parameters could lead to a loss of information 
 or misinterpretation. The issue is further explained in the 
@@ -284,12 +263,12 @@ there is a ``rule of thumb'' for the optimal spot-to-pixel size ratio.
 \subsection{Purpose of Document}
 
 This document serves as the software requirements specification. The details of the 
-requirements, limitations, definitions, models to be used are laid explicitly 
+requirements, limitations, definitions, models to be used are laid out explicitly 
 within this document.
 
 \subsection{Scope of Requirements} 
 
-The scope of the requirements of this software is restricted to only the image 
+The scope of the requirements is restricted to only the image 
 formation process used in SEMs, more specifically the image processing from 
 signal to an image or visual representations. It does not cover election-sample 
 interactions or CCD (charge-coupled device) detector voltage to signal value 
@@ -299,7 +278,7 @@ details.
 \subsection{Characteristics of Intended Reader} \label{sec_IntendedReader}
 
 The intended reader of this document should have a basic understanding of 
-electron-optics concepts used in an SEM. This can be equated to standard level 
+electron-optics concepts used by an SEM. This can be equated to standard level 
 two university physics (optics, electricity, magnetism, thermodynamics and 
 modern physics) along with a standard undergraduate course related to materials 
 characterization (concepts such as backscattered electrons, mean free path, and 
@@ -317,7 +296,7 @@ likely changes and traceability details.
 
 \section{General System Description}
 
-This section provides general information about the system.  It identifies the
+This section provides general information about the system. It identifies the
 interfaces between the system and its environment, describes the user
 characteristics and lists the system constraints.
 
@@ -345,7 +324,6 @@ includes the responsibilities of the user and the software.
     \item Provided a ground truth image that should be free of distortions (e.g., from FOV edges, depth of field, ``charging'', insufficient focus, astigmatism, etc.).
     \item Be able to interact with the software's graphical user interface using a computer mouse, keyboard and monitor.
     \item Provide realistic spot profiles (size and shape).
-    \item Understand the basic concepts of the SEM image formation process.
     \item Run the software on a platform or system with sufficient resources to process computer graphics.
   \end{itemize}
 
@@ -368,17 +346,17 @@ The \progname{} software end user is anyone that has used an SEM or is learning 
 This ranges from a university undergraduate science student whose curriculum includes 
 EM (Electron Microscopy), to experienced SEM operators or even to experts in the field of EM. 
 The software end users also include those described in Section~\ref{sec_IntendedReader} 
-(intended readers of this document). That said, image processing nor linear algebra knowledge 
-is not required. 
+(intended readers of this document). That said, neither image processing nor linear algebra knowledge 
+is required to use the software. 
 
 \subsection{System Constraints}
 
-The real world design constraints are to be listed here, but currently this is none, or it is unknown if there are any.
+The real world design constraints are to be listed here, but there are none.
 
 \section{Specific System Description}
 
 This section first presents the problem description, which gives a high-level
-view of the problem to be solved.  This is followed by the solution characteristics
+view of the problem to be solved. This is followed by the solution characteristics
 specification, which presents the assumptions, theories, definitions and finally
 the instance models.
 
@@ -386,7 +364,7 @@ the instance models.
 
 \progname{} is intended to help visualize and understand the influence of the 
 spot profile and pixel size. It should be able to help determine the optimal 
-spot-to-pixel-size ratio (see fig. \ref{fig_samp_ratios} and \ref{fig_samp_scenarios}).
+spot-to-pixel-size ratio (see fig.~\ref{fig_samp_ratios} and \ref{fig_samp_scenarios}).
 
 \subsubsection{Terminology and Definitions}
 
@@ -467,11 +445,11 @@ easier to correctly understand the requirements:
 \subsubsection{Physical System Description} \label{sec_phySystDescrip}
 
 The basic principle of the SEM image formation process is to scan an electron beam over the surface 
-of the sample (fig. \ref{fig_ebeam}) at discrete locations: cells of a raster or scan grid. A signal (e.g., BSEs, SEs) is 
+of the sample (fig.~\ref{fig_ebeam}) at discrete locations: cells of a raster or scan grid. A signal (e.g., BSEs, SEs) is 
 produced as the beam dwells over each cell (representing a pixel in the resulting image). This 
 signal is then collected by detectors to calculate a value (or intensity) to fill the corresponding
 pixel in the resulting image. The area sampled depends on the spot's (produced by the beam) size and 
-shape (see fig. \ref{fig_sampling}). \\
+shape (see fig.~\ref{fig_sampling}). \\
 
 The physical system of \progname{}, as shown in Figure \ref{fig_ebeam} and \ref{fig_sampling},
 includes the following elements:
@@ -480,7 +458,7 @@ includes the following elements:
 
 \item[PS1:] The sample that is being imaged or studied.
 
-\item[PS2:] An SEM which includes a BSE and/or SE detector. The electron beam interacts with the sample surface in high-vacuum producing various signals.
+\item[PS2:] An SEM that includes a BSE and/or SE detector. The electron beam interacts with the sample surface in high-vacuum producing various signals.
 
 \end{itemize}
 
@@ -587,7 +565,7 @@ Export the reprocessed images.
 This section provides the assumptions, instance models, theoretical models, general definitions, and data constraints. The information specified in this section is intended to reduce ambiguities and reduce the problem into clear logical or mathematical terms. \\
 
 The instance models that govern \progname{} are presented in
-Subsection~\ref{sec_instance}.  The information to understand the meaning of the
+Subsection~\ref{sec_instance}. The information to understand the meaning of the
 instance models and their derivation is also presented, so that the instance
 models can be verified.
 
@@ -690,13 +668,17 @@ on.
   \hline
   Label& \bf Contrast\\
   \hline
-  Equation & $C_{tr} = (S_{max} - S_{min}) / S_{max}$ \\
+  Equation & $C_{tr} = (S_{2} - S_{1}) / S_{2}$ \\
   \hline
   Description
+    & $C_{tr}$ This is proportion or level of contrast or difference in signal. It is dimensionless. \\
     & $S$ is the emitted signal strength or intensity (see \ddref{DD_yield}). \\
+    & $S_{1}$ is one signal at one location (e.g., pixel). \\
+    & $S_{2}$ is another signal at a different location to be compared with $S_{1}$ 
+    and should the larger value of the two signals. \\
   \hline
   Notes
-    & $S_{max} > S_{min}$ \\
+    & $S_{2} > S_{1}$ \\
   \hline
   Sources& \cite{goldstein_textbook_2018}, \cite{lifshin_improving_2014} \\
   \hline
@@ -783,14 +765,15 @@ instance models.
   Equation & $G(x,y): \{ x \ge 0, y \ge 0 \}$ \\
   \hline
   Description
-    & This is a grid pattern applied to the sample surface within the FOV and 
+    & $G$ is the grid pattern applied to the sample surface within the FOV and 
     spanning within deflection space (\tref{T_deflectionSpace}) of the SEM. \\
-    & Each cell is a discrete x-y location over which the beam scans over to 
+    & Each cell is a discrete $(x,y)$ location over which the beam scans over to 
     produce a signal. These signals are then collected by detectors to generate 
     an image. \\
-    & Each cell represents a picture element or ``pixel'' that is by convention 
-    square. \\
-    & Non-square pixels may lead to unfaithful or distorted representations, see \aref{A_reality}. \\
+    & Each cell represents a picture element or ``pixel''. \\
+    & By convention, pixels are square, but this is not a necessity. That said, 
+    non-square pixels may lead to unfaithful or distorted representations, see 
+    \aref{A_reality} and \cite{goldstein_image_2018}. \\
     & The size of a pixel can be expressed in \si{\nm}, \si{\um}, or even a 
     percentage of the FOV. \\
   \hline
@@ -823,7 +806,7 @@ models. The dimension of each quantity is also given.
   \hline
   Symbol & $\eta$ (for BSE), $\delta$ (for SE), $Y$ (for general) \\
   \hline
-  Units & ratio - unitless \\
+  Units & dimensionless \\
   \hline
   Equation & $Y_{signal} = N_{signal} / N_{B}$ \\
   \hline
@@ -831,9 +814,11 @@ models. The dimension of each quantity is also given.
     & $Y_{signal}$ is the intensity relative to the incident beam. \\
     & $N_{signal}$ is the number of scattered or emitted electrons. \\
     & $N_{B}$ is the number of (primary) incident electrons from the beam. \\
+  \hline
   Notes
     & The $signal$ can BSE or SE. \\
-    & There assumptions related to the beam, the signal produced, and sample nature, see \aref{A_beam}, \aref{A_yield}, \aref{A_sampleZ}. \\
+    & There assumptions related to the beam, the signal produced, and sample nature, 
+    see \aref{A_sampleZ}, \aref{A_beam}, and \aref{A_yield}. \\
   \hline
   Sources& \cite{goldstein_textbook_2018} \\
   \hline
@@ -906,11 +891,11 @@ The goal of reprocessing an image \gsref{G_reprocess} will be solved by \iref{IM
   on each cell of the image matrix, based on the corresponding cell value found in the mask
   matrix at row $i$ and column $j$.\\
   
-  & If the mask cell value (at $i$, $j$) is true (or any non-zero value), the corresponding image
+  & If the mask cell value (at $i$, $j$) is True, the corresponding image
   cell value is transferred/kept in the resulting/destination matrix.\\
 
   & Otherwise, if the corresponding
-  matrix cell (at $i$, $j$) is false (or zero), then no value is transferred, and zero will be inserted
+  matrix cell (at $i$, $j$) is False, then no value is transferred, and zero will be inserted
   at $i$, $j$ in the destination image matrix. \\
   \hline
   Sources
@@ -961,15 +946,15 @@ The goal of reprocessing an image \gsref{G_reprocess} will be solved by \iref{IM
 \subsubsection{Input Data Constraints} \label{sec_DataConstraints}    
 
 Table~\ref{TblInputVar} shows the data constraints on the input output
-variables.  The column for physical constraints gives the physical limitations
-on the range of values that can be taken by the variable.  The column for
-software constraints restricts the range of inputs to reasonable values.  The
+variables. The column for physical constraints gives the physical limitations
+on the range of values that can be taken by the variable. The column for
+software constraints restricts the range of inputs to reasonable values. The
 software constraints will be helpful in the design stage for picking suitable
-algorithms.  The constraints are conservative, to give the user of the model the
-flexibility to experiment with unusual situations.  The column of typical values
-is intended to provide a feel for a common scenario.  The uncertainty column
+algorithms. The constraints are conservative, to give the user of the model the
+flexibility to experiment with unusual situations. The column of typical values
+is intended to provide a feel for a common scenario. The uncertainty column
 provides an estimate of the confidence with which the physical quantities can be
-measured.  This information would be part of the input if one were performing an
+measured. This information would be part of the input if one were performing an
 uncertainty quantification exercise. 
 
 The specification parameters in Table~\ref{TblInputVar} are listed in
@@ -983,13 +968,17 @@ Table~\ref{TblSpecParams}.
   \textbf{Var} & \textbf{Physical Constraints} & \textbf{Software Constraints} &
                              \textbf{Typical Value} & \textbf{Uncertainty}\\
   \midrule 
-  $d_p$ & $d_p > 0.4$ \si{nm} & $d_{min} \leq d_p \leq d_{max}$ & 10 \si{nm} & 10\% \\
-  $d_i$ & $d_i > 0.4$ \si{nm} & $d_{min} \leq d_i \leq d_{max}$ & 150 \si{nm} & 10\% \\
-  $I_{n \times m}$ & -- & $n_{min} \leq n \leq n_{max}$ & 1024 & 10\% \\
-   ... & -- & $m_{min} \leq n \leq m_{max}$ & 1024 & 10\% \\
-  $I_{i,j}$ & -- & $0 \leq I_{i,j} \leq I_{max}$ & 128 & 10\% \\
+  $d_p$ & $d_p > 0.4$ \si{nm}\textsuperscript{1} & $d_{min} \leq d_p \leq d_{max}$ & 10 \si{nm} & 10\% \\
+  $d_i$ & $d_i > 0.4$ \si{nm}\textsuperscript{1} & $d_{min} \leq d_i \leq d_{max}$ & 150 \si{nm} & 10\% \\
+  $n$ & -- & $n_{min} \leq n \leq n_{max}$ & 1024 & 10\% \\
+  $m$ & -- & $m_{min} \leq n \leq m_{max}$ & 1024 & 10\% \\
+  $I_{i,j}$ & -- & $\forall i,j: 0 \leq I_{i,j} \leq I_{max}$ & 128 & 10\% \\
   \bottomrule
 \end{longtable*}
+\begin{tablenotes}
+  \small
+  \item \textsuperscript{1}The reason for this number is that most SEMs cannot achieve finer resolution than this.
+\end{tablenotes}
 \end{table}
 
 \begin{table}[!h]
@@ -1100,7 +1089,7 @@ Here are changes listed that will likely be implemented as the software is impro
 
 \noindent \begin{itemize}
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_realUnits}:] Give a sense of scale in real world units such as \si{nm}. The user have to provide the physical dimension of the input image.
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_realUnits}:] Give a sense of scale in real world units such as \si{nm}. The user has to provide the physical dimension of the input image.
 
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_simNoise}:] Simulate basic noise (such as Gaussian or Poisson) at an intensity defined by the user.
 
@@ -1121,9 +1110,9 @@ Here are changes listed that will likely be implemented as the software is impro
 \section{Traceability Matrices and Graphs}
 
 The purpose of the traceability matrices is to provide easy references on what
-has to be additionally modified if a certain component is changed.  Every time a
+has to be additionally modified if a certain component is changed. Every time a
 component is changed, the items in the column of that component that are marked
-with an ``X'' may have to be modified as well.  Table~\ref{Table:trace} shows the
+with an ``X'' may have to be modified as well. Table~\ref{Table:trace} shows the
 dependencies of theoretical models, general definitions, data definitions, and
 instance models with each other. Table~\ref{Table:R_trace} shows the
 dependencies of instance models, requirements, and data constraints on each
