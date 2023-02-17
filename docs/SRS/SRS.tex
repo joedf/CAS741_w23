@@ -428,6 +428,10 @@ easier to correctly understand the requirements:
         Secondary Electron & An electron that emitted from the sample as a result of inelastic electron-sample interactions between the beam and the sample. These can be weakly bounded valence electrons or conduction band electrons. \\
         
         Signal-to-Noise Ratio & The amount of information (signal) considered useful or representative of reality versus the amount of noise. \\
+
+        Spot Content & The area covered and sampled by the probe to produce a signal value. \\
+
+        Spot Layout & The regular arrangement, sizing, and positioning of the spots and the raster grid used for imaging the sample surface. (ex. see fig. \ref{fig_sampling}) \\
         
         Spot Shape & The overall shape of the spot or probe, whether is it a perfect circle or elongated ellipse, or even a halo or ring. \\
         
@@ -449,7 +453,7 @@ The basic principle of the SEM image formation process is to scan an electron be
 of the sample (fig.~\ref{fig_ebeam}) at discrete locations: cells of a raster or scan grid. A signal (e.g., BSEs, SEs) is 
 produced as the beam dwells over each cell (representing a pixel in the resulting image). This 
 signal is then collected by detectors to calculate a value (or intensity) to fill the corresponding
-pixel in the resulting image. The area sampled depends on the spot's (produced by the beam) size and 
+pixel in the resulting image. The area sampled (spot content) depends on the spot's (produced by the beam) size and 
 shape (see fig.~\ref{fig_sampling}). \\
 
 The physical system of \progname{}, as shown in Figure \ref{fig_ebeam} and \ref{fig_sampling},
@@ -467,7 +471,7 @@ includes the following elements:
 \begin{figure}[h!]
 \begin{center}
 {
- \includegraphics[width=0.3\textwidth]{figures/e_beam.png}
+ \includegraphics[width=0.27\textwidth]{figures/e_beam.png}
 }
 \caption{\label{fig_ebeam} Schematic drawing of an electron beam hitting the sample surface within an SEM chamber. (Image from: \url{https://github.com/joedf/ImgBeamer})}
 \end{center}
@@ -477,7 +481,7 @@ includes the following elements:
 \begin{figure}[h!]
 \begin{center}
 {
- \includegraphics[width=0.8\textwidth]{figures/sampling.png}
+ \includegraphics[width=0.77\textwidth]{figures/sampling.png}
 }
 \caption{\label{fig_sampling} Schematic of the three sampling scenarios (under-sampling, exact-sampling, and over-sampling) and a visual representation of the pixel grid, $d_p$, and $d_o$. The dashed lines are to help visualize the center of each pixel cell. Adapted from \citet{lifshin_improving_2014}}
 \end{center}
@@ -498,7 +502,7 @@ includes the following elements:
 \setlength{\belowcaptionskip}{10pt}
 \end{landscape}
 
-Depending on how large the spot size is, the surface are coverage will vary. As shown in
+Depending on how large the spot size is, the surface area coverage (or spot content) will vary. As shown in
 figure \ref{fig_samp_ratios}, a circular spot cannot cover the entire area without overlap. However,
 when the spot size is small, there is no overlap, but there are significant gaps where potentially 
 means a loss of in formation. There is a balance between the overlaps and the gaps. 
