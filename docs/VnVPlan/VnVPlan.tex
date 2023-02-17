@@ -159,7 +159,7 @@ no setup being required. The design and implementation is documented in the
 MG / MIS \citep{MG,MIS}.
 The VnV team as well as any volunteer users are welcome to provide
 their input (through GitHub issues). Eventually, the project may be published in a journal
-where the software \progname and its accompanying documentation will 
+where the software \progname~and its accompanying documentation will 
 likely be rigorously reviewed.
 
 \an{Not sure what was appropriate to put here.}
@@ -218,34 +218,30 @@ tests will be unit tests as described in section \ref{sec_unittest}.
 
 \subsection{Tests for Functional Requirements}
 
-Accept an input image in the following formats:
-- PNG (Portable Net Graphics)
-– JPG (Joint Photographic Experts Group)
-– BMP (Bitmap)
-14
-– preloaded example images
-R2: Accept user input of the spot profile (size and shape) and ensure that all its defining
-values are positive real numbers.
-R3: Accept user input of pixel size and ensure it is a positive real number.
-R4: Accept user input to specify a subregion (FOV) for processing.
-R5: Display a representative spot layout used for processing the image.
-R6: Reprocess (using IM1) and display the resulting image to the user.
-R7: Calculate and display an image quality metric (according to IM2) to the user.
+The tests present will verify whether the functional requirements 
+(as listed in the SRS \cite{SRS}) are met and validate that the outputs
+are as expected.
 
-\wss{Subsets of the tests may be in related, so this section is divided into
-  different areas.  If there are no identifiable subsets for the tests, this
-  level of document structure can be removed.}
+\subsubsection{Image Import}
 
-\wss{Include a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good here.}
+To satisfy R1 from the SRS \citep{SRS}, an input image for the follow formats shall be 
+accepted provided they follow the input data constraints.
+Some preloaded example images shall be included and be available to the user for use as well.
 
-\subsubsection{Area of Testing1}
+\begin{itemize}
+  \item{PNG}
+  \item{JPG}
+  \item{BMP}
+\end{itemize}
 
-\wss{It would be nice to have a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good here.  If a section
-  covers tests for input constraints, you should reference the data constraints
-  table in the SRS.}
-		
+% R2: Accept user input of the spot profile (size and shape) and ensure that all its defining
+% values are positive real numbers.
+% R3: Accept user input of pixel size and ensure it is a positive real number.
+% R4: Accept user input to specify a subregion (FOV) for processing.
+% R5: Display a representative spot layout used for processing the image.
+% R6: Reprocess (using IM1) and display the resulting image to the user.
+% R7: Calculate and display an image quality metric (according to IM2) to the user.
+
 \paragraph{Title for Test}
 
 \begin{enumerate}
