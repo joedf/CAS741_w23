@@ -14,6 +14,10 @@
 % \usepackage[round]{natbib}
 \usepackage[numbers,square]{natbib}
 
+\newcounter{testnum} %test Number
+\newcommand{\dthetestnum}{T\thetestnum}
+\newcommand{\tref}[1]{T\ref{#1}}
+
 \input{../Comments}
 \input{../Common}
 
@@ -56,8 +60,10 @@ Date 2 & 1.1 & Notes\\
   \textbf{symbol} & \textbf{description}\\
   \midrule 
   GUI & Graphical User Interface\\
+  ROI & Region of Interest\\
   SRS & Software Requirements Specification\\
   T & Test\\
+  UI & User Interface\\
   VnV & Verification and Validation\\
   \bottomrule
 \end{tabular}\\
@@ -222,11 +228,12 @@ The tests present will verify whether the functional requirements
 (as listed in the SRS \cite{SRS}) are met and validate that the outputs
 are as expected.
 
-\subsubsection{Image Import}
+\subsubsection{Image Import and Export}
 
 To satisfy R1 from the SRS \citep{SRS}, an input image for the follow formats shall be 
 accepted provided they follow the input data constraints.
 Some preloaded example images shall be included and be available to the user for use as well.
+As well as for R6, the software should allow for export of the resulting image.
 
 \begin{itemize}
   \item{PNG}
@@ -234,51 +241,131 @@ Some preloaded example images shall be included and be available to the user for
   \item{BMP}
 \end{itemize}
 
-% R2: Accept user input of the spot profile (size and shape) and ensure that all its defining
-% values are positive real numbers.
-% R3: Accept user input of pixel size and ensure it is a positive real number.
-% R4: Accept user input to specify a subregion (FOV) for processing.
-% R5: Display a representative spot layout used for processing the image.
-% R6: Reprocess (using IM1) and display the resulting image to the user.
-% R7: Calculate and display an image quality metric (according to IM2) to the user.
-
-\paragraph{Title for Test}
-
 \begin{enumerate}
 
-\item{test-id1\\}
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum}: Test import for PNG/JPG/BMP format}
+            
+  Control: Manual
+            
+  Initial State: Loaded and idle.
+            
+  Input: A non-corrupt (valid) PNG, JPG, or BMP image file.
+            
+  Output: The image should be visible and be displayed as expected as the ground truth image.
+            
+  Test Case Derivation: Theses are some of the most common image file formats and should be compatible with the software.
+            
+  How test will be performed: The user will click the "Load image" button and select an image to import.
 
-Control: Manual versus Automatic
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum}: Test PNG Image Export}
+              
+  Control: Manual
+            
+  Initial State: Loaded and idle.
+            
+  Input: not needed, the software defaults to a preloaded image if none is given.
+            
+  % Output: \wss{The expected result for the given inputs}
+  Output: The output image file should look the same as what is displayed in the "Resulting Image" display.
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-					
-How test will be performed: 
-					
-\item{test-id2\\}
+  % Test Case Derivation: \wss{Justify the expected value given in the Output field}
+  Test Case Derivation: \an{Not sure what this means, and how this differs from what's explained Output.}
 
-Control: Manual versus Automatic
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-How test will be performed: 
+  How test will be performed: The user will click the "Export image" button and choose where to save the image file.
 
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
 
-...
+\subsubsection{Spot Profile and Imaging Parameters}
+
+To satisfy R2 and R5 from the SRS \citep{SRS}, the software should accept input from the user
+to change the width, height, and rotation which define an ellipsoid shape. 
+This shape is then used as the spot to sample the ground truth image.
+To satisfy R3, the software should accept user input for a real positive number for the pixel size.
+TO satisfy R4, the user should be able to specify a subregion (or ROI) for processing.
+
+\begin{enumerate}
+
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum}: Spot Width and Height}
+
+    Control: Manual
+              
+    Initial State: Running and idle.
+              
+    Input: Width and Height as positive real numbers relative.
+              
+    Output: The spot layout should reflect these changes display an updated arrangement with the given shape.
+    The resulting image should exhibit expected effects as document the SRS figures \citep{SRS}.
+
+    Test Case Derivation: \an{not needed in this case?}
+              
+    How test will be performed: Either by scrolling in the visual spot shape UI or by number input in the GUI.
+					
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum}: Spot Rotation}
+
+    Control: Manual
+                
+    Initial State: Running and idle.
+              
+    Input: An angle in degrees as a real number.
+              
+    Output: The spot layout should reflect the updated arrangement with the rotated spots.
+    The resulting image should exhibit expected effects as document the SRS figures \citep{SRS}.
+
+    Test Case Derivation: \an{see output?}
+
+    How test will be performed: By dragging the rotation node in the visual spot shape UI.
+					
+    \item{\textbf{T\refstepcounter{testnum}\thetestnum}: Raster Grid / Pixel Size}
+
+    Control: Manual
+                
+    Initial State: Running and idle.
+              
+    Input: Positive real numbers for the rows and columns used for the raster grid to calculate the number of pixels and their size.
+              
+    Output: The resulting image resolution should grow or shrink according to the pixel size given.
+
+    Test Case Derivation: \an{see output?}
+
+    How test will be performed: The user shall input the number of rows and columns.
+
+\end{enumerate}
+
+
+\subsubsection{Image Quality Metric}
+
+To satisfy R7, the user be able to see a larger number for a resulting image that is closer to ground truth, 
+and a smaller number otherwise.
+
+\begin{enumerate}
+
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum}: Higher metric value}
+
+    Control: Manual
+              
+    Initial State: Running and idle.
+              
+    Input: Spot size between 100\% to 130\%.
+              
+    Output: A number that is higher than if the spot size were outside the 100\% to 130\% range.
+
+    Test Case Derivation: The resulting image should look somewhat sharp.
+					
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum}: Low metric value}
+
+  Control: Manual
+              
+  Initial State: Running and idle.
+            
+  Input: Spot size from 0\% to 90\% or from 140\% or more.
+            
+  Output: A number that is lower than if the spot size were inside the range of 100\% to 130\%.
+
+  Test Case Derivation: The resulting image should look somewhat blurry or overly sharp or pixelated.
+
+\end{enumerate}
+
 
 \subsection{Tests for Nonfunctional Requirements}
 
@@ -294,8 +381,6 @@ How test will be performed:
 format for the tests given below.}
 
 \subsubsection{Area of Testing1}
-		
-\paragraph{Title for Test}
 
 \begin{enumerate}
 
@@ -467,29 +552,5 @@ Their values are defined in this section for easy maintenance.
 \subsection{Usability Survey Questions?}
 
 \wss{This is a section that would be appropriate for some projects.}
-
-\newpage{}
-\section*{Appendix --- Reflection}
-
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Lifelong Learning.  Please answer the following questions:
-
-\newpage{}
-\section*{Appendix --- Reflection}
-
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Lifelong Learning.  Please answer the following questions:
-
-\begin{enumerate}
-  \item What knowledge and skills will the team collectively need to acquire to
-  successfully complete the verification and validation of your project?
-  Examples of possible knowledge and skills include dynamic testing knowledge,
-  static testing knowledge, specific tool usage etc.  You should look to
-  identify at least one item for each team member.
-  \item For each of the knowledge areas and skills identified in the previous
-  question, what are at least two approaches to acquiring the knowledge or
-  mastering the skill?  Of the identified approaches, which will each team
-  member pursue, and why did they make this choice?
-\end{enumerate}
 
 \end{document}
