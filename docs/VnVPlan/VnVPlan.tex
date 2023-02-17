@@ -154,7 +154,9 @@ and sound to the intended audience as defined in the SRS.
 Much of the conceptualization was done after having multiple discussions with the expert 
 consultants and having done literature review for preexisting tools and documentation 
 relevant to the project. Decision are made with focus on the usability, with little to 
-no setup being required. The VnV team as well as any volunteer users are welcome to provide
+no setup being required. The design and implementation is documented in the 
+MG / MIS \citep{MG,MIS}.
+The VnV team as well as any volunteer users are welcome to provide
 their input (through GitHub issues). Eventually, the project may be published in a journal
 where the software \progname and its accompanying documentation will 
 likely be rigorously reviewed.
@@ -183,13 +185,14 @@ accomplished and the requirements fulfilled.
 
 \subsection{Automated Testing and Verification Tools}
 
-The image metric shall be unit-tested using \href{https://pytest.org}{pytest} for 
+The image quality metric shall be unit-tested using \href{https://pytest.org}{pytest} for 
 automated testing of any algorithms implemented in Python and \href{https://qunitjs.com}{QUnit} 
 shall be used for those implemented in javascript. The unit tests are listed in 
 section \ref{sec_unittest}.
 As for linter, \href{https://flake8.pycqa.org}{flake8} shall be used for Python code 
 and \href{https://eslint.org}{ESLint} for javascript code.
-
+The \href{https://github.com/andrewekhalel/sewar}{sewar} python package will be 
+used as a reference implementation in Python for the image quality metrics.
 
 \subsection{Software Validation Plan}
 
