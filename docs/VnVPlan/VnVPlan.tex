@@ -183,20 +183,13 @@ accomplished and the requirements fulfilled.
 
 \subsection{Automated Testing and Verification Tools}
 
-\wss{What tools are you using for automated testing.  Likely a unit testing
-  framework and maybe a profiling tool, like ValGrind.  Other possible tools
-  include a static analyzer, make, continuous integration tools, test coverage
-  tools, etc.  Explain your plans for summarizing code coverage metrics.
-  Linters are another important class of tools.  For the programming language
-  you select, you should look at the available linters.  There may also be tools
-  that verify that coding standards have been respected, like flake9 for
-  Python.}
+The image metric shall be unit-tested using \href{https://pytest.org}{pytest} for 
+automated testing of any algorithms implemented in Python and \href{https://qunitjs.com}{QUnit} 
+shall be used for those implemented in javascript. The unit tests are listed in 
+section \ref{sec_unittest}.
+As for linter, \href{https://flake8.pycqa.org}{flake8} shall be used for Python code 
+and \href{https://eslint.org}{ESLint} for javascript code.
 
-\wss{If you have already done this in the development plan, you can point to
-that document.}
-
-\wss{The details of this section will likely evolve as you get closer to the
-  implementation.}
 
 \subsection{Software Validation Plan}
 
@@ -320,7 +313,7 @@ How test will be performed:
 \wss{Provide a table that shows which test cases are supporting which
   requirements.}
 
-\section{Unit Test Description}
+\section{Unit Test Description} \label{sec_unittest}
 
 \wss{Reference your MIS (detailed design document) and explain your overall
   philosophy for test case selection.}  
