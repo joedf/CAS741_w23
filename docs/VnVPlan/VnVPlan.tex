@@ -55,6 +55,7 @@ Date 2 & 1.1 & Notes\\
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
+  GUI & Graphical User Interface\\
   SRS & Software Requirements Specification\\
   T & Test\\
   VnV & Verification and Validation\\
@@ -175,15 +176,16 @@ accomplished and the requirements fulfilled.
 
 \subsection{Implementation Verification Plan}
 
-\wss{You should at least point to the tests listed in this document and the unit
-  testing plan.}
+Much of the software will be tested manually by users. This will include checking for
+any inconsistencies, bugs in the graphical user interface (GUI), and any unexpected
+artifacts in images produced.
+The image metrics will be tested using unit tests (section \ref{sec_unittest}). For the
+all the code implemented, linters will be used as mentioned in section \ref{sec_autotest_tools}.
+As a control for the image metrics, they will be calculated using the same image as the ground truth 
+reference to rule out any baseline or unexpected factors in the implementations themselves.
 
-\wss{In this section you would also give any details of any plans for static verification of
-  the implementation.  Potential techniques include code walkthroughs, code
-  inspection, static analyzers, etc.}
 
-
-\subsection{Automated Testing and Verification Tools}
+\subsection{Automated Testing and Verification Tools} \label{sec_autotest_tools}
 
 The image quality metric shall be unit-tested using \href{https://pytest.org}{pytest} for 
 automated testing of any algorithms implemented in Python and \href{https://qunitjs.com}{QUnit} 
@@ -194,17 +196,18 @@ and \href{https://eslint.org}{ESLint} for javascript code.
 The \href{https://github.com/andrewekhalel/sewar}{sewar} python package will be 
 used as a reference implementation in Python for the image quality metrics.
 
+
 \subsection{Software Validation Plan}
+A \textit{usability} survey will be conducted to evaluate the user experience and whether 
+the GUI is intuitive enough to the intended users as described in the SRS \citep{SRS}.
+An \textit{accuracy} survey will be conducted to assess the user-perceived image quality. 
+The trends identified in the surveys results will be compared to the calculated image metrics.
+As a control for the images produced, a manual and an automated test will be conducted to verify if 
+an image identical (or with unperceivable difference) to ground truth image can be reproduced.
+The compared images shall be in the \textit{accuracy} survey for confirmation. This can be compared
+as well using the image metrics. 
 
-\wss{If there is any external data that can be used for validation, you should
-  point to it here.  If there are no plans for validation, you should state that
-  here.}
-
-\wss{You might want to use review sessions with the stakeholder to check that
-the requirements document captures the right requirements.  Maybe task based
-inspection?}
-
-\wss{This section might reference back to the SRS verification section.}
+\an{I think I might be confusing the Software and the Implementation validation plans...}
 
 \section{System Test Description}
 	
