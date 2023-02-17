@@ -41,7 +41,6 @@ Date 2 & 1.1 & Notes\\
 \tableofcontents
 
 \listoftables
-\wss{Remove this section if it isn't needed}
 
 \listoffigures
 \wss{Remove this section if it isn't needed}
@@ -210,8 +209,27 @@ as well using the image metrics.
 \an{I think I might be confusing the Software and the Implementation validation plans...}
 
 \section{System Test Description}
-	
+
+In this section, the system tests that will be conducted as described in detail. These tests
+will be used to verify the fulfillment of the requirements as listed in the SRS \citep{SRS}.
+Most, if not all, of the tests listed here will be manually performed. Automatic
+tests will be unit tests as described in section \ref{sec_unittest}.
+
 \subsection{Tests for Functional Requirements}
+
+Accept an input image in the following formats:
+- PNG (Portable Net Graphics)
+– JPG (Joint Photographic Experts Group)
+– BMP (Bitmap)
+14
+– preloaded example images
+R2: Accept user input of the spot profile (size and shape) and ensure that all its defining
+values are positive real numbers.
+R3: Accept user input of pixel size and ensure it is a positive real number.
+R4: Accept user input to specify a subregion (FOV) for processing.
+R5: Display a representative spot layout used for processing the image.
+R6: Reprocess (using IM1) and display the resulting image to the user.
+R7: Calculate and display an image quality metric (according to IM2) to the user.
 
 \wss{Subsets of the tests may be in related, so this section is divided into
   different areas.  If there are no identifiable subsets for the tests, this
