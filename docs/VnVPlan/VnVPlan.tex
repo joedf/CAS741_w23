@@ -47,9 +47,6 @@ Date 2 & 1.1 & Notes\\
 
 \listoftables
 
-\listoffigures
-\wss{Remove this section if it isn't needed}
-
 \newpage
 
 \section{Symbols, Abbreviations and Acronyms}
@@ -59,7 +56,9 @@ Date 2 & 1.1 & Notes\\
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
+  NFR & Nonfunctional Requirement\\
   GUI & Graphical User Interface\\
+  R & Requirement\\
   ROI & Region of Interest\\
   SRS & Software Requirements Specification\\
   T & Test\\
@@ -67,11 +66,6 @@ Date 2 & 1.1 & Notes\\
   VnV & Verification and Validation\\
   \bottomrule
 \end{tabular}\\
-
-\wss{symbols, abbreviations or acronyms --- you can simply reference the SRS
-\citep{SRS} tables, if appropriate}
-
-\wss{Remove this section if it isn't needed}
 
 \newpage
 
@@ -238,12 +232,12 @@ As well as for R6, the software should allow for export of the resulting image.
 \begin{itemize}
   \item{PNG}
   \item{JPG}
-  \item{BMP}
+  \item{BMP\\}
 \end{itemize}
 
 \begin{enumerate}
 
-  \item{\textbf{T\refstepcounter{testnum}\thetestnum}: Test import for PNG/JPG/BMP format}
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_inputImage}}: Test import for PNG/JPG/BMP format\\}
             
   Control: Manual
             
@@ -257,7 +251,7 @@ As well as for R6, the software should allow for export of the resulting image.
             
   How test will be performed: The user will click the "Load image" button and select an image to import.
 
-  \item{\textbf{T\refstepcounter{testnum}\thetestnum}: Test PNG Image Export}
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_exportImage}}: Test PNG Image Export\\}
               
   Control: Manual
             
@@ -286,7 +280,7 @@ TO satisfy R4, the user should be able to specify a subregion (or ROI) for proce
 
 \begin{enumerate}
 
-  \item{\textbf{T\refstepcounter{testnum}\thetestnum}: Spot Width and Height}
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_spotSize}}: Spot Width and Height\\}
 
     Control: Manual
               
@@ -301,7 +295,7 @@ TO satisfy R4, the user should be able to specify a subregion (or ROI) for proce
               
     How test will be performed: Either by scrolling in the visual spot shape UI or by number input in the GUI.
 					
-  \item{\textbf{T\refstepcounter{testnum}\thetestnum}: Spot Rotation}
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_spotRotation}}: Spot Rotation\\}
 
     Control: Manual
                 
@@ -316,7 +310,7 @@ TO satisfy R4, the user should be able to specify a subregion (or ROI) for proce
 
     How test will be performed: By dragging the rotation node in the visual spot shape UI.
 					
-    \item{\textbf{T\refstepcounter{testnum}\thetestnum}: Raster Grid / Pixel Size}
+    \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_rasterGrid}}: Raster Grid / Pixel Size\\}
 
     Control: Manual
                 
@@ -340,7 +334,7 @@ and a smaller number otherwise.
 
 \begin{enumerate}
 
-  \item{\textbf{T\refstepcounter{testnum}\thetestnum}: Higher metric value}
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricHigh}}: Higher metric value\\}
 
     Control: Manual
               
@@ -352,7 +346,7 @@ and a smaller number otherwise.
 
     Test Case Derivation: The resulting image should look somewhat sharp.
 					
-  \item{\textbf{T\refstepcounter{testnum}\thetestnum}: Low metric value}
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricLow}}: Low metric value\\}
 
   Control: Manual
               
@@ -369,50 +363,53 @@ and a smaller number otherwise.
 
 \subsection{Tests for Nonfunctional Requirements}
 
-\wss{The nonfunctional requirements for accuracy will likely just reference the
-  appropriate functional tests from above.  The test cases should mention
-  reporting the relative error for these tests.  Not all projects will
-  necessarily have nonfunctional requirements related to accuracy}
+The follow tests will check if the nonfunctional requirements as defined in the SRS \citep{SRS} are 
+met. The emphasis is on the \textit{usability} (NFR2) of the software. In the case of \progname~
+simplicity is more important than the actual complexity or correctness.
+To satisfy the \textit{accuracy} (NFR1) requirement, an image quality and clarity survey shall be
+conducted to establish what is perceived by the user and the image metric of what 
+a "better" image is. To satisfy the \textit{maintainability} (NFR3) requirement, the code should 
+follow a consistent style and reasonably pass static code analysis as described below.
+As for \textit{Portability} (NFR4), the user should be run the software on their platform and 
+environment of choice.
 
-\wss{Tests related to usability could include conducting a usability test and
-  survey.  The survey will be in the Appendix.}
-
-\wss{Static tests, review, inspections, and walkthroughs, will not follow the
-format for the tests given below.}
-
-\subsubsection{Area of Testing1}
-
+\subsubsection{Usability Testing}
 \begin{enumerate}
 
-\item{test-id1\\}
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_surveyUsability}}: Usability Survey\\}
 
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input/Condition: 
-					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
+  Type: Manual
+            
+  Initial State: None
+            
+  Input/Condition: A group of intended users, the SRS document \citep{SRS}, 
+  the survey questions on topics related to \textit{usability}.
+            
+  Output/Result: The completed user surveys (see \ref{survey_usability}).
+            
+  How test will be performed: The users will be given a series of questions to evaluate the 
+  ease-of-use, whether the GUI is intuitive or confusing, etc.
 
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\subsubsection{Accuracy Testing}
+\begin{enumerate}
 
-...
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_surveyMetric}}: Image Metric Survey\\}
+
+  Type: Manual
+            
+  Initial State: None
+            
+  Input/Condition: A group of intended users, the SRS document \citep{SRS}, 
+  the survey questions on topics related to \textit{usability}.
+            
+  Output/Result: The completed user surveys (see \ref{survey_usability}).
+            
+  How test will be performed: The users will be given a series of questions to evaluate the 
+  ease-of-use, whether the GUI is intuitive or confusing, etc.
+  
+\end{enumerate}
 
 \subsection{Traceability Between Test Cases and Requirements}
 
@@ -534,7 +531,41 @@ How test will be performed:
 \subsection{Traceability Between Test Cases and Modules}
 
 \wss{Provide evidence that all of the modules have been considered.}
-				
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \hline
+    & R1
+    & R2
+    & R3
+    & R4
+    & R5
+    & R6
+    & R7
+    & NFR1
+    & NFR2
+    & NFR3
+    & NFR4
+  \\ \hline
+  \tref{T_inputImage}        & & & & & & & & & & & \\ \hline
+  \tref{T_exportImage}       & & & & & & & & & & & \\ \hline
+  \tref{T_spotSize}          & & & & & & & & & & & \\ \hline
+  \tref{T_spotRotation}      & & & & & & & & & & & \\ \hline
+  \tref{T_rasterGrid}        & & & & & & & & & & & \\ \hline
+  \tref{T_manualMetricHigh}  & & & & & & & & & & & \\ \hline
+  \tref{T_manualMetricLow}   & & & & & & & & & & & \\ \hline
+  \tref{T_surveyUsability}   & & & & & & & & & & & \\ \hline
+  \tref{T_surveyMetric}      & & & & & & & & & & & \\ \hline
+  \end{tabular}
+  \caption{Traceability Matrix Showing the Connections Between the Tests and Requirements}
+  \label{Table:A_trace}
+\end{table}
+
+
+\newpage
+\clearpage
+
 \bibliographystyle{plainnat}
 \bibliography{../../refs/References,../../refs/cas741}
 
@@ -549,7 +580,7 @@ This is where you can place additional information.
 The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
 Their values are defined in this section for easy maintenance.
 
-\subsection{Usability Survey Questions?}
+\subsection{Usability Survey Questions?} \label{survey_usability}
 
 \wss{This is a section that would be appropriate for some projects.}
 
