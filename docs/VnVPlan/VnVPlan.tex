@@ -1,5 +1,6 @@
 \documentclass[12pt, titlepage]{article}
 
+\usepackage{colortbl}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
@@ -71,44 +72,70 @@ Date 2 & 1.1 & Notes\\
 
 This document lays out the Verification and Validation (VnV) plan of the \progname{} (scanning electron 
 microscope image formation) as described by the Software Requirements Specification (SRS) 
-document \citep{SRS}.
-Testing of the software and its components is conducted to build confidence in its usability, 
-accuracy, and ultimately whether it meets the SRS.
+document \citep{SRS}. Testing of the software and its components is conducted to build confidence in 
+its usability, accuracy, and ultimately whether it meets the SRS.
 
 \section{General Information}
 
 \subsection{Summary}
 
-\wss{Say what software is being tested.  Give its name and a brief overview of
-  its general functions.}
+The \progname{} software aims to be a demonstration and learning tool of how a scanning electron 
+microscope (SEM) formulates an image. The idea is to help visualize the influence trends of imaging 
+parameters (as defined in the SRS) on image quality (or clarity) and resolution.
 
-\subsection{Objectives}
 
-\wss{State what is intended to be accomplished.  The objective will be around
-  the qualities that are most important for your project.  You might have
-  something like: ``build confidence in the software correctness,''
-  ``demonstrate adequate usability.'' etc.  You won't list all of the qualities,
-  just those that are most important.}
+\subsection{Objectives} \label{sec_objectives}
+
+The objective is to produce a tool that is easy to use (\textit{usability}). It should feel intuitive 
+to the user and should provide easy to understand information. This is so that the user may 
+identify any trends in how the final image is affected with relative ease and confidence. As a 
+secondary goal, the \textit{accuracy} in the trends are important. As such, the image metrics 
+should be straight-forward to understand and provide some kind of assurance away from the 
+subjective nature of image quality.
 
 \subsection{Relevant Documentation}
 
-\wss{Reference relevant documentation.  This will definitely include your SRS
-  and your other project documents (design documents, like MG, MIS, etc).  You
-  can include these even before they are written, since by the time the project
-  is done, they will be written.}
+There are multiple design documents that provide the important and intimate details to understand 
+some of the concepts that are being tested. These documents are the following:
 
-\citet{SRS}
+\begin{itemize}
+  \item Problem Statement \citep{Prob_Statement}
+  \item SRS \citep{SRS}
+  \item VnV Report \citep{VnV_report}
+\end{itemize}
 
 \section{Plan}
 
-\wss{Introduce this section.   You can provide a roadmap of the sections to
-  come.}
+In this section, multiple plans are described to test and inspect the software with an emphasis 
+on \textit{usability}. Multiple approaches and perspectives will be employed by the VnV team (\ref{sec_vnv_team})
+to help build confidence in the requirements, to avoid any missed important details, 
+and to deliver on the qualities as mentioned in the objective (\ref{sec_objectives}).
 
-\subsection{Verification and Validation Team}
+\subsection{Verification and Validation Team} \label{sec_vnv_team}
 
-\wss{Your teammates.  Maybe your supervisor.
-  You shoud do more than list names.  You should say what each person's role is
-  for the project's verification.  A table is a good way to summarize this information.}
+The members of the VnV team as well their individual roles are listed in the following table:
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{|r|l|}
+    \rowcolor[gray]{0.9}
+    \hline
+    \textbf{Role} & \textbf{Name} \\ \hline
+    Project Supervisor & Dr.\ Spencer Smith  \\ \hline
+    Author             & \authname           \\ \hline
+    Domain Expert      & Karen Wang          \\ \hline
+    SRS Reviewer       & Jason Balaci        \\ \hline
+    VnV Plan Reviewer  & Sam Crawford        \\ \hline
+    MG + MIS Reviewer  & Lesley Wheat        \\ \hline
+    Expert Consultant  & Dr. Nabil Bassim    \\ \hline
+    Expert Consultant  & Michael W. Phaneuf  \\ \hline
+  \end{tabular}
+  \caption{Table of the VnV Team Members}
+  \label{table_vnv_team}
+\end{table}
+
+\an{Dr. Bassim is my PhD Supervisor, and Mr. Phaneuf is my co-supervisor (employer/industry), 
+since I am doing an industrial PhD.}
 
 \subsection{SRS Verification Plan}
 
