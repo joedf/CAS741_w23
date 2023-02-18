@@ -18,6 +18,10 @@
 \newcommand{\dthetestnum}{T\thetestnum}
 \newcommand{\tref}[1]{T\ref{#1}}
 
+\newcounter{unittestnum} %unittest Number
+\newcommand{\dtheunittestnum}{U\theunittestnum}
+\newcommand{\utref}[1]{U\ref{#1}}
+
 \input{../Comments}
 \input{../Common}
 
@@ -56,6 +60,9 @@ Date 2 & 1.1 & Notes\\
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
+  MSE & Mean Squared Error\\
+  RMSE & Root Mean Square Error\\
+  RMSPE & Root Mean Square Percentage Error\\
   NFR & Nonfunctional Requirement\\
   GUI & Graphical User Interface\\
   R & Requirement\\
@@ -319,10 +326,25 @@ TO satisfy R4, the user should be able to specify a subregion (or ROI) for proce
     Input: Positive real numbers for the rows and columns used for the raster grid to calculate the number of pixels and their size.
               
     Output: The resulting image resolution should grow or shrink according to the pixel size given.
+    The number of rows and columns should be represented in the spot layout display.
 
     Test Case Derivation: \an{see output?}
 
     How test will be performed: The user shall input the number of rows and columns.
+
+    \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_subregion}}: Subregion / ROI\\}
+
+    Control: Manual
+                
+    Initial State: Running and idle.
+              
+    Input: Location and magnification.
+              
+    Output: The resulting image preview and image used in the spot layout display should represent the ROI selected by the user.
+
+    Test Case Derivation: \an{see output?}
+
+    How test will be performed: The user shall drag and scroll in the Subregion View display to set the subregion / ROI.
 
 \end{enumerate}
 
@@ -340,7 +362,7 @@ and a smaller number otherwise.
               
     Initial State: Running and idle.
               
-    Input: Spot size between 100\% to 130\%.
+    Input: Spot size between 100\% to 130\%, and a perfectly circular spot shape.
               
     Output: A number that is higher than if the spot size were outside the 100\% to 130\% range.
 
@@ -352,9 +374,23 @@ and a smaller number otherwise.
               
   Initial State: Running and idle.
             
-  Input: Spot size from 0\% to 90\% or from 140\% or more.
+  Input: Spot size from 0\% to 90\% or from 140\% or more, and a perfectly circular spot shape.
             
   Output: A number that is lower than if the spot size were inside the range of 100\% to 130\%.
+
+  Test Case Derivation: The resulting image should look somewhat blurry or overly sharp or pixelated.
+  					
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricControl}}: Control metric value\\}
+
+  Control: Manual
+              
+  Initial State: Running and idle.
+            
+  Input: Spot size of a 100\%, the same pixel size (image resolution) as the ground truth image, 
+  and perfectly circular spot shape.
+            
+  Output: A that is near the best or maximum quality metric value. The resulting image should nearly
+  identical to the ground truth image. 
 
   Test Case Derivation: The resulting image should look somewhat blurry or overly sharp or pixelated.
 
@@ -382,7 +418,7 @@ environment of choice.
             
   Initial State: None
             
-  Input/Condition: A group of intended users, the SRS document \citep{SRS}, 
+  Input/Condition: A group of intended users, the SRS document \citep{SRS}, and 
   the survey questions on topics related to \textit{usability}.
             
   Output/Result: The completed user surveys (see \ref{survey_usability}).
@@ -402,28 +438,76 @@ environment of choice.
   Initial State: None
             
   Input/Condition: A group of intended users, the SRS document \citep{SRS}, 
-  the survey questions on topics related to \textit{usability}.
+  a list of images of varying quality, and the survey questions on topics related 
+  to the image quality and clarity.
             
-  Output/Result: The completed user surveys (see \ref{survey_usability}).
+  Output/Result: The completed user surveys (see \ref{survey_metric}).
             
-  How test will be performed: The users will be given a series of questions to evaluate the 
-  ease-of-use, whether the GUI is intuitive or confusing, etc.
+  How test will be performed: The users will be given a series of questions to evaluate 
+  a given list of images, rank them based on detail and information content, etc.
   
 \end{enumerate}
 
-\subsection{Traceability Between Test Cases and Requirements}
+\subsubsection{Maintainability Testing}
+\begin{enumerate}
 
-\wss{Provide a table that shows which test cases are supporting which
-  requirements.}
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_linters}}: Static code analysis\\}
+
+  Type: Manual
+            
+  Initial State: None
+            
+  Input/Condition: The software code will be tested through the use \textbf{pylint} for any
+  Python code used and \textbf{ESLint} for any JavaScript code used.
+            
+  Output/Result: The code linters should list little to no 
+  warnings (on the default strictness setting), and zero errors.
+            
+  How test will be performed: Execute the \textbf{pylint} tool on all written Python code and 
+  the \textbf{ESLint} tool on all written JavaScript code.
+
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_codeReview}}: Code Review\\}
+
+  Type: Manual
+            
+  Initial State: None
+            
+  Input/Condition: The software source code and the code review checklist (see \ref{checklist_codeReview})
+            
+  Output/Result: The code should respect the defined code review checklist.
+            
+  How test will be performed: The author with walkthrough the code manually and check for qualities
+  such as consistent styling, loose variables, variable scoping, unreachable code, 
+  sufficient commenting, etc.
+  
+\end{enumerate}
+
+\subsubsection{Portability Testing}
+\begin{enumerate}
+
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_portability}}: Various Platforms and Environments\\}
+
+  Type: Manual
+            
+  Initial State: None
+            
+  Input/Condition: Given any of the supported platforms, the user should be able to set up and 
+  run the software with relative ease.
+            
+  Output/Result: The software runs on the platform of choice with little to no setup.
+            
+  How test will be performed: The user will download and run the software on their platform of choice.
+  
+\end{enumerate}
 
 \section{Unit Test Description} \label{sec_unittest}
 
-\wss{Reference your MIS (detailed design document) and explain your overall
-  philosophy for test case selection.}  
-\wss{This section should not be filled in until after the MIS (detailed design
-  document) has been completed.}
+This section cannot not be filled or completed until the MIS (detailed design document) has been completed.
+\an{I did do some image metrics testing that can at least be partially documented here...}
 
 \subsection{Unit Testing Scope}
+
+\an{Other than the image metrics, I am not sure what else could be unit-tested as of now?}
 
 \wss{What modules are outside of the scope.  If there are modules that are
   developed by someone else, then you would say here if you aren't planning on
@@ -480,9 +564,6 @@ How test will be performed:
     
 \end{enumerate}
 
-\subsubsection{Module 2}
-
-...
 
 \subsection{Tests for Nonfunctional Requirements}
 
@@ -493,26 +574,42 @@ How test will be performed:
 \wss{These tests may involve collecting performance data from previously
   mentioned functional tests.}
 
-\subsubsection{Module ?}
+\subsubsection{Module: Image Quality Metric}
+
+\an{I will likely use the "reverse" / "inverse" value as the image metric: \\
+$Metric = 1 - RMSPE$, where the "RMSPE" is RMSE normalized to a value between 0 and 1.}
 		
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric1}}: Lowest/Highest MSE, RMSE and RMSPE scores\\}
+
+Type: Automatic
+					
+Initial State: \an{Not running?}
+					
+Input/Condition: The ground truth images and multiple resampled images of varying and known quality.
+					
+Output/Result: The higher quality image should return the lowest error (i.e. lowest MSE, RMSE, RMSPE) scores.
+					
+How test will be performed: Executing a suite of tests for the multiple images.
+					
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metricControl}}: Control testing \\}
+
+Type: Automatic
+					
+Initial State: \an{Not running?}
+					
+Input: The ground truth image.
+					
+Output: an error score of zero \an{or the lowest error possible depending on the given metric}.
+					
+How test will be performed: Executing a suite of tests using the different metric to compare the 
+ground truth image to itself.
+					
+\item{test-id\#\\}
 
 Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input/Condition: 
-					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Type: Functional, Dynamic, Manual, Static etc.
+be automatic}
 					
 Initial State: 
 					
@@ -528,9 +625,13 @@ How test will be performed:
 
 ...
 
-\subsection{Traceability Between Test Cases and Modules}
+\newpage
+\clearpage
 
-\wss{Provide evidence that all of the modules have been considered.}
+\section{Traceability Between Test Cases and \\ Requirements}
+Traceability matrices are used to simplify the process of identifying what needs to be changed 
+if a component is modified. An "X" is used to indicate links between items in the table. 
+When a component is changed, the elements marked with an "X" might need to be updated as well.
 
 \begin{table}[h!]
   \centering
@@ -548,20 +649,26 @@ How test will be performed:
     & NFR3
     & NFR4
   \\ \hline
-  \tref{T_inputImage}        & & & & & & & & & & & \\ \hline
-  \tref{T_exportImage}       & & & & & & & & & & & \\ \hline
-  \tref{T_spotSize}          & & & & & & & & & & & \\ \hline
-  \tref{T_spotRotation}      & & & & & & & & & & & \\ \hline
-  \tref{T_rasterGrid}        & & & & & & & & & & & \\ \hline
-  \tref{T_manualMetricHigh}  & & & & & & & & & & & \\ \hline
-  \tref{T_manualMetricLow}   & & & & & & & & & & & \\ \hline
-  \tref{T_surveyUsability}   & & & & & & & & & & & \\ \hline
-  \tref{T_surveyMetric}      & & & & & & & & & & & \\ \hline
+  \tref{T_inputImage}           &X& & & & & & & & & & \\ \hline
+  \tref{T_exportImage}          & & & & & &X& & & & & \\ \hline
+  \tref{T_spotSize}             & &X& & &X& & & & & & \\ \hline
+  \tref{T_spotRotation}         & &X& & &X& & & & & & \\ \hline
+  \tref{T_rasterGrid}           & & &X& &X& & & & & & \\ \hline
+  \tref{T_subregion}            & & & &X&X& & & & & & \\ \hline
+  \tref{T_manualMetricHigh}     & & & & & & &X& & & & \\ \hline
+  \tref{T_manualMetricLow}      & & & & & & &X& & & & \\ \hline
+  \tref{T_manualMetricControl}  & & & & & & &X& & & & \\ \hline
+  \tref{T_surveyUsability}      & & & & & & & & &X& & \\ \hline
+  \tref{T_surveyMetric}         & & & & & & & &X& & & \\ \hline
+  \tref{T_linters}              & & & & & & & & & &X& \\ \hline
+  \tref{T_codeReview}           & & & & & & & & & &X& \\ \hline
+  \tref{T_portability}          & & & & & & & & & & &X\\ \hline
+  \utref{U_metric1}             & & & & & & &X& & & &X\\ \hline
+  \utref{U_metricControl}       & & & & & & &X& & & &X\\ \hline
   \end{tabular}
   \caption{Traceability Matrix Showing the Connections Between the Tests and Requirements}
   \label{Table:A_trace}
 \end{table}
-
 
 \newpage
 \clearpage
@@ -573,15 +680,59 @@ How test will be performed:
 
 \section{Appendix}
 
-This is where you can place additional information.
+This section contains the \textit{usability} and image quality (metric \textit{accuracy}) 
+user survey questions, as well as a code review checklist.
 
-\subsection{Symbolic Parameters}
+\subsection{Usability Survey Questions} \label{survey_usability}
 
-The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.
+\begin{itemize}
+  \item{What web browser do you use and what version is it?}
+  \item{What operating system do you use?}
+  \item{What is your screen resolution?}
+  \item{Are you using a mouse and keyboard or a touchscreen?}
+  \item{How much time (in seconds or minutes) did it take you to find the function you were looking for?}
+  \item{What was the most useful feature for you?}
+  \item{On a scale from 1 to 10, how easy was it to set up and start the software?}
+  \item{On a scale from 1 to 10, how easy was it to use the software?}
+  \item{What was the least enjoyable feature to use?}
+  \item{Was everything legible and clearly displayed? If not, what was not?}
+  \item{Would you consider using the software as a learning or teaching tool?}
+  \item{Do you have any extra comments or thoughts you'd like to share?}
+\end{itemize}
 
-\subsection{Usability Survey Questions?} \label{survey_usability}
+\subsection{Image Quality Survey Questions} \label{survey_metric}
+Given multiple images that are numbered and a ground truth image, 
+the user shall answer the following questions?
 
-\wss{This is a section that would be appropriate for some projects.}
+\begin{itemize}
+  \item{Which image looks the seems to be the clearest or is of the high quality in your opinion?}
+  \item{Which image provide the most information or detail?}
+  \item{Which image is the most similar to or the most representative of the ground truth image?}
+  \item{Which image is the least pleasant in your opinion?}
+  \item{Rank the images from the lowest quality (least clear) to the highest quality (most clear) in your opinion?}
+  \item{Rank the images from least to most informative (or has most of the details of the ground truth image)?}
+  \item{The user is shown the ground truth image and the reproduced control image 
+  (generated using the same image resolution and exact-sampling). 
+  Do these images look identical to you? If not, on a scale of 1 to 10, how similar are these images?}
+\end{itemize}
+
+\subsection{Code Review Checklist} \label{checklist_codeReview}
+
+\begin{itemize}
+  \item{Does the code follow a consistent style?}
+  \item{Are there any variables that should not be global?}
+  \item{Are function names not too long (i.e. less than 40 characters)?}
+  \item{Are most function well named and clear in what they do?}
+  \item{Are there any long lines of that can be split into multiple lines?}
+  \item{Are global variables and functions documented?}
+  \item{Is each function not too long and sufficiently broken down to accomplish a single task?}
+  \item{Are commments plentiful, but not noisy?}
+  \item{Is the code sorted into separate files where reasonable?}
+  \item{Is there any duplicate that code be avoided?}
+  \item{Is there any use of jargon, domain-specific, or unclear terms?}
+  \item{Is all of the code reachable?}
+  \item{Could programmer other than the author read the code and briefly understand it?}
+  \item{Is there any leftover commented code that is not useful?}
+\end{itemize}
 
 \end{document}
