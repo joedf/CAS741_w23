@@ -589,12 +589,6 @@ likely change [LC], in which the respective assumption is used.
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sampleSolid}:] The sample 
 surface is solid.
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sampleTopo}:] The sample 
-surface is flat (meaning no topography).
-
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sampleConductive}:] The sample 
-surface is conductive (meaning no charge build up from electrons).
-
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_sampleZ}:] The sample 
 material is made of atoms with atomic numbers greater than 3 (lithium and lighter elements are not detectable in SEM).
 
@@ -603,20 +597,12 @@ beam is ideal (meaning stable and collimated meaning all the electrons are
 traveling parallel to each other down towards the sample surface within high 
 vacuum for optimal mean free path).
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_beam1}:] The beam 
-intensity or current is considered uniform throughout the beam.
-
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_beam2}:] The beam is orthogonal to the sample surface.
-
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_inputImage}:] The input 
 image of the sample is considered to have infinite resolution representative of reality: ground truth.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_yield}:] The signal yields (such as BSEs and SEs, see \ddref{DD_yield})
 are high enough to produce an image meaning optimal SNR (enough signal, 
 contrast [\tref{T_contrast}] and noise is low).
-
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_environment}:] The SEM 
-is within a controlled environment: climate controlled and low vibration.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_reality}:] The image 
 produced by the SEM (see \ddref{DD_signalImage}) as the electron raster scan the sample surface is an 
@@ -1129,35 +1115,30 @@ the assumptions.
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
 	& \aref{A_sampleSolid}
-	& \aref{A_sampleTopo}
-	& \aref{A_sampleConductive}
 	& \aref{A_sampleZ}
 	& \aref{A_beam}
-	& \aref{A_beam1}
-	& \aref{A_beam2}
 	& \aref{A_inputImage}
 	& \aref{A_yield}
-	& \aref{A_environment}
 	& \aref{A_reality}
 	& \aref{A_deflectionLimit}
 \\ \hline
-\tref{T_meanfreepath}      & & & & &X& & & & & & & \\ \hline
-\tref{T_contrast}          & & & & & & & & &X& & & \\ \hline
-\tref{T_mag}               & & & & & & & &X& & & & \\ \hline
-\tref{T_deflectionSpace}   & & & & & & & & & & & &X\\ \hline
-\dref{GD_grid}             & & & & & & & & & & &X& \\ \hline
-\ddref{DD_yield}           & & & &X&X& & & &X& & & \\ \hline
-\ddref{DD_signalImage}     & & & & & & & & & & &X& \\ \hline
-\iref{IM_bitblt}           & & & & & & & & & & & & \\ \hline
-\iref{IM_imageMetric}      & & & & & & & &X& & & & \\ \hline
-\lcref{LC_realUnits}       & & & & & & & & & & & & \\ \hline
-\lcref{LC_simNoise}        & & & & & & & & & & & & \\ \hline
-\lcref{LC_imgMetricAlgos}  & & & & & & & & & & & & \\ \hline
-\ucref{UC_multichannel}    & & & & & & & &X& & & & \\ \hline
-\ucref{UC_physics}         &X& & & & & & & & & & & \\ \hline
+\tref{T_meanfreepath}      & & &X& & & & \\ \hline
+\tref{T_contrast}          & & & & &X& & \\ \hline
+\tref{T_mag}               & & & &X& & & \\ \hline
+\tref{T_deflectionSpace}   & & & & & & &X\\ \hline
+\dref{GD_grid}             & & & & & &X& \\ \hline
+\ddref{DD_yield}           & &X&X& &X& & \\ \hline
+\ddref{DD_signalImage}     & & & & & &X& \\ \hline
+\iref{IM_bitblt}           & & & & & & & \\ \hline
+\iref{IM_imageMetric}      & & & &X& & & \\ \hline
+\lcref{LC_realUnits}       & & & & & & & \\ \hline
+\lcref{LC_simNoise}        & & & & & & & \\ \hline
+\lcref{LC_imgMetricAlgos}  & & & & & & & \\ \hline
+\ucref{UC_multichannel}    & & & &X& & & \\ \hline
+\ucref{UC_physics}         &X& & & & & & \\ \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Assumptions and Other Items}
 \label{Table:A_trace}
@@ -1241,5 +1222,27 @@ This is not applicable as there no auxiliary constants defined.
 
 \bibliographystyle {plainnat}
 \bibliography {../../refs/References,../../refs/SEM_Image_chapter,../../refs/algorithms}
+
+
+\newpage
+
+\clearpage
+
+\section{Appendix}
+
+The following is background information and some additional assumptions that are not
+technically required for the implementation and instance models.
+
+\begin{enumerate}
+  \item \label{A_sampleTopo} The sample surface is flat (meaning no topography).
+
+  \item \label{A_sampleConductive} The sample surface is conductive (meaning no charge build up from electrons).
+
+  \item \label{A_beam1} The beam intensity or current is considered uniform throughout the beam.
+
+  \item \label{A_beam2} The beam is orthogonal to the sample surface.
+
+  \item \label{A_environment} The SEM is within a controlled environment: climate controlled and low vibration.
+\end{enumerate}
 
 \end{document}
