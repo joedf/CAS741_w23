@@ -48,6 +48,7 @@
   \ref{sec_design_vplan}, \ref{sec_impl_vplan}, and \ref{sec_autotest_tools}. \\
 2023/02/20 & 1.0.3 & Fix formatting and grammar in sections \ref{sec_systest_desc}, 
   \ref{subsec_img_io}, \ref{subsec_spot}, and \ref{subsec_img_metric}. \\
+2023/02/20 & 1.0.4 & Fix grammar in Section \ref{sec_NFR_tests}. \\
 \bottomrule
 \end{tabularx}
 
@@ -404,16 +405,16 @@ and a smaller number otherwise.
 \end{enumerate}
 
 
-\subsection{Tests for Nonfunctional Requirements}
+\subsection{Tests for Nonfunctional Requirements} \label{sec_NFR_tests}
 
-The follow tests will check if the nonfunctional requirements as defined in the SRS \citep{SRS} are 
-met. The emphasis is on the \textit{usability} (NFR2) of the software. In the case of \progname~
+The following tests will check if the nonfunctional requirements, as defined in the SRS \citep{SRS}, are 
+met. The emphasis is on the \textit{usability} (NFR2) of the software. In the case of \progname{}, 
 simplicity is more important than the actual complexity or correctness.
 To satisfy the \textit{accuracy} (NFR1) requirement, an image quality and clarity survey shall be
 conducted to establish what is perceived by the user and the image metric of what 
 a ``better'' image is. To satisfy the \textit{maintainability} (NFR3) requirement, the code should 
 follow a consistent style and reasonably pass static code analysis as described below.
-As for \textit{Portability} (NFR4), the user should be run the software on their platform and 
+As for \textit{portability} (NFR4), the user should be run the software on their platform and 
 environment of choice.
 
 \subsubsection{Usability Testing}
