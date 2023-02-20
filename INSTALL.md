@@ -1,2 +1,2 @@
-Instructions for installing your software.  You should also include uninstall
-instructions.
+Using your preferred HTML5 compliant web-browser, simply navigate to:
+https://joedf.github.io/ImgBeamer/app/index.html
