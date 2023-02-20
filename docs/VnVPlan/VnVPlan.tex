@@ -41,7 +41,8 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 2023/02/17 & 1.0 & First version \\
-Date 2 & 1.1 & Notes\\
+2023/02/20 & 1.0.1 & fix minor issues in T\ref{T_exportImage}, T\ref{T_spotSize}, T\ref{T_linters}, 
+  and T\ref{T_portability}\\
 \bottomrule
 \end{tabularx}
 
@@ -264,7 +265,7 @@ As well as for R6, the software should allow for export of the resulting image.
             
   Initial State: Loaded and idle.
             
-  Input: not needed, the software defaults to a preloaded image if none is given.
+  Input: User clicks the \textit{Export} button.
             
   % Output: \wss{The expected result for the given inputs}
   Output: The output image file should look the same as what is displayed in the "Resulting Image" display.
@@ -293,7 +294,7 @@ TO satisfy R4, the user should be able to specify a subregion (or ROI) for proce
               
     Initial State: Running and idle.
               
-    Input: Width and Height as positive real numbers relative.
+    Input: Width and Height as positive real numbers.
               
     Output: The spot layout should reflect these changes display an updated arrangement with the given shape.
     The resulting image should exhibit expected effects as document the SRS figures \citep{SRS}.
@@ -461,7 +462,7 @@ environment of choice.
   Python code used and \textbf{ESLint} for any JavaScript code used.
             
   Output/Result: The code linters should list little to no 
-  warnings (on the default strictness setting), and zero errors.
+  warnings (less than 10 unique warnings, on the default strictness setting), and zero errors.
             
   How test will be performed: Execute the \textbf{pylint} tool on all written Python code and 
   the \textbf{ESLint} tool on all written JavaScript code.
@@ -494,7 +495,8 @@ environment of choice.
   Input/Condition: Given any of the supported platforms, the user should be able to set up and 
   run the software with relative ease.
             
-  Output/Result: The software runs on the platform of choice with little to no setup.
+  Output/Result: The software runs on the platform of choice with little to no setup including 
+  installation, meaning less than 4 clicks and under 3 minutes set up time.
             
   How test will be performed: The user will download and run the software on their platform of choice.
   
