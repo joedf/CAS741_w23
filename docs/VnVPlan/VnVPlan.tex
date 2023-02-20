@@ -45,7 +45,9 @@
   and T\ref{T_portability}\\
 2023/02/20 & 1.0.1 & Minor issues in general information\\
 2023/02/20 & 1.0.2 & Fix grammar in sections \ref{sec_srs_vplan}, 
-  \ref{sec_design_vplan}, \ref{sec_impl_vplan}, and \ref{sec_autotest_tools} \\
+  \ref{sec_design_vplan}, \ref{sec_impl_vplan}, and \ref{sec_autotest_tools}. \\
+2023/02/20 & 1.0.3 & Fix formatting and grammar in sections \ref{sec_systest_desc}, 
+  \ref{subsec_img_io}, \ref{subsec_spot}, and \ref{subsec_img_metric}. \\
 \bottomrule
 \end{tabularx}
 
@@ -221,9 +223,9 @@ as well using the image metrics.
 
 \an{I think I might be confusing the Software and the Implementation validation plans...}
 
-\section{System Test Description}
+\section{System Test Description} \label{sec_systest_desc}
 
-In this section, the system tests that will be conducted as described in detail. These tests
+In this section, the system tests that will be conducted are described in detail. These tests
 will be used to verify the fulfillment of the requirements as listed in the SRS \citep{SRS}.
 Most, if not all, of the tests listed here will be manually performed. Automatic
 tests will be unit tests as described in Section \ref{sec_unittest}.
@@ -234,9 +236,9 @@ The tests present will verify whether the functional requirements
 (as listed in the SRS \cite{SRS}) are met and validate that the outputs
 are as expected.
 
-\subsubsection{Image Import and Export}
+\subsubsection{Image Import and Export} \label{subsec_img_io}
 
-To satisfy R1 from the SRS \citep{SRS}, an input image for the follow formats shall be 
+To satisfy R1 from the SRS \citep{SRS}, an input image for the following formats listed below shall be 
 accepted provided they follow the input data constraints.
 Some preloaded example images shall be included and be available to the user for use as well.
 As well as for R6, the software should allow for export of the resulting image.
@@ -253,42 +255,42 @@ As well as for R6, the software should allow for export of the resulting image.
             
   Control: Manual
             
-  Initial State: Loaded and idle.
+  Initial State: \progname{} loaded and idle.
             
   Input: A non-corrupt (valid) PNG, JPG, or BMP image file.
             
   Output: The image should be visible and be displayed as expected as the ground truth image.
             
-  Test Case Derivation: Theses are some of the most common image file formats and should be compatible with the software.
+  Test Case Derivation: These are some of the most common image file formats and should be compatible with the software.
             
-  How test will be performed: The user will click the "Load image" button and select an image to import.
+  How test will be performed: The user will click the ``Load image'' button and select an image to import.
 
   \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_exportImage}}: Test PNG Image Export\\}
               
   Control: Manual
             
-  Initial State: Loaded and idle.
+  Initial State: \progname{} loaded and idle.
             
   Input: User clicks the \textit{Export} button.
             
   % Output: \wss{The expected result for the given inputs}
-  Output: The output image file should look the same as what is displayed in the "Resulting Image" display.
+  Output: The output image file should look the same as what is displayed in the ``Resulting Image'' display.
 
   % Test Case Derivation: \wss{Justify the expected value given in the Output field}
   Test Case Derivation: \an{Not sure what this means, and how this differs from what's explained Output.}
 
-  How test will be performed: The user will click the "Export image" button and choose where to save the image file.
+  How test will be performed: The user will click the ``Export image'' button and choose where to save the image file.
 
 \end{enumerate}
 
 
-\subsubsection{Spot Profile and Imaging Parameters}
+\subsubsection{Spot Profile and Imaging Parameters} \label{subsec_spot}
 
 To satisfy R2 and R5 from the SRS \citep{SRS}, the software should accept input from the user
-to change the width, height, and rotation which define an ellipsoid shape. 
+to change the width, height, and rotation which, define an ellipsoid shape. 
 This shape is then used as the spot to sample the ground truth image.
 To satisfy R3, the software should accept user input for a real positive number for the pixel size.
-TO satisfy R4, the user should be able to specify a subregion (or ROI) for processing.
+To satisfy R4, the user should be able to specify a subregion (or ROI) for processing.
 
 \begin{enumerate}
 
@@ -296,12 +298,12 @@ TO satisfy R4, the user should be able to specify a subregion (or ROI) for proce
 
     Control: Manual
               
-    Initial State: Running and idle.
+    Initial State: \progname{} loaded and idle.
               
-    Input: Width and Height as positive real numbers.
+    Input: Width and height as positive real numbers.
               
-    Output: The spot layout should reflect these changes display an updated arrangement with the given shape.
-    The resulting image should exhibit expected effects as documented in the SRS figures \citep{SRS}.
+    Output: The spot layout should reflect these changes and display an updated arrangement with the given shape.
+    The resulting image should exhibit expected effects as documented by the SRS figures \citep{SRS}.
 
     Test Case Derivation: \an{not needed in this case?}
               
@@ -311,7 +313,7 @@ TO satisfy R4, the user should be able to specify a subregion (or ROI) for proce
 
     Control: Manual
                 
-    Initial State: Running and idle.
+    Initial State: \progname{} loaded and idle.
               
     Input: An angle in degrees as a real number.
               
@@ -326,7 +328,7 @@ TO satisfy R4, the user should be able to specify a subregion (or ROI) for proce
 
     Control: Manual
                 
-    Initial State: Running and idle.
+    Initial State: \progname{} loaded and idle.
               
     Input: Positive real numbers for the rows and columns used for the raster grid to calculate the number of pixels and their size.
               
@@ -341,7 +343,7 @@ TO satisfy R4, the user should be able to specify a subregion (or ROI) for proce
 
     Control: Manual
                 
-    Initial State: Running and idle.
+    Initial State: \progname{} loaded and idle.
               
     Input: Location and magnification.
               
@@ -354,9 +356,9 @@ TO satisfy R4, the user should be able to specify a subregion (or ROI) for proce
 \end{enumerate}
 
 
-\subsubsection{Image Quality Metric}
+\subsubsection{Image Quality Metric} \label{subsec_img_metric}
 
-To satisfy R7, the user be able to see a larger number for a resulting image that is closer to ground truth, 
+To satisfy R7, the user should be able to see a larger number for a resulting image that is closer to ground truth 
 and a smaller number otherwise.
 
 \begin{enumerate}
@@ -365,7 +367,7 @@ and a smaller number otherwise.
 
     Control: Manual
               
-    Initial State: Running and idle.
+    Initial State: \progname{} loaded and idle.
               
     Input: Spot size between 100\% to 130\%, and a perfectly circular spot shape.
               
@@ -377,7 +379,7 @@ and a smaller number otherwise.
 
   Control: Manual
               
-  Initial State: Running and idle.
+  Initial State: \progname{} loaded and idle.
             
   Input: Spot size from 0\% to 90\% or from 140\% or more, and a perfectly circular spot shape.
             
@@ -389,12 +391,12 @@ and a smaller number otherwise.
 
   Control: Manual
               
-  Initial State: Running and idle.
+  Initial State: \progname{} loaded and idle.
             
   Input: Spot size of a 100\%, the same pixel size (image resolution) as the ground truth image, 
   and perfectly circular spot shape.
             
-  Output: A that is near the best or maximum quality metric value. The resulting image should nearly
+  Output: A number that is near the best or maximum quality metric value. The resulting image should nearly
   identical to the ground truth image. 
 
   Test Case Derivation: The resulting image should look somewhat blurry or overly sharp or pixelated.
@@ -409,7 +411,7 @@ met. The emphasis is on the \textit{usability} (NFR2) of the software. In the ca
 simplicity is more important than the actual complexity or correctness.
 To satisfy the \textit{accuracy} (NFR1) requirement, an image quality and clarity survey shall be
 conducted to establish what is perceived by the user and the image metric of what 
-a "better" image is. To satisfy the \textit{maintainability} (NFR3) requirement, the code should 
+a ``better'' image is. To satisfy the \textit{maintainability} (NFR3) requirement, the code should 
 follow a consistent style and reasonably pass static code analysis as described below.
 As for \textit{Portability} (NFR4), the user should be run the software on their platform and 
 environment of choice.
@@ -582,8 +584,8 @@ How test will be performed:
 
 \subsubsection{Module: Image Quality Metric}
 
-\an{I will likely use the "reverse" / "inverse" value as the image metric: \\
-$Metric = 1 - RMSPE$, where the "RMSPE" is RMSE normalized to a value between 0 and 1.}
+\an{I will likely use the ``reverse'' / ``inverse'' value as the image metric: \\
+$Metric = 1 - RMSPE$, where the ``RMSPE'' is RMSE normalized to a value between 0 and 1.}
 		
 \begin{enumerate}
 
@@ -636,8 +638,8 @@ How test will be performed:
 
 \section{Traceability Between Test Cases and \\ Requirements}
 Traceability matrices are used to simplify the process of identifying what needs to be changed 
-if a component is modified. An "X" is used to indicate links between items in the table. 
-When a component is changed, the elements marked with an "X" might need to be updated as well.
+if a component is modified. An ``X'' is used to indicate links between items in the table. 
+When a component is changed, the elements marked with an ``X'' might need to be updated as well.
 
 \begin{table}[h!]
   \centering
