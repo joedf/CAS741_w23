@@ -210,6 +210,10 @@ $\delta$ & dimensionless & SE yield \\
 $I_{n\times m}$ & 8-bit gray level & Image intensity matrix that has $n$ rows and $m$ columns.\\
 $M_{n\times m}$ & Boolean & Mask / stencil matrix that has $n$ rows and $m$ columns.\\
 $R_{n\times m}$ & 8-bit gray level & Resulting image intensity matrix that has $n$ rows and $m$ columns.\\
+$G_{n\times m}$ & dimensionless & A matrix representation of the raster or imaging grid that has $n$ rows and $m$ columns.\\
+$i_{x,y}$ & dimensionless & An entry (at x, y) in the raster grid represented by an intensity or signal value.\\
+$m_{x,y}$ & Boolean & An entry (at x, y) in a mask matrix.\\
+$r_{x,y}$ & dimensionless & An entry (at x, y) in the resulting image represented by an intensity or signal value.\\
 \bottomrule
 \end{longtable*}
 
@@ -421,7 +425,7 @@ easier to correctly understand the requirements:
         
         Probe & Generally interchangeable with ``beam''. Contextually within this document, it is the final part of the beam that comes into contact with the surface of the sample (being analyzed within the microscope) forming a ``spot'' with a targeted size and shape. \\
         
-        Raster Grid & A scanning pattern with a defined and repeated cell size. \\
+        Raster Grid & An imaging grid or scanning pattern with a defined and repeated cell size. \\
         
         Region of Interest & A defined 2D area in both position, size, and shape on a sample. \\
         
@@ -475,7 +479,7 @@ includes the following elements:
 \begin{figure}[h!]
 \begin{center}
 {
- \includegraphics[width=0.25\textwidth]{figures/e_beam.pdf}
+ \includegraphics[width=0.23\textwidth]{figures/e_beam.pdf}
 }
 \caption{\label{fig_ebeam} Schematic drawing of an electron beam hitting the sample surface within an SEM chamber. (Image from: \url{https://github.com/joedf/ImgBeamer})}
 \end{center}
@@ -485,7 +489,7 @@ includes the following elements:
 \begin{figure}[h!]
 \begin{center}
 {
- \includegraphics[width=0.72\textwidth]{figures/sampling.pdf}
+ \includegraphics[width=0.71\textwidth]{figures/sampling.pdf}
 }
 \caption{\label{fig_sampling} Schematic of the three sampling scenarios (under-sampling, exact-sampling, and over-sampling) and a visual representation of the pixel grid, $d_p$, and $d_o$. The dashed lines are to help visualize the center of each pixel cell. Adapted from \citet{lifshin_improving_2014}}
 \end{center}
@@ -757,15 +761,14 @@ instance models.
   \hline
   Units & px (pixels) \\
   \hline
-  Equation & $G(x,y): \{ x \ge 0, y \ge 0 \}$ \\
+  Equation & $G_{n \times m}(x,y) = i_{x,y} | \{0 \le x \le m, 0 \le y \le n \}$ \\
   \hline
   Description
-    & $G$ is the grid pattern applied to the sample surface within the FOV and 
-    spanning within deflection space (\tref{T_deflectionSpace}) of the SEM. \\
+    & $G$ is the grid applied to the sample surface (can be represented as a matrix) spanning within deflection space (\tref{T_deflectionSpace}) of the SEM. \\
     & Each cell is a discrete $(x,y)$ location over which the beam scans over to 
     produce a signal. These signals are then collected by detectors to generate 
     an image. \\
-    & Each cell represents a picture element or ``pixel''. \\
+    & Each cell ($i_{x,y}$) represents a picture element or ``pixel'' with an intensity or signal value. \\
     & By convention, pixels are square, but this is not a necessity. That said, 
     non-square pixels may lead to unfaithful or distorted representations, see 
     \aref{A_reality} and \cite{goldstein_image_2018}. \\
@@ -884,14 +887,23 @@ The goal of reprocessing an image \gsref{G_reprocess} will be solved by \iref{IM
   Description
   & Given an image (see \ddref{DD_signalImage}) and mask (or stencil), a boolean operation is performed iteratively
   on each cell of the image matrix, based on the corresponding cell value found in the mask
-  matrix at row $i$ and column $j$.\\
-  
-  & If the mask cell value (at $i$, $j$) is True, the corresponding image
-  cell value is transferred/kept in the resulting/destination matrix.\\
+  matrix at row $x$ and column $y$.\\
 
-  & Otherwise, if the corresponding
-  matrix cell (at $i$, $j$) is False, then no value is transferred, and zero will be inserted
-  at $i$, $j$ in the destination image matrix. \\
+  & \[
+    \forall _{x,y} : r_{x,y} =
+    \begin{cases}
+    i_{x,y} & \text{if $m_{x,y}=True$} \\
+    0 & \text{otherwise}
+    \end{cases}
+  \] \\
+  
+  & If the mask cell value ($m_{x,y}$) is True, the corresponding image
+  cell value is transferred/kept in the resulting/destination matrix, meaning
+  $r_{x,y} = i_{x,y}$.\\
+
+  & Otherwise, if the corresponding mask 
+  matrix cell ($m_{x,y}$) is False, then no value is transferred, and zero will be inserted
+  at $x$, $y$ in the destination image matrix, meaning $r_{x,y} = 0$. \\
   \hline
   Sources
     & \cite{pike_bitmap_1984}, \url{https://en.wikipedia.org/wiki/Bit\_blit} \\
@@ -1066,11 +1078,9 @@ maintainability, and portability. These are listed below in detail:
   A user survey may be conducted to ascertain the software's usability.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Maintainability}:]
-  \textbf{Maintainability} The code should follow a consistent style and
-  be reasonably separated in multiple files were it makes sense. Function names 
-  should be no longer than 40 characters. Duplicate code should be avoided 
-  wherever possible. Comments should be plentiful, but short, and avoid any 
-  unnecessary use jargon or domain-specific terms.
+  \textbf{Maintainability} The code should be clear and understandable for further 
+  development by other programmers with little to no prior experience with this software.
+  Adding further features and extending the software should not prove to be a daunting task.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Portability}:]
   \textbf{Portability} The software should be cross-platform (Windows, Linux, 
