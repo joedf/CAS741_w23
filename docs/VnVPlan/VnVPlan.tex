@@ -37,13 +37,15 @@
 
 \section{Revision History}
 
-\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\begin{tabularx}{\textwidth}{p{2.2cm}p{1.8cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 2023/02/17 & 1.0 & First version \\
 2023/02/20 & 1.0.1 & fix minor issues in T\ref{T_exportImage}, T\ref{T_spotSize}, T\ref{T_linters}, 
   and T\ref{T_portability}\\
-2023/02/20 & 1.0.1 & Minor issues in general information
+2023/02/20 & 1.0.1 & Minor issues in general information\\
+2023/02/20 & 1.0.2 & Fix grammar in sections \ref{sec_srs_vplan}, 
+  \ref{sec_design_vplan}, \ref{sec_impl_vplan}, and \ref{sec_autotest_tools} \\
 \bottomrule
 \end{tabularx}
 
@@ -149,24 +151,25 @@ since I am doing an industrial PhD. Much of this project was originally conceptu
 the help and guidance of Mr. Phaneuf.}
 
 
-\subsection{SRS Verification Plan}
+\subsection{SRS Verification Plan} \label{sec_srs_vplan}
 
-The SRS is reviewed by the project supervisor, the SRS reviewer and the author. Some input
+The SRS will be reviewed by the project supervisor, the SRS reviewer and the author. Some input
 may be given by the expert consultants if time permits. Most of the feedback has been provided 
-as issues on GitHub, or as annotated documents, or by verbal exchange. The author is then expected
-make the resolve the issues and makes accordingly throughout the development of the project.
-The key objectives are to verify that the software requirements and the documentation are coherent
-and sound to the intended audience as defined in the SRS.
+as issues on GitHub, as annotated documents, or by verbal exchange. 
+Throughout the development of the project, the author is expected 
+to make changes needed to the resolve the issues.
+The key objective is to verify that the software requirements and the documentation are sound 
+and coherent to the intended audience as defined in the SRS.
 
 
-\subsection{Design Verification Plan}
+\subsection{Design Verification Plan} \label{sec_design_vplan}
 
 Much of the conceptualization was done after having multiple discussions with the expert 
 consultants and having done literature review for preexisting tools and documentation 
-relevant to the project. Decision are made with focus on the usability, with little to 
-no setup being required. The design and implementation is documented in the 
-MG / MIS \citep{MG,MIS}.
-The VnV team as well as any volunteer users are welcome to provide
+relevant to the project. Decisions were made with a focus on the usability, meaning little to 
+no setup required. The design and implementation is documented in the 
+MG\citep{MG}/MIS\citep{MIS}.
+The VnV team, as well as any volunteers, are welcome to provide
 their input (through GitHub issues). Eventually, the project may be published in a journal
 where the software \progname~and its accompanying documentation will 
 likely be rigorously reviewed.
@@ -183,23 +186,23 @@ will check whether the documented testing plans and verification process have be
 accomplished and the requirements fulfilled.
 
 
-\subsection{Implementation Verification Plan}
+\subsection{Implementation Verification Plan}  \label{sec_impl_vplan}
 
 Much of the software will be tested manually by users. This will include checking for
-any inconsistencies, bugs in the graphical user interface (GUI), and any unexpected
+any inconsistencies, bugs in the graphical user interface (GUI), and unexpected
 artifacts in images produced.
-The image metrics will be tested using unit tests (section \ref{sec_unittest}). For the
-all the code implemented, linters will be used as mentioned in section \ref{sec_autotest_tools}.
+The image metrics will be tested using unit tests (Section \ref{sec_unittest}). For the
+all the code implemented, linters will be used as mentioned in Section \ref{sec_autotest_tools}.
 As a control for the image metrics, they will be calculated using the same image as the ground truth 
 reference to rule out any baseline or unexpected factors in the implementations themselves.
 
 
 \subsection{Automated Testing and Verification Tools} \label{sec_autotest_tools}
 
-The image quality metric shall be unit-tested using \href{https://pytest.org}{pytest} for 
+The image quality metric shall be unit tested using \href{https://pytest.org}{pytest} for 
 automated testing of any algorithms implemented in Python and \href{https://qunitjs.com}{QUnit} 
 shall be used for those implemented in JavaScript. The unit tests are listed in 
-section \ref{sec_unittest}.
+Section \ref{sec_unittest}.
 As for linter, \href{https://flake8.pycqa.org}{flake8} shall be used for Python code 
 and \href{https://eslint.org}{ESLint} for JavaScript code.
 The \href{https://github.com/andrewekhalel/sewar}{sewar} python package will be 
@@ -223,7 +226,7 @@ as well using the image metrics.
 In this section, the system tests that will be conducted as described in detail. These tests
 will be used to verify the fulfillment of the requirements as listed in the SRS \citep{SRS}.
 Most, if not all, of the tests listed here will be manually performed. Automatic
-tests will be unit tests as described in section \ref{sec_unittest}.
+tests will be unit tests as described in Section \ref{sec_unittest}.
 
 \subsection{Tests for Functional Requirements}
 
@@ -510,7 +513,7 @@ This section cannot not be filled or completed until the MIS (detailed design do
 
 \subsection{Unit Testing Scope}
 
-\an{Other than the image metrics, I am not sure what else could be unit-tested as of now?}
+\an{Other than the image metrics, I am not sure what else could be unit tested as of now?}
 
 \wss{What modules are outside of the scope.  If there are modules that are
   developed by someone else, then you would say here if you aren't planning on
