@@ -1,5 +1,4 @@
 # Automated tests
 
-The folders and files for this folder are as follows:
-
-Describe ...
+The test code is available here:  
+https://github.com/joedf/ImgBeamer/tree/cas741/tests
