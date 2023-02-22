@@ -51,6 +51,7 @@
 2023/02/20 & 1.0.4 & Fix grammar in Section \ref{sec_NFR_tests}. \\
 2023/02/20 & 1.0.5 & Tweaks to Section \ref{sec_objectives}. \\
 2023/02/20 & 1.0.6 & Added missing references to MG and MIS. \\
+2023/02/22 & 1.0.7 & Provide specific inputs and outputs for most of the tests. \\
 \bottomrule
 \end{tabularx}
 
@@ -302,31 +303,61 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
 
 \begin{enumerate}
 
-  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_spotSize}}: Spot Width and Height\\}
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_spotSize}}: Spot Width and Height - Exact-sampling\\}
 
     Control: Manual
               
     Initial State: \progname{} loaded and idle.
               
-    Input: Width and height as positive real numbers.
+    Input: Both width and height are set to ``100\%''.
               
     Output: The spot layout should reflect these changes and display an updated arrangement with the given shape.
-    The resulting image should exhibit expected effects as documented by the SRS figures \citep{SRS}.
+    The resulting image should exhibit the expected \textbf{exact-sampling} case as documented by the SRS figures \citep{SRS}.
 
     Test Case Derivation: \an{not needed in this case?}
               
     How test will be performed: Either by scrolling in the visual spot shape UI or by number input in the GUI.
 					
-  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_spotRotation}}: Spot Rotation\\}
+    \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_spotSize10}}: Spot Width and Height - Under-sampling\\}
+
+    Control: Manual
+              
+    Initial State: \progname{} loaded and idle.
+              
+    Input: Both width and height are set to ``10\%''.
+              
+    Output: The spot layout should reflect these changes and display an updated arrangement with the given shape.
+    The resulting image should exhibit the expected \textbf{under-sampling} case as documented by the SRS figures \citep{SRS}.
+
+    Test Case Derivation: \an{not needed in this case?}
+              
+    How test will be performed: Either by scrolling in the visual spot shape UI or by number input in the GUI.
+					
+    \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_spotSize500}}: Spot Width and Height - Over-sampling\\}
+
+    Control: Manual
+              
+    Initial State: \progname{} loaded and idle.
+              
+    Input: Both width and height are set to ``500\%''.
+              
+    Output: The spot layout should reflect these changes and display an updated arrangement with the given shape.
+    The resulting image should exhibit the expected \textbf{over-sampling} case as documented by the SRS figures \citep{SRS}.
+
+    Test Case Derivation: \an{not needed in this case?}
+              
+    How test will be performed: Either by scrolling in the visual spot shape UI or by number input in the GUI.
+					
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_spotRotation}}: Spot Rotation - Astigmatism\\}
 
     Control: Manual
                 
     Initial State: \progname{} loaded and idle.
               
-    Input: An angle in degrees as a real number.
+    Input: The angle is set to ``45 degrees'', the width is set ``60\%'', and the height is set to ``500\%''.
               
     Output: The spot layout should reflect the updated arrangement with the rotated spots.
-    The resulting image should exhibit expected effects as documented in the SRS figures \citep{SRS}.
+    The resulting image should exhibit the expected \textbf{astigmatism} effects as documented in the SRS figures \citep{SRS}.
 
     Test Case Derivation: \an{see output?}
 
@@ -338,10 +369,10 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
                 
     Initial State: \progname{} loaded and idle.
               
-    Input: Positive real numbers for the rows and columns used for the raster grid to calculate the number of pixels and their size.
+    Input: The rows and columns are set to ``8'' for the raster grid.
               
-    Output: The resulting image resolution should grow or shrink according to the pixel size given.
-    The number of rows and columns should be represented in the spot layout display.
+    Output: The resulting image resolution (not image size) should be an ``8'' by ``8'' grid image.
+    The ``8'' rows and ``8'' columns should be represented in the spot layout display.
 
     Test Case Derivation: \an{see output?}
 
@@ -353,13 +384,13 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
                 
     Initial State: \progname{} loaded and idle.
               
-    Input: Location and magnification.
+    Input: The magnification is set to ``2x'' and the raster grid is set to ``8 x 8''.
               
-    Output: The resulting image preview and image used in the spot layout display should represent the ROI selected by the user.
+    Output: Both the spot layout and the resulting subregion displays should have ``8 x 8'' rows and columns. The resulting image preview should have ``16 x 16'' rows and columns.
 
     Test Case Derivation: \an{see output?}
 
-    How test will be performed: The user shall drag and scroll in the Subregion View display to set the subregion / ROI.
+    How test will be performed: The user scroll/zoom in the Subregion View display to set the subregion / ROI.
 
 \end{enumerate}
 
@@ -377,11 +408,11 @@ and a smaller number otherwise.
               
     Initial State: \progname{} loaded and idle.
               
-    Input: Spot size between 100\% to 130\%, and a perfectly circular spot shape.
+    Input: The Spot size is set to ``120\%'' with a perfectly circular spot shape.
               
-    Output: A number that is higher than if the spot size were outside the 100\% to 130\% range.
+    Output: The score should be greater than ``0.8650''.
 
-    Test Case Derivation: The resulting image should look somewhat sharp.
+    Test Case Derivation: The resulting image should look somewhat sharp as shown in the SRS figures \citep{SRS}.
 					
   \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricLow}}: Low metric value\\}
 
@@ -389,11 +420,11 @@ and a smaller number otherwise.
               
   Initial State: \progname{} loaded and idle.
             
-  Input: Spot size from 0\% to 90\% or from 140\% or more, and a perfectly circular spot shape.
+  Input: The Spot size is set to ``10\%'' with a perfectly circular spot shape.
             
-  Output: A number that is lower than if the spot size were inside the range of 100\% to 130\%.
+  Output: The score should be less than ``0.8601''.
 
-  Test Case Derivation: The resulting image should look somewhat blurry or overly sharp or pixelated.
+  Test Case Derivation: The resulting image should look somewhat blurry or overly sharp or pixelated as shown in the SRS figures \citep{SRS}.
   					
   \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricControl}}: Control metric value\\}
 
@@ -405,9 +436,9 @@ and a smaller number otherwise.
   and perfectly circular spot shape.
             
   Output: A number that is near the best or maximum quality metric value. The resulting image should nearly
-  identical to the ground truth image. 
+  identical to the ground truth image. The score should be greater than ``0.9800''.
 
-  Test Case Derivation: The resulting image should look somewhat blurry or overly sharp or pixelated.
+  Test Case Derivation: The resulting image should be identical or have imperceivable differences to the naked eye.
 
 \end{enumerate}
 
@@ -668,6 +699,8 @@ When a component is changed, the elements marked with an ``X'' might need to be 
   \tref{T_inputImage}           &X& & & & & & & & & & \\ \hline
   \tref{T_exportImage}          & & & & & &X& & & & & \\ \hline
   \tref{T_spotSize}             & &X& & &X& & & & & & \\ \hline
+  \tref{T_spotSize10}           & &X& & &X& & & & & & \\ \hline
+  \tref{T_spotSize500}          & &X& & &X& & & & & & \\ \hline
   \tref{T_spotRotation}         & &X& & &X& & & & & & \\ \hline
   \tref{T_rasterGrid}           & & &X& &X& & & & & & \\ \hline
   \tref{T_subregion}            & & & &X&X& & & & & & \\ \hline
