@@ -210,6 +210,7 @@ $d_i$ & \si[per-mode=symbol] {\nm} & probe step size in image space\\
 $d_o$ & \si[per-mode=symbol] {\nm} & probe step size in object space\\
 $\eta$ & dimensionless & BSE yield \\
 $\delta$ & dimensionless & SE yield \\
+$\alpha_q$ & dimensionless & Image quality metric (see \ref{IM_imageMetric}) \\
 $I_{n\times m}$ & 8-bit gray level & Image intensity matrix that has $n$ rows and $m$ columns.\\
 $M_{n\times m}$ & Boolean & Mask / stencil matrix that has $n$ rows and $m$ columns.\\
 $R_{n\times m}$ & 8-bit gray level & Resulting image intensity matrix that has $n$ rows and $m$ columns.\\
@@ -934,7 +935,7 @@ The goal of reprocessing an image \gsref{G_reprocess} will be solved by \iref{IM
   \hline
   Input& an image $I_{n \times m}$ serving as ground truth and the image $R_{n \times m}$ to compare\\
   \hline
-  Output& a positive ratio value ranging from $0$ to $1.00$.\\
+  Output& a positive value ranging from $0$ to $1.00$.\\
   \hline
   Description
   & Given the original image (ground truth, see \aref{A_inputImage}) and a reprocessed image, a 
@@ -954,7 +955,7 @@ The goal of reprocessing an image \gsref{G_reprocess} will be solved by \iref{IM
     
   & \begin{equation}
     \label{eqn:metric}
-    \text{metric} = 1 - \text{RMSPE}
+    \alpha_q = 1 - \text{RMSPE}
     \end{equation} \\
 
     & The values of the metric (eq. \ref{eqn:metric}) do not need to be absolutely quantitative. They only need to 
