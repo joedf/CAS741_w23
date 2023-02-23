@@ -52,6 +52,7 @@
   & 1.0.5 & Tweaks to Section \ref{sec_objectives}. \\
   & 1.0.6 & Added missing references to MG and MIS. \\
 2023/02/22 & 1.0.7 & Provide specific values for most of the tests. \\
+  & 1.0.8 & Review the design and VnV verification plans. \\
 \bottomrule
 \end{tabularx}
 
@@ -168,7 +169,7 @@ The SRS will be reviewed by the project supervisor, the SRS reviewer and the aut
 may be given by the expert consultants if time permits. Most of the feedback has been provided 
 as issues on GitHub, as annotated documents, or by verbal exchange. 
 Throughout the development of the project, the author is expected 
-to make changes needed to the resolve the issues.
+to make changes needed to the resolve the issues. The reviewers may refer to the SRS checklist \citep{SRS_checklist}.
 The key objective is to verify that the software requirements and the documentation are sound 
 and coherent to the intended audience as defined in the SRS.
 
@@ -180,22 +181,24 @@ consultants and having done literature review for preexisting tools and document
 relevant to the project. Decisions were made with a focus on the usability, meaning little to 
 no setup required. The design and implementation is documented in the 
 MG\citep{MG}/MIS\citep{MIS}.
-The VnV team, as well as any volunteers, are welcome to provide
+The VnV team, as well as any welcomed volunteers, will provide
 their input (through GitHub issues). Eventually, the project may be published in a journal
 where the software \progname~and its accompanying documentation will 
-likely be rigorously reviewed.
+likely be rigorously reviewed; The expert consultants will review and evaluate the software to
+establish whether it is fit for public use.
 
 \an{Not sure what was appropriate to put here.}
 
 
 \subsection{Verification and Validation Plan Verification Plan}
 
-The goal is to uncover any mistakes and reveal any risks through the supervision and 
+The goal is to uncover any mistakes and reveal any risks (such as misconceptions or converage gaps) 
+through the supervision and 
 review of the VnV team members. Once most of the work has been done, the work and
-accompanying documentation shall undergo a final vetting process. Mainly, the team
+accompanying documentation shall undergo a vetting process: the VnV team
 will check whether the documented testing plans and verification process have been 
-accomplished and the requirements fulfilled.
-
+accomplished and the requirements fulfilled. The author will then review the documents once more
+against the VnV checklist \citep{VnV_checklist}, before a final review by the rest of the VnV team.
 
 \subsection{Implementation Verification Plan}  \label{sec_impl_vplan}
 
