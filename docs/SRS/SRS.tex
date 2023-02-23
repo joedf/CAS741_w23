@@ -157,11 +157,12 @@
 2023/02/03 & 1.0 & First version\\
 2023/02/11 & 1.1 & Changes after review by domain expert\\
 2023/02/15 & 1.2 & Changes after review by SRS secondary reviewer\\
-2023/02/15 & 1.3 & Includes some changes after review by Dr. Smith\\
+  & 1.3 & Includes some changes after review by Dr. Smith\\
 2023/02/17 & 1.3.1 & Added some missing definitions\\
-2023/02/17 & 1.3.2 & Some changes needed for use with the VnV plan\\
+  & 1.3.2 & Some changes needed for use with the VnV plan\\
 2023/02/20 & 1.3.3 & Tweaks some definitions, some math notation updates\\
 2023/02/22 & 1.3.4 & Define RMSPE-based image metric.\\
+  & 1.3.5 & Add 8-bit depth grayscale as a system constraint.\\
 \bottomrule
 \end{tabularx}
 
@@ -362,7 +363,8 @@ is required to use the software.
 
 \subsection{System Constraints}
 
-The real world design constraints are to be listed here, but there are none.
+The real world design constraints are to be listed here. Currently, the only constraint is that images will be
+restricted to 8-bit grayscale (as listed in Table \ref{TblSpecParams}). 
 
 \section{Specific System Description}
 
@@ -483,7 +485,7 @@ includes the following elements:
 \begin{figure}[h!]
 \begin{center}
 {
- \includegraphics[width=0.23\textwidth]{figures/e_beam.pdf}
+ \includegraphics[width=0.3\textwidth]{figures/e_beam.pdf}
 }
 \caption{\label{fig_ebeam} Schematic drawing of an electron beam hitting the sample surface within an SEM chamber. (Image from: \url{https://github.com/joedf/ImgBeamer})}
 \end{center}
@@ -493,7 +495,7 @@ includes the following elements:
 \begin{figure}[h!]
 \begin{center}
 {
- \includegraphics[width=0.71\textwidth]{figures/sampling.pdf}
+ \includegraphics[width=0.80\textwidth]{figures/sampling.pdf}
 }
 \caption{\label{fig_sampling} Schematic of the three sampling scenarios (under-sampling, exact-sampling, and over-sampling) and a visual representation of the pixel grid, $d_p$, and $d_o$. The dashed lines are to help visualize the center of each pixel cell. Adapted from \citet{lifshin_improving_2014}}
 \end{center}
