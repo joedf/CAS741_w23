@@ -245,6 +245,7 @@ $r_{x,y}$ & dimensionless & An entry (at x, y) in the resulting image represente
   R & Requirement\\
   ROI & Region of Interest\\
   RMSE & Root Mean Square Error\\
+  NRMSE & Normalized Root Mean Square Error\\
   RMSPE & Root Mean Square Percentage Error\\
   SE & Secondary Electron\\
   SEM & Scanning Electron Microscope\\
@@ -941,29 +942,32 @@ The goal of reprocessing an image \gsref{G_reprocess} will be solved by \iref{IM
   & Given the original image (ground truth, see \aref{A_inputImage}) and a reprocessed image, a 
   metric must be calculated to express image similarity where $1.00$ means
   a perfect match and $0.00$ means absolutely no correlation or similarity found.\\
+  
+  & The metric uses normalized RMSE, called RMSPE (eq. \ref{eqn:RMSPE}) or sometimes NRMSE. 
+    In this case, the RMSE is normalized using the maximum value 
+    possible ($\text{pixel}_{max}=255$ for 8 bit depth for grayscale images).\\
 
   & \begin{equation}
     \label{eqn:RMSPE}
-    \text{RMSPE} = \frac{1}{\text{pixel}_{max}} \cdot \sqrt{\frac{1}{n} \cdot \sum_{i=1}^n (I_i - R_i)^2}
+    \text{RMSPE or NRMSE} = \frac{1}{\text{pixel}_{max}} \cdot \sqrt{\frac{1}{n} \cdot \sum_{i=1}^n (I_i - R_i)^2}
     \end{equation} \\
 
-    & Wwere $n$ is the total number of pixels, $I_i$ is a pixel from the ground truth image, and 
+  & Where $n$ is the total number of pixels of one image, $I_i$ is a pixel from the ground truth image, and 
     $R_i$ is the corresponding pixel in the result image.\\
-
-    & The metric uses modified RMSE, called RMSPE (eq. \ref{eqn:RMSPE}), which has been normalized to the maximum value 
-    possible ($\text{pixel}_{max}=255$ for 8 bit depth for grayscale images).\\
+  
+  & Note that $\text{pixel}_{max}=255$ should be substracted by $\text{pixel}_{min}=0$, but is omitted for simplicity. \\
     
   & \begin{equation}
     \label{eqn:metric}
     \alpha_q = 1 - \text{RMSPE}
     \end{equation} \\
 
-    & The values of the metric (eq. \ref{eqn:metric}) do not need to be absolutely quantitative. They only need to 
+  & The values of the metric (eq. \ref{eqn:metric}) do not need to be absolutely quantitative. They only need to 
     be relatively comparable when only changing $d_p$ or the spot shape.\\
-    
-    & If the images do no match in size, the smaller image shall be scaled to match.\\
+  
+  & If the images do no match in size, the smaller image shall be scaled to match.\\
   \hline
-  Sources& \\
+  Sources& \url{https://cirpwiki.info/wiki/Statistics#Normalization} \\
   \hline
   Ref.\ By & \rref{R_imageMetric}, \nfrref{NFR_Usability} \\
   \hline
