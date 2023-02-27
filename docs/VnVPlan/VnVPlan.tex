@@ -54,6 +54,7 @@
 2023/02/22 & 1.0.7 & Provide specific values for most of the tests. \\
   & 1.0.8 & Review the design and VnV verification plans. \\
 2023/02/27 & 1.0.9 & Improve wording for Section \ref{sec_impl_vplan}. \\
+  & 1.0.10 & Tweak tests in sections \ref{subsec_spot} and \ref{subsec_img_metric}. \\
 \bottomrule
 \end{tabularx}
 
@@ -391,11 +392,12 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
               
     Input: The magnification is set to ``2x'' and the raster grid is set to ``8 x 8''.
               
-    Output: Both the spot layout and the resulting subregion displays should have ``8 x 8'' rows and columns. The resulting image preview should have ``16 x 16'' rows and columns.
+    Output: Both the spot layout and the resulting subregion displays should have ``8 x 8'' resolution (rows and columns). 
+    The resulting image preview should have ``16 x 16'' resolution (rows and columns).
 
     Test Case Derivation: \an{see output?}
 
-    How test will be performed: The user scroll/zoom in the Subregion View display to set the subregion / ROI.
+    How test will be performed: The user scroll/zoom in the Subregion (ROI) View display until a magnification of 2x is reached.
 
 \end{enumerate}
 
@@ -407,7 +409,7 @@ and a smaller number otherwise.
 
 \begin{enumerate}
 
-  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricHigh}}: Higher metric value\\}
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricHigh}}: High metric value (approximate to exact-sampling)\\}
 
     Control: Manual
               
@@ -419,7 +421,7 @@ and a smaller number otherwise.
 
     Test Case Derivation: The resulting image should look somewhat sharp as shown in the SRS figures \citep{SRS}.
 					
-  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricLow}}: Low metric value\\}
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricLow}}: Low metric value (under-sampling)\\}
 
   Control: Manual
               
@@ -429,7 +431,19 @@ and a smaller number otherwise.
             
   Output: The score should be less than ``0.8601''.
 
-  Test Case Derivation: The resulting image should look somewhat blurry or overly sharp or pixelated as shown in the SRS figures \citep{SRS}.
+  Test Case Derivation: The resulting image should look somewhat overly ``sharp'' or pixelated as shown in the SRS figures \citep{SRS}.
+  					
+  \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricLow2}}: Low metric value (over-sampling)\\}
+
+  Control: Manual
+              
+  Initial State: \progname{} loaded and idle.
+            
+  Input: The Spot size is set to ``500\%'' with a perfectly circular spot shape.
+            
+  Output: The score should be less than ``0.8601''.
+
+  Test Case Derivation: The resulting image should look somewhat ``blurry'' or ``defocused'' as shown in the SRS figures \citep{SRS}.
   					
   \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricControl}}: Control metric value\\}
 
@@ -711,6 +725,7 @@ When a component is changed, the elements marked with an ``X'' might need to be 
   \tref{T_subregion}            & & & &X&X& & & & & & \\ \hline
   \tref{T_manualMetricHigh}     & & & & & & &X& & & & \\ \hline
   \tref{T_manualMetricLow}      & & & & & & &X& & & & \\ \hline
+  \tref{T_manualMetricLow2}     & & & & & & &X& & & & \\ \hline
   \tref{T_manualMetricControl}  & & & & & & &X& & & & \\ \hline
   \tref{T_surveyUsability}      & & & & & & & & &X& & \\ \hline
   \tref{T_surveyMetric}         & & & & & & & &X& & & \\ \hline
