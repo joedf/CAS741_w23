@@ -53,6 +53,7 @@
   & 1.0.6 & Added missing references to MG and MIS. \\
 2023/02/22 & 1.0.7 & Provide specific values for most of the tests. \\
   & 1.0.8 & Review the design and VnV verification plans. \\
+2023/02/27 & 1.0.9 & Improve wording for Section \ref{sec_impl_vplan}. \\
 \bottomrule
 \end{tabularx}
 
@@ -207,8 +208,9 @@ any inconsistencies, bugs in the graphical user interface (GUI), and unexpected
 artifacts in images produced.
 The image metrics will be tested using unit tests (Section \ref{sec_unittest}). For the
 all the code implemented, linters will be used as mentioned in Section \ref{sec_autotest_tools}.
-As a control for the image metrics, they will be calculated using the same image as the ground truth 
-reference to rule out any baseline or unexpected factors in the implementations themselves.
+As a control for the image metrics, they will be calculated using the ground truth image as both the 
+input and the reference image (effectively comparing it to itself) 
+to rule out any baseline or unexpected factors in the implementations themselves.
 
 
 \subsection{Automated Testing and Verification Tools} \label{sec_autotest_tools}
