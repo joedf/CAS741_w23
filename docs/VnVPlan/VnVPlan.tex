@@ -77,7 +77,7 @@
   MG & Module Guide \\
   MSE & Mean Squared Error\\
   RMSE & Root Mean Square Error\\
-  RMSPE & Root Mean Square Percentage Error\\
+  NRMSE & Normalized Root Mean Square Error\\
   NFR & Nonfunctional Requirement\\
   GUI & Graphical User Interface\\
   R & Requirement\\
@@ -643,11 +643,11 @@ How test will be performed:
 \subsubsection{Module: Image Quality Metric}
 
 \an{I will likely use the ``reverse'' / ``inverse'' value as the image metric: \\
-$Metric = 1 - RMSPE$, where the ``RMSPE'' is RMSE normalized to a value between 0 and 1.}
+$Metric = 1 - NRMSE$, where the ``NRMSE'' is RMSE normalized to a value between 0 and 1.}
 		
 \begin{enumerate}
 
-\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric1}}: Lowest/Highest MSE, RMSE and RMSPE scores\\}
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric1}}: Lowest/Highest MSE, RMSE and NRMSE scores\\}
 
 Type: Automatic
 					
@@ -655,7 +655,7 @@ Initial State: \an{Not running?}
 					
 Input/Condition: The ground truth images and multiple resampled images of varying and known quality.
 					
-Output/Result: The higher quality image should return the lowest error (i.e. lowest MSE, RMSE, RMSPE) scores.
+Output/Result: The higher quality image should return the lowest error (i.e. lowest MSE, RMSE, NRMSE) scores.
 					
 How test will be performed: Executing a suite of tests for the multiple images.
 					

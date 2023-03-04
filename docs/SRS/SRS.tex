@@ -163,6 +163,7 @@
 2023/02/20 & 1.3.3 & Tweaks some definitions, some math notation updates\\
 2023/02/22 & 1.3.4 & Define RMSPE-based image metric.\\
   & 1.3.5 & Add 8-bit depth grayscale as a system constraint.\\
+2023/03/04 & 1.3.6 & Use NRMSE as the main term instead of RMSPE.\\
 \bottomrule
 \end{tabularx}
 
@@ -932,7 +933,7 @@ The goal of reprocessing an image \gsref{G_reprocess} will be solved by \iref{IM
   \rowcolor[gray]{0.9}
   Number& IM\refstepcounter{instnum}\theinstnum \label{IM_imageMetric}\\
   \hline
-  Label& \bf Image quality metric (Inverted RMSPE) \\
+  Label& \bf Image quality metric (Inverted NRMSE) \\
   \hline
   Input& an image $I_{n \times m}$ serving as ground truth and the image $R_{n \times m}$ to compare\\
   \hline
@@ -943,13 +944,13 @@ The goal of reprocessing an image \gsref{G_reprocess} will be solved by \iref{IM
   metric must be calculated to express image similarity where $1.00$ means
   a perfect match and $0.00$ means absolutely no correlation or similarity found.\\
   
-  & The metric uses normalized RMSE, called RMSPE (eq. \ref{eqn:RMSPE}) or sometimes NRMSE. 
+  & The metric ($\alpha_q$) uses normalized RMSE, called NRMSE (eq. \ref{eqn:NRMSE}) or sometimes RMSPE. 
     In this case, the RMSE is normalized using the maximum value 
     possible ($\text{pixel}_{max}=255$ for 8 bit depth for grayscale images).\\
 
   & \begin{equation}
-    \label{eqn:RMSPE}
-    \text{RMSPE or NRMSE} = \frac{1}{\text{pixel}_{max}} \cdot \sqrt{\frac{1}{n} \cdot \sum_{i=1}^n (I_i - R_i)^2}
+    \label{eqn:NRMSE}
+    \text{NRMSE} = \frac{1}{\text{pixel}_{max}} \cdot \sqrt{\frac{1}{n} \cdot \sum_{i=1}^n (I_i - R_i)^2}
     \end{equation} \\
 
   & Where $n$ is the total number of pixels of one image, $I_i$ is a pixel from the ground truth image, and 
@@ -959,7 +960,7 @@ The goal of reprocessing an image \gsref{G_reprocess} will be solved by \iref{IM
     
   & \begin{equation}
     \label{eqn:metric}
-    \alpha_q = 1 - \text{RMSPE}
+    \alpha_q = 1 - \text{NRMSE}
     \end{equation} \\
 
   & The values of the metric (eq. \ref{eqn:metric}) do not need to be absolutely quantitative. They only need to 
