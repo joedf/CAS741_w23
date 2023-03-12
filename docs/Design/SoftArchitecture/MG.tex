@@ -1,5 +1,7 @@
 \documentclass[12pt, titlepage]{article}
 
+\usepackage{amsmath, mathtools}
+\usepackage{siunitx}
 \usepackage{fullpage}
 \usepackage[round]{natbib}
 \usepackage{multirow}
@@ -46,7 +48,8 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-2023/03/17 & 1.0.0 & First version\\
+2023/03/05 & 0.1.0 & Creation\\
+2023/03/10 & 0.1.1 & Add anticipated changes\\
 \bottomrule
 \end{tabularx}
 
@@ -155,11 +158,28 @@ adapted here is called design for
 change.
 
 \begin{description}
-\item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific
-  hardware on which the software is running.
-\item[\refstepcounter{acnum} \actheacnum \label{acInput}:] The format of the
-  initial input data.
-\item ...
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_hardware}:] The specific
+    hardware on which the software is running.
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_input}:] The format of the
+    initial input data.
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_inFormat}:] The format of the input parameters.
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_inConst}:] The constraints on the input parameters.
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_outFormat}:] The format of the final output data.
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_outConst}:] The constraints on the output results.
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_calc}:] How the overall control of the
+    calculations are orchestrated.
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_displayUnits}:] The display of scale in
+    virtual, physical, or real world units such as \si{nm}.
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_simNoise}:] The ability to simulate basic
+    image noise (such as Gaussian or Poisson).
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_imgMetricAlgos}:] The ability
+    to use different image quality metrics.
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_maskOpts}:] The implementation for the ``Bit BLT'',
+    compositing, or blending operations.
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_calcSignal}:] The calculation of the
+    average pixel or signal (intensity) value sampled by the beam.
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_GUI}:] The implementation of graphical user
+    interface.
 \end{description}
 
 \subsection{Unlikely Changes} \label{SecUchange}
@@ -330,18 +350,19 @@ R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-\acref{acHardware} & \mref{mHH}\\
-\acref{acInput} & \mref{mInput}\\
-\acref{acParams} & \mref{mParams}\\
-\acref{acVerify} & \mref{mVerify}\\
-\acref{acOutput} & \mref{mOutput}\\
-\acref{acVerifyOut} & \mref{mVerifyOut}\\
-\acref{acODEs} & \mref{mODEs}\\
-\acref{acEnergy} & \mref{mEnergy}\\
-\acref{acControl} & \mref{mControl}\\
-\acref{acSeqDS} & \mref{mSeqDS}\\
-\acref{acSolver} & \mref{mSolver}\\
-\acref{acPlot} & \mref{mPlot}\\
+\acref{AC_hardware} & \mref{mHH}\\
+\acref{AC_input} & \mref{mInput}\\
+\acref{AC_inFormat} & \mref{mParams}\\
+\acref{AC_inConst} & \mref{mVerify}\\
+\acref{AC_outFormat} & \mref{mOutput}\\
+\acref{AC_outConst} & \mref{mVerifyOut}\\
+\acref{AC_calc} & \mref{mODEs}\\
+\acref{AC_displayUnits} & \mref{mEnergy}\\
+\acref{AC_simNoise} & \mref{mControl}\\
+\acref{AC_imgMetricAlgos} & \mref{mSeqDS}\\
+\acref{AC_maskOpts} & \mref{mSolver}\\
+\acref{AC_calcSignal} & \mref{mPlot}\\
+\acref{AC_GUI} & \mref{mPlot}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}
