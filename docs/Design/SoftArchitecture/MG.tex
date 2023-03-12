@@ -50,6 +50,7 @@
 \midrule
 2023/03/05 & 0.1.0 & Creation\\
 2023/03/10 & 0.1.1 & Add anticipated changes\\
+2023/03/12 & 0.1.2 & Add unlikely changes\\
 \bottomrule
 \end{tabularx}
 
@@ -192,9 +193,19 @@ will potentially need to be modified. Hence, it is not intended that these
 decisions will be changed.
 
 \begin{description}
-\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input/Output devices
-  (Input: File and/or Keyboard, Output: File, Memory, and/or Screen).
-\item ...
+  \item[\refstepcounter{ucnum} \uctheucnum \label{UC_IO}:] Input/Output devices
+    (Input: File and/or Keyboard, Output: File, Memory, and/or Screen).
+  \item[\refstepcounter{ucnum} \uctheucnum \label{UC_physics}:] The software will not
+    simulate electron beam physics, collision cascades, sample nature, topography, 
+    or other electron-sample interactions.
+  \item[\refstepcounter{ucnum} \uctheucnum \label{UC_layout}:] The beam sampling
+    layout or raster pattern.
+  \item[\refstepcounter{ucnum} \uctheucnum \label{UC_import}:] The software must
+    be able to import a groud truth image.
+  \item[\refstepcounter{ucnum} \uctheucnum \label{UC_export}:] The software must
+    be able to export the resulting image.
+  \item[\refstepcounter{ucnum} \uctheucnum \label{UC_visualize}:] The software must be able
+    to display a live visualization to the user of the effects of changing the imaging parameters.
 \end{description}
 
 \section{Module Hierarchy} \label{SecMH}
