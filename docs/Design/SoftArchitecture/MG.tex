@@ -143,8 +143,8 @@ was constructed according to the likely changes. Section \ref{SecConnection}
 specifies the connections between the software requirements and the
 modules. Section \ref{SecMD} gives a detailed description of the
 modules. Section \ref{SecTM} includes two traceability matrices. One checks
-the completeness of the design against the requirements provided in the SRS. The
-other shows the relation between anticipated changes and the modules. Section
+the completeness of the design against the requirements provided in the SRS \citep{SRS}.
+The other shows the relation between anticipated changes and the modules. Section
 \ref{SecUse} describes the use relation between modules.
 
 \section{Anticipated and Unlikely Changes} \label{SecChange}
@@ -228,8 +228,9 @@ actually be implemented.
 \item [\refstepcounter{mnum} \mthemnum \label{M_infoDisp}:] Information and Metrics Display
 \item [\refstepcounter{mnum} \mthemnum \label{M_metric}:] Image Metrics Calculation
 \item [\refstepcounter{mnum} \mthemnum \label{M_drawStage}:] Drawing Stage / Canvas Module
+\item [\refstepcounter{mnum} \mthemnum \label{M_imgDataStruct}:] Image Data Structure
 \item [\refstepcounter{mnum} \mthemnum \label{M_compositing}:] Image Compositing
-\item [\refstepcounter{mnum} \mthemnum \label{M_rendering}:] Image Compositing
+\item [\refstepcounter{mnum} \mthemnum \label{M_rendering}:] Image Rendering
 \item [\refstepcounter{mnum} \mthemnum \label{M_sampling}:] Image Sampling
 \item [\refstepcounter{mnum} \mthemnum \label{M_DOM}:] DOM Manipulation
 \item [\refstepcounter{mnum} \mthemnum \label{M_vizGT}:] Ground Truth Visualization
@@ -279,7 +280,7 @@ actually be implemented.
   & Drawing Stage / Canvas Module \\
   && DOM Manipulation \\
   \cline{2-3}
-& \multirow{4}{0.3\textwidth}{Image Manipulation and Processing}
+& \multirow{5}{0.3\textwidth}{Image Manipulation and Processing}
   & Image Data Structure \\
   && Image Compositing \\
   && Image Rendering \\
