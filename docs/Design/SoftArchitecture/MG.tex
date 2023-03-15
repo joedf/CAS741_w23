@@ -309,7 +309,7 @@ without documenting \emph{how} to do it. For each module, a suggestion for the
 implementing software is given under the \emph{Implemented By} title. If the
 entry is \emph{OS}, this means that the module is provided by the operating
 system or by standard programming language libraries.
-If the entry is \emph{Web browser}, this means that the module is provided by the 
+If the entry is \emph{WebBrowser}, this means that the module is provided by the 
 HTML 5 compliant web browser.
 If the entry is \emph{CanvasAPI}, this means that the module is provided by the 
 Canvas API of the HTML 5 living standard \cite{html_std_canvas}.
@@ -372,8 +372,9 @@ to be implemented.
 
 \subsubsection{Spot Profile Control (\mref{M_vizSpotProfile})}
 \begin{description}
-\item[Secrets:]The format and structure of the input data (spot shape) provided
-  through by user to GUI interaction.
+\item[Secrets:]The display (sizing, style, colours, etc.) and
+  the format and structure of the input data (spot shape) provided
+  through user interaction with the GUI.
 \item[Services:] Obtains the shape of the spot as provided by the user and stores it for use
   by the visualization modules \mref{M_vizSpotContent}, \mref{M_vizSpotSignal}, \mref{M_vizSpotLayout},
   \mref{M_vizSampledSub}, \mref{M_vizResultSub}, and \mref{M_vizResultImg}.
@@ -397,10 +398,10 @@ to be implemented.
 \subsubsection{Information and Metrics Display (\mref{M_infoDisp})}
 \begin{description}
 \item[Secrets:]The display and calculation methods of the information on rendered
-  images from the visualization modules (\mref{M_vizSubregion}, \mref{M_vizSpotProfile},
+  images from the visualization modules (\mref{M_vizSubregion},
   \mref{M_vizSpotContent}, \mref{M_vizSpotSignal}, and \mref{M_vizResultImg}),
   the input ground truth image (\mref{M_imgGTInput}), and the spot profile/shape 
-  information (width, height, rotation, and eccentricity).
+  (\mref{M_vizSpotProfile}) information (width, height, rotation, and eccentricity).
 \item[Services:]Calculates and displays information such as the magnification,
   image quality metrics, spot shape information, spot signal pixel values (RBGA),
   and the drawing rate of resulting image (e.g., rows per milliseconds).
@@ -543,17 +544,84 @@ to be implemented.
 \item[Implemented By:] --
 \end{description}
 
-\an{==== module template START ====}
-\subsubsection{Example Software Module (\mref{M_Input})}
+
+\subsubsection{Image Metrics Calculation (\mref{M_metric})}
 \begin{description}
-\item[Secrets:]The format and structure of the input data.
-\item[Services:]Converts the input data into the data structure used by the
-  input parameters module.
-\item[Implemented By:] [Your Program Name Here]
+\item[Secrets:]The algorithm, criteria, and validations for processing and comparing two images.
+\item[Services:]Takes two images (ideally one - a reference or ground truth image, 
+and the other - an image to compare to), compares them, and produces a score on the 
+similarity or quality of the compared image in question.
+\item[Implemented By:] \progname{}
 \item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
   [Information to include for leaf modules in the decomposition by secrets tree.]}
 \end{description}
-\an{==== module template END ====}
+
+
+\subsubsection{Drawing Stage / Canvas Module (\mref{M_drawStage})}
+\begin{description}
+\item[Secrets:] \an{The format and structure of the input data.}
+\item[Services:] \an{Converts the input data into the data structure used by the
+  input parameters module.}
+\item[Implemented By:] Konva and CanvasAPI
+\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
+  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\end{description}
+
+
+\subsubsection{Image Data Structure (\mref{M_imgDataStruct})}
+\begin{description}
+\item[Secrets:]\an{The format and structure of the input data.}
+\item[Services:]\an{Converts the input data into the data structure used by the
+  input parameters module.}
+\item[Implemented By:] CanvasAPI (ImageData interface)
+\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
+  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\end{description}
+
+
+\subsubsection{Image Compositing (\mref{M_compositing})}
+\begin{description}
+\item[Secrets:]\an{The format and structure of the input data.}
+\item[Services:]\an{Converts the input data into the data structure used by the
+  input parameters module.}
+\item[Implemented By:] CanvasAPI (globalCompositeOperation or CanvasRenderingContext2D.clip())
+\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
+  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\end{description}
+
+
+\subsubsection{Image Rendering (\mref{M_rendering})}
+\begin{description}
+\item[Secrets:]\an{The format and structure of the input data.}
+\item[Services:]\an{Converts the input data into the data structure used by the
+  input parameters module.}
+\item[Implemented By:] Konva and ImgBeamer
+\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
+  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\end{description}
+
+
+\subsubsection{Image Sampling (\mref{M_sampling})}
+\begin{description}
+\item[Secrets:]\an{The format and structure of the input data.}
+\item[Services:]\an{Converts the input data into the data structure used by the
+  input parameters module.}
+\item[Implemented By:] CanvasAPI and ImgBeamer
+\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
+  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\end{description}
+
+
+\subsubsection{DOM Manipulation (\mref{M_DOM})}
+\begin{description}
+\item[Secrets:]\an{The format and structure of the input data.}
+\item[Services:]\an{Converts the input data into the data structure used by the
+  input parameters module.}
+\item[Implemented By:] WebBrowser
+\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
+  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\end{description}
+
 
 
 \section{Traceability Matrix} \label{SecTM}
@@ -602,7 +670,7 @@ R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
 \acref{AC_displayUnits} & \mref{mEnergy}\\
 \acref{AC_simNoise} & \mref{mControl}\\
 \acref{AC_imgMetricAlgos} & \mref{mSeqDS}\\
-\acref{AC_compositing} & \mref{mSolver}\\
+\acref{AC_maskOpts} & \mref{mSolver}\\
 \acref{AC_calcSignal} & \mref{mPlot}\\
 \acref{AC_GUI} & \mref{mPlot}\\
 \bottomrule
