@@ -1,0 +1,52 @@
+digraph G {
+concentrate=true;
+splines="ortho";
+rankdir="LR";
+node_0f22ac85 [label="245: drawAvgCircle()" name="drawsteps::drawAvgCircle" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_d20fd905 [label="3: drawBaseBeam()" name="drawsteps::drawBaseBeam" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_e92ea3c4 [label="196: drawBaseComposite()" name="drawsteps::drawBaseComposite" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_77e3152a [label="105: drawBaseImage()" name="drawsteps::drawBaseImage" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_ff4d77d0 [label="428: drawGroundtruthImage()" name="drawsteps::drawGroundtruthImage" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_13147fa1 [label="282: drawProbeLayout()" name="drawsteps::drawProbeLayout" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_f9720d33 [label="362: drawProbeLayoutSampling()" name="drawsteps::drawProbeLayoutSampling" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_1a883a5b [label="393: drawResampled()" name="drawsteps::drawResampled" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_2dd91a21 [label="483: drawVirtualSEM()" name="drawsteps::drawVirtualSEM" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_c29f2f9f [label="0: (global)()" name="main::(global)" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_ddd9e932 [label="71: OnImageLoaded()" name="main::OnImageLoaded" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_5f038918 [label="61: UpdateBaseImage()" name="main::UpdateBaseImage" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_8aa612ce [label="136: Utils_SetSpotWidth()" name="main::Utils_SetSpotWidth" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_19a66438 [label="83: doUpdate()" name="main::doUpdate" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_9b98348e [label="98: promptForSpotWidth()" name="main::promptForSpotWidth" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_17e92fb6 [label="223: updateBeams()" name="main::updateBeams" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_c29f2f9f -> node_5f038918 [color="#CC79A7" penwidth="2"];
+node_ddd9e932 -> node_0f22ac85 [color="#56B4E9" penwidth="2"];
+node_ddd9e932 -> node_d20fd905 [color="#56B4E9" penwidth="2"];
+node_ddd9e932 -> node_e92ea3c4 [color="#56B4E9" penwidth="2"];
+node_ddd9e932 -> node_77e3152a [color="#56B4E9" penwidth="2"];
+node_ddd9e932 -> node_ff4d77d0 [color="#56B4E9" penwidth="2"];
+node_ddd9e932 -> node_13147fa1 [color="#56B4E9" penwidth="2"];
+node_ddd9e932 -> node_f9720d33 [color="#56B4E9" penwidth="2"];
+node_ddd9e932 -> node_1a883a5b [color="#56B4E9" penwidth="2"];
+node_ddd9e932 -> node_2dd91a21 [color="#56B4E9" penwidth="2"];
+node_ddd9e932 -> node_19a66438 [color="#56B4E9" penwidth="2"];
+node_ddd9e932 -> node_19a66438 [color="#56B4E9" penwidth="2"];
+node_ddd9e932 -> node_17e92fb6 [color="#56B4E9" penwidth="2"];
+node_5f038918 -> node_ddd9e932 [color="#000000" penwidth="2"];
+node_8aa612ce -> node_19a66438 [color="#D55E00" penwidth="2"];
+node_8aa612ce -> node_17e92fb6 [color="#D55E00" penwidth="2"];
+node_9b98348e -> node_8aa612ce [color="#D55E00" penwidth="2"];
+subgraph cluster_3658e2d9 {
+    node_d20fd905 node_77e3152a node_e92ea3c4 node_0f22ac85 node_13147fa1 node_f9720d33 node_1a883a5b node_ff4d77d0 node_2dd91a21;
+    label="File: drawsteps";
+    name="drawsteps";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_314306b6 {
+    node_5f038918 node_ddd9e932 node_19a66438 node_9b98348e node_8aa612ce node_17e92fb6 node_c29f2f9f;
+    label="File: main";
+    name="main";
+    style="filled";
+    graph[style=dotted];
+};
+}
