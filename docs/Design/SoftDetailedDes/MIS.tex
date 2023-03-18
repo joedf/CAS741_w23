@@ -2,7 +2,8 @@
 
 \usepackage{amsmath, mathtools}
 
-\usepackage[round]{natbib}
+% \usepackage[round]{natbib}
+\usepackage[numbers,square]{natbib}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
@@ -53,8 +54,7 @@ urlcolor=cyan          % color of external links
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+2023/03/18 & 0.1.0 & Creation\\
 \bottomrule
 \end{tabularx}
 
@@ -62,7 +62,7 @@ Date 2 & 1.1 & Notes\\
 
 \section{Symbols, Abbreviations and Acronyms}
 
-See SRS Documentation at \wss{give url}
+See SRS Documentation \cite{SRS}.
 
 \wss{Also add any additional symbols, abbreviations or acronyms}
 
@@ -77,11 +77,11 @@ See SRS Documentation at \wss{give url}
 \section{Introduction}
 
 The following document details the Module Interface Specifications for
-\wss{Fill in your project name and description}
+\progname{} (\prognamelong{}).
 
 Complementary documents include the System Requirement Specifications
 and Module Guide.  The full documentation and implementation can be
-found at \url{...}.  \wss{provide the url for your repo}
+found at \url{https://github.com/joedf/CAS741_w23}.
 
 \section{Notation}
 
@@ -230,7 +230,7 @@ The following table is taken directly from the Module Guide document for this pr
 \newpage
 
 \bibliographystyle {plainnat}
-\bibliography {../../../refs/References}
+\bibliography {../../../refs/References,../../../refs/cas741,../../../refs/programming}
 
 \newpage
 
