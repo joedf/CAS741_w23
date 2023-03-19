@@ -53,7 +53,7 @@
 2023/03/10 & 0.1.1 & Add anticipated changes\\
 2023/03/12 & 0.1.2 & Add unlikely changes\\
            & 0.1.3 & Add the module hierarchy and Behaviour-Hiding module descriptions\\
-2023/03/18 & 0.1.4 & Rework modules and update traceability\\
+2023/03/18 & 0.1.4 & Rework modules and graph. Update traceability\\
 \bottomrule
 \end{tabularx}
 
@@ -228,10 +228,6 @@ actually be implemented.
 \item [\refstepcounter{mnum} \mthemnum \label{M_inSpotProfile}:] Spot Profile Input
 \item [\refstepcounter{mnum} \mthemnum \label{M_export}:] Image Export
 \item [\refstepcounter{mnum} \mthemnum \label{M_infoDisp}:] Information and Metrics Display
-\item [\refstepcounter{mnum} \mthemnum \label{M_metric}:] Image Metrics Calculation
-\item [\refstepcounter{mnum} \mthemnum \label{M_drawStage}:] Drawing Stage / Canvas Module
-\item [\refstepcounter{mnum} \mthemnum \label{M_imgDataStruct}:] Image Data Structure
-\item [\refstepcounter{mnum} \mthemnum \label{M_rendering}:] Image Rendering
 \item [\refstepcounter{mnum} \mthemnum \label{M_vizGT}:] Ground Truth Visualization
 \item [\refstepcounter{mnum} \mthemnum \label{M_vizSubregion}:] Subregion Visualization
 \item [\refstepcounter{mnum} \mthemnum \label{M_vizSpotProfile}:] Spot Profile Visualization
@@ -241,6 +237,10 @@ actually be implemented.
 \item [\refstepcounter{mnum} \mthemnum \label{M_vizSampledSub}:] Sampled Subregion Visualization
 \item [\refstepcounter{mnum} \mthemnum \label{M_vizResultSub}:] Resulting Subregion Visualization
 \item [\refstepcounter{mnum} \mthemnum \label{M_vizResultImg}:] Resulting Image Visualization
+\item [\refstepcounter{mnum} \mthemnum \label{M_GUI}:] Graphical User Interface
+\item [\refstepcounter{mnum} \mthemnum \label{M_drawStage}:] Drawing Stage / Canvas Module
+\item [\refstepcounter{mnum} \mthemnum \label{M_rendering}:] Image Rendering
+\item [\refstepcounter{mnum} \mthemnum \label{M_metric}:] Image Metrics Calculation
 \end{description}
 
 \begin{table}[h!]
@@ -268,6 +268,8 @@ entry is \emph{OS}, this means that the module is provided by the operating
 system or by standard programming language libraries.
 If the entry is \emph{WebBrowser}, this means that the module is provided by the 
 HTML 5 compliant web browser.
+If the entry is \emph{jQuery}, this means that the module is provided by the 
+jQuery DOM manipulation javascript library \cite{jquery}.
 If the entry is \emph{CanvasAPI}, this means that the module is provided by the 
 Canvas API of the HTML 5 living standard \cite{html_std_canvas}.
 If the entry is \emph{Konva}, this means that the module is provided by the 
@@ -457,14 +459,14 @@ of the resulting image.
 \end{description}
 
 
-\subsubsection{Image Metrics Calculation (\mref{M_metric})}
+\subsubsection{Graphical User Interface (\mref{M_GUI})}
 \begin{description}
-\item[Secrets:] The algorithm, criteria, and validations for processing and comparing two images.
-\item[Services:] Takes two images (ideally one - a reference or ground truth image, 
-and the other - an image to compare to), compares them, and produces a score on the 
-similarity or quality of the compared image in question.
-\item[Implemented By:] \progname{}
-\item[Type of Module:] Abstract Object
+\item[Secrets:]\an{The format and structure of the input data.} DOM Manipulation
+\item[Services:]\an{Converts the input data into the data structure used by the
+  input parameters module.}
+\item[Implemented By:] WebBrowser and jQuery
+\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
+  [Information to include for leaf modules in the decomposition by secrets tree.]}
 \end{description}
 
 
@@ -475,27 +477,6 @@ similarity or quality of the compared image in question.
   input parameters module.}
 \item[Implemented By:] Konva and CanvasAPI
 \item[Type of Module:] Abstract Object
-\end{description}
-
-
-\subsubsection{Image Data Structure (\mref{M_imgDataStruct})}
-\begin{description}
-\item[Secrets:]\an{The format and structure of the input data.}
-\item[Services:]\an{Converts the input data into the data structure used by the
-  input parameters module.}
-\item[Implemented By:] CanvasAPI (ImageData interface)
-\item[Type of Module:] Abstract Object
-\end{description}
-
-
-\subsubsection{Image Compositing (\mref{M_compositing})}
-\begin{description}
-\item[Secrets:]\an{The format and structure of the input data.}
-\item[Services:]\an{Converts the input data into the data structure used by the
-  input parameters module.}
-\item[Implemented By:] CanvasAPI (globalCompositeOperation or CanvasRenderingContext2D.clip())
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
 \end{description}
 
 
@@ -510,25 +491,14 @@ similarity or quality of the compared image in question.
 \end{description}
 
 
-\subsubsection{Image Sampling (\mref{M_sampling})}
+\subsubsection{Image Metrics Calculation (\mref{M_metric})}
 \begin{description}
-\item[Secrets:]\an{The format and structure of the input data.}
-\item[Services:]\an{Converts the input data into the data structure used by the
-  input parameters module.}
-\item[Implemented By:] CanvasAPI and ImgBeamer
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
-\end{description}
-
-
-\subsubsection{DOM Manipulation (\mref{M_DOM})}
-\begin{description}
-\item[Secrets:]\an{The format and structure of the input data.}
-\item[Services:]\an{Converts the input data into the data structure used by the
-  input parameters module.}
-\item[Implemented By:] WebBrowser
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Secrets:] The algorithm, criteria, and validations for processing and comparing two images.
+\item[Services:] Takes two images (ideally one - a reference or ground truth image, 
+and the other - an image to compare to), compares them, and produces a score on the 
+similarity or quality of the compared image in question.
+\item[Implemented By:] \progname{}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
