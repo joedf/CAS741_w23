@@ -54,6 +54,7 @@
 2023/03/12 & 0.1.2 & Add unlikely changes\\
            & 0.1.3 & Add the module hierarchy and Behaviour-Hiding module descriptions\\
 2023/03/18 & 0.1.4 & Rework modules and graph. Update traceability\\
+2023/03/19 & 0.1.5 & Some minor tweaks\\
 \bottomrule
 \end{tabularx}
 
@@ -482,7 +483,7 @@ of the resulting image.
 
 \subsubsection{Display Control (\mref{M_dispControl})}
 \begin{description}
-\item[Secrets:] The number of drawing stages / Canvases and the references to them,
+\item[Secrets:] The number of drawing stages / canvases and the references to them,
   the update and redraw events, drawing rates,
   and the connection to rendering (\mref{M_rendering}).
 \item[Services:] Initializes the drawing stages, provides methods to manipulate them
@@ -495,11 +496,14 @@ of the resulting image.
 
 \subsubsection{Graphical User Interface (\mref{M_GUI})}
 \begin{description}
-\item[Secrets:] The HTML DOM Manipulation, CSS rules, user interaction event handling,
-  user input controls and data formats (such as text-boxes, buttons, file dialogs)
+\item[Secrets:] The HTML DOM Manipulation; CSS rules; user interaction event handling;
+  user input controls, states, and data formats (such as text-boxes, buttons, file dialogs);
   along with the layout, styles, colors, and sizing.
 \item[Services:] Sets up a visual interface for the user to see and interact with,
-  handles user and GUI control events, and updates the visual elements accordingly.
+  handles user and GUI control events, updates the visual elements representing the
+  state of the application, and sends messages back to the
+  application control (\mref{M_control})
+  to update the application state accordingly.
 \item[Implemented By:] OS, WebBrowser, jQuery, and \progname{}
 \item[Type of Module:] Abstract Object
 \end{description}
