@@ -33,9 +33,14 @@ urlcolor=cyan          % color of external links
 \usepackage{array}
 
 \externaldocument{../../SRS/SRS}
+% \externaldocument{../MG/MG}
 
 \input{../../Comments}
 \input{../../Common}
+
+\newcommand{\mref}[1]{M\ref{#1}}
+\newcommand{\mrefp}[1]{(\mref{#1})}
+\newcommand{\mreff}[1]{Module \mrefp{#1}}
 
 \begin{document}
 
@@ -135,19 +140,19 @@ The following table is taken directly from the Module Guide \cite{MG} document f
 
 ~\newpage
 
-\section{MIS of \wss{Module Name}} \label{Module} \wss{Use labels for
-  cross-referencing}
 
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
+% ///////////////////////////////////////////////////////////////////////
+% /////////////////////////// START MIS ITEMS ///////////////////////////
+% ///////////////////////////////////////////////////////////////////////
 
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
+
+\section{MIS of Application Control} \label{M_control}
 
 \subsection{Module}
-
-\wss{Short name for the module}
+main
 
 \subsection{Uses}
-
+Metrics Calculation \mreff{M_metrics}, GUI \mreff{M_GUI}
 
 \subsection{Syntax}
 
@@ -160,7 +165,7 @@ The following table is taken directly from the Module Guide \cite{MG} document f
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+main & - & - & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -168,45 +173,36 @@ The following table is taken directly from the Module Guide \cite{MG} document f
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
+None
 
 \subsubsection{Environment Variables}
-
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
+None
 
 \subsubsection{Assumptions}
-
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
+\begin{itemize}
+  \item The application is run in an HTML5 compliant web browser.
+  \item The GUI is running and displayed without issue.
+\end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent main():
 \begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
+\item transition: Modifies the state and environment variables of the GUI \mreff{M_GUI}.
 \end{itemize}
 
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
-
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
-
 \subsubsection{Local Functions}
-
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
-
+UpdateBaseImage(): Updates the GUI and propagates a change in the input ground truth throughout the application.
+updateImageMetricsInfo(): 
 \newpage
+
+\input{module_spec_template.tex}
+
+
+% ///////////////////////////////////////////////////////////////////////
+% //////////////////////////// END MIS ITEMS ////////////////////////////
+% ///////////////////////////////////////////////////////////////////////
+
 
 \bibliographystyle {plainnat}
 \bibliography {../../../refs/References,../../../refs/cas741,../../../refs/programming}
