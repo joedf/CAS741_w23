@@ -53,6 +53,7 @@
 2023/03/10 & 0.1.1 & Add anticipated changes\\
 2023/03/12 & 0.1.2 & Add unlikely changes\\
            & 0.1.3 & Add the module hierarchy and Behaviour-Hiding module descriptions\\
+2023/03/18 & 0.1.4 & Rework modules and update traceability\\
 \bottomrule
 \end{tabularx}
 
@@ -71,7 +72,7 @@ This section records information for easy reference.
   \midrule 
   AC & Anticipated Change\\
   DAG & Directed Acyclic Graph \\
-  DOM & Document Object Model \\
+  GUI & Graphical User Interface \\
   M & Module \\
   MG & Module Guide \\
   OS & Operating System \\
@@ -221,20 +222,19 @@ actually be implemented.
 
 \begin{description}
 \item [\refstepcounter{mnum} \mthemnum \label{M_HdwHide}:] Hardware-Hiding Module
+\item [\refstepcounter{mnum} \mthemnum \label{M_control}:] Application Control Module
 \item [\refstepcounter{mnum} \mthemnum \label{M_imgGTInput}:] Ground Truth Image Input
 \item [\refstepcounter{mnum} \mthemnum \label{M_params}:] Imaging Parameters Input
-\item [\refstepcounter{mnum} \mthemnum \label{M_vizSpotProfile}:] Spot Profile Control
+\item [\refstepcounter{mnum} \mthemnum \label{M_inSpotProfile}:] Spot Profile Input
 \item [\refstepcounter{mnum} \mthemnum \label{M_export}:] Image Export
 \item [\refstepcounter{mnum} \mthemnum \label{M_infoDisp}:] Information and Metrics Display
 \item [\refstepcounter{mnum} \mthemnum \label{M_metric}:] Image Metrics Calculation
 \item [\refstepcounter{mnum} \mthemnum \label{M_drawStage}:] Drawing Stage / Canvas Module
 \item [\refstepcounter{mnum} \mthemnum \label{M_imgDataStruct}:] Image Data Structure
-\item [\refstepcounter{mnum} \mthemnum \label{M_compositing}:] Image Compositing
 \item [\refstepcounter{mnum} \mthemnum \label{M_rendering}:] Image Rendering
-\item [\refstepcounter{mnum} \mthemnum \label{M_sampling}:] Image Sampling
-\item [\refstepcounter{mnum} \mthemnum \label{M_DOM}:] DOM Manipulation
 \item [\refstepcounter{mnum} \mthemnum \label{M_vizGT}:] Ground Truth Visualization
 \item [\refstepcounter{mnum} \mthemnum \label{M_vizSubregion}:] Subregion Visualization
+\item [\refstepcounter{mnum} \mthemnum \label{M_vizSpotProfile}:] Spot Profile Visualization
 \item [\refstepcounter{mnum} \mthemnum \label{M_vizSpotContent}:] Spot Content Visualization
 \item [\refstepcounter{mnum} \mthemnum \label{M_vizSpotSignal}:] Spot Signal Visualization
 \item [\refstepcounter{mnum} \mthemnum \label{M_vizSpotLayout}:] Spot Layout Visualization
@@ -306,65 +306,51 @@ to be implemented.
 \subsubsection{Ground Truth Image Input (\mref{M_imgGTInput})}
 \begin{description}
 \item[Secrets:]The format, structure, verification of the input ground truth image data.
-\item[Services:]Converts the input ground truth image data into the data structure used by the
-  visualization modules \mref{M_vizGT}, \mref{M_vizSubregion}, and \mref{M_vizResultImg}.
-\item[Implemented By:] CanvasAPI
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Services:]Prompts the user for an input ground truth image file. This module reads and
+  converts, and provides the data in the data structure used by \progname{}.
+\item[Implemented By:] CanvasAPI and \progname{}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
 \subsubsection{Imaging Parameters Input (\mref{M_params})}
 \begin{description}
-\item[Secrets:]The format, structure, GUI of the input imaging parameters (number
-  of rows and columns that will be used for the sampling/imaging raster grid) data.
-\item[Services:]Displays and converts the input data into the data structure used by the
-  visualization modules \mref{M_vizSpotLayout}, \mref{M_vizSampledSub}, \mref{M_vizResultSub},
-  and \mref{M_vizResultImg}.
+\item[Secrets:]The format and current values of the input imaging parameters (number
+  of rows and columns for the rasterization grid and magnification) data.
+\item[Services:]Gets and provides the parameters values.
 \item[Implemented By:] \progname{}
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
-\subsubsection{Spot Profile Control (\mref{M_vizSpotProfile})}
+\subsubsection{Spot Profile Input (\mref{M_inSpotProfile})}
 \begin{description}
-\item[Secrets:]The display (sizing, style, colours, etc.) and
-  the format and structure of the input data (spot shape) provided
-  through user interaction with the GUI.
-\item[Services:] Obtains the shape of the spot as provided by the user and stores it for use
-  by the visualization modules \mref{M_vizSpotContent}, \mref{M_vizSpotSignal}, \mref{M_vizSpotLayout},
-  \mref{M_vizSampledSub}, \mref{M_vizResultSub}, and \mref{M_vizResultImg}.
+\item[Secrets:]The format and current values describing the spot profile
+  (shape: width, height, rotation; size: scaling).
+\item[Services:]Gets and provides the spot profile values.
 \item[Implemented By:] \progname{}
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
 \subsubsection{Image Export (\mref{M_export})}
 \begin{description}
 \item[Secrets:]The format and structure of the data of the resulting image.
-\item[Services:]Converts the resulting image, as provided by the 
-  Resulting Image Visualization module (\mref{M_vizResultImg}), to an output image file.
-\item[Implemented By:] CanvasAPI, Konva, and ImgBeamer
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Services:]Converts image data to an output image file.
+\item[Implemented By:] CanvasAPI, Konva, and \progname{}
+\item[Type of Module:] Library
 \end{description}
 
 
 \subsubsection{Information and Metrics Display (\mref{M_infoDisp})}
 \begin{description}
-\item[Secrets:]The display and calculation methods of the information on rendered
-  images from the visualization modules (\mref{M_vizSubregion},
-  \mref{M_vizSpotContent}, \mref{M_vizSpotSignal}, and \mref{M_vizResultImg}),
-  the input ground truth image (\mref{M_imgGTInput}), and the spot profile/shape 
-  (\mref{M_vizSpotProfile}) information (width, height, rotation, and eccentricity).
-\item[Services:]Calculates and displays information such as the magnification,
+\item[Secrets:]The display of information on the rendered
+  images and minor calculation algorithms of supplemental information (such as spot eccentricity).
+\item[Services:]Displays information on the images and parameters such as the magnification,
   image quality metrics, spot shape information, spot signal pixel values (RBGA),
   and the drawing rate of resulting image (e.g., rows per milliseconds).
 \item[Implemented By:] \progname{}
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Type of Module:] Library
 \end{description}
 
 
@@ -652,7 +638,7 @@ because they use modules from the lower levels.
 \begin{figure}[H]
 \centering
 %\includegraphics[width=0.7\textwidth]{UsesHierarchy.png}
-\includegraphics[width=0.9\textwidth]{MG_graph_draft.pdf}
+\includegraphics[width=1.00\textwidth]{MG_graph.pdf}
 \caption{Use hierarchy among modules}
 \label{FigUH}
 \end{figure}

@@ -11,3 +11,4 @@ Balaci
 VnV
 Konva
 CanvasAPI
+rasterization
