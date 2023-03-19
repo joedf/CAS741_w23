@@ -168,22 +168,20 @@ change.
 \begin{description}
   \item[\refstepcounter{acnum} \actheacnum \label{AC_hardware}:] The specific
     hardware on which the software is running.
-  \item[\refstepcounter{acnum} \actheacnum \label{AC_input}:] The format of the
-    initial input data.
-  \item[\refstepcounter{acnum} \actheacnum \label{AC_inFormat}:] The format of the input parameters.
-  \item[\refstepcounter{acnum} \actheacnum \label{AC_inVerif}:] The constraints on the input parameters.
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_inImage}:] The format of the
+    initial input (ground truth) image data.
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_inParamsFormat}:] The format of the input parameters.
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_inParamsVerif}:] The constraints on the input parameters.
   \item[\refstepcounter{acnum} \actheacnum \label{AC_outFormat}:] The format of the final output data.
   \item[\refstepcounter{acnum} \actheacnum \label{AC_outVerif}:] The constraints on the output results.
   \item[\refstepcounter{acnum} \actheacnum \label{AC_calc}:] How the overall control of the
     calculations are orchestrated.
-  \item[\refstepcounter{acnum} \actheacnum \label{AC_displayUnits}:] The display of scale in
-    virtual, physical, or real world units such as \si{nm}.
-  \item[\refstepcounter{acnum} \actheacnum \label{AC_simNoise}:] The ability to simulate basic
-    image noise (such as Gaussian or Poisson).
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_dispInfo}:] The display of information on
+    the visualizations and resulting images.
   \item[\refstepcounter{acnum} \actheacnum \label{AC_imgMetricAlgos}:] The ability
     to use different image quality metrics.
-  \item[\refstepcounter{acnum} \actheacnum \label{AC_maskOpts}:] The implementation of compositing
-    or blending operations (e.g., ``Bit BLT'').
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_maskOpts}:] The implementation of rendering,
+    compositing, clipping, or blending operations (e.g., ``Bit BLT'').
   \item[\refstepcounter{acnum} \actheacnum \label{AC_calcSignal}:] The calculation of the
     average pixel or signal (intensity) value sampled by the beam.
   \item[\refstepcounter{acnum} \actheacnum \label{AC_GUI}:] The implementation of graphical user
@@ -239,6 +237,7 @@ actually be implemented.
 \item [\refstepcounter{mnum} \mthemnum \label{M_vizSampledSub}:] Sampled Subregion Visualization
 \item [\refstepcounter{mnum} \mthemnum \label{M_vizResultSub}:] Resulting Subregion Visualization
 \item [\refstepcounter{mnum} \mthemnum \label{M_vizResultImg}:] Resulting Image Visualization
+\item [\refstepcounter{mnum} \mthemnum \label{M_dispControl}:] Display Control
 \item [\refstepcounter{mnum} \mthemnum \label{M_GUI}:] Graphical User Interface
 \item [\refstepcounter{mnum} \mthemnum \label{M_drawStage}:] Drawing Stage / Canvas Module
 \item [\refstepcounter{mnum} \mthemnum \label{M_rendering}:] Image Rendering
@@ -481,14 +480,27 @@ of the resulting image.
 \end{description}
 
 
+\subsubsection{Display Control (\mref{M_dispControl})}
+\begin{description}
+\item[Secrets:] The number of drawing stages / Canvases and the references to them,
+  the update and redraw events, drawing rates,
+  and the connection to rendering (\mref{M_rendering}).
+\item[Services:] Initializes the drawing stages, provides methods to manipulate them
+  and to attach events, manages the image rendering and drawing, and
+  holds and manages the update function references for each drawing stage.
+\item[Implemented By:] \progname{}
+\item[Type of Module:] Abstract Object
+\end{description}
+
+
 \subsubsection{Graphical User Interface (\mref{M_GUI})}
 \begin{description}
 \item[Secrets:] The HTML DOM Manipulation, CSS rules, user interaction event handling,
   user input controls and data formats (such as text-boxes, buttons, file dialogs)
-  along with the styles, colors, and sizing.
+  along with the layout, styles, colors, and sizing.
 \item[Services:] Sets up a visual interface for the user to see and interact with,
   handles user and GUI control events, and updates the visual elements accordingly.
-\item[Implemented By:] OS, WebBrowser, and jQuery
+\item[Implemented By:] OS, WebBrowser, jQuery, and \progname{}
 \item[Type of Module:] Abstract Object
 \end{description}
 
@@ -543,17 +555,13 @@ requirements and between the modules and the anticipated changes.
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-R1 & \mref{M_HdwHide}, \mref{mInput}, \mref{mParams}, \mref{mControl}\\
-R2 & \mref{mInput}, \mref{mParams}\\
-R3 & \mref{mVerify}\\
-R4 & \mref{mOutput}, \mref{mControl}\\
-R5 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R6 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R7 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R8 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R9 & \mref{mVerifyOut}\\
-R10 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}\\
-R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
+R1 & \mref{M_HdwHide}, \mref{M_imgGTInput}, \mref{M_GUI}\\
+R2 & \mref{M_HdwHide}, \mref{M_inSpotProfile}, \mref{M_GUI}\\
+R3 & \mref{M_HdwHide}, \mref{M_params}, \mref{M_GUI}\\
+R4 & \mref{M_vizGT}, \mref{M_vizSubregion}, \mref{M_dispControl}, \mref{M_GUI}, \mref{M_drawStage}, \mref{M_rendering}\\
+R5 & \mref{M_vizSpotLayout}, \mref{M_vizSpotProfile} \mref{M_dispControl}, \mref{M_GUI}, \mref{M_drawStage}, \mref{M_rendering}\\
+R6 & \mref{M_export}, \mref{M_vizSpotContent}, \mref{M_vizSpotSignal}, \mref{M_vizSampledSub}, \mref{M_vizResultSub}, \mref{M_vizResultImg}, \mref{M_dispControl} \mref{M_GUI}, \mref{M_drawStage}, \mref{M_rendering}\\
+R7 & \mref{M_infoDisp}, \mref{M_GUI}, \mref{M_drawStage}, \mref{M_rendering}, \mref{M_metric}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Requirements and Modules}
@@ -568,18 +576,17 @@ R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
 \textbf{AC} & \textbf{Modules}\\
 \midrule
 \acref{AC_hardware} & \mref{M_HdwHide}\\
-\acref{AC_input} & \mref{mInput}\\
-\acref{AC_inFormat} & \mref{mParams}\\
-\acref{AC_inVerif} & \mref{mVerify}\\
-\acref{AC_outFormat} & \mref{mOutput}\\
-\acref{AC_outVerif} & \mref{mVerifyOut}\\
-\acref{AC_calc} & \mref{mODEs}\\
-\acref{AC_displayUnits} & \mref{mEnergy}\\
-\acref{AC_simNoise} & \mref{mControl}\\
-\acref{AC_imgMetricAlgos} & \mref{mSeqDS}\\
-\acref{AC_maskOpts} & \mref{mSolver}\\
-\acref{AC_calcSignal} & \mref{mPlot}\\
-\acref{AC_GUI} & \mref{mPlot}\\
+\acref{AC_inImage} & \mref{M_imgGTInput}, \mref{M_GUI}, \mref{M_drawStage}\\
+\acref{AC_inParamsFormat} & \mref{M_params}, \mref{M_GUI}, \mref{M_drawStage}\\
+\acref{AC_inParamsVerif} & \mref{M_params}, \mref{M_GUI}\\
+\acref{AC_outFormat} & \mref{M_export}, \mref{M_GUI}, \mref{M_drawStage}\\
+\acref{AC_outVerif} & \mref{M_export}, \mref{M_GUI}\\
+\acref{AC_calc} & \mref{M_control}, \mref{M_rendering}, \mref{M_metric}\\
+\acref{AC_dispInfo} & \mref{M_infoDisp}, \mref{M_GUI}\\
+\acref{AC_imgMetricAlgos} & \mref{M_GUI}, \mref{M_metric}\\
+\acref{AC_maskOpts} & \mref{M_dispControl}, \mref{M_rendering}\\
+\acref{AC_calcSignal} & \mref{M_rendering}\\
+\acref{AC_GUI} & \mref{M_GUI}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}
