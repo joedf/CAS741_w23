@@ -71,16 +71,18 @@ This section records information for easy reference.
   \textbf{symbol} & \textbf{description}\\
   \midrule 
   AC & Anticipated Change\\
+  CSS & Cascading Style Sheets\\
   DAG & Directed Acyclic Graph \\
+  DOM & Document Object Model \\
   GUI & Graphical User Interface \\
+  HTML & HyperText Markup Language \\
+  \progname & \prognamelong{}\\
   M & Module \\
   MG & Module Guide \\
   OS & Operating System \\
   R & Requirement\\
   RBGA & Red-Blue-Green-Alpha (pixel components)\\
-  SC & Scientific Computing \\
   SRS & Software Requirements Specification\\
-  \progname & \prognamelong{}\\
   UC & Unlikely Change \\
   \bottomrule
 \end{tabular}\\
@@ -267,9 +269,9 @@ implementing software is given under the \emph{Implemented By} title. If the
 entry is \emph{OS}, this means that the module is provided by the operating
 system or by standard programming language libraries.
 If the entry is \emph{WebBrowser}, this means that the module is provided by the 
-HTML 5 compliant web browser.
+HTML 5 \cite{html5} compliant web browser.
 If the entry is \emph{jQuery}, this means that the module is provided by the 
-jQuery DOM manipulation javascript library \cite{jquery}.
+jQuery DOM \cite{html_DOM} manipulation javascript library \cite{jquery}.
 If the entry is \emph{CanvasAPI}, this means that the module is provided by the 
 Canvas API of the HTML 5 living standard \cite{html_std_canvas}.
 If the entry is \emph{Konva}, this means that the module is provided by the 
@@ -302,6 +304,15 @@ to be implemented.
   hardware-hiding module and the software decision module. The programs in this
   module will need to change if there are changes in the SRS.
 \item[Implemented By:] --
+\end{description}
+
+
+\subsubsection{Application Control (\mref{M_control})}
+\begin{description}
+\item[Secrets:] The algorithm for coordinating the running of the program.
+\item[Services:] Provides the main program.
+\item[Implemented By:] \progname{}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
@@ -373,6 +384,17 @@ to be implemented.
 \item[Services:] Draws the subregion image (zoomed-in area on the ground truth image) 
   and returns an update function (reference/pointer) to call when the drawing should 
   be updated/redrawn.
+\item[Implemented By:] \progname{}
+\item[Type of Module:] Abstract Object
+\end{description}
+
+
+\subsubsection{Spot Profile Visualization (\mref{M_vizSpotProfile})}
+\begin{description}
+\item[Secrets:] The display and drawing stage to represent the
+  spot profile (width, height, and rotation, see SRS \cite{SRS}).
+\item[Services:] Draws the spot profile and returns an update function (reference/pointer)
+  to call when the drawing should be updated/redrawn.
 \item[Implemented By:] \progname{}
 \item[Type of Module:] Abstract Object
 \end{description}
@@ -461,42 +483,47 @@ of the resulting image.
 
 \subsubsection{Graphical User Interface (\mref{M_GUI})}
 \begin{description}
-\item[Secrets:]\an{The format and structure of the input data.} DOM Manipulation
-\item[Services:]\an{Converts the input data into the data structure used by the
-  input parameters module.}
-\item[Implemented By:] WebBrowser and jQuery
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Secrets:] The HTML DOM Manipulation, CSS rules, user interaction event handling,
+  user input controls and data formats (such as text-boxes, buttons, file dialogs)
+  along with the styles, colors, and sizing.
+\item[Services:] Sets up a visual interface for the user to see and interact with,
+  handles user and GUI control events, and updates the visual elements accordingly.
+\item[Implemented By:] OS, WebBrowser, and jQuery
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
 \subsubsection{Drawing Stage / Canvas Module (\mref{M_drawStage})}
 \begin{description}
-\item[Secrets:] \an{The format and structure of the input data.}
-\item[Services:] \an{Converts the input data into the data structure used by the
-  input parameters module.}
+\item[Secrets:] The format and structure of the image pixel data, layering / draw order,
+  compositing algorithms, frame buffers, and other graphical operations.
+\item[Services:] Provides the means to draw and manipulate computer graphics with the
+  concepts of layers and geometry objects (such as rectangles, ellipses, lines, etc.).
 \item[Implemented By:] Konva and CanvasAPI
-\item[Type of Module:] Abstract Object
+\item[Type of Module:] Abstract Data Type
 \end{description}
 
 
 \subsubsection{Image Rendering (\mref{M_rendering})}
 \begin{description}
-\item[Secrets:]\an{The format and structure of the input data.}
-\item[Services:]\an{Converts the input data into the data structure used by the
-  input parameters module.}
-\item[Implemented By:] Konva and ImgBeamer
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Secrets:] The image and pixel by pixel format (RGBA values) and data manipulations,
+  calculations, and resampling algorithms.
+\item[Services:] Provides the image rendering methods to create images needed for
+  the visualization modules (\mref{M_vizGT}, \mref{M_vizSubregion},
+  \mref{M_vizSpotProfile}, \mref{M_vizSpotContent}, \mref{M_vizSpotSignal},
+  \mref{M_vizSpotLayout}, \mref{M_vizSampledSub}, \mref{M_vizResultSub},
+  \mref{M_vizResultImg}).
+\item[Implemented By:] \progname{}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
 \subsubsection{Image Metrics Calculation (\mref{M_metric})}
 \begin{description}
 \item[Secrets:] The algorithm, criteria, and validations for processing and comparing two images.
-\item[Services:] Takes two images (ideally one - a reference or ground truth image, 
-and the other - an image to compare to), compares them, and produces a score on the 
-similarity or quality of the compared image in question.
+\item[Services:] Compares two images (ideally one - a reference or ground truth image, 
+  and the other - an image to compare to) and produces a score on the 
+  similarity or quality of the compared image with respect to reference image.
 \item[Implemented By:] \progname{}
 \item[Type of Module:] Abstract Object
 \end{description}
@@ -532,6 +559,7 @@ R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
 \caption{Trace Between Requirements and Modules}
 \label{TblRT}
 \end{table}
+
 
 \begin{table}[H]
 \centering
