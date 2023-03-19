@@ -293,8 +293,8 @@ to be implemented.
 \subsection{Behaviour-Hiding Module}
 
 \begin{description}
-\item[Secrets:]The contents of the required behaviours.
-\item[Services:]Includes programs that provide externally visible behaviour of
+\item[Secrets:] The contents of the required behaviours.
+\item[Services:] Includes programs that provide externally visible behaviour of
   the system as specified in the software requirements specification (SRS)
   documents. This module serves as a communication layer between the
   hardware-hiding module and the software decision module. The programs in this
@@ -305,8 +305,8 @@ to be implemented.
 
 \subsubsection{Ground Truth Image Input (\mref{M_imgGTInput})}
 \begin{description}
-\item[Secrets:]The format, structure, verification of the input ground truth image data.
-\item[Services:]Prompts the user for an input ground truth image file. This module reads and
+\item[Secrets:] The format, structure, verification of the input ground truth image data.
+\item[Services:] Prompts the user for an input ground truth image file. This module reads and
   converts, and provides the data in the data structure used by \progname{}.
 \item[Implemented By:] CanvasAPI and \progname{}
 \item[Type of Module:] Abstract Object
@@ -315,9 +315,9 @@ to be implemented.
 
 \subsubsection{Imaging Parameters Input (\mref{M_params})}
 \begin{description}
-\item[Secrets:]The format and current values of the input imaging parameters (number
+\item[Secrets:] The format and current values of the input imaging parameters (number
   of rows and columns for the rasterization grid and magnification) data.
-\item[Services:]Gets and provides the parameters values.
+\item[Services:] Gets and provides the parameters values.
 \item[Implemented By:] \progname{}
 \item[Type of Module:] Abstract Object
 \end{description}
@@ -325,9 +325,9 @@ to be implemented.
 
 \subsubsection{Spot Profile Input (\mref{M_inSpotProfile})}
 \begin{description}
-\item[Secrets:]The format and current values describing the spot profile
+\item[Secrets:] The format and current values describing the spot profile
   (shape: width, height, rotation; size: scaling).
-\item[Services:]Gets and provides the spot profile values.
+\item[Services:] Gets and provides the spot profile values.
 \item[Implemented By:] \progname{}
 \item[Type of Module:] Abstract Object
 \end{description}
@@ -335,8 +335,8 @@ to be implemented.
 
 \subsubsection{Image Export (\mref{M_export})}
 \begin{description}
-\item[Secrets:]The format and structure of the data of the resulting image.
-\item[Services:]Converts image data to an output image file.
+\item[Secrets:] The format and structure of the data of the resulting image.
+\item[Services:] Converts image data to an output image file.
 \item[Implemented By:] CanvasAPI, Konva, and \progname{}
 \item[Type of Module:] Library
 \end{description}
@@ -344,9 +344,9 @@ to be implemented.
 
 \subsubsection{Information and Metrics Display (\mref{M_infoDisp})}
 \begin{description}
-\item[Secrets:]The display of information on the rendered
+\item[Secrets:] The display of information on the rendered
   images and minor calculation algorithms of supplemental information (such as spot eccentricity).
-\item[Services:]Displays information on the images and parameters such as the magnification,
+\item[Services:] Displays information on the images and parameters such as the magnification,
   image quality metrics, spot shape information, spot signal pixel values (RBGA),
   and the drawing rate of resulting image (e.g., rows per milliseconds).
 \item[Implemented By:] \progname{}
@@ -356,120 +356,89 @@ to be implemented.
 
 \subsubsection{Ground Truth Visualization (\mref{M_vizGT})}
 \begin{description}
-\item[Secrets:]The display (sizing, style, colours, etc.) to represent the ground truth image
-  the display of the subregion bounds, and drawing stage.
-\item[Services:]Converts the image data, as provided by Ground Truth Image Input (\mref{M_imgGTInput}),
-  and displays it to the user. And, draws/display a highlighted area representing the subregion
-  represented in the Subregion Visualization (\mref{M_vizSubregion}).
+\item[Secrets:] The display and drawing stage to represent the ground truth image and subregion bounds.
+\item[Services:] Draws the Ground Truth Image, a highlighted area representing the subregion
+  area (as drawn by \mref{M_vizSubregion}), and returns an update function (reference/pointer)
+  to call when the drawing should be updated/redrawn.
 \item[Implemented By:] \progname{}
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
 \subsubsection{Subregion Visualization (\mref{M_vizSubregion})}
 \begin{description}
-\item[Secrets:]The bounds (size and location) of the subregion within the ground truth image,
-  the display (scaling, colours, styling), and drawing stage.
-\item[Services:]Displays the image representing the subregion and obtains GUI
-  input (pan and zoom) from the user.
+\item[Secrets:] The display and drawing stage to represent the subregion.
+\item[Services:] Draws the subregion image (zoomed-in area on the ground truth image) 
+  and returns an update function (reference/pointer) to call when the drawing should 
+  be updated/redrawn.
 \item[Implemented By:] \progname{}
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
 \subsubsection{Spot Content Visualization (\mref{M_vizSpotContent})}
 \begin{description}
-\item[Secrets:]A separate subregion representation that is scaled (zoomed) according to
-  the spot size, a display for the ``stencil'' representation based on the spot profile,
-  and drawing stage.
-\item[Services:]Serves as example to how the image is sampled (or ``stenciled'').
-  Takes a copy of the subregion (from \mref{M_vizSubregion}) image and the spot shape, 
-  as provided the Spot Profile Control (\mref{M_vizSpotProfile}), to display a ``stenciled'' image
-  that represents the image content that will be use produce a signal value.
-  (as displayed by \mref{M_vizSpotSignal}).
+\item[Secrets:] The display and drawing stage to represent the
+  spot content (subregion ``stenciled'' with the spot profile, see SRS \cite{SRS}).
+\item[Services:] Draws the spot content and returns an update function (reference/pointer)
+  to call when the drawing should be updated/redrawn.
 \item[Implemented By:] \progname{}
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
 \subsubsection{Spot Signal Visualization (\mref{M_vizSpotSignal})}
 \begin{description}
-\item[Secrets:]The calculation or determination of the signal (pixel) value to represent
-  what has been sampled by the spot or beam, the display (scaling, colours, styling),
-  and drawing stage.
-\item[Services:]Calculates a signal value (pixel colour) to use as the fill colour
-  of a copy of the spot profile to display to the user.
-  Serves as example of what the sampled spot looks like based on the image content
-  (as provided and displayed by \mref{M_vizSpotContent}).
+\item[Secrets:] The display and drawing stage to represent the
+  spot content (a signal or pixel value to represent what has been sampled by
+  the spot or beam, see SRS \cite{SRS}).
+\item[Services:] Draws the spot signal and returns an update function (reference/pointer)
+  to call when the drawing should be updated/redrawn.
 \item[Implemented By:] \progname{}
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
 \subsubsection{Spot Layout Visualization (\mref{M_vizSpotLayout})}
 \begin{description}
-\item[Secrets:]The display (scaling, colours, styling) and drawing stage of the spot layout.
-\item[Services:]Given the subregion image (from \mref{M_vizSubregion}), 
-  the spot size (provided by \mref{M_vizSpotContent}),
-  and the spot shape (provided by \mref{M_vizSpotProfile}),
-  draws and display the sampling/imaging raster grid
-  (number of rows and columns are provided by \mref{M_params}) and
-  the spots located in each cell. This displays how and what areas of the subregion
-  image that are sampled and will be used to visualize the 
-  sampled region (by \mref{M_vizSampledSub}).
+\item[Secrets:] The display and drawing stage to represent the spot layout.
+\item[Services:] Draws the spot layout and returns an update function (reference/pointer)
+  to call when the drawing should be updated/redrawn.
 \item[Implemented By:] \progname{}
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
 \subsubsection{Sampled Subregion Visualization (\mref{M_vizSampledSub})}
 \begin{description}
-\item[Secrets:]The display (scaling, colours, styling) and drawing stage 
-  of the subregion sampled image content.
-\item[Services:]Given the spot size (\mref{M_vizSpotContent}) and
-  shape (\mref{M_vizSpotProfile}), and the sampling raster grid (\mref{M_params}),
-  the module should display the sampled (``stenciled'') image content from the areas
-  depicted by module \mref{M_vizSpotLayout}.
+\item[Secrets:] The display and drawing stage to represent the sampled image content in the subregion.
+\item[Services:] Draws the sampled subregion (image content ``stenciled'' with the spot layout)
+  and returns an update function (reference/pointer) to call when the drawing should be updated/redrawn.
 \item[Implemented By:] \progname{}
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
 \subsubsection{Resulting Subregion Visualization (\mref{M_vizResultSub})}
 \begin{description}
-\item[Secrets:]The display (scaling, colours, styling) and drawing stage 
-  of the resulting subregion.
-\item[Services:]Displays the resulting subregion image based on the sampling
-  (as depicted by \mref{M_vizSpotLayout}),
-  where each cell (or pixel) in the raster grid (as defined by \mref{M_params})
-  is filled with the calculated sampled signal value (or pixel colour) based
-  on the sampled image content (as depicted by \mref{M_vizSampledSub}).
+\item[Secrets:] The display and drawing stage to represent the resulting subregion.
+\item[Services:] Draws the resulting (resampled) subregion image 
+  and returns an update function (reference/pointer) to call when the drawing
+  should be updated/redrawn.
 \item[Implemented By:] \progname{}
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
 \subsubsection{Resulting Image Visualization (\mref{M_vizResultImg})}
 \begin{description}
-\item[Secrets:]The display (scaling, colours, styling) and drawing stage 
-  of the resulting image.
-\item[Services:]Given the imaging parameters (raster grid, spot size and shape -
-  as provided by modules \mref{M_params}, \mref{M_vizSpotProfile}, and \mref{M_vizSpotContent})
-  and the ground truth image (provided by \mref{M_imgGTInput}),
-  the module should display a rendering of the full ground truth image resampled
-  using the conditions as in \mref{M_vizResultSub} but extended to the full image area
-  instead of the restricted bounded subregion area (meaning a raster grid with the same
-  relative cell size, but more rows and columns for the larger area covered).
+\item[Secrets:] The display and drawing stage 
+of the resulting image.
+\item[Services:] Draws the resulting (resampled full) image 
+  and returns an update function (reference/pointer) to call when the drawing
+  should be updated/redrawn.
 \item[Implemented By:] \progname{}
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
@@ -490,13 +459,12 @@ to be implemented.
 
 \subsubsection{Image Metrics Calculation (\mref{M_metric})}
 \begin{description}
-\item[Secrets:]The algorithm, criteria, and validations for processing and comparing two images.
-\item[Services:]Takes two images (ideally one - a reference or ground truth image, 
+\item[Secrets:] The algorithm, criteria, and validations for processing and comparing two images.
+\item[Services:] Takes two images (ideally one - a reference or ground truth image, 
 and the other - an image to compare to), compares them, and produces a score on the 
 similarity or quality of the compared image in question.
 \item[Implemented By:] \progname{}
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
@@ -506,8 +474,7 @@ similarity or quality of the compared image in question.
 \item[Services:] \an{Converts the input data into the data structure used by the
   input parameters module.}
 \item[Implemented By:] Konva and CanvasAPI
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
@@ -517,8 +484,7 @@ similarity or quality of the compared image in question.
 \item[Services:]\an{Converts the input data into the data structure used by the
   input parameters module.}
 \item[Implemented By:] CanvasAPI (ImageData interface)
-\item[Type of Module:] \an{[Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]}
+\item[Type of Module:] Abstract Object
 \end{description}
 
 
