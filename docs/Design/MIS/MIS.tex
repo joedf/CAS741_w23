@@ -465,8 +465,13 @@ None
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-References to drawing stages/canvases for all the visualization/display modules mentioned
-in section \ref{USES_dispControl}, along with each corresponding update function references.
+\begin{itemize}
+  \item References to drawing stages/canvases for all the visualization/display modules mentioned
+    in section \ref{USES_dispControl}
+  \item ... and each corresponding update function references
+  \item \code{gtImage}: a reference to the ground truth image data (as provided by \mref{M_imgGTInput}).
+  \item \code{subregionImage}: a reference to imageDrawingObject (as provided by \mref{M_vizSubregion}).
+\end{itemize}
 
 \subsubsection{Environment Variables}
 Display controls as provided by the GUI \mreff{M_GUI}.
@@ -776,8 +781,9 @@ None
 \noindent \code{drawGroundtruthImage(stage, gtImage, subregionImage)}:
 \begin{itemize}
 \item transition: Defines a drawing arrangement to fill the stage with the ground truth image
+  (\code{gtImage} as provided by \mref{M_dispControl})
   with a semi-transparent rectangle (\code{rect}) representing the bounds of the
-  \code{subregionImage}.
+  \code{subregionImage} (as provided by \mref{M_dispControl}).
 \item output: an object with a reference to the update function and a reference to \code{rect}.
 \end{itemize}
 
@@ -788,10 +794,10 @@ None
 
 
 
-\section{MIS of NAMEHERE Visualization} \label{MS_viz}
+\section{MIS of Subregion Visualization} \label{MS_vizSubregion}
 
 \subsection{Module}
-draw \mrefp{M_viz}
+drawSubregionImage \mrefp{M_vizSubregion}
 
 \subsection{Uses}
 Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
@@ -807,7 +813,8 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{draw} & - & - & - \\
+\code{drawSubregionImage} & \code{stage}, \code{gtImage}, \code{updateCallback}
+  & \code{subregionImage} & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -816,23 +823,35 @@ None
 
 \subsubsection{State Variables}
 These are kept for update calls and performance reasons.
+\begin{itemize}
+  \item \code{stage}: a reference to drawing stage,
+  \item \code{subregionImage}: a reference to imageDrawingObject.
+  \item \code{updateCallback}: an optional reference to a function call when an update occurs
+    (i.e. when view bounds change).
+\end{itemize}
 
 \subsubsection{Environment Variables and Assumptions}
 None
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \code{draw()}:
+\noindent \code{drawSubregionImage(stage, gtImage, updateCallback = null)}:
 \begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
+\item transition: Draw a view displaying a copy of the ground truth image
+  (\code{gtImage} as provided by \mref{M_dispControl}) representing the current subregion / ROI.
+  This view can be panned and zoomed with mouse events.
+  The \code{updateCallback} function reference is called when mouse event (drag or scroll) causes the
+  of the view bounds to change.
+\item output: a reference to \code{subregionImage} imageDrawingObject
+  (which can be used like \code{rect}) representing the bounds of the current view.
 \end{itemize}
 
 \subsubsection{Local Functions}
-\code{doUpdate()}: Update the drawing based on the state variables.
+\code{doUpdate()}: Update the drawing based on the state variables that change on mouse event
+  such as dragging or scrolling events (pan and zoom) and calls the \code{updateCallback}.
 
 \newpage
+
 
 
 
