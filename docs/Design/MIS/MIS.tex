@@ -122,7 +122,6 @@ The following table summarizes the primitive data types used by \progname.
 \toprule 
 \textbf{Data Type} & \textbf{Notation} & \textbf{Description}\\ 
 \midrule
-character & char & a single symbol or digit\\
 integer & $\mathbb{Z}$ & a number without a fractional component in (-$\infty$, $\infty$) \\
 positive integer & $\mathbb{Z}_+$ & a positive integer ($\mathbb{Z}$) in (0, $\infty$) \\
 unsigned 8-bit integer & $\mathbb{U}$ & a number without a fractional component in (0, 255)\\
@@ -765,7 +764,7 @@ None
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-These are kept for update calls and performance reasons.
+These are kept for mutation, update calls, and performance reasons.
 \begin{itemize}
   \item \code{stage}: a reference to drawing stage,
   \item \code{rect}: a reference to a rectangle geometry.
@@ -822,7 +821,7 @@ None
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-These are kept for update calls and performance reasons.
+These are kept for mutation, update calls, and performance reasons.
 \begin{itemize}
   \item \code{stage}: a reference to drawing stage,
   \item \code{subregionImage}: a reference to imageDrawingObject.
@@ -852,6 +851,58 @@ None
 
 \newpage
 
+
+
+
+\section{MIS of Spot Profile Visualization} \label{MS_vizSpotProfile}
+
+\subsection{Module}
+drawSpotProfile \mrefp{M_vizSpotProfile}
+
+\subsection{Uses}
+Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{5cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\code{drawSpotProfile} & \code{stage} & \code{beam} & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+These are kept for mutation, update calls, and performance reasons.
+\begin{itemize}
+  \item \code{stage}: a reference to the drawing stage,
+  \item \code{beam}: a reference to the ellipse geometry.
+\end{itemize}
+
+\subsubsection{Environment Variables and Assumptions}
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \code{drawSpotProfile(stage)}:
+\begin{itemize}
+\item transition: On the given drawing \code{stage},
+  draws an editable ellipse shape representing the beam/spot shape.
+\item output: a reference to the ellipse geometry (\code{beam}).
+\end{itemize}
+
+\subsubsection{Local Functions}
+Mouse events handled by Konva for shape node-editing / ``transformers''.
+
+\newpage
 
 
 
