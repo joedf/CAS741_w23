@@ -1155,6 +1155,76 @@ None
 
 
 
+\section{MIS of Resulting Subregion Visualization} \label{MS_vizResultSub}
+
+\subsection{Module}
+drawResultingSubregion \mrefp{M_vizResultSub}
+
+\subsection{Uses}
+Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{5cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\code{drawResultingSubregion} & \code{stage}, \code{subregionImage},
+  \code{gtImage}, \code{imgParams}, \code{beam} & \code{doUpdate} & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+These are kept for mutation, update calls, and performance reasons.
+\begin{itemize}
+  \item \code{stage}: a reference to the drawing stage.
+  \item \code{subregionImage}: a reference to the subregion image.
+  \item \code{gtImage}: a reference to the ground truth image.
+  \item \code{imgParams}: a reference to function to call to get the rasterization
+    grid parameters (number of rows \code{imageRows} and columns \code{imageCols},
+    and magnification (\code{imageMag}) 
+    provided by \mref{M_params}
+    through the Display Control \mref{M_dispControl}).
+  \item \code{beam}: a reference to the beam geometry.
+  \item \code{doUpdate}: an optional reference to a function call when an update occurs.
+\end{itemize}
+
+\subsubsection{Environment Variables and Assumptions}
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \code{drawResultingSubregion(stage, subregionImage, gtImage, imgParams, beam)}:
+\begin{itemize}
+\item transition: On the given stage, draws the resampled \code{subregionImage}
+  meaning each cell in the rasterization grid (as defined by \code(imgParams))
+  is filled with the corresponding computed average pixel value using
+  the ``stenciled'' or ``clipped'' image content with the \code{beam} geometry
+  at the center of each cell as represented by the Sampled Subregion
+  display \mrefp{M_vizSampledSub}.
+  The \code{gtImage} is used as the actual image data source instead of the
+  \code{subregionImage} for visual fidelity, but using the cropped region defined
+  by the \code{subregionImage}.
+\item output: a reference to the update function (\code{doUpdate}).
+\end{itemize}
+
+\subsubsection{Local Functions}
+\code{doUpdate()}: Update the drawing based on the state variables.
+
+\newpage
+
+
+
+
+
 % ///////////////////////////////////////////////////////////////////////
 % //////////////////////////// END MIS ITEMS ////////////////////////////
 % ///////////////////////////////////////////////////////////////////////
