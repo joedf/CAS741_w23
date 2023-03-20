@@ -257,8 +257,9 @@ Information and Metrics Display \mreff{M_infoDisp}
 
 \subsection{Semantics}
 \an{Didn't do MIS descriptions of the Input modules because they are essentially just
-buttons or text boxes with event handlers. Can be implemented however as long the SRS
-value constrains are followed... Or are full descriptions also needed for these?
+buttons or text boxes with event handlers. Can be implemented however a developer wishes
+as long the SRS value constrains are followed...
+Or are full descriptions also needed for these?
 Not sure if they would add much value than already provided here or just informational noise.
 Maybe I can write this as a note here (instead of a comment)?}
 
@@ -1174,7 +1175,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawResultingSubregion} & \code{stage}, \code{subregionImage},
+\code{drawResultingSubregion} & \code{stage}, \code{subregionRect},
   \code{gtImage}, \code{imgParams}, \code{beam} & \code{doUpdate} & - \\
 \hline
 \end{tabular}
@@ -1186,7 +1187,7 @@ None
 These are kept for mutation, update calls, and performance reasons.
 \begin{itemize}
   \item \code{stage}: a reference to the drawing stage.
-  \item \code{subregionImage}: a reference to the subregion image.
+  \item \code{subregionRect}: a reference to the subregion bounds.
   \item \code{gtImage}: a reference to the ground truth image.
   \item \code{imgParams}: a reference to function to call to get the rasterization
     grid parameters (number of rows \code{imageRows} and columns \code{imageCols},
@@ -1202,17 +1203,15 @@ None
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \code{drawResultingSubregion(stage, subregionImage, gtImage, imgParams, beam)}:
+\noindent \code{drawResultingSubregion(stage, subregionRect, gtImage, imgParams, beam)}:
 \begin{itemize}
-\item transition: On the given stage, draws the resampled \code{subregionImage}
+\item transition: On the given stage, draws the resampled subregion
+  (using \code{gtImage} cropped to the bounds of \code{subregionRect})
   meaning each cell in the rasterization grid (as defined by \code(imgParams))
   is filled with the corresponding computed average pixel value using
   the ``stenciled'' or ``clipped'' image content with the \code{beam} geometry
   at the center of each cell as represented by the Sampled Subregion
   display \mrefp{M_vizSampledSub}.
-  The \code{gtImage} is used as the actual image data source instead of the
-  \code{subregionImage} for visual fidelity, but using the cropped region defined
-  by the \code{subregionImage}.
 \item output: a reference to the update function (\code{doUpdate}).
 \end{itemize}
 
@@ -1222,6 +1221,67 @@ None
 \newpage
 
 
+
+\section{MIS of Result Image Visualization} \label{MS_vizResultImg}
+
+\subsection{Module}
+drawResultingImage \mrefp{M_vizResultImg}
+
+\subsection{Uses}
+Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{5cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\code{drawResultingImage} & \code{stage}, \code{beam}, \code{gtImage},
+  \code{subregionRect}, \code{imgParams} & \code{updateConfigValues} & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+These are kept for mutation, update calls, and performance reasons.
+\begin{itemize}
+  \item \code{stage}: a reference to the drawing stage.
+  \item \code{beam}: a reference to the beam geometry.
+  \item \code{gtImage}: a reference to the ground truth image.
+  \item \code{subregionRect}: a reference to the subregion bounds.
+  \item \code{imgParams}: a reference to function to call to get the rasterization
+    grid parameters (number of rows \code{imageRows} and columns \code{imageCols},
+    and magnification (\code{imageMag}) 
+    provided by \mref{M_params}
+    through the Display Control \mref{M_dispControl}).
+\end{itemize}
+
+\subsubsection{Environment Variables and Assumptions}
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \code{drawResultingImage(stage, beam, gtImage, subregionRect, imgParams)}:
+\begin{itemize}
+\item transition: 
+\item output: returns a reference to \code{updateConfigValues} to call
+  (by the Display Control \mref{M_dispControl}) when there is a change
+  in the magnification (\code{imageMag}), the rasterization grid 
+  (\code{imageRows} and \code{imageCols})
+  or the spot profile (beam shape, \mref{M_inSpotProfile}).
+\end{itemize}
+
+\subsubsection{Local Functions}
+\code{updateConfigValues()}: Update the drawing based on the state variables.
+
+\newpage
 
 
 
