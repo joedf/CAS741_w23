@@ -1051,7 +1051,7 @@ None
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
 \code{drawSpotLayout} & \code{drawStage}, \code{subregionImage}, \code{imgParams}, \code{beam}
-  & - & - \\
+  & \code{doUpdate} & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -1080,11 +1080,9 @@ None
 \noindent \code{drawSpotLayout(drawStage, subregionImage, imgParams, beam)}:
 \begin{itemize}
 \item transition: On the given stage, draws a grid over the subregionImage with
-  the \code{beam} geometry clone into the center of cell in the drawn grid
+  the \code{beam} geometry clone in the center of each cell in the drawn grid
   representing the individual location beam/spot sampling location and spot area coverage.
-\item output: returns an object with a reference to the update function (\code{doUpdate})
-  and a reference to spot geometry (scaled accordingly to \code{imgParams})
-  to use for sampling the subregion.
+\item output: a reference to the update function (\code{doUpdate}).
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -1094,6 +1092,66 @@ None
 
 
 
+\section{MIS of Sample Subregion Visualization} \label{MS_vizSampledSub}
+
+\subsection{Module}
+drawSampledSubregion \mrefp{M_vizSampledSub}
+
+\subsection{Uses}
+Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{5cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\code{drawSampledSubregion} & \code{drawStage}, \code{subregionImage}, \code{imgParams},
+  \code{beam} & \code{doUpdate} & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+These are kept for mutation, update calls, and performance reasons.
+\begin{itemize}
+  \item \code{drawStage}: a reference to the drawing stage.
+  \item \code{subregionImage}: a reference to the subregion image.
+  \item \code{beam}: a reference to the beam geometry.
+  \item \code{imgParams}: a reference to function to call to get the rasterization
+    grid parameters (number of rows \code{imageRows} and columns \code{imageCols},
+    and magnification (\code{imageMag}) 
+    provided by \mref{M_params}
+    through the Display Control \mref{M_dispControl}).
+  \item \code{doUpdate}: an optional reference to a function call when an update occurs.
+\end{itemize}
+
+\subsubsection{Environment Variables and Assumptions}
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \code{drawSampledSubregion(drawStage, subregionImage, imgParams, beam)}:
+\begin{itemize}
+\item transition: On the given stage, draws the subregionImage with ``stenciled''
+  or ``clipped'' the \code{beam} geometry clone at the center of each cell
+  of the rasterization grid. This display represents
+  the image content to be sampled by the beam/spot at discrete location
+  and the area covered by the beam.
+\item output: a reference to the update function (\code{doUpdate}).
+\end{itemize}
+
+\subsubsection{Local Functions}
+\code{doUpdate()}: Update the drawing based on the state variables.
+
+\newpage
 
 
 
