@@ -66,6 +66,7 @@ urlcolor=cyan          % color of external links
 2023/03/18 & 0.1.0 & Creation\\
            & 0.1.1 & Update module hierarchy\\
 2023/03/19 & 0.1.2 & Add in module specifications\\
+2023/03/20 & 0.1.3 & Add in minor missing type information.\\
 \bottomrule
 \end{tabularx}
 
@@ -80,7 +81,7 @@ urlcolor=cyan          % color of external links
   \midrule 
   HID & Human Interface Device\\
   URL & Uniform Resource Locator\\
-  imageDrawingObject & a geometry where the fill is an image\\
+  imageDrawingObject & a geometry where the fill is an image (wrapped by Konva)\\
   \bottomrule
 \end{tabular}\\
 
@@ -249,7 +250,7 @@ Information and Metrics Display \mreff{M_infoDisp}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{gui} & \code{baseImage} & displayReference, & - \\
+\code{gui} & \code{baseImage} ($\mathbb{I}_{w,h}$) & displayReference, & - \\
            &                  & event handlers \\
 \hline
 \end{tabular}
@@ -340,8 +341,8 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{updateInfo} & \code{textDisplayControl}, \code{baseImage}, & - & - \\
-                  & \code{resultImage}, \code{imageMag} \\
+\code{updateInfo} & \code{textDisplayControl}, \code{baseImage} ($\mathbb{I}_{w,h}$), & - & - \\
+                  & \code{resultImage} ($\mathbb{I}_{w,h}$), \code{imageMag} ($\mathbb{R}_+$) \\
 \hline
 \end{tabular}
 \end{center}
@@ -397,7 +398,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{export} & \code{resultImage}, \code{outputPath} & ImageFile & \code{InvalidPath} \\
+\code{export} & \code{resultImage} ($\mathbb{I}_{w,h}$), \code{outputPath} (string) & ImageFile & \code{InvalidPath} \\
 \hline
 \end{tabular}
 \end{center}
@@ -461,7 +462,8 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{Init} & \code{gtImage}, \code{drawControls}: GUI controls for 2 to 10 in section \ref{USES_dispControl}
+\code{Init} & \code{gtImage} ($\mathbb{I}_{w,h}$),
+  \code{drawControls}: GUI controls for 2 to 10 in section \ref{USES_dispControl}
   & a reference to the \code{doUpdate} function for each & - \\
 \hline
 \code{doUpdateAll} & - & - & - \\
@@ -530,7 +532,8 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{init} & \code{container}, \code{width}, \code{height} & drawing stage & \code{ContainerNotFound} \\
+\code{init} & \code{container}, \code{width} ($\mathbb{Z}_+$), \code{height} ($\mathbb{Z}_+$)
+  & drawing stage & \code{ContainerNotFound} \\
 \hline
 \code{getLayers} & - & array of the layers & - \\
 \hline
@@ -619,7 +622,8 @@ Drawing Stage / Canvas \mreff{M_drawStage}
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-\code{defaultLineColor}: the default line color (RGBA) to use for drawing grids (255,255,255,204).
+\code{defaultLineColor}: the default line color (RGBA) to use for drawing grids (255,255,255,204)
+ - types: ($\mathbb{Z}_+$, $\mathbb{Z}_+$, $\mathbb{Z}_+$, $\mathbb{Z}_+$).
 
 \subsubsection{Exported Access Programs}
 
@@ -628,15 +632,18 @@ Drawing Stage / Canvas \mreff{M_drawStage}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawGrid} & \code{gridLayer}, \code{rect}, \code{rows}, \code{cols}, \code{lineColor}
-  & cell size (width/height in pixels) & \code{badGridParams} \\
+\code{drawGrid} & \code{gridLayer}, \code{rect},
+  \code{rows} ($\mathbb{Z}_+$), \code{cols} ($\mathbb{Z}_+$), \code{lineColor}
+  & cell size (width/height in pixels, $\mathbb{Z}_+$) & \code{badGridParams} \\
 \hline
-\code{repeatDrawOnGrid} & \code{layer}, \code{rect}, \code{rows}, \code{cols}, \code{shape}
+\code{repeatDrawOnGrid} & \code{layer}, \code{rect}, \code{rows} ($\mathbb{Z}_+$),
+  \code{cols} ($\mathbb{Z}_+$), \code{shape}
   & - & \code{badGridParams} \\
 \hline
-\code{ComputeProbeValue\_gs} & \code{image}, \code{probe} & grayscale value ($\mathbb{U}$) & - \\
+\code{ComputeProbeValue\_gs} & \code{image} ($\mathbb{I}_{w,h}$),
+  \code{probe} & grayscale value ($\mathbb{U}$) & - \\
 \hline
-\code{get\_avg\_pixel\_gs} & \code{rawImageData} & grayscale value ($\mathbb{U}$) & - \\
+\code{get\_avg\_pixel\_gs} & \code{rawImageData} ($\mathbb{I}_{w,h}$) & grayscale value ($\mathbb{U}$) & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -718,7 +725,8 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{compare} & \code{image1}, \code{image2} & similarity ratio ($\mathbb{A}$) & \code{DifferentImageSizes} \\
+\code{compare} & \code{image1} ($\mathbb{I}_{w,h}$), \code{image2} ($\mathbb{I}_{w,h}$)
+  & similarity ratio ($\mathbb{A}$) & \code{DifferentImageSizes} \\
 \hline
 \end{tabular}
 \end{center}
@@ -777,8 +785,8 @@ These are kept for mutation, update calls, and performance reasons.
 \begin{itemize}
   \item \code{stage}: a reference to drawing stage.
   \item \code{rect}: a reference to a rectangle geometry.
-  \item \code{gtImage}: a reference to imageDrawingObject.
-  \item \code{subregionImage}: a reference to imageDrawingObject.
+  \item \code{gtImage}: a reference to imageDrawingObject for the ground truth image.
+  \item \code{subregionImage}: a reference to imageDrawingObject for the subregion image.
 \end{itemize}
 
 \subsubsection{Environment Variables and Assumptions}
@@ -833,7 +841,8 @@ None
 These are kept for mutation, update calls, and performance reasons.
 \begin{itemize}
   \item \code{stage}: a reference to drawing stage.
-  \item \code{subregionImage}: a reference to imageDrawingObject.
+  \item \code{gtImage}: a reference to imageDrawingObject for the ground truth image.
+  \item \code{subregionImage}: a reference to imageDrawingObject for the subregion image.
   \item \code{updateCallback}: an optional reference to a function call when an update occurs
     (i.e. when view bounds change).
   \item mouse events (scroll and drag)
@@ -948,7 +957,7 @@ None
 These are kept for mutation, update calls, and performance reasons.
 \begin{itemize}
   \item \code{stage}: a reference to the drawing stage.
-  \item \code{sImage}: a reference to the subregion image clone.
+  \item \code{sImage}: a reference to the subregion image clone (imageDrawingObject).
   \item \code{sBeam}: a local reference to the beam ``stencil'' geometry clone (not changed).
   \item \code{updateCallback}: an optional reference to a function call when an update occurs
   (i.e. when the \code{sImage} position and scaling to changese).
@@ -1071,7 +1080,7 @@ None
 These are kept for mutation, update calls, and performance reasons.
 \begin{itemize}
   \item \code{drawStage}: a reference to the drawing stage.
-  \item \code{subregionImage}: a reference to the subregion image.
+  \item \code{subregionImage}: a reference to the subregion image (imageDrawingObject).
   \item \code{beam}: a reference to the beam geometry.
   \item \code{imgParams}: a reference to function to call to get the rasterization
     grid parameters (number of rows \code{imageRows} and columns \code{imageCols},
@@ -1132,7 +1141,7 @@ None
 These are kept for mutation, update calls, and performance reasons.
 \begin{itemize}
   \item \code{drawStage}: a reference to the drawing stage.
-  \item \code{subregionImage}: a reference to the subregion image.
+  \item \code{subregionImage}: a reference to the subregion image (imageDrawingObject).
   \item \code{beam}: a reference to the beam geometry.
   \item \code{imgParams}: a reference to function to call to get the rasterization
     grid parameters (number of rows \code{imageRows} and columns \code{imageCols},
@@ -1196,7 +1205,7 @@ These are kept for mutation, update calls, and performance reasons.
 \begin{itemize}
   \item \code{stage}: a reference to the drawing stage.
   \item \code{subregionRect}: a reference to the subregion bounds.
-  \item \code{gtImage}: a reference to the ground truth image.
+  \item \code{gtImage}: a reference to the ground truth image (imageDrawingObject).
   \item \code{imgParams}: a reference to function to call to get the rasterization
     grid parameters (number of rows \code{imageRows} and columns \code{imageCols},
     and magnification (\code{imageMag}) 
@@ -1262,7 +1271,7 @@ These are kept for mutation, update calls, and performance reasons.
 \begin{itemize}
   \item \code{stage}: a reference to the drawing stage.
   \item \code{beam}: a reference to the beam geometry.
-  \item \code{gtImage}: a reference to the ground truth image.
+  \item \code{gtImage}: a reference to the ground truth image (imageDrawingObject).
   \item \code{subregionRect}: a reference to the subregion bounds.
   \item \code{imgParams}: a reference to function to call to get the rasterization
     grid parameters (number of rows \code{imageRows} and columns \code{imageCols},
