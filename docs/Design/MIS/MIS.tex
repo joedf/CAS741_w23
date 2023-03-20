@@ -827,6 +827,7 @@ These are kept for mutation, update calls, and performance reasons.
   \item \code{subregionImage}: a reference to imageDrawingObject.
   \item \code{updateCallback}: an optional reference to a function call when an update occurs
     (i.e. when view bounds change).
+  \item mouse events (scroll and drag)
 \end{itemize}
 
 \subsubsection{Environment Variables and Assumptions}
@@ -839,8 +840,8 @@ None
 \item transition: Draw a view displaying a copy of the ground truth image
   (\code{gtImage} as provided by \mref{M_dispControl}) representing the current subregion / ROI.
   This view can be panned and zoomed with mouse events.
-  The \code{updateCallback} function reference is called when mouse event (drag or scroll) causes the
-  of the view bounds to change.
+  The \code{updateCallback} function reference is called when mouse events (drag or scroll)
+  causes the of the view bounds to change.
 \item output: a reference to \code{subregionImage} imageDrawingObject
   (which can be used like \code{rect}) representing the bounds of the current view.
 \end{itemize}
@@ -903,6 +904,70 @@ None
 Mouse events handled by Konva for shape node-editing / ``transformers''.
 
 \newpage
+
+
+
+\section{MIS of Spot Content Visualization} \label{MS_vizSpotContent}
+
+\subsection{Module}
+drawSpotContent \mrefp{M_vizSpotContent}
+
+\subsection{Uses}
+Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{5cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\code{drawSpotContent} & \code{stage}, \code{subregionImage}, \code{sBeam}, \code{updateCallback}
+  & \code{sImage} & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+These are kept for mutation, update calls, and performance reasons.
+\begin{itemize}
+  \item \code{stage}: a reference to the drawing stage,
+  \item \code{sImage}: a reference to the subregion image clone.
+  \item \code{sBeam}: a local reference to the beam geometry clone (not changed).
+  \item \code{updateCallback}: an optional reference to a function call when an update occurs
+  (i.e. when the \code{sImage} position and scaling to changese).
+  \item mouse events (scroll and drag)
+\end{itemize}
+
+\subsubsection{Environment Variables and Assumptions}
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \code{drawSpotContent(stage, subregionImage, sBeam, updateCallback = null)}:
+\begin{itemize}
+\item transition: On a given drawing stage (\code{stage}),
+  draws an image clone (based on \code{subregionImage}) of the subregion (\code{sImage})
+  that is ``stenciled'' or clipped by the \code{sBeam} geometry/shape.
+  This image can be panned and zoomed by mouse events.
+  The \code{updateCallback} function reference is called when mouse events
+  (drag or scroll) causes the image (\code{sImage}) position and scaling to changes.
+\item output: a reference to the image (\code{sImage}) being moved and scaled.
+\end{itemize}
+
+\subsubsection{Local Functions}
+\code{doUpdate()}: Update the drawing based on the state variables that change on mouse event
+  such as dragging or scrolling events (pan and zoom) and calls the \code{updateCallback}.
+
+\newpage
+
+
 
 
 
