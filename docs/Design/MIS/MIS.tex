@@ -273,6 +273,7 @@ Maybe I can write this as a note here (instead of a comment)?}
   \item \code{spotWidth}: The spot's width given by \mref{M_inSpotProfile} as $\mathbb{Z}_+$.
   \item \code{spotHeight}: The spot's height given by \mref{M_inSpotProfile} as $\mathbb{Z}_+$.
   \item \code{spotAngle}: The spot's angle given by \mref{M_inSpotProfile} as $\mathbb{R}$.
+  \item \code{dispControl}: a reference to the Display Control \mrefp{M_dispControl}.
 \end{itemize}
 
 \subsubsection{Environment Variables}
@@ -297,8 +298,13 @@ Maybe I can write this as a note here (instead of a comment)?}
 \begin{itemize}
   \item transition: Sets up user control event handlers (e.g., mouse clicks or drag, button presses, text input change, ...)
     as needed for the user input modules (\mref{M_imgGTInput}, \mref{M_params} and \mref{M_inSpotProfile}),
-    initializes the Display Control \mreff{M_dispControl} and obtains an update function reference for redraws or state changes.
-    \an{I am not sure what transition means, couldn't find it as a defined term in the slides. I hope this is right...}
+    initializes the Display Control \mreff{M_dispControl}
+    with the individual GUI draw controls/locations for each visualization
+    and obtains an update function reference for redraws or state changes.
+    If another image is loaded (i.e. the image is changed),
+    the Display Control is reinitialized with the new image.
+    \newline\an{I am not sure what transition means, couldn't find it as a defined term in the slides.
+    Defined what the function/method does. I hope this is right, continuing as so...}
   \item output: 
     \begin{itemize}
       \item \code{doUpdate()}: notifies the Display Control \mreff{M_dispControl} to update / redraw the visualization displays.
@@ -309,7 +315,7 @@ Maybe I can write this as a note here (instead of a comment)?}
 \end{itemize}
 
 \subsubsection{Local Functions}
-None.
+\code{doUpdate()}, \code{updateInfoDisplay()}, and \code{doExport()} as described above.
 
 \newpage
 
@@ -343,7 +349,7 @@ None
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-None.
+None
 
 \subsubsection{Environment Variables}
 The decimal length for rounding the number for display as defined by \msref{MS_GUI}.
@@ -365,7 +371,7 @@ The decimal length for rounding the number for display as defined by \msref{MS_G
 \end{itemize}
 
 \subsubsection{Local Functions}
-None.
+None
 
 \newpage
 
@@ -399,7 +405,7 @@ None
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-None.
+None
 
 \subsubsection{Environment Variables}
 The File System.
@@ -417,7 +423,8 @@ The output location is a valid writable and accessible.
 \end{itemize}
 
 \subsubsection{Local Functions}
-None
+\code{GetSuggestedFileName()}: generates a suggested filename with a timestamp
+that is displayed in the save-file dialog where possible.
 
 \newpage
 
@@ -450,12 +457,12 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{3cm} p{5cm} p{4cm} p{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{Init} & Display controls for 2 to 10 in section \ref{USES_dispControl}
-  & a reference to the \code{doUpdate} for each & - \\
+\code{Init} & \code{gtImage}, \code{drawControls}: GUI controls for 2 to 10 in section \ref{USES_dispControl}
+  & a reference to the \code{doUpdate} function for each & - \\
 \hline
 \code{doUpdateAll} & - & - & - \\
 \hline
@@ -481,9 +488,10 @@ None
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \code{Init()}:
+\noindent \code{Init(gtImage, drawControls...)}:
 \begin{itemize}
-\item transition: Initializes the drawing stages/canvases in each of the Display control (locations)
+\item transition: Initializes the drawing stages/canvases in each of the
+  draw-control locations (\code{drawControls})
   as provided by the GUI \mreff{M_GUI} and passes them to each corresponding visualization module.
 \item output: a \code{doUpdate} function reference for each of the visualization modules.
 \end{itemize}
@@ -1205,7 +1213,7 @@ None
 
 \noindent \code{drawResultingSubregion(stage, subregionRect, gtImage, imgParams, beam)}:
 \begin{itemize}
-\item transition: On the given stage, draws the resampled subregion
+\item transition: On the given stage (\code{stage}), draws the resampled subregion
   (using \code{gtImage} cropped to the bounds of \code{subregionRect})
   meaning each cell in the rasterization grid (as defined by \code(imgParams))
   is filled with the corresponding computed average pixel value using
@@ -1263,14 +1271,26 @@ These are kept for mutation, update calls, and performance reasons.
     through the Display Control \mref{M_dispControl}).
 \end{itemize}
 
-\subsubsection{Environment Variables and Assumptions}
+\subsubsection{Environment Variables}
 None
+
+\subsubsection{Assumptions}
+The \code{subregionRect} is smaller than the full extent of the ground truth image
+(\code{gtImage}).
 
 \subsubsection{Access Routine Semantics}
 
 \noindent \code{drawResultingImage(stage, beam, gtImage, subregionRect, imgParams)}:
 \begin{itemize}
-\item transition: 
+\item transition: On the given stage (\code{stage}), 
+  continuously draws (row by row for responsiveness and performance)
+  the resampled full image (\code{gtImage})
+  based on the beam shape (\code{beam}: Spot Profile \mref{M_inSpotProfile}),
+  the rasterization grid as defined by \code{imgParams} for \code{subregionRect}
+  (similar to Resulting Subregion \mref{M_vizResultSub})
+  but extended to the full extent of the ground truth image, keeping the same
+  relative cell size (meaning more cells - or rows and columns - 
+  that are ``smaller'' in the full image). 
 \item output: returns a reference to \code{updateConfigValues} to call
   (by the Display Control \mref{M_dispControl}) when there is a change
   in the magnification (\code{imageMag}), the rasterization grid 
