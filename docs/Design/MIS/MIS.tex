@@ -751,7 +751,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawGroundtruthImage} & \code{stage}, \code{gtImage}, \code{subregionImage}, \code{boxSize}
+\code{drawGroundtruthImage} & \code{stage}, \code{gtImage}, \code{subregionImage}
   & \code{imageDrawingObject} & - \\
 \hline
 \end{tabular}
@@ -773,14 +773,64 @@ None
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \code{drawGroundtruthImage(stage, gtImage, subregionImage, boxSize)}:
+\noindent \code{drawGroundtruthImage(stage, gtImage, subregionImage)}:
 \begin{itemize}
-\item transition: \wss{if appropriate} 
+\item transition: Defines a drawing arrangement to fill the stage with the ground truth image
+  with a semi-transparent rectangle (\code{rect}) representing the bounds of the
+  \code{subregionImage}.
 \item output: an object with a reference to the update function and a reference to \code{rect}.
 \end{itemize}
 
 \subsubsection{Local Functions}
-\code{doUpdate()}: Defines a drawing arrangement to fill the stage with a image bounded by \code{rect}.
+\code{doUpdate()}: Update the drawing based on the state variables.
+
+\newpage
+
+
+
+\section{MIS of NAMEHERE Visualization} \label{MS_viz}
+
+\subsection{Module}
+draw \mrefp{M_viz}
+
+\subsection{Uses}
+Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{5cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\code{draw} & - & - & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+These are kept for update calls and performance reasons.
+
+\subsubsection{Environment Variables and Assumptions}
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \code{draw()}:
+\begin{itemize}
+\item transition: \wss{if appropriate} 
+\item output: \wss{if appropriate} 
+\item exception: \wss{if appropriate} 
+\end{itemize}
+
+\subsubsection{Local Functions}
+\code{doUpdate()}: Update the drawing based on the state variables.
 
 \newpage
 
