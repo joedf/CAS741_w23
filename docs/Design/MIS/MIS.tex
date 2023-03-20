@@ -265,7 +265,7 @@ Maybe I can write this as a note here (instead of a comment)?}
 \subsubsection{State Variables}
 \begin{itemize}
   \item \code{baseImage}: The ground truth image as processed and given by \mref{M_imgGTInput} as $\mathbb{I}_{w,h}$.
-  \item \code{resultImage}: A reference to resulting image as processed and given by \mref{M_dispControl} as $\mathbb{I}_{w,h}$.
+  \item \code{resultImage}: A reference to resulting image as processed and given by the Display Control \mref{M_dispControl} as $\mathbb{I}_{w,h}$.
   \item \code{imageRows}: Rasterization grid rows given by \mref{M_params} as $\mathbb{Z}_+$.
   \item \code{imageCols}: Rasterization grid columns given by \mref{M_params} as $\mathbb{Z}_+$.
   \item \code{imageMag}: Magnification of the subregion as given by \mref{M_params} as $\mathbb{R}_+$.
@@ -296,7 +296,7 @@ Maybe I can write this as a note here (instead of a comment)?}
 \begin{itemize}
   \item transition: Sets up user control event handlers (e.g., mouse clicks or drag, button presses, text input change, ...)
     as needed for the user input modules (\mref{M_imgGTInput}, \mref{M_params} and \mref{M_inSpotProfile}),
-    initializes the Display \mreff{M_dispControl} and obtains an update function reference for redraws or state changes.
+    initializes the Display Control \mreff{M_dispControl} and obtains an update function reference for redraws or state changes.
     \an{I am not sure what transition means, couldn't find it as a defined term in the slides. I hope this is right...}
   \item output: 
     \begin{itemize}
@@ -766,7 +766,7 @@ None
 \subsubsection{State Variables}
 These are kept for mutation, update calls, and performance reasons.
 \begin{itemize}
-  \item \code{stage}: a reference to drawing stage,
+  \item \code{stage}: a reference to drawing stage.
   \item \code{rect}: a reference to a rectangle geometry.
   \item \code{gtImage}: a reference to imageDrawingObject.
   \item \code{subregionImage}: a reference to imageDrawingObject.
@@ -780,9 +780,9 @@ None
 \noindent \code{drawGroundtruthImage(stage, gtImage, subregionImage)}:
 \begin{itemize}
 \item transition: Defines a drawing arrangement to fill the stage with the ground truth image
-  (\code{gtImage} as provided by \mref{M_dispControl})
+  (\code{gtImage} as provided by the Display Control \mref{M_dispControl})
   with a semi-transparent rectangle (\code{rect}) representing the bounds of the
-  \code{subregionImage} (as provided by \mref{M_dispControl}).
+  \code{subregionImage} (as provided by the Display Control \mref{M_dispControl}).
 \item output: an object with a reference to the update function and a reference to \code{rect}.
 \end{itemize}
 
@@ -823,7 +823,7 @@ None
 \subsubsection{State Variables}
 These are kept for mutation, update calls, and performance reasons.
 \begin{itemize}
-  \item \code{stage}: a reference to drawing stage,
+  \item \code{stage}: a reference to drawing stage.
   \item \code{subregionImage}: a reference to imageDrawingObject.
   \item \code{updateCallback}: an optional reference to a function call when an update occurs
     (i.e. when view bounds change).
@@ -838,7 +838,8 @@ None
 \noindent \code{drawSubregionImage(stage, gtImage, updateCallback = null)}:
 \begin{itemize}
 \item transition: Draw a view displaying a copy of the ground truth image
-  (\code{gtImage} as provided by \mref{M_dispControl}) representing the current subregion / ROI.
+  (\code{gtImage} as provided by the Display Control \mref{M_dispControl})
+  representing the current subregion / ROI.
   This view can be panned and zoomed with mouse events.
   The \code{updateCallback} function reference is called when mouse events (drag or scroll)
   causes the of the view bounds to change.
@@ -884,7 +885,7 @@ None
 \subsubsection{State Variables}
 These are kept for mutation, update calls, and performance reasons.
 \begin{itemize}
-  \item \code{stage}: a reference to the drawing stage,
+  \item \code{stage}: a reference to the drawing stage.
   \item \code{beam}: a reference to the ellipse geometry.
 \end{itemize}
 
@@ -937,9 +938,9 @@ None
 \subsubsection{State Variables}
 These are kept for mutation, update calls, and performance reasons.
 \begin{itemize}
-  \item \code{stage}: a reference to the drawing stage,
+  \item \code{stage}: a reference to the drawing stage.
   \item \code{sImage}: a reference to the subregion image clone.
-  \item \code{sBeam}: a local reference to the beam geometry clone (not changed).
+  \item \code{sBeam}: a local reference to the beam ``stencil'' geometry clone (not changed).
   \item \code{updateCallback}: an optional reference to a function call when an update occurs
   (i.e. when the \code{sImage} position and scaling to changese).
   \item mouse events (scroll and drag)
@@ -967,6 +968,66 @@ None
 
 \newpage
 
+
+
+\section{MIS of Spot Signal Visualization} \label{MS_vizSpotSignal}
+
+\subsection{Module}
+drawSpotSignal \mrefp{M_viz}
+
+\subsection{Uses}
+Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{5cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\code{drawSpotSignal} & \code{sourceStage}, \code{destStage}, \code{sBeam}
+  & \code{doUpdate} & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+These are kept for mutation, update calls, and performance reasons.
+\begin{itemize}
+  \item \code{sourceStage}: a reference to the drawing stage from \mref{M_vizSpotContent}
+    given by the Display Control \mref{M_dispControl}.
+  \item \code{destStage}: a reference to the drawing stage to the spot signal
+    representation draw on.
+  \item \code{sBeam}: a local reference to the beam ``stencil'' geometry clone (not changed).
+  \item \code{doUpdate}: an optional reference to a function call when an update occurs.
+\end{itemize}
+
+\subsubsection{Environment Variables and Assumptions}
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \code{drawSpotSignal(sourceStage, destStage, sBeam)}:
+\begin{itemize}
+  \item transition: On a given drawing stage (\code{destStage}),
+  draws the \code{sBeam} geometry/shape filled in by the computed average pixel value
+  from the clipped / ``stenciled'' image content as displayed in
+  Spot Content \mrefp{M_vizSpotContent}.
+\item output: a reference to an update function (\code{doUpdate})
+  to call (by the Display Control \mref{M_dispControl})
+  when a redraw is needed (such as a change in Spot Content \mrefp{M_vizSpotContent}).
+\end{itemize}
+
+\subsubsection{Local Functions}
+\code{doUpdate()}: Update the drawing based on the state variables.
+
+\newpage
 
 
 
