@@ -80,6 +80,7 @@ urlcolor=cyan          % color of external links
   \midrule 
   HID & Human Interface Device\\
   URL & Uniform Resource Locator\\
+  imageDrawingObject & a geometry where the fill is an image\\
   \bottomrule
 \end{tabular}\\
 
@@ -605,7 +606,7 @@ Drawing Stage / Canvas \mreff{M_drawStage}
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-None
+\code{defaultLineColor}: the default line color (RGBA) to use for drawing grids (255,255,255,204).
 
 \subsubsection{Exported Access Programs}
 
@@ -640,7 +641,7 @@ None
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \code{drawGrid(gridLayer, rect, rows, cols, lineColor)}:
+\noindent \code{drawGrid(gridLayer, rect, rows, cols, lineColor = defaultLineColor)}:
 \begin{itemize}
 \item transition: Draws a line (optional colour \code{lineColor}) grid with the specified
   number of \code{rows} and \code{cols} (columns) on the given drawing layer (\code{gridLayer})
@@ -652,7 +653,7 @@ None
 
 \noindent \code{repeatDrawOnGrid(layer, rect, rows, cols, shape)}:
 \begin{itemize}
-\item transition: Draw a given geometry (\code{shape}) or image object repeated over a grid pattern
+\item transition: Draw a given geometry (\code{shape}) or imageDrawingObject repeated over a grid pattern
   with the specified number of \code{rows} and \code{cols} (columns) on the given drawing
   layer (\code{layer}) within the given grid rectangular bounds (\code{rect}).
 \item exception: \code{badGridParams} meaning non-integer or non-positive values were given for
@@ -710,12 +711,9 @@ None
 \end{center}
 
 \subsection{Semantics}
+See the SRS \cite{SRS} and MG \cite{MG} for more information.
 
-\subsubsection{State Variables}
-None
-\subsubsection{Environment Variables}
-None
-\subsubsection{Assumptions}
+\subsubsection{State Variables, Environment Variables, and Assumptions}
 None
 
 \subsubsection{Access Routine Semantics}
@@ -734,6 +732,59 @@ None
 \newpage
 
 
+\section{MIS of Ground Truth Visualization} \label{MS_vizGT}
+
+\subsection{Module}
+drawGroundtruthImage \mrefp{M_vizGT}
+
+\subsection{Uses}
+Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{5cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\code{drawGroundtruthImage} & \code{stage}, \code{gtImage}, \code{subregionImage}, \code{boxSize}
+  & \code{imageDrawingObject} & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+These are kept for update calls and performance reasons.
+\begin{itemize}
+  \item \code{stage}: a reference to drawing stage,
+  \item \code{rect}: a reference to a rectangle geometry.
+  \item \code{gtImage}: a reference to imageDrawingObject.
+  \item \code{subregionImage}: a reference to imageDrawingObject.
+\end{itemize}
+
+\subsubsection{Environment Variables and Assumptions}
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \code{drawGroundtruthImage(stage, gtImage, subregionImage, boxSize)}:
+\begin{itemize}
+\item transition: \wss{if appropriate} 
+\item output: an object with a reference to the update function and a reference to \code{rect}.
+\end{itemize}
+
+\subsubsection{Local Functions}
+\code{doUpdate()}: Defines a drawing arrangement to fill the stage with a image bounded by \code{rect}.
+
+\newpage
+
+
 
 % ///////////////////////////////////////////////////////////////////////
 % //////////////////////////// END MIS ITEMS ////////////////////////////
@@ -744,9 +795,5 @@ None
 \bibliography {../../../refs/References,../../../refs/cas741,../../../refs/programming}
 
 \newpage
-
-\section{Appendix} \label{Appendix}
-
-\wss{Extra information if required}
 
 \end{document}
