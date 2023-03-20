@@ -33,7 +33,7 @@ urlcolor=cyan          % color of external links
 \usepackage{array}
 
 \externaldocument{../../SRS/SRS}
-% \externaldocument{../MG/MG}
+\externaldocument{../MG/MG}
 
 \input{../../Comments}
 \input{../../Common}
@@ -41,6 +41,10 @@ urlcolor=cyan          % color of external links
 \newcommand{\mref}[1]{M\ref{#1}}
 \newcommand{\mrefp}[1]{(\mref{#1})}
 \newcommand{\mreff}[1]{Module \mrefp{#1}}
+
+\newcommand{\msref}[1]{Module Specification (\ref{#1})}
+
+\newcommand{\code}[1]{\texttt{#1}}
 
 \begin{document}
 
@@ -69,7 +73,18 @@ urlcolor=cyan          % color of external links
 
 \section{Symbols, Abbreviations and Acronyms}
 
-See SRS \cite{SRS} and the MG \cite{MG} Documentation.
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l l} 
+  \toprule		
+  \textbf{symbol} & \textbf{description}\\
+  \midrule 
+  HID & Human Interface Device\\
+  URL & Uniform Resource Locator\\
+  \bottomrule
+\end{tabular}\\
+
+~\newline
+\noindent See the SRS \cite{SRS} and MG \cite{MG} Documentation for additional items.
 
 \newpage
 
@@ -90,9 +105,6 @@ found at \url{https://github.com/joedf/CAS741_w23}.
 
 \section{Notation}
 
-\wss{You should describe your notation.  You can use what is below as
-  a starting point.}
-
 The structure of the MIS for modules comes from \citet{HoffmanAndStrooper1995},
 with the addition that template modules have been adapted from
 \cite{GhezziEtAl2003}.  The mathematical notation comes from Chapter 3 of
@@ -111,8 +123,15 @@ The following table summarizes the primitive data types used by \progname.
 \midrule
 character & char & a single symbol or digit\\
 integer & $\mathbb{Z}$ & a number without a fractional component in (-$\infty$, $\infty$) \\
+positive integer & $\mathbb{Z}_+$ & a positive integer ($\mathbb{Z}$) in (0, $\infty$) \\
+unsigned 8-bit integer & $\mathbb{U}$ & a number without a fractional component in (0, 255)\\
 natural number & $\mathbb{N}$ & a number without a fractional component in [1, $\infty$) \\
 real & $\mathbb{R}$ & any number in (-$\infty$, $\infty$)\\
+positive real & $\mathbb{R}_+$ & any real number in (0, $\infty$)\\
+imageData \cite{MDN_imagedata} & $\mathbb{I}_{w,h}$ & \code{data}: a one dimensional array of positive integers from
+  0 to 255 in RGBA order (pixel components) start from the top left pixel to the
+  bottom right pixel with a \code{width}: $\mathbb{Z}_+$ width of $w$
+  and \code{height}: $\mathbb{Z}_+$ height of $h$.\\
 \bottomrule
 \end{tabular} 
 \end{center}
@@ -146,17 +165,18 @@ The following table is taken directly from the Module Guide \cite{MG} document f
 % ///////////////////////////////////////////////////////////////////////
 
 
-\section{MIS of Application Control} \label{M_control}
+\section{MIS of Application Control} \label{MS_control}
 
 \subsection{Module}
-main
+\code{main} \mrefp{M_control}
 
 \subsection{Uses}
-Metrics Calculation \mreff{M_metrics}, GUI \mreff{M_GUI}
+GUI \msref{MS_GUI}
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
+None
 
 \subsubsection{Exported Access Programs}
 
@@ -186,18 +206,490 @@ None
 
 \subsubsection{Access Routine Semantics}
 
-\noindent main():
+\noindent \code{main()}:
 \begin{itemize}
-\item transition: Modifies the state and environment variables of the GUI \mreff{M_GUI}.
+\item transition: Initializes the GUI, modifies the state and environment variables of the GUI \msref{MS_GUI}.
 \end{itemize}
 
 \subsubsection{Local Functions}
-UpdateBaseImage(): Updates the GUI and propagates a change in the input ground truth throughout the application.
-updateImageMetricsInfo(): 
+\code{UpdateBaseImage()}: Updates the GUI and propagates a change in the input ground truth
+image throughout the application.
 \newpage
 
-\input{module_spec_template.tex}
 
+
+\section{MIS of Graphical User Interface (GUI)} \label{MS_GUI}
+
+\subsection{Module}
+\code{gui} \mrefp{M_GUI}
+
+\subsection{Uses}
+Hardware Hiding \mreff{M_HdwHide},
+Display Control \mreff{M_dispControl},
+Ground Truth Image Input \mreff{M_imgGTInput},
+Imaging Parameters Input \mreff{M_params},
+Spot Profile Input \mreff{M_inSpotProfile},
+Image Export \mreff{M_export},
+Information and Metrics Display \mreff{M_infoDisp}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+\begin{itemize}
+  \item \code{G\_BoxSize}: A value ($\mathbb{N}$) describing both the pixel width and height used for each visualization display ``box''.
+  \item \code{G\_MATH\_TOFIXED}: Used for display for fixed decimal number length
+    rounding (ex. ``4.1234'' at fixed length ``2'' results in ``4.12'').
+\end{itemize}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{5cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\code{gui} & \code{baseImage} & displayReference, & - \\
+           &                  & event handlers \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+\an{Didn't do MIS descriptions of the Input modules because they are essentially just
+buttons or text boxes with event handlers. Can be implemented however as long the SRS
+value constrains are followed... Or are full descriptions also needed for these?
+Not sure if they would add much value than already provided here or just informational noise.
+Maybe I can write this as a note here (instead of a comment)?}
+
+\subsubsection{State Variables}
+\begin{itemize}
+  \item \code{baseImage}: The ground truth image as processed and given by \mref{M_imgGTInput} as $\mathbb{I}_{w,h}$.
+  \item \code{resultImage}: A reference to resulting image as processed and given by \mref{M_dispControl} as $\mathbb{I}_{w,h}$.
+  \item \code{imageRows}: Rasterization grid rows given by \mref{M_params} as $\mathbb{Z}_+$.
+  \item \code{imageCols}: Rasterization grid columns given by \mref{M_params} as $\mathbb{Z}_+$.
+  \item \code{imageMag}: Magnification of the subregion as given by \mref{M_params} as $\mathbb{R}_+$.
+  \item \code{spotWidth}: The spot's width given by \mref{M_inSpotProfile} as $\mathbb{Z}_+$.
+  \item \code{spotHeight}: The spot's height given by \mref{M_inSpotProfile} as $\mathbb{Z}_+$.
+  \item \code{spotAngle}: The spot's angle given by \mref{M_inSpotProfile} as $\mathbb{R}$.
+\end{itemize}
+
+\subsubsection{Environment Variables}
+\begin{itemize}
+  \item Keyboard
+  \item Mouse
+  \item Screen
+  \item File System
+\end{itemize}
+
+\subsubsection{Assumptions}
+\begin{itemize}
+  \item The file system is able to read and provide the image file as specified by the user through an OS file-open dialog.
+  Otherwise, if the file is not found, denied access, or cancelled, no changes should occur.
+  \item The OS and WebBrowser are able to provide basic text or number input user controls with some basic built-in validation,
+  and is able to handle events from Human Interface Devices (HIDs such as a mouse, keyboard, or touchscreen).
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \code{OnImageLoaded()}:
+\begin{itemize}
+  \item transition: Sets up user control event handlers (e.g., mouse clicks or drag, button presses, text input change, ...)
+    as needed for the user input modules (\mref{M_imgGTInput}, \mref{M_params} and \mref{M_inSpotProfile}),
+    initializes the Display \mreff{M_dispControl} and obtains an update function reference for redraws or state changes.
+    \an{I am not sure what transition means, couldn't find it as a defined term in the slides. I hope this is right...}
+  \item output: 
+    \begin{itemize}
+      \item \code{doUpdate()}: notifies the Display Control \mreff{M_dispControl} to update / redraw the visualization displays.
+      \item \code{updateInfoDisplay()}: notifies the Information Display \mreff{M_infoDisp} to update when needed (such as
+      an input value change from the mentioned input modules).
+      \item \code{doExport()}: Event handler for the "Export" button press, it calls the Image Export \mreff{M_export}.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Local Functions}
+None.
+
+\newpage
+
+
+\section{MIS of Information and Metrics Display} \label{MS_infoDisp}
+
+\subsection{Module}
+\code{infoDisp} \mrefp{M_infoDisp}
+
+\subsection{Uses}
+Metrics Calculation \mreff{M_metric}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{7cm} p{1cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\code{updateInfo} & \code{textDisplayControl}, \code{baseImage}, & - & \code{DifferentImageSizes} \\
+                  & \code{resultImage}, \code{imageMag} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+None.
+
+\subsubsection{Environment Variables}
+The decimal length for rounding the number for display as defined by \msref{MS_GUI}.
+
+\subsubsection{Assumptions}
+\begin{itemize}
+  \item A suitable display control (capable of displaying text and numbers) is constructed
+  and displayed in the GUI for use by this module.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \code{updateInfo(textDisplayControl, baseImage, resultImage, imageMag)}:
+\begin{itemize}
+\item transition: Calls the Metrics Calculation \mreff{M_metric} to compare the given images
+  (\code{baseImage} and \code{resultImage}) to get metric value ($\mathbb{R}$).
+  The magnification (\code{imageMag}) and metric values are then rounded 
+  and pushed as formatted descriptive text to \code{textDisplayControl}.
+\item exception: \code{DifferentImageSizes} meaning the size of \code{baseImage} and
+  \code{resultImage} do not match.
+\end{itemize}
+
+\subsubsection{Local Functions}
+None.
+
+\newpage
+
+
+
+\section{MIS of Image Export} \label{MS_ImageExport}
+
+\subsection{Module}
+\code{imgExport} \mrefp{M_export}
+
+\subsection{Uses}
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\code{export} & \code{resultImage}, \code{outputPath} & ImageFile & \code{InvalidPath} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+None.
+
+\subsubsection{Environment Variables}
+The File System.
+
+\subsubsection{Assumptions}
+The output location is a valid writable and accessible. 
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \code{export}(resultImage, outputPath):
+\begin{itemize}
+\item output: an image file representing \code{resultImage} at location \code{outputPath}. 
+\item exception: \code{InvalidPath} meaning the location cannot be written to, either because
+  the directory is nonexistent, the path contains invalid characters, or inadequate write permissions.
+\end{itemize}
+
+\subsubsection{Local Functions}
+None
+
+\newpage
+
+
+
+\section{MIS of Display Control} \label{MS_dispControl}
+
+\subsection{Module}
+\code{dispControl} \mrefp{M_dispControl}
+
+\subsection{Uses} \label{USES_dispControl}
+\begin{enumerate}
+  \item Rendering \mreff{M_rendering}
+  \item Ground Truth Visualization \mreff{M_vizGT}
+  \item Subregion Visualization \mreff{M_vizSubregion}
+  \item Spot Profile Visualization \mreff{M_vizSpotProfile}
+  \item Spot Content Visualization \mreff{M_vizSpotContent}
+  \item Spot Signal Visualization \mreff{M_vizSpotSignal}
+  \item Spot Layout Visualization \mreff{M_vizSpotLayout}
+  \item Sampled Subregion Visualization \mreff{M_vizSampledSub}
+  \item Resulting Subregion Visualization \mreff{M_vizResultSub}
+  \item Resulting Image Visualization \mreff{M_vizResultImg}
+\end{enumerate}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\code{Init} & Display controls for 2 to 10 in section \ref{USES_dispControl}
+  & a reference to the \code{doUpdate} for each & - \\
+\hline
+\code{doUpdateAll} & - & - & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+References to drawing stages/canvases for all the visualization/display modules mentioned
+in section \ref{USES_dispControl}, along with each corresponding update function references.
+
+\subsubsection{Environment Variables}
+Display controls as provided by the GUI \mreff{M_GUI}.
+
+\subsubsection{Assumptions}
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \code{Init()}:
+\begin{itemize}
+\item transition: Initializes the drawing stages/canvases in each of the Display control (locations)
+  as provided by the GUI \mreff{M_GUI} and passes them to each corresponding visualization module.
+\item output: a \code{doUpdate} function reference for each of the visualization modules.
+\end{itemize}
+
+\noindent \code{doUpdateAll()}:
+\begin{itemize}
+\item transition: updates all the visualization displays by calling all the corresponding
+   \code{doUpdate} function references.
+\end{itemize}
+
+\subsubsection{Local Functions}
+None
+
+\newpage
+
+
+
+
+\section{MIS of Drawing Stage / Canvas} \label{MS_drawStage}
+
+\subsection{Module}
+\code{stage} \mrefp{M_drawStage} 
+
+\subsection{Uses}
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{5cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\code{init} & \code{container}, \code{width}, \code{height} & drawing stage & \code{ContainerNotFound} \\
+\hline
+\code{getLayers} & - & array of the layers & - \\
+\hline
+\code{getContext} & - & drawing context \cite{html_std_canvas} & - \\
+\hline
+\code{getContainer} & - & display control / container & - \\
+\hline
+\code{toCanvas} & - & canvasAPI object \cite{html_std_canvas} & - \\
+\hline
+\code{toDataURL} & - & a URL to an exported image \cite{html_std_canvas} & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+Currently, using the implementing by the Konva \cite{konva_2021} javascript library.
+Largely wraps around the HTML Canvas API object with added functionality such as layering
+and ``transformers'' for node-editable shapes.
+
+\subsubsection{State Variables}
+\begin{itemize}
+  \item width/height: the width and height of the drawing stage in pixels.
+  \item Layers: drawing layers
+  \item Container: the display control / container where to ``paint'' the images
+    as provided by the GUI \mreff{M_GUI}.
+  \item Event handlers: all the Konva objects (layers, geometries, stage) may
+    have event handlers for HID events.
+\end{itemize}
+
+\subsubsection{Environment Variables}
+The HIDs and the screen.
+
+\subsubsection{Assumptions}
+Any drawing exceptions will result in throwing errors that may be caught as needed,
+but will simply result in blank (or black) images with no interruption in any
+drawings in progress or drawing loops.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \code{init()}:
+\begin{itemize}
+\item transition: Initializes a drawing stage object with the given options where \code{container}
+  is the control or location given by the GUI \mreff{M_GUI}.
+\item output: the drawing stage object.
+\item exception: \code{ContainerNotFound} meaning the given control is nonexistent or could not be found.
+\end{itemize}
+
+\noindent \code{getLayers()}:
+\begin{itemize}
+\item output: an array of all the individual drawing layers within the stage.
+\end{itemize}
+
+\noindent \code{getContext()}:
+\begin{itemize}
+\item output: the drawing context as defined by the CanvasAPI \cite{html_std_canvas}.
+\end{itemize}
+
+\noindent \code{getContainer()}:
+\begin{itemize}
+\item output: the display container as defined/given by the GUI \mreff{M_GUI} when the stage is initialized.
+\end{itemize}
+
+\noindent \code{toCanvas()}:
+\begin{itemize}
+\item output: the canvasAPI element / object \cite{html_std_canvas}.
+\end{itemize}
+
+\noindent \code{toDataURL()}:
+\begin{itemize}
+\item output: a URL pointing to an image exported in-memory within the WebBrowser that can
+  ``downloaded'' and saved a location specified by the user.
+\end{itemize}
+
+\newpage
+
+
+
+\section{MIS of Image Rendering} \label{MS_rendering}
+
+\subsection{Module}
+\code{renderUtils} \mrefp{M_rendering}
+
+\subsection{Uses}
+Drawing Stage / Canvas \mreff{M_drawStage}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\code{drawGrid} & \code{gridLayer}, \code{rect}, \code{rows}, \code{cols}, \code{lineColor}
+  & cell size (width/height in pixels) & \code{badGridParams} \\
+\hline
+\code{repeatDrawOnGrid} & \code{layer}, \code{rect}, \code{rows}, \code{cols}, \code{shape}
+  & - & \code{badGridParams} \\
+\hline
+\code{ComputeProbeValue\_gs} & \code{image}, \code{probe} & grayscale value ($\mathbb{U}$) & - \\
+\hline
+\code{get\_avg\_pixel\_gs} & \code{rawImageData} & grayscale value ($\mathbb{U}$) & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+None.
+
+\subsubsection{Environment Variables}
+The graphics processing hardware.
+
+\subsubsection{Assumptions}
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \code{drawGrid(gridLayer, rect, rows, cols, lineColor)}:
+\begin{itemize}
+\item transition: Draws a line (optional colour \code{lineColor}) grid with the specified
+  number of \code{rows} and \code{cols} (columns) on the given drawing layer (\code{gridLayer})
+  within the given grid rectangular bounds (\code{rect}).
+\item output: the computed size in pixel of a cell within the grid drawn.
+\item exception: \code{badGridParams} meaning non-integer or non-positive values were given for
+  \code{rows} and \code{cols}.
+\end{itemize}
+
+\noindent \code{repeatDrawOnGrid(layer, rect, rows, cols, shape)}:
+\begin{itemize}
+\item transition: Draw a given geometry (\code{shape}) or image object repeated over a grid pattern
+  with the specified number of \code{rows} and \code{cols} (columns) on the given drawing
+  layer (\code{layer}) within the given grid rectangular bounds (\code{rect}).
+\item exception: \code{badGridParams} meaning non-integer or non-positive values were given for
+  \code{rows} and \code{cols}.
+\end{itemize}
+
+\noindent \code{ComputeProbeValue\_gs(image, probe)}:
+\begin{itemize}
+\item transition: internally uses \code{get\_avg\_pixel\_gs()} to calculate the pixel value
+  of a locally composited or ``stenciled'' or ``clipped'' image (for sampling the region
+  defined by the shape or \code{probe}, like a cookie cutter).
+  Pixels that have been ``stenciled'' out are set to blank pixels (where all RGBA components are equal to 0)
+  and the image is cropped to small rectangular bounding box of the ``stencil'' shape (\code{probe}).
+\item output: Gives the average pixel value (grayscale intensity: $\mathbb{U}$) by sampling the given image
+  (\code{image}) object with the given shape / geometry (\code{probe}).
+\end{itemize}
+
+\noindent \code{get\_avg\_pixel\_gs(rawImageData)}:
+\begin{itemize}
+  \item output: Gives the average pixel value (grayscale intensity: $\mathbb{U}$) from a given imageData
+  array (\code{rawImageData}) of the RGBA pixel values ignoring
+  any blank pixels (where all RGBA components are equal to 0).
+\end{itemize}
+
+\subsubsection{Local Functions}
+None
+
+\newpage
+
+
+
+
+
+
+
+\mref{M_metric} Image Metrics Calculation
 
 % ///////////////////////////////////////////////////////////////////////
 % //////////////////////////// END MIS ITEMS ////////////////////////////

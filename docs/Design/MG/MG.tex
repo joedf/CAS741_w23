@@ -339,7 +339,7 @@ to be implemented.
 \subsubsection{Spot Profile Input (\mref{M_inSpotProfile})}
 \begin{description}
 \item[Secrets:] The format and current values describing the spot profile
-  (shape: width, height, rotation; size: scaling).
+  (shape: normalized height vs. width, rotation/angle).
 \item[Services:] Gets and provides the spot profile values.
 \item[Implemented By:] \progname{}
 \item[Type of Module:] Abstract Object
@@ -358,7 +358,7 @@ to be implemented.
 \subsubsection{Information and Metrics Display (\mref{M_infoDisp})}
 \begin{description}
 \item[Secrets:] The display of information on the rendered
-  images and minor calculation algorithms of supplemental information (such as spot eccentricity).
+  images and minor calculation algorithms of supplemental/optional information (such as spot eccentricity).
 \item[Services:] Displays information on the images and parameters such as the magnification,
   image quality metrics, spot shape information, spot signal pixel values (RBGA),
   and the drawing rate of resulting image (e.g., rows per milliseconds).
