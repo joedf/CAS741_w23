@@ -128,6 +128,7 @@ unsigned 8-bit integer & $\mathbb{U}$ & a number without a fractional component 
 natural number & $\mathbb{N}$ & a number without a fractional component in [1, $\infty$) \\
 real & $\mathbb{R}$ & any number in (-$\infty$, $\infty$)\\
 positive real & $\mathbb{R}_+$ & any real number in (0, $\infty$)\\
+ratio & $\mathbb{A}$ & any real number in (0, 1)\\
 imageData \cite{MDN_imagedata} & $\mathbb{I}_{w,h}$ & \code{data}: a one dimensional array of positive integers from
   0 to 255 in RGBA order (pixel components) start from the top left pixel to the
   bottom right pixel with a \code{width}: $\mathbb{Z}_+$ width of $w$
@@ -332,7 +333,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{updateInfo} & \code{textDisplayControl}, \code{baseImage}, & - & \code{DifferentImageSizes} \\
+\code{updateInfo} & \code{textDisplayControl}, \code{baseImage}, & - & - \\
                   & \code{resultImage}, \code{imageMag} \\
 \hline
 \end{tabular}
@@ -360,8 +361,6 @@ The decimal length for rounding the number for display as defined by \msref{MS_G
   (\code{baseImage} and \code{resultImage}) to get metric value ($\mathbb{R}$).
   The magnification (\code{imageMag}) and metric values are then rounded 
   and pushed as formatted descriptive text to \code{textDisplayControl}.
-\item exception: \code{DifferentImageSizes} meaning the size of \code{baseImage} and
-  \code{resultImage} do not match.
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -685,11 +684,56 @@ None
 
 
 
+\section{MIS of Image Metrics Calculation} \label{MS_metrics}
+
+\subsection{Module}
+\code{metrics} \mrefp{M_metric}
+
+\subsection{Uses}
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{5cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\code{compare} & \code{image1}, \code{image2} & similarity ratio ($\mathbb{A}$) & \code{DifferentImageSizes} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+None
+\subsubsection{Environment Variables}
+None
+\subsubsection{Assumptions}
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \code{compare(image1, image2)}:
+\begin{itemize}
+\item transition: Compares the two images and computes a value representing the similarity.
+\item output: Gives a value ($\mathbb{A}$) where 1.0 means a perfect match and 0 means zero similarity.
+\item exception: \code{DifferentImageSizes} meaning the size of \code{image1} and
+  \code{image2} do not match.
+\end{itemize}
+
+\subsubsection{Local Functions}
+None
+
+\newpage
 
 
-
-
-\mref{M_metric} Image Metrics Calculation
 
 % ///////////////////////////////////////////////////////////////////////
 % //////////////////////////// END MIS ITEMS ////////////////////////////
