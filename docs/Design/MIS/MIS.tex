@@ -484,7 +484,11 @@ None
 \end{itemize}
 
 \subsubsection{Environment Variables}
-Display controls as provided by the GUI \mreff{M_GUI}.
+\begin{itemize}
+  \item Display/Canvas controls as provided by the GUI \mreff{M_GUI}.
+  \item Mouse
+  \item Keyboard
+\end{itemize}
 
 \subsubsection{Assumptions}
 None
@@ -565,7 +569,7 @@ and ``transformers'' for node-editable shapes.
 \end{itemize}
 
 \subsubsection{Environment Variables}
-The HIDs and the screen.
+The HIDs (e.g., mouse, keyboard) and the screen.
 
 \subsubsection{Assumptions}
 Any drawing exceptions will result in throwing errors that may be caught as needed,
@@ -655,7 +659,7 @@ Drawing Stage / Canvas \mreff{M_drawStage}
 None.
 
 \subsubsection{Environment Variables}
-The graphics processing hardware.
+The graphics processing hardware. \an{or optional software rendering?}
 
 \subsubsection{Assumptions}
 None
@@ -849,7 +853,10 @@ These are kept for mutation, update calls, and performance reasons.
   \item mouse events (scroll and drag)
 \end{itemize}
 
-\subsubsection{Environment Variables and Assumptions}
+\subsubsection{Environment Variables}
+The HIDs.
+
+\subsubsection{Assumptions}
 None
 
 \subsubsection{Access Routine Semantics}
@@ -908,7 +915,10 @@ These are kept for mutation, update calls, and performance reasons.
   \item \code{beam}: a reference to the ellipse geometry.
 \end{itemize}
 
-\subsubsection{Environment Variables and Assumptions}
+\subsubsection{Environment Variables}
+The HIDs.
+
+\subsubsection{Assumptions}
 None
 
 \subsubsection{Access Routine Semantics}
@@ -965,7 +975,10 @@ These are kept for mutation, update calls, and performance reasons.
   \item mouse events (scroll and drag)
 \end{itemize}
 
-\subsubsection{Environment Variables and Assumptions}
+\subsubsection{Environment Variables}
+The HIDs.
+
+\subsubsection{Assumptions}
 None
 
 \subsubsection{Access Routine Semantics}
