@@ -138,11 +138,12 @@ imageData \cite{MDN_imagedata} & $\mathbb{I}_{w,h}$ & \code{data}: a one dimensi
 
 \noindent
 The specification of \progname \ uses some derived data types: sequences, strings,
-tuples, and \code{imageDrawingObject}. Sequences are lists filled with elements of the same data type. Strings
+tuples, and \code{drawingObject}. Sequences are lists filled with elements of the same data type. Strings
 are sequences of characters. Tuples contain a list of values, potentially of
-different types. \code{imageDrawingObject} is a geometry object (provided by Konva):
+different types. \code{drawingObject} is a geometry object (provided by Konva):
 the fill can be an image, a colour, or even another shape. They can have a width, height,
 rotation, position (x,y), and many other properties.
+\code{imageDrawingObject} is essentially \code{drawingObject} with an image as the fill.
 In addition, \progname \ uses functions, which
 are defined by the data types of their inputs and outputs. Local functions are
 described by giving their type signature followed by their specification.
@@ -901,7 +902,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawSpotProfile} & \code{stage} & \code{beam} & - \\
+\code{drawSpotProfile} & \code{stage} & \code{beam} (\code{drawingObject}) & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -956,7 +957,8 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawSpotContent} & \code{stage}, \code{subregionImage}, \code{sBeam}, \code{updateCallback}
+\code{drawSpotContent} & \code{stage}, \code{subregionImage}, \code{sBeam} (\code{drawingObject}),
+  \code{updateCallback}
   & \code{sImage} & - \\
 \hline
 \end{tabular}
@@ -1021,7 +1023,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawSpotSignal} & \code{sourceStage}, \code{destStage}, \code{sBeam}
+\code{drawSpotSignal} & \code{sourceStage}, \code{destStage}, \code{sBeam} (\code{drawingObject})
   & \code{doUpdate} & - \\
 \hline
 \end{tabular}
@@ -1082,7 +1084,8 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawSpotLayout} & \code{drawStage}, \code{subregionImage}, \code{imgParams}, \code{beam}
+\code{drawSpotLayout} & \code{drawStage}, \code{subregionImage}, \code{imgParams},
+  \code{beam} (\code{drawingObject})
   & \code{doUpdate} & - \\
 \hline
 \end{tabular}
@@ -1144,7 +1147,7 @@ None
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
 \code{drawSampledSubregion} & \code{drawStage}, \code{subregionImage}, \code{imgParams},
-  \code{beam} & \code{doUpdate} & - \\
+  \code{beam} (\code{drawingObject}) & \code{doUpdate} & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -1207,7 +1210,8 @@ None
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
 \code{drawResultingSubregion} & \code{stage}, \code{subregionRect},
-  \code{gtImage}, \code{imgParams}, \code{beam} & \code{doUpdate} & - \\
+  \code{gtImage}, \code{imgParams}, \code{beam} (\code{drawingObject})
+  & \code{doUpdate} & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -1225,7 +1229,7 @@ These are kept for mutation, update calls, and performance reasons.
     and magnification (\code{imageMag}) 
     provided by \mref{M_params}
     through the Display Control \mref{M_dispControl}).
-  \item \code{beam}: a reference to the beam geometry.
+  \item \code{beam}: a reference to the beam geometry (\code{drawingObject}).
   \item \code{doUpdate}: an optional reference to a function call when an update occurs.
 \end{itemize}
 
@@ -1284,7 +1288,7 @@ None
 These are kept for mutation, update calls, and performance reasons.
 \begin{itemize}
   \item \code{stage}: a reference to the drawing stage.
-  \item \code{beam}: a reference to the beam geometry.
+  \item \code{beam}: a reference to the beam geometry (\code{drawingObject}).
   \item \code{gtImage}: a reference to the ground truth image (imageDrawingObject).
   \item \code{subregionRect}: a reference to the subregion bounds.
   \item \code{imgParams}: a reference to function to call to get the rasterization
