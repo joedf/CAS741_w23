@@ -81,7 +81,6 @@ urlcolor=cyan          % color of external links
   \midrule 
   HID & Human Interface Device\\
   URL & Uniform Resource Locator\\
-  imageDrawingObject & a geometry where the fill is an image (wrapped by Konva)\\
   \bottomrule
 \end{tabular}\\
 
@@ -99,10 +98,9 @@ urlcolor=cyan          % color of external links
 \section{Introduction}
 
 The following document details the Module Interface Specifications for
-\progname{} (\prognamelong{}).
-
-Complementary documents include the System Requirement Specifications
-and Module Guide.  The full documentation and implementation can be
+\progname{} (\prognamelong{}). Complementary documents include the
+System Requirement Specifications and Module Guide. The full
+documentation and implementation can be
 found at \url{https://github.com/joedf/CAS741_w23}.
 
 \section{Notation}
@@ -129,7 +127,7 @@ unsigned 8-bit integer & $\mathbb{U}$ & a number without a fractional component 
 natural number & $\mathbb{N}$ & a number without a fractional component in [1, $\infty$) \\
 real & $\mathbb{R}$ & any number in (-$\infty$, $\infty$)\\
 positive real & $\mathbb{R}_+$ & any real number in (0, $\infty$)\\
-ratio & $\mathbb{A}$ & any real number in (0, 1)\\
+unit interval & $\mathbb{A}$ & any real number in (0, 1)\\
 imageData \cite{MDN_imagedata} & $\mathbb{I}_{w,h}$ & \code{data}: a one dimensional array of positive integers from
   0 to 255 in RGBA order (pixel components) start from the top left pixel to the
   bottom right pixel with a \code{width}: $\mathbb{Z}_+$ width of $w$
@@ -139,10 +137,13 @@ imageData \cite{MDN_imagedata} & $\mathbb{I}_{w,h}$ & \code{data}: a one dimensi
 \end{center}
 
 \noindent
-The specification of \progname \ uses some derived data types: sequences, strings, and
-tuples. Sequences are lists filled with elements of the same data type. Strings
+The specification of \progname \ uses some derived data types: sequences, strings,
+tuples, and \code{imageDrawingObject}. Sequences are lists filled with elements of the same data type. Strings
 are sequences of characters. Tuples contain a list of values, potentially of
-different types. In addition, \progname \ uses functions, which
+different types. \code{imageDrawingObject} is a geometry object (provided by Konva):
+the fill can be an image, a colour, or even another shape. They can have a width, height,
+rotation, position (x,y), and many other properties.
+In addition, \progname \ uses functions, which
 are defined by the data types of their inputs and outputs. Local functions are
 described by giving their type signature followed by their specification.
 
