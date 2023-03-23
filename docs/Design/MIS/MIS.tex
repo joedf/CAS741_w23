@@ -148,6 +148,8 @@ different types. \code{drawingObject} is a geometry object (provided by Konva):
 the fill can be an image, a colour, or even another shape. They can have a width, height,
 rotation, position (x,y), and many other properties.
 \code{imageDrawingObject} is essentially \code{drawingObject} with an image as the fill.
+\code{drawingLayer} is a layer on a drawing stage (provided by Konva).
+A drawing stage may have many layers.
 In addition, \progname \ uses functions, which
 are defined by the data types of their inputs and outputs. Local functions are
 described by giving their type signature followed by their specification.
@@ -640,16 +642,16 @@ Drawing Stage / Canvas \mreff{M_drawStage}
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{L{4cm} L{4cm} L{4cm} L{3cm}}
+\begin{tabular}{L{4.2cm} L{4.2cm} L{3.6cm} L{3cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawGrid} & \code{gridLayer}, \code{rect},
+\code{drawGrid} & \code{gridLayer} (\code{drawingLayer}), \code{rect} (\code{drawingObject}),
   \code{rows} ($\mathbb{Z}_+$), \code{cols} ($\mathbb{Z}_+$), \code{lineColor}
   & cell size (width/height in pixels, $\mathbb{Z}_+$) & \code{badGridParams} \\
 \hline
-\code{repeatDrawOnGrid} & \code{layer}, \code{rect}, \code{rows} ($\mathbb{Z}_+$),
-  \code{cols} ($\mathbb{Z}_+$), \code{shape}
+\code{repeatDrawOnGrid} & \code{layer} (\code{drawingLayer}), \code{rect} (\code{drawingObject}), \code{rows} ($\mathbb{Z}_+$),
+  \code{cols} ($\mathbb{Z}_+$), \code{shape} (\code{drawingObject})
   & - & \code{badGridParams} \\
 \hline
 \code{ComputeProbeValue\_gs} & \code{image} ($\mathbb{I}_{w,h}$),
