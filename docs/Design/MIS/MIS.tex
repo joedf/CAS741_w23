@@ -70,7 +70,7 @@ urlcolor=cyan          % color of external links
            & 0.1.1 & Update module hierarchy\\
 2023/03/19 & 0.1.2 & Add in module specifications\\
 2023/03/20 & 0.1.3 & Add in minor missing type information.\\
-2023/03/22 & 0.1.4 & Fix some typos and various minor issues.\\
+2023/03/22 & 0.1.4 & Fix some typos, formatting, and various minor issues.\\
 \bottomrule
 \end{tabularx}
 
@@ -232,13 +232,15 @@ image throughout the application.
 \code{gui} \mrefp{M_GUI}
 
 \subsection{Uses}
-Hardware Hiding \mreff{M_HdwHide},
-Display Control \mreff{M_dispControl},
-Ground Truth Image Input \mreff{M_imgGTInput},
-Imaging Parameters Input \mreff{M_params},
-Spot Profile Input \mreff{M_inSpotProfile},
-Image Export \mreff{M_export},
-Information and Metrics Display \mreff{M_infoDisp}
+\begin{itemize}
+  \item Hardware Hiding \mreff{M_HdwHide}
+  \item Display Control \mreff{M_dispControl}
+  \item Ground Truth Image Input \mreff{M_imgGTInput}
+  \item Imaging Parameters Input \mreff{M_params}
+  \item Spot Profile Input \mreff{M_inSpotProfile}
+  \item Image Export \mreff{M_export}
+  \item Information and Metrics Display \mreff{M_infoDisp}
+\end{itemize}
 
 \subsection{Syntax}
 
@@ -418,7 +420,7 @@ None
 The File System.
 
 \subsubsection{Assumptions}
-The output location is a valid writable and accessible. 
+The output location is valid, writable, and accessible.
 
 \subsubsection{Access Routine Semantics}
 
@@ -585,8 +587,8 @@ drawings in progress or drawing loops.
 
 \noindent \code{init()}:
 \begin{itemize}
-\item transition: Initializes a drawing stage object with the given options where \code{container}
-  is the control or location given by the GUI \mreff{M_GUI}.
+\item transition: Initializes a drawing stage object with the given options
+  where \code{container} is the control or location given by the GUI \mreff{M_GUI}.
 \item output: the drawing stage object.
 \item exception: \code{ContainerNotFound} meaning the given control is nonexistent or could not be found.
 \end{itemize}
@@ -769,7 +771,10 @@ None
 drawGroundtruthImage \mrefp{M_vizGT}
 
 \subsection{Uses}
-Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+\begin{itemize}
+  \item Rendering \mreff{M_rendering}
+  \item DrawingStage \mreff{M_drawStage}
+\end{itemize}
 
 \subsection{Syntax}
 
@@ -826,7 +831,10 @@ None
 drawSubregionImage \mrefp{M_vizSubregion}
 
 \subsection{Uses}
-Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+\begin{itemize}
+  \item Rendering \mreff{M_rendering}
+  \item DrawingStage \mreff{M_drawStage}
+\end{itemize}
 
 \subsection{Syntax}
 
@@ -893,7 +901,10 @@ None
 drawSpotProfile \mrefp{M_vizSpotProfile}
 
 \subsection{Uses}
-Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+\begin{itemize}
+  \item Rendering \mreff{M_rendering}
+  \item DrawingStage \mreff{M_drawStage}
+\end{itemize}
 
 \subsection{Syntax}
 
@@ -948,7 +959,10 @@ Mouse events handled by Konva for shape node-editing / ``transformers''.
 drawSpotContent \mrefp{M_vizSpotContent}
 
 \subsection{Uses}
-Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+\begin{itemize}
+  \item Rendering \mreff{M_rendering}
+  \item DrawingStage \mreff{M_drawStage}
+\end{itemize}
 
 \subsection{Syntax}
 
@@ -1014,7 +1028,10 @@ None
 drawSpotSignal \mrefp{M_vizSpotSignal}
 
 \subsection{Uses}
-Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+\begin{itemize}
+  \item Rendering \mreff{M_rendering}
+  \item DrawingStage \mreff{M_drawStage}
+\end{itemize}
 
 \subsection{Syntax}
 
@@ -1075,7 +1092,10 @@ None
 drawSpotLayout \mrefp{M_vizSpotLayout}
 
 \subsection{Uses}
-Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+\begin{itemize}
+  \item Rendering \mreff{M_rendering}
+  \item DrawingStage \mreff{M_drawStage}
+\end{itemize}
 
 \subsection{Syntax}
 
@@ -1137,7 +1157,10 @@ None
 drawSampledSubregion \mrefp{M_vizSampledSub}
 
 \subsection{Uses}
-Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+\begin{itemize}
+  \item Rendering \mreff{M_rendering}
+  \item DrawingStage \mreff{M_drawStage}
+\end{itemize}
 
 \subsection{Syntax}
 
@@ -1200,7 +1223,10 @@ None
 drawResultingSubregion \mrefp{M_vizResultSub}
 
 \subsection{Uses}
-Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+\begin{itemize}
+  \item Rendering \mreff{M_rendering}
+  \item DrawingStage \mreff{M_drawStage}
+\end{itemize}
 
 \subsection{Syntax}
 
@@ -1267,7 +1293,10 @@ None
 drawResultingImage \mrefp{M_vizResultImg}
 
 \subsection{Uses}
-Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
+\begin{itemize}
+  \item Rendering \mreff{M_rendering}
+  \item DrawingStage \mreff{M_drawStage}
+\end{itemize}
 
 \subsection{Syntax}
 
