@@ -336,7 +336,7 @@ includes the responsibilities of the user and the software.
   \item User Responsibilities:
   \begin{itemize}
     \item Provide an image of sufficient size (see \ref{sec_DataConstraints}), such that there is enough detail.
-    \item Provided a ground truth image that should be free of distortions (e.g., from FOV edges, depth of field, ``charging'', insufficient focus, astigmatism, etc.).
+    \item Provide a ground truth image that should be free of distortions (e.g., from FOV edges, depth of field, ``charging'', insufficient focus, astigmatism, etc.).
     \item Be able to interact with the software's graphical user interface using a computer mouse, keyboard and monitor.
     \item Provide realistic spot profiles (size and shape).
     \item Run the software on a platform or system with sufficient resources to process computer graphics.
@@ -1065,7 +1065,7 @@ input of the spot profile (size and shape) and ensure that all its defining
 values are positive real numbers.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_userPixelSize}:] Accept user 
-input of pixel size and ensure it is a positive real number.
+input of pixel size and ensure it is valid (a positive real number).
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_subregion}:] Accept user
 input to specify a subregion or ROI for processing.
