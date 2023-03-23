@@ -56,6 +56,7 @@
 2023/03/18 & 0.1.4 & Rework modules and graph, update traceability\\
 2023/03/19 & 0.1.5 & Some minor tweaks, and update graph\\
 2023/03/22 & 0.1.6 & Clarify \acref{AC_GUI} and \uref{UC_IO}.\\
+           & 0.1.7 & Resolve some minor issues for clarity.\\
 \bottomrule
 \end{tabularx}
 
@@ -73,6 +74,7 @@ This section records information for easy reference.
   \textbf{symbol} & \textbf{description}\\
   \midrule 
   AC & Anticipated Change\\
+  BLT & Bit Block Transfer \cite{pike_bitmap_1984}\\
   CSS & Cascading Style Sheets\\
   DAG & Directed Acyclic Graph \\
   DOM & Document Object Model \\
@@ -178,10 +180,12 @@ change.
   \item[\refstepcounter{acnum} \actheacnum \label{AC_inParamsVerif}:] The constraints on the input parameters.
   \item[\refstepcounter{acnum} \actheacnum \label{AC_outFormat}:] The format of the final output data.
   \item[\refstepcounter{acnum} \actheacnum \label{AC_outVerif}:] The constraints on the output results.
-  \item[\refstepcounter{acnum} \actheacnum \label{AC_calc}:] How the overall control of the
-    calculations are orchestrated.
-  \item[\refstepcounter{acnum} \actheacnum \label{AC_dispInfo}:] The display of information on
-    the visualizations and resulting images.
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_calc}:] How the overall flow and control of the
+    calculations (for image rendering) are orchestrated.
+  \item[\refstepcounter{acnum} \actheacnum \label{AC_dispInfo}:] The display of information 
+    on the visualizations and resulting images, meaning in terms what should (considered
+    useful) be shown to the user. This information may include overall brightness and
+    contrast values, the number of decimal places, image size, etc.
   \item[\refstepcounter{acnum} \actheacnum \label{AC_imgMetricAlgos}:] The ability
     to use different image quality metrics.
   \item[\refstepcounter{acnum} \actheacnum \label{AC_maskOpts}:] The implementation of rendering,
@@ -214,7 +218,7 @@ decisions will be changed.
   \item[\refstepcounter{ucnum} \uctheucnum \label{UC_export}:] The software must
     be able to export the resulting image.
   \item[\refstepcounter{ucnum} \uctheucnum \label{UC_visualize}:] The software must be able
-    to display a live visualization to the user of the effects of changing the imaging parameters.
+    to display a live visualization to the user while the imaging parameters are changed.
 \end{description}
 
 \section{Module Hierarchy} \label{SecMH}
@@ -312,7 +316,7 @@ to be implemented.
 
 \subsubsection{Application Control (\mref{M_control})}
 \begin{description}
-\item[Secrets:] The algorithm for coordinating the running of the program.
+\item[Secrets:] The algorithm for the overall flow of the program.
 \item[Services:] Provides the main program.
 \item[Implemented By:] \progname{}
 \item[Type of Module:] Abstract Object
@@ -321,7 +325,7 @@ to be implemented.
 
 \subsubsection{Ground Truth Image Input (\mref{M_imgGTInput})}
 \begin{description}
-\item[Secrets:] The format, structure, verification of the input ground truth image data.
+\item[Secrets:] The format, structure, and verification of the input ground truth image data.
 \item[Services:] Prompts the user for an input ground truth image file. This module reads and
   converts, and provides the data in the data structure used by \progname{}.
 \item[Implemented By:] CanvasAPI and \progname{}
@@ -331,7 +335,7 @@ to be implemented.
 
 \subsubsection{Imaging Parameters Input (\mref{M_params})}
 \begin{description}
-\item[Secrets:] The format and current values of the input imaging parameters (number
+\item[Secrets:] The format and validation of the input imaging parameters (number
   of rows and columns for the rasterization grid and magnification) data.
 \item[Services:] Gets and provides the parameters values.
 \item[Implemented By:] \progname{}
@@ -486,12 +490,11 @@ of the resulting image.
 
 \subsubsection{Display Control (\mref{M_dispControl})}
 \begin{description}
-\item[Secrets:] The number of drawing stages / canvases and the references to them,
-  the update and redraw events, drawing rates,
-  and the connection to rendering (\mref{M_rendering}).
-\item[Services:] Initializes the drawing stages, provides methods to manipulate them
-  and to attach events, manages the image rendering and drawing, and
-  holds and manages the update function references for each drawing stage.
+\item[Secrets:] The drawing stages (or canvases), the information required
+  for each (object/function references, update and redraw events, drawing rates),
+  and the connection to the rendering module (\mref{M_rendering}).
+\item[Services:] Initializes and manages the display objects and is responsible
+  for the image rendering and drawing.
 \item[Implemented By:] \progname{}
 \item[Type of Module:] Abstract Object
 \end{description}
@@ -499,9 +502,9 @@ of the resulting image.
 
 \subsubsection{Graphical User Interface (\mref{M_GUI})}
 \begin{description}
-\item[Secrets:] The HTML DOM Manipulation; CSS rules; user interaction event handling;
-  user input controls, states, and data formats (such as text-boxes, buttons, file dialogs);
-  along with the layout, styles, colors, and sizing.
+\item[Secrets:] The HTML DOM Manipulation, CSS rules, user interaction event handling,
+  user input controls, states, data formats (such as text-boxes, buttons, file dialogs),
+  visual layout and styling (e.g., colors or sizing).
 \item[Services:] Sets up a visual interface for the user to see and interact with,
   handles user and GUI control events, updates the visual elements representing the
   state of the application, and sends messages back to the
@@ -539,9 +542,9 @@ of the resulting image.
 
 \subsubsection{Image Metrics Calculation (\mref{M_metric})}
 \begin{description}
-\item[Secrets:] The algorithm, criteria, and validations for processing and comparing two images.
-\item[Services:] Compares two images (ideally one - a reference or ground truth image, 
-  and the other - an image to compare to) and produces a score on the 
+\item[Secrets:] The algorithm, criteria, and validation for processing and comparing two images.
+\item[Services:] Compares two images (ideally, one should be a reference or ground truth image
+  and the other should be an image to compare to) and produces a score on the 
   similarity or quality of the compared image with respect to reference image.
 \item[Implemented By:] \progname{}
 \item[Type of Module:] Abstract Object
@@ -624,7 +627,8 @@ because they use modules from the lower levels.
 %\section*{References}
 
 \bibliographystyle {plainnat}
-\bibliography{../../../refs/References,../../../refs/cas741,../../../refs/programming}
+\bibliography{../../../refs/References,../../../refs/cas741,
+../../../refs/programming,../../../refs/algorithms}
 
 \newpage{}
 
