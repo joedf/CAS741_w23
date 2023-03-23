@@ -46,6 +46,9 @@ urlcolor=cyan          % color of external links
 
 \newcommand{\code}[1]{\texttt{#1}}
 
+% https://tex.stackexchange.com/a/337681/289389
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
 \begin{document}
 
 \title{Module Interface Specification for \progname{}}
@@ -67,6 +70,7 @@ urlcolor=cyan          % color of external links
            & 0.1.1 & Update module hierarchy\\
 2023/03/19 & 0.1.2 & Add in module specifications\\
 2023/03/20 & 0.1.3 & Add in minor missing type information.\\
+2023/03/22 & 0.1.4 & Fix some typos and various minor issues.\\
 \bottomrule
 \end{tabularx}
 
@@ -185,7 +189,7 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{L{2cm} L{4cm} L{4cm} L{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -248,7 +252,7 @@ Information and Metrics Display \mreff{M_infoDisp}
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{5cm} p{2cm}}
+\begin{tabular}{L{2cm} L{4cm} L{5cm} L{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -339,7 +343,7 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{7cm} p{1cm} p{4cm}}
+\begin{tabular}{L{3cm} L{5cm} L{3cm} L{3cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -396,7 +400,7 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{L{2cm} L{4cm} L{4cm} L{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -460,7 +464,7 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{3cm} p{5cm} p{4cm} p{2cm}}
+\begin{tabular}{L{3cm} L{5cm} L{4cm} L{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -534,7 +538,7 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{5cm} p{4cm} p{4cm}}
+\begin{tabular}{L{3cm} L{4cm} L{4cm} L{4cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -634,7 +638,7 @@ Drawing Stage / Canvas \mreff{M_drawStage}
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{4cm} p{4cm} p{4cm} p{3cm}}
+\begin{tabular}{L{4cm} L{4cm} L{4cm} L{3cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -727,7 +731,7 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{5cm}}
+\begin{tabular}{L{2cm} L{4cm} L{4cm} L{5cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -774,7 +778,7 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{5cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{L{5cm} L{4cm} L{4cm} L{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -831,7 +835,7 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{5cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{L{5cm} L{4cm} L{4cm} L{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -898,7 +902,7 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{5cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{L{5cm} L{4cm} L{4cm} L{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -953,7 +957,7 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{4cm} p{5cm} p{4cm} p{2cm}}
+\begin{tabular}{L{4cm} L{5cm} L{4cm} L{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -1007,7 +1011,7 @@ None
 \section{MIS of Spot Signal Visualization} \label{MS_vizSpotSignal}
 
 \subsection{Module}
-drawSpotSignal \mrefp{M_viz}
+drawSpotSignal \mrefp{M_vizSpotSignal}
 
 \subsection{Uses}
 Rendering \mreff{M_rendering} and DrawingStage \mreff{M_drawStage}
@@ -1019,7 +1023,7 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{5cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{L{5cm} L{4cm} L{4cm} L{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -1080,7 +1084,7 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{4cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{L{4cm} L{4cm} L{4cm} L{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -1142,7 +1146,7 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{5cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{L{5cm} L{4cm} L{4cm} L{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -1205,7 +1209,7 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{5cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{L{5cm} L{4cm} L{4cm} L{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -1272,7 +1276,7 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{5cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{L{5cm} L{4cm} L{4cm} L{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
