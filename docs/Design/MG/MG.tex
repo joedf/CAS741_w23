@@ -376,7 +376,8 @@ to be implemented.
 
 \subsubsection{Ground Truth Visualization (\mref{M_vizGT})}
 \begin{description}
-\item[Secrets:] The display and drawing stage to represent the ground truth image and subregion bounds.
+\item[Secrets:] The drawing stage and how to render the visualization for
+  the ground truth image and subregion bounds.
 \item[Services:] Draws the Ground Truth Image, a highlighted area representing the subregion
   area (as drawn by \mref{M_vizSubregion}), and returns an update function (reference/pointer)
   to call when the drawing should be updated/redrawn.
@@ -387,7 +388,7 @@ to be implemented.
 
 \subsubsection{Subregion Visualization (\mref{M_vizSubregion})}
 \begin{description}
-\item[Secrets:] The display and drawing stage to represent the subregion.
+\item[Secrets:] The drawing stage and how to render the subregion visualization.
 \item[Services:] Draws the subregion image (zoomed-in area on the ground truth image) 
   and returns an update function (reference/pointer) to call when the drawing should 
   be updated/redrawn.
@@ -398,7 +399,7 @@ to be implemented.
 
 \subsubsection{Spot Profile Visualization (\mref{M_vizSpotProfile})}
 \begin{description}
-\item[Secrets:] The display and drawing stage to represent the
+\item[Secrets:] The drawing stage and how to render the visualization for the
   spot profile (width, height, and rotation, see SRS \cite{SRS}).
 \item[Services:] Draws the spot profile and returns an update function (reference/pointer)
   to call when the drawing should be updated/redrawn.
@@ -409,7 +410,7 @@ to be implemented.
 
 \subsubsection{Spot Content Visualization (\mref{M_vizSpotContent})}
 \begin{description}
-\item[Secrets:] The display and drawing stage to represent the
+\item[Secrets:] The drawing stage and how to render the visualization for the
   spot content (subregion ``stenciled'' with the spot profile, see SRS \cite{SRS}).
 \item[Services:] Draws the spot content and returns an update function (reference/pointer)
   to call when the drawing should be updated/redrawn.
@@ -420,7 +421,7 @@ to be implemented.
 
 \subsubsection{Spot Signal Visualization (\mref{M_vizSpotSignal})}
 \begin{description}
-\item[Secrets:] The display and drawing stage to represent the
+\item[Secrets:] The drawing stage and how to render the visualization for the
   spot content (a signal or pixel value to represent what has been sampled by
   the spot or beam, see SRS \cite{SRS}).
 \item[Services:] Draws the spot signal and returns an update function (reference/pointer)
@@ -432,7 +433,7 @@ to be implemented.
 
 \subsubsection{Spot Layout Visualization (\mref{M_vizSpotLayout})}
 \begin{description}
-\item[Secrets:] The display and drawing stage to represent the spot layout.
+\item[Secrets:] The drawing stage and how to render the visualization for the spot layout.
 \item[Services:] Draws the spot layout and returns an update function (reference/pointer)
   to call when the drawing should be updated/redrawn.
 \item[Implemented By:] \progname{}
@@ -442,7 +443,8 @@ to be implemented.
 
 \subsubsection{Sampled Subregion Visualization (\mref{M_vizSampledSub})}
 \begin{description}
-\item[Secrets:] The display and drawing stage to represent the sampled image content in the subregion.
+\item[Secrets:] The drawing stage and how to render the visualization for
+  the sampled image content of the subregion.
 \item[Services:] Draws the sampled subregion (image content ``stenciled'' with the spot layout)
   and returns an update function (reference/pointer) to call when the drawing should be updated/redrawn.
 \item[Implemented By:] \progname{}
@@ -452,7 +454,8 @@ to be implemented.
 
 \subsubsection{Resulting Subregion Visualization (\mref{M_vizResultSub})}
 \begin{description}
-\item[Secrets:] The display and drawing stage to represent the resulting subregion.
+\item[Secrets:] The drawing stage and how to render the visualization for
+  the resulting subregion.
 \item[Services:] Draws the resulting (resampled) subregion image 
   and returns an update function (reference/pointer) to call when the drawing
   should be updated/redrawn.
@@ -463,8 +466,7 @@ to be implemented.
 
 \subsubsection{Resulting Image Visualization (\mref{M_vizResultImg})}
 \begin{description}
-\item[Secrets:] The display and drawing stage 
-of the resulting image.
+\item[Secrets:] The drawing stage and how to render the resulting image.
 \item[Services:] Draws the resulting (resampled full) image 
   and returns an update function (reference/pointer) to call when the drawing
   should be updated/redrawn.
