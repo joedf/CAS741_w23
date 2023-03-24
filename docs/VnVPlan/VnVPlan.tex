@@ -490,15 +490,15 @@ environment of choice.
 
   Type: Manual
             
-  Initial State: None
-            
-  Input/Condition: A group of intended users, the SRS \citep{SRS}, and 
+  Condition: A group of intended users, the SRS \citep{SRS}, and 
   the survey questions on topics related to \textit{usability}.
             
-  Output/Result: The completed user surveys (see \ref{survey_usability}).
+  Goal: The information collected from the completed user surveys (see \ref{survey_usability})
+    will be aggregated and analyzed for any patterns and changes
+    that may be incorporated to improve the software.
             
   How test will be performed: The users will be given a series of questions to evaluate the 
-  ease-of-use, whether the GUI is intuitive or confusing, etc.
+    ease-of-use, whether the GUI is intuitive or confusing, etc.
 
 \end{enumerate}
 
@@ -509,16 +509,16 @@ environment of choice.
 
   Type: Manual
             
-  Initial State: None
-            
-  Input/Condition: A group of intended users, the SRS \citep{SRS}, 
+  Condition: A group of intended users, the SRS \citep{SRS}, 
   a list of images of varying quality, and the survey questions on topics related 
   to the image quality and clarity.
             
-  Output/Result: The completed user surveys (see \ref{survey_metric}).
+  Goal: The information collected from the completed user surveys (see \ref{survey_metric})
+    will be aggregated and analyzed for any patterns to
+    change or adapt the image metric used according to the rankings.
             
   How test will be performed: The users will be given a series of questions to evaluate 
-  a given list of images, rank them based on detail and information content, etc.
+    a given list of images, rank them based on detail and information content, etc.
   
 \end{enumerate}
 
@@ -529,30 +529,26 @@ environment of choice.
 
   Type: Manual
             
-  Initial State: None
+  Condition: The software code will be tested through the use \textbf{pylint} for any
+    Python code used and \textbf{ESLint} for any JavaScript code used.
             
-  Input/Condition: The software code will be tested through the use \textbf{pylint} for any
-  Python code used and \textbf{ESLint} for any JavaScript code used.
-            
-  Output/Result: The code linters should list little to no 
-  warnings (less than 10 unique warnings, on the default strictness setting), and zero errors.
+  Goal: The code linters should list little to no 
+    warnings (less than 10 unique warnings, on the default strictness setting), and zero errors.
             
   How test will be performed: Execute the \textbf{pylint} tool on all written Python code and 
-  the \textbf{ESLint} tool on all written JavaScript code.
+    the \textbf{ESLint} tool on all written JavaScript code.
 
   \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_codeReview}}: Code Review\\}
 
   Type: Manual
             
-  Initial State: None
+  Condition: The software source code and the code review checklist (see \ref{checklist_codeReview})
             
-  Input/Condition: The software source code and the code review checklist (see \ref{checklist_codeReview})
-            
-  Output/Result: The code should respect the defined code review checklist.
+  Goal: The code should respect the defined code review checklist.
             
   How test will be performed: The author with walkthrough the code manually and check for qualities
-  such as consistent styling, loose variables, variable scoping, unreachable code, 
-  sufficient commenting, etc.
+    such as consistent styling, loose variables, variable scoping, unreachable code, 
+    sufficient commenting, etc.
   
 \end{enumerate}
 
@@ -563,15 +559,14 @@ environment of choice.
 
   Type: Manual
             
-  Initial State: None
+  Condition: Given any of the supported platforms, the user should be able to set up and 
+    run the software with relative ease.
             
-  Input/Condition: Given any of the supported platforms, the user should be able to set up and 
-  run the software with relative ease.
+  Goal: The software runs on the platform of choice with little to no setup including 
+    installation, meaning less than 4 clicks and under 3 minutes set up time.
             
-  Output/Result: The software runs on the platform of choice with little to no setup including 
-  installation, meaning less than 4 clicks and under 3 minutes set up time.
-            
-  How test will be performed: The user will download and run the software on their platform of choice.
+  How test will be performed: The user will download and run the software on their
+    platform of choice.
   
 \end{enumerate}
 
