@@ -198,9 +198,10 @@ no setup required. The design and implementation is documented in the
 MG\citep{MG}/MIS\citep{MIS} which will be verified with the MG \cite{MG_checklist}
 and MIS \cite{MIS_checklist} checklists.
 The VnV team, as well as any welcomed volunteers, will provide
-their input (through GitHub issues). Eventually, the project may be published in a journal
-where the software \progname~and its accompanying documentation will 
-likely be rigorously reviewed; The expert consultants will review and evaluate the software to
+their input (through GitHub issues). Eventually, if the project were to be published
+in a journal (to be determined) where the software \progname~and its
+accompanying documentation will likely be rigorously reviewed; the expert
+consultants will review and evaluate the software to
 establish whether it is fit for public use.
 
 \an{Not sure what was appropriate to put here.}
@@ -245,7 +246,8 @@ A \textit{usability} survey will be conducted to evaluate the user experience an
 the GUI is intuitive enough to the intended users as described in the SRS \citep{SRS}.
 An \textit{accuracy} survey will be conducted to assess the user-perceived image quality. 
 The trends identified in the surveys results will be compared to the calculated image metrics.
-As a control for the images produced, a manual and an automated test will be conducted to verify if 
+As a control for the images produced, a manual test (see \tref{T_reproduceGT})
+will be conducted to verify if 
 an image identical (or with unperceivable difference) to ground truth image can be reproduced.
 The compared images shall be in the \textit{accuracy} survey for confirmation. This can be compared
 as well using the image metrics. 
@@ -267,7 +269,7 @@ are as expected.
 
 \subsubsection{Image Import and Export} \label{subsec_img_io}
 
-To satisfy R1 from the SRS \citep{SRS}, an input image for the following formats listed below shall be 
+To satisfy R1 from the SRS \citep{SRS}, any input image of the following formats listed below shall be 
 accepted provided they follow the input data constraints.
 Some preloaded example images shall be included and be available to the user for use as well.
 As well as for R6, the software should allow for export of the resulting image.
@@ -286,9 +288,10 @@ As well as for R6, the software should allow for export of the resulting image.
             
   Initial State: \progname{} loaded and idle.
             
-  Input: A non-corrupt (valid) PNG, JPG, or BMP image file.
+  Input: The default preloaded image or any non-corrupt (valid) PNG, JPG, or BMP image file of the testers choice.
             
   Output: The image should be visible and be displayed as expected as the ground truth image.
+    This will be judged and verified by manual visual inspection.
             
   Test Case Derivation: These are some of the most common image file formats and should be compatible with the software.
             
@@ -304,9 +307,10 @@ As well as for R6, the software should allow for export of the resulting image.
             
   % Output: \wss{The expected result for the given inputs}
   Output: The output image file should look the same as what is displayed in the ``Resulting Image'' display.
+    This will be judged and verified by manual visual inspection.
 
   % Test Case Derivation: \wss{Justify the expected value given in the Output field}
-  Test Case Derivation: \an{Not sure what this means, and how this differs from what's explained Output.}
+  Test Case Derivation: Not applicable.
 
   How test will be performed: The user will click the ``Export image'' button and choose where to save the image file.
 
@@ -332,9 +336,10 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
     Input: Both width and height are set to ``100\%''.
               
     Output: The spot layout should reflect these changes and display an updated arrangement with the given shape.
-    The resulting image should exhibit the expected \textbf{exact-sampling} case as documented by the SRS figures \citep{SRS}.
+      The resulting image should exhibit the expected \textbf{exact-sampling} case as documented by the SRS figures \citep{SRS}.
+      This will be judged and verified by manual visual inspection.
 
-    Test Case Derivation: \an{not needed in this case?}
+    Test Case Derivation: Not applicable.
               
     How test will be performed: Manually, either by using the mouse scroll wheel in
       the spot content display, or by double-clicking on the width display and entering '100'
@@ -349,9 +354,10 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
     Input: Both width and height are set to ``10\%''.
               
     Output: The spot layout should reflect these changes and display an updated arrangement with the given shape.
-    The resulting image should exhibit the expected \textbf{under-sampling} case as documented by the SRS figures \citep{SRS}.
+      The resulting image should exhibit the expected \textbf{under-sampling} case as documented by the SRS figures \citep{SRS}.
+      This will be judged and verified by manual visual inspection.
 
-    Test Case Derivation: \an{not needed in this case?}
+    Test Case Derivation: Not applicable.
               
     How test will be performed: Manually, either by using the mouse scroll wheel in
       the spot content display, or by double-clicking on the width display and entering '10'
@@ -366,9 +372,10 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
     Input: Both width and height are set to ``500\%''.
               
     Output: The spot layout should reflect these changes and display an updated arrangement with the given shape.
-    The resulting image should exhibit the expected \textbf{over-sampling} case as documented by the SRS figures \citep{SRS}.
+      The resulting image should exhibit the expected \textbf{over-sampling} case as documented by the SRS figures \citep{SRS}.
+      This will be judged and verified by manual visual inspection.
 
-    Test Case Derivation: \an{not needed in this case?}
+    Test Case Derivation: Not applicable.
               
     How test will be performed: Manually, either by using the mouse scroll wheel in
       the spot content display, or by double-clicking on the width display and entering '500'
@@ -383,9 +390,10 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
     Input: The angle is set to ``45 degrees'', the width is set ``60\%'', and the height is set to ``500\%''.
               
     Output: The spot layout should reflect the updated arrangement with the rotated spots.
-    The resulting image should exhibit the expected \textbf{astigmatism} effects as documented in the SRS figures \citep{SRS}.
+      The resulting image should exhibit the expected \textbf{astigmatism} effects as documented in the SRS figures \citep{SRS}.
+      This will be judged and verified by manual visual inspection.
 
-    Test Case Derivation: \an{see output?}
+    Test Case Derivation: Not applicable.
 
     How test will be performed: How test will be performed: Manually, either by using the mouse scroll wheel in
     the spot content display, or by double-clicking on the width display and entering '100'
@@ -401,9 +409,10 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
     Input: The rows and columns are set to ``8'' for the raster grid.
               
     Output: The resulting image resolution (not image size) should be an ``8'' by ``8'' grid image.
-    The ``8'' rows and ``8'' columns should be represented in the spot layout display.
+      The ``8'' rows and ``8'' columns should be represented in the spot layout display.
+      This will be judged and verified by manual visual inspection.
 
-    Test Case Derivation: \an{see output?}
+    Test Case Derivation: Not applicable.
 
     How test will be performed: The user shall input the number of rows and columns.
 
@@ -416,11 +425,34 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
     Input: The magnification is set to ``2x'' and the raster grid is set to ``8 x 8''.
               
     Output: Both the spot layout and the resulting subregion displays should have ``8 x 8'' resolution (rows and columns). 
-    The resulting image preview should have ``16 x 16'' resolution (rows and columns).
+      The resulting image preview should have ``16 x 16'' resolution (rows and columns).
+      This will be judged and verified by manual visual inspection.
 
-    Test Case Derivation: \an{see output?}
+    Test Case Derivation: Not applicable.
 
     How test will be performed: The user scroll/zoom in the Subregion (ROI) View display until a magnification of 2x is reached.
+					
+    \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_reproduceGT}}: Ground Truth Reproduction\\}
+
+    Control: Manual
+                
+    Initial State: \progname{} loaded and idle.
+              
+    Input: An image that is 400x400 pixels is loaded.
+      The rows and columns are set to ``200'' for the raster grid.
+      The magnification is set to ``2x''.
+      Both the spot width and height are set to ``100\%''.
+              
+    Output: The resulting image shall look nearly identical to input image.
+      This will be judged and verified by manual visual inspection.
+
+    Test Case Derivation: Not applicable.
+
+    How test will be performed: The user shall input the number of rows and columns,
+      set the magnification by using the mouse scroll wheel in the Subregion/ROI display,
+      and set the spot size either by using the mouse scroll wheel in
+      the spot content display, or by double-clicking on the width display and entering '100'
+      in prompt that appears.
 
 \end{enumerate}
 
@@ -428,7 +460,9 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
 \subsubsection{Image Quality Metric} \label{subsec_img_metric}
 
 To satisfy R7, the user should be able to see a larger number for a resulting image that is closer to ground truth 
-and a smaller number otherwise.
+and a smaller number otherwise. The ground truth image used for these tests shall be the default
+preloaded image or any valid (as per the SRS \cite{SRS}) image of the tester's choice that is
+400 by 400 pixels.
 
 \begin{enumerate}
 
@@ -439,10 +473,14 @@ and a smaller number otherwise.
     Initial State: \progname{} loaded and idle.
               
     Input: The Spot size is set to ``120\%'' with a perfectly circular spot shape.
+      The rows and columns are set to ``16''.
+      The magnification is set to ``2x''.
               
-    Output: The score should be greater than ``0.8650''.
+    Output: The score should be greater than ``0.8501''.
 
     Test Case Derivation: The resulting image should look somewhat sharp as shown in the SRS figures \citep{SRS}.
+      This will be judged and verified by manual visual inspection.
+      Preliminary tests were conducted to the score value shown above.
 					
   \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricLow}}: Low metric value (under-sampling)\\}
 
@@ -451,10 +489,15 @@ and a smaller number otherwise.
   Initial State: \progname{} loaded and idle.
             
   Input: The Spot size is set to ``10\%'' with a perfectly circular spot shape.
+    The rows and columns are set to ``16''.
+    The magnification is set to ``2x''.
             
-  Output: The score should be less than ``0.8601''.
+  Output: The score should be less than ``0.8501''.
 
-  Test Case Derivation: The resulting image should look somewhat overly ``sharp'' or pixelated as shown in the SRS figures \citep{SRS}.
+  Test Case Derivation: The resulting image should look somewhat overly ``sharp'' or
+    pixelated as shown in the SRS figures \citep{SRS}.
+    This will be judged and verified by manual visual inspection.
+    Preliminary tests were conducted to the score value shown above.
   					
   \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricLow2}}: Low metric value (over-sampling)\\}
 
@@ -463,10 +506,15 @@ and a smaller number otherwise.
   Initial State: \progname{} loaded and idle.
             
   Input: The Spot size is set to ``500\%'' with a perfectly circular spot shape.
+    The rows and columns are set to ``16''.
+    The magnification is set to ``2x''.
             
-  Output: The score should be less than ``0.8601''.
+  Output: The score should be less than ``0.8501''.
 
-  Test Case Derivation: The resulting image should look somewhat ``blurry'' or ``defocused'' as shown in the SRS figures \citep{SRS}.
+  Test Case Derivation: The resulting image should look somewhat ``blurry'' or ``defocused''
+    as shown in the SRS figures \citep{SRS}.
+    This will be judged and verified by manual visual inspection.
+    Preliminary tests were conducted to the score value shown above.
   					
   \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricControl}}: Control metric value\\}
 
@@ -475,12 +523,19 @@ and a smaller number otherwise.
   Initial State: \progname{} loaded and idle.
             
   Input: Spot size of a 100\%, the same pixel size (image resolution) as the ground truth image, 
-  and perfectly circular spot shape.
+    and perfectly circular spot shape.
+    The rows and columns are set to ``200''.
+    The magnification is set to ``2x''.
             
-  Output: A number that is near the best or maximum quality metric value. The resulting image should nearly
-  identical to the ground truth image. The score should be greater than ``0.9800''.
+  Output: A number that is near the best or maximum quality metric value
+    (as specified in the SRS \cite{SRS}). The resulting image should nearly
+    identical to the ground truth image. This will be judged and verified by manual visual inspection.
+    However, The score should be ``1.00'' (meaning a perfect score), but to allow
+    for a small error margin, it should be greater than ``0.9800''.
 
   Test Case Derivation: The resulting image should be identical or have unperceivable differences to the naked eye.
+    This will be judged and verified by manual visual inspection.
+    Preliminary tests were conducted to the score value shown above.
 
 \end{enumerate}
 
