@@ -55,7 +55,8 @@
   & 1.0.8 & Review the design and VnV verification plans. \\
 2023/02/27 & 1.0.9 & Improve wording for Section \ref{sec_impl_vplan}. \\
   & 1.0.10 & Tweak tests in sections \ref{subsec_spot} and \ref{subsec_img_metric}. \\
-2023/03/23 & 1.0.11 & Improve clarity for how some of the test will be performed.\\
+2023/03/23 & 1.0.11 & Improve clarity for how some tests will be performed.\\
+  & 1.1.0 & Incorporate feedback from Dr. Smith's review.\\
 \bottomrule
 \end{tabularx}
 
@@ -112,11 +113,15 @@ parameters (as defined in the SRS) on image quality (or clarity) and resolution.
 \subsection{Objectives} \label{sec_objectives}
 
 The objective is to produce a tool that is easy to use (\textit{usability}). It should feel intuitive 
-to the user and should provide easy-to-understand information. This is so that the user may 
+to the user and should provide easy-to-understand information. This is so the user may 
 identify any trends in how the final image is affected with relative ease and confidence. As a 
 secondary goal, the \textit{accuracy} in the trends are important. Due to the subjective and 
 qualitative nature of evaluating image quality, the metric used should be straight-forward and 
 provide some objectivity (for quantitative comparison) and assurance to the users.
+As for an objective that will be left out, due to resource limitations, is the study and
+improvement of an all-round robust (quantitative and consistent) image metric. While this
+is a highly desired goal, this is an incredibly difficult task and is 
+currently deemed to be outside the scope of this project.
 
 \subsection{Relevant Documentation}
 
@@ -124,11 +129,16 @@ There are multiple design documents that provide the important and intimate deta
 some of the concepts that are being tested. These documents are the following:
 
 \begin{itemize}
-  \item Problem Statement \citep{Prob_Statement}
-  \item SRS \citep{SRS}
-  \item VnV Report \citep{VnV_report}
-  \item MG \citep{MG}
-  \item MIS \citep{MIS}
+  \item Problem Statement \citep{Prob_Statement}: States the problem we are trying to solve
+    and introduces the topics that will need be verified.
+  \item SRS \citep{SRS}: States the requirements, assumptions, models, and important 
+  terminology that are used in the VnV plan.
+  \item VnV Report \citep{VnV_report}: States what has been achieved from the VnV plan,
+    as well as provide results or evidence to help build confidence for correctness.
+  \item MG \citep{MG}: States the responsibilities and secrets for each module that will
+    be evaluated by the VnV plan.
+  \item MIS \citep{MIS}: Specifies the functional design and states what is needed for each
+    module that will be evaluated by the VnV plan.
 \end{itemize}
 
 \section{Plan}
@@ -137,6 +147,8 @@ In this section, multiple plans are described to test and inspect the software w
 on \textit{usability}. Multiple approaches and perspectives will be employed by the VnV team (\ref{sec_vnv_team})
 to help build confidence in the requirements, to avoid any missed important details, 
 and to deliver on the qualities as mentioned in the objective (\ref{sec_objectives}).
+
+\newpage
 
 \subsection{Verification and Validation Team} \label{sec_vnv_team}
 
@@ -154,16 +166,16 @@ The members of the VnV team as well their individual roles are listed in the fol
     SRS Reviewer       & Jason Balaci        \\ \hline
     VnV Plan Reviewer  & Sam Crawford        \\ \hline
     MG + MIS Reviewer  & Lesley Wheat        \\ \hline
-    Expert Consultant  & Dr. Nabil Bassim    \\ \hline
-    Expert Consultant  & Michael W. Phaneuf  \\ \hline
+    Expert Consultant  & Dr.~Nabil Bassim    \\ \hline
+    Expert Consultant  & Michael W.~Phaneuf  \\ \hline
   \end{tabular}
   \caption{Table of the VnV Team Members}
   \label{table_vnv_team}
 \end{table}
 
-\an{Dr. Bassim is my PhD Supervisor, and Mr. Phaneuf is my co-supervisor (employer/industry), 
+\an{Dr.~Bassim is my PhD Supervisor, and Mr.~Phaneuf is my co-supervisor (employer/industry), 
 since I am doing an industrial PhD. Much of this project was originally conceptualized with 
-the help and guidance of Mr. Phaneuf.}
+the help and guidance of Mr.~Phaneuf.}
 
 
 \subsection{SRS Verification Plan} \label{sec_srs_vplan}
@@ -183,7 +195,8 @@ Much of the conceptualization was done after having multiple discussions with th
 consultants and having done literature review for preexisting tools and documentation 
 relevant to the project. Decisions were made with a focus on the usability, meaning little to 
 no setup required. The design and implementation is documented in the 
-MG\citep{MG}/MIS\citep{MIS}.
+MG\citep{MG}/MIS\citep{MIS} which will be verified with the MG \cite{MG_checklist}
+and MIS \cite{MIS_checklist} checklists.
 The VnV team, as well as any welcomed volunteers, will provide
 their input (through GitHub issues). Eventually, the project may be published in a journal
 where the software \progname~and its accompanying documentation will 
