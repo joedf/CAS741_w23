@@ -652,6 +652,11 @@ environment of choice.
 This section cannot not be filled or completed until the MIS (detailed design document) has been completed.
 \an{I did do some image metrics testing that can at least be partially documented here...}
 
+
+\an{TODO: add unit tests for black, white and half black+white images tests for control.
+and the various tests for og, fant, 10, 60, 120, etc. py and js tests.}
+
+
 \subsection{Unit Testing Scope}
 
 \an{Other than the image metrics, I am not sure what else could be unit tested as of now?}
@@ -804,6 +809,7 @@ When a component is changed, the elements marked with an ``X'' might need to be 
   \tref{T_spotRotation}         & &X& & &X& & & & & & \\ \hline
   \tref{T_rasterGrid}           & & &X& &X& & & & & & \\ \hline
   \tref{T_subregion}            & & & &X&X& & & & & & \\ \hline
+  \tref{T_reproduceGT}          &X&X&X& & &X& & & & & \\ \hline
   \tref{T_manualMetricHigh}     & & & & & & &X& & & & \\ \hline
   \tref{T_manualMetricLow}      & & & & & & &X& & & & \\ \hline
   \tref{T_manualMetricLow2}     & & & & & & &X& & & & \\ \hline
