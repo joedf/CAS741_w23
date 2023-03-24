@@ -57,6 +57,8 @@
   & 1.0.10 & Tweak tests in sections \ref{subsec_spot} and \ref{subsec_img_metric}. \\
 2023/03/23 & 1.0.11 & Improve clarity for how some tests will be performed.\\
   & 1.1.0 & Incorporate feedback from Dr. Smith's review.\\
+  & 1.1.1 & Added a code linting ruleset.\\
+  & 1.1.2 & Added symbolic constants.\\
 \bottomrule
 \end{tabularx}
 
@@ -636,7 +638,9 @@ environment of choice.
     run the software with relative ease.
             
   Result: The software runs on the platform of choice with little to no setup including 
-    installation, meaning less than 4 clicks and under 3 minutes set up time.
+    installation, meaning less than \code{SETUP\_MAX\_CLICKS}
+    clicks and under \code{SETUP\_MAX\_TIME}
+    setup time (see symbolic constants in section \ref{secsymbolic_constants}).
             
   How test will be performed: The user will download and run the software on their
     platform of choice.
@@ -912,6 +916,15 @@ The code linting ruleset should the default recommended ruleset plus the followi
     a global variable. Library names are exempt.
 \end{itemize}
 
+
+\subsection{Symbolic Constants} \label{secsymbolic_constants}
+These are \textit{symbolic} values used in the descriptions and text in this document that are 
+subject to change. They listed and defined here to make it easy to change and reduce the
+possibility of mistakes when updating this document.
+\begin{itemize}
+  \item \code{SETUP\_MAX\_CLICKS = 4} clicks
+  \item \code{SETUP\_MAX\_TIME = 3} minutes
+\end{itemize}
 
 
 
