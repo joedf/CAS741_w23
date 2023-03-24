@@ -12,3 +12,5 @@ VnV
 Konva
 CanvasAPI
 rasterization
+ruleset
+Ruleset

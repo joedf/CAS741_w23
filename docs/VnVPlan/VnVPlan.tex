@@ -462,7 +462,8 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
 To satisfy R7, the user should be able to see a larger number for a resulting image that is closer to ground truth 
 and a smaller number otherwise. The ground truth image used for these tests shall be the default
 preloaded image or any valid (as per the SRS \cite{SRS}) image of the tester's choice that is
-400 by 400 pixels.
+400 by 400 pixels. Most of these test are conducted manually and judge visually by the tester.
+As for automated testing, there are control tests for the image metric in section \ref{sec_unittest}.
 
 \begin{enumerate}
 
@@ -604,8 +605,8 @@ environment of choice.
   Condition: The software code will be tested through the use \textbf{pylint} for any
     Python code used and \textbf{ESLint} for any JavaScript code used.
             
-  Result: The code linters should list little to no 
-    warnings (less than 10 unique warnings, on the default strictness setting), and zero errors.
+  Result: The code linters should list zero 
+    warnings (using a specified ruleset, see \ref{codelint_ruleset}), and zero errors.
             
   How test will be performed: Execute the \textbf{pylint} tool on all written Python code and 
     the \textbf{ESLint} tool on all written JavaScript code.
@@ -879,5 +880,39 @@ the user shall answer the following questions?
   \item{Could programmer other than the author read the code and briefly understand it?}
   \item{Is there any leftover commented code that is not useful?}
 \end{itemize}
+
+\subsection{Code Linting Ruleset} \label{codelint_ruleset}
+The code linting ruleset should the default recommended ruleset plus the following:
+\begin{itemize}
+  \item No lines longer than 120 characters.
+  \item No function or variable names are at least 2 characters long and at most 40 characters long.
+    Exceptions:
+    \begin{itemize}
+      \item \code{i}, \code{j}, \code{k}: common for iterators in loops
+      \item \code{x}, \code{y}: common for positioning and coordinates
+      \item \code{w}, \code{h}: common for width and height values
+      \item (ESLint only) \code{e}: \textit{defacto} standard for javascript events
+      \item \code{c}, \code{d}: used heavily in \progname{}'s image data manipulation.
+        Otherwise, the code gets very difficult to read when dealing multiple arrays of data 
+        on a lower level
+    \end{itemize}
+  \item No "magic numbers". Exceptions:
+    \begin{itemize}
+      \item \code{0}, \code{1}: common for array starting indexes
+      \item \code{2}: common for getting half of a value
+      \item \code{3}, \code{4}: used heavily for managing RGBA values/data on a lower level
+      \item \code{-1}: common value for failure or an error
+      \item \code{100}: common for percentages
+      \item \code{180}: common for angle conversions
+      \item \code{255}: the maximum value for an 8-bit pixel value.
+        \progname{} is limited to 8-bit images as specified in the SRS \cite{SRS}
+        and is unlikely to change as specified in the MG \cite{MG}.
+    \end{itemize}
+  \item Warn about global variables. Each shall be carefully considered whether it should remain
+    a global variable. Library names are exempt.
+\end{itemize}
+
+
+
 
 \end{document}
