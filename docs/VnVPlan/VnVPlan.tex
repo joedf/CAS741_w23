@@ -346,7 +346,7 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
     How test will be performed: Manually, either by using the mouse scroll wheel in
       the spot content display, or by double-clicking on the width display and entering '100'
       in prompt that appears.
-					
+
     \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_spotSize10}}: Spot Width and Height - Under-sampling\\}
 
     Control: Manual
@@ -364,7 +364,7 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
     How test will be performed: Manually, either by using the mouse scroll wheel in
       the spot content display, or by double-clicking on the width display and entering '10'
       in prompt that appears.
-					
+
     \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_spotSize500}}: Spot Width and Height - Over-sampling\\}
 
     Control: Manual
@@ -382,7 +382,7 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
     How test will be performed: Manually, either by using the mouse scroll wheel in
       the spot content display, or by double-clicking on the width display and entering '500'
       in prompt that appears.
-					
+
   \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_spotRotation}}: Spot Rotation - Astigmatism\\}
 
     Control: Manual
@@ -401,7 +401,7 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
     the spot content display, or by double-clicking on the width display and entering '100'
     in prompt that appears. And, by dragging the rotation node in the spot profile display
     until an angle of 45 is reached.
-					
+
     \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_rasterGrid}}: Raster Grid / Pixel Size\\}
 
     Control: Manual
@@ -433,7 +433,7 @@ To satisfy R4, the user should be able to specify a subregion (or ROI) for proce
     Test Case Derivation: Not applicable.
 
     How test will be performed: The user scroll/zoom in the Subregion (ROI) View display until a magnification of 2x is reached.
-					
+
     \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_reproduceGT}}: Ground Truth Reproduction\\}
 
     Control: Manual
@@ -484,7 +484,7 @@ As for automated testing, there are control tests for the image metric in sectio
     Test Case Derivation: The resulting image should look somewhat sharp as shown in the SRS figures \citep{SRS}.
       This will be judged and verified by manual visual inspection.
       Preliminary tests were conducted to the score value shown above.
-					
+
   \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricLow}}: Low metric value (under-sampling)\\}
 
   Control: Manual
@@ -501,7 +501,7 @@ As for automated testing, there are control tests for the image metric in sectio
     pixelated as shown in the SRS figures \citep{SRS}.
     This will be judged and verified by manual visual inspection.
     Preliminary tests were conducted to the score value shown above.
-  					
+
   \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricLow2}}: Low metric value (over-sampling)\\}
 
   Control: Manual
@@ -518,7 +518,7 @@ As for automated testing, there are control tests for the image metric in sectio
     as shown in the SRS figures \citep{SRS}.
     This will be judged and verified by manual visual inspection.
     Preliminary tests were conducted to the score value shown above.
-  					
+
   \item{\textbf{T\refstepcounter{testnum}\thetestnum \label{T_manualMetricControl}}: Control metric value\\}
 
   Control: Manual
@@ -652,6 +652,7 @@ environment of choice.
 This section cannot not be filled or completed until the MIS (detailed design document) has been completed.
 \an{I did do some image metrics testing that can at least be partially documented here...}
 
+\an{Prof says: The unit tests are decided by your module interfaces.}
 
 \an{TODO: add unit tests for black, white and half black+white images tests for control.
 and the various tests for og, fant, 10, 60, 120, etc. py and js tests.}
@@ -686,26 +687,26 @@ and the various tests for og, fant, 10, 60, 120, etc. py and js tests.}
 
 Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
   be automatic}
-					
+
 Initial State: 
-					
+
 Input: 
-					
+
 Output: \wss{The expected result for the given inputs}
 
 Test Case Derivation: \wss{Justify the expected value given in the Output field}
 
 How test will be performed: 
-					
+
 \item{test-id2\\}
 
 Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
   be automatic}
-					
+
 Initial State: 
-					
+
 Input: 
-					
+
 Output: \wss{The expected result for the given inputs}
 
 Test Case Derivation: \wss{Justify the expected value given in the Output field}
@@ -736,39 +737,41 @@ $Metric = 1 - NRMSE$, where the ``NRMSE'' is RMSE normalized to a value between 
 \item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric1}}: Lowest/Highest MSE, RMSE and NRMSE scores\\}
 
 Type: Automatic
-					
+
 Initial State: \an{Not running?}
-					
-Input/Condition: The ground truth images and multiple resampled images of varying and known quality.
-					
+
+Input/Condition: The ground truth images \an{Prof says What image?}
+  and multiple resampled images of varying and known quality.
+
 Output/Result: The higher quality image should return the lowest error (i.e. lowest MSE, RMSE, NRMSE) scores.
-					
-How test will be performed: Executing a suite of tests for the multiple images.
-					
+
+How test will be performed: Executing a suite of tests \an{Prof says What tests?}
+  for the multiple images.
+
 \item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metricControl}}: Control testing \\}
 
 Type: Automatic
-					
+
 Initial State: \an{Not running?}
-					
+
 Input: The ground truth image.
-					
+
 Output: an error score of zero \an{or the lowest error possible depending on the given metric}.
-					
+
 How test will be performed: Executing a suite of tests using the different metric to compare the 
 ground truth image to itself.
-					
+
 \item{test-id\#\\}
 
 Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
 be automatic}
-					
+
 Initial State: 
-					
+
 Input: 
-					
+
 Output: 
-					
+
 How test will be performed: 
 
 \end{enumerate}
