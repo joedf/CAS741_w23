@@ -469,7 +469,7 @@ None
 \hline
 \code{Init} & \code{gtImage} ($\mathbb{I}_{w,h}$),
   \code{drawControls}: GUI controls for 2 to 10 in section \ref{USES_dispControl}
-  & a reference to the \code{doUpdate} function for each & - \\
+  & a \code{doUpdate} function for each visualization that has one & - \\
 \hline
 \code{doUpdateAll} & - & - & - \\
 \hline
@@ -482,7 +482,7 @@ None
 \begin{itemize}
   \item References to drawing stages/canvases for all the visualization/display modules mentioned
     in section \ref{USES_dispControl}
-  \item ... and each corresponding update function references
+  \item ... and each corresponding update function (\code{doUpdate}) 
   \item \code{gtImage}: a reference to the ground truth image data (as provided by \mref{M_imgGTInput}).
   \item \code{subregionImage}: a reference to imageDrawingObject (as provided by \mref{M_vizSubregion}).
 \end{itemize}
@@ -504,13 +504,13 @@ None
 \item transition: Initializes the drawing stages/canvases in each of the
   draw-control locations (\code{drawControls})
   as provided by the GUI \mreff{M_GUI} and passes them to each corresponding visualization module.
-\item output: a \code{doUpdate} function reference for each of the visualization modules.
+\item output: a \code{doUpdate} function for each of the visualization modules.
 \end{itemize}
 
 \noindent \code{doUpdateAll()}:
 \begin{itemize}
 \item transition: updates all the visualization displays by calling all the corresponding
-   \code{doUpdate} function references.
+   \code{doUpdate} functions.
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -815,7 +815,7 @@ None
   (\code{gtImage} as provided by the Display Control \mref{M_dispControl})
   with a semi-transparent rectangle (\code{rect}) representing the bounds of the
   \code{subregionImage} (as provided by the Display Control \mref{M_dispControl}).
-\item output: an object with a reference to the update function (\code{doUpdate}) and a reference to \code{rect}.
+\item output: an object with an update function (\code{doUpdate}) and a reference to \code{rect}.
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -861,7 +861,7 @@ These are kept for mutation, update calls, and performance reasons.
   \item \code{stage}: a reference to drawing stage.
   \item \code{gtImage}: a reference to imageDrawingObject for the ground truth image.
   \item \code{subregionImage}: a reference to imageDrawingObject for the subregion image.
-  \item \code{updateCallback}: an optional reference to a function call when an update occurs
+  \item \code{updateCallback}: (optional to pass) a function to call when an update occurs
     (i.e. when view bounds change).
   \item mouse events (scroll and drag)
 \end{itemize}
@@ -880,7 +880,7 @@ None
   (\code{gtImage} as provided by the Display Control \mref{M_dispControl})
   representing the current subregion / ROI.
   This view can be panned and zoomed with mouse events.
-  The \code{updateCallback} function reference is called when mouse events (drag or scroll)
+  The \code{updateCallback} function is called when mouse events (drag or scroll)
   causes the of the view bounds to change.
 \item output: a reference to \code{subregionImage} imageDrawingObject
   (which can be used like \code{rect}) representing the bounds of the current view.
@@ -991,8 +991,8 @@ These are kept for mutation, update calls, and performance reasons.
   \item \code{stage}: a reference to the drawing stage.
   \item \code{sImage}: a reference to the subregion image clone (imageDrawingObject).
   \item \code{sBeam}: a local reference to the beam ``stencil'' geometry clone (not changed).
-  \item \code{updateCallback}: an optional reference to a function call when an update occurs
-  (i.e. when the \code{sImage} position and scaling to changese).
+  \item \code{updateCallback}: (optional to pass) a function to call when an update occurs
+  (i.e. when the \code{sImage} position or scaling changes).
   \item mouse events (scroll and drag)
 \end{itemize}
 
@@ -1010,14 +1010,14 @@ None
   draws an image clone (based on \code{subregionImage}) of the subregion (\code{sImage})
   that is ``stenciled'' or clipped by the \code{sBeam} geometry/shape.
   This image can be panned and zoomed by mouse events.
-  The \code{updateCallback} function reference is called when mouse events
-  (drag or scroll) causes the image (\code{sImage}) position and scaling to changes.
+  The \code{updateCallback} function is called when mouse events
+  (drag or scroll) causes the image (\code{sImage}) position or scaling to change.
 \item output: a reference to the image (\code{sImage}) being moved and scaled.
 \end{itemize}
 
 \subsubsection{Local Functions}
 \code{doUpdate()}: Update the drawing based on the state variables that change on mouse event
-  such as dragging or scrolling events (pan and zoom) and calls the \code{updateCallback}.
+  such as dragging or scrolling events (pan and zoom) and calls \code{updateCallback}.
 
 \newpage
 
@@ -1061,7 +1061,7 @@ These are kept for mutation, update calls, and performance reasons.
   \item \code{destStage}: a reference to the drawing stage to the spot signal
     representation draw on.
   \item \code{sBeam}: a local reference to the beam ``stencil'' geometry clone (not changed).
-  \item \code{doUpdate}: an optional reference to a function call when an update occurs.
+  \item \code{doUpdate}: a function to call when an update occurs.
 \end{itemize}
 
 \subsubsection{Environment Variables and Assumptions}
@@ -1075,7 +1075,7 @@ None
   draws the \code{sBeam} geometry/shape filled in by the computed average pixel value
   from the clipped / ``stenciled'' image content as displayed in
   Spot Content \mrefp{M_vizSpotContent}.
-\item output: a reference to an update function (\code{doUpdate})
+\item output: an update function (\code{doUpdate})
   to call (by the Display Control \mref{M_dispControl})
   when a redraw is needed (such as a change in Spot Content \mrefp{M_vizSpotContent}).
 \end{itemize}
@@ -1124,12 +1124,12 @@ These are kept for mutation, update calls, and performance reasons.
   \item \code{drawStage}: a reference to the drawing stage.
   \item \code{subregionImage}: a reference to the subregion image (imageDrawingObject).
   \item \code{beam}: a reference to the beam geometry.
-  \item \code{imgParams}: a reference to function to call to get the rasterization
+  \item \code{imgParams}: a function to call to get the rasterization
     grid parameters (number of rows \code{imageRows} and columns \code{imageCols},
     and magnification (\code{imageMag}) 
     provided by \mref{M_params}
     through the Display Control \mref{M_dispControl}).
-  \item \code{doUpdate}: an optional reference to a function call when an update occurs.
+  \item \code{doUpdate}: a function call when an update occurs.
 \end{itemize}
 
 \subsubsection{Environment Variables and Assumptions}
@@ -1142,7 +1142,7 @@ None
 \item transition: On the given stage, draws a grid over the subregionImage with
   the \code{beam} geometry clone in the center of each cell in the drawn grid
   representing the individual location beam/spot sampling location and spot area coverage.
-\item output: a reference to the update function (\code{doUpdate}).
+\item output: an update function (\code{doUpdate}).
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -1188,12 +1188,12 @@ These are kept for mutation, update calls, and performance reasons.
   \item \code{drawStage}: a reference to the drawing stage.
   \item \code{subregionImage}: a reference to the subregion image (imageDrawingObject).
   \item \code{beam}: a reference to the beam geometry.
-  \item \code{imgParams}: a reference to function to call to get the rasterization
+  \item \code{imgParams}: a function to call to get the rasterization
     grid parameters (number of rows \code{imageRows} and columns \code{imageCols},
     and magnification (\code{imageMag}) 
     provided by \mref{M_params}
     through the Display Control \mref{M_dispControl}).
-  \item \code{doUpdate}: an optional reference to a function call when an update occurs.
+  \item \code{doUpdate}: a function call when an update occurs.
 \end{itemize}
 
 \subsubsection{Environment Variables and Assumptions}
@@ -1208,7 +1208,7 @@ None
   of the rasterization grid. This display represents
   the image content to be sampled by the beam/spot at discrete location
   and the area covered by the beam.
-\item output: a reference to the update function (\code{doUpdate}).
+\item output: the update function (\code{doUpdate}).
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -1255,13 +1255,13 @@ These are kept for mutation, update calls, and performance reasons.
   \item \code{stage}: a reference to the drawing stage.
   \item \code{subregionRect}: a reference to the subregion bounds.
   \item \code{gtImage}: a reference to the ground truth image (imageDrawingObject).
-  \item \code{imgParams}: a reference to function to call to get the rasterization
+  \item \code{imgParams}: a function to call to get the rasterization
     grid parameters (number of rows \code{imageRows} and columns \code{imageCols},
     and magnification (\code{imageMag}) 
     provided by \mref{M_params}
     through the Display Control \mref{M_dispControl}).
   \item \code{beam}: a reference to the beam geometry (\code{drawingObject}).
-  \item \code{doUpdate}: an optional reference to a function call when an update occurs.
+  \item \code{doUpdate}: a function call when an update occurs.
 \end{itemize}
 
 \subsubsection{Environment Variables and Assumptions}
@@ -1278,7 +1278,7 @@ None
   the ``stenciled'' or ``clipped'' image content with the \code{beam} geometry
   at the center of each cell as represented by the Sampled Subregion
   display \mrefp{M_vizSampledSub}.
-\item output: a reference to the update function (\code{doUpdate}).
+\item output: the update function (\code{doUpdate}).
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -1325,7 +1325,7 @@ These are kept for mutation, update calls, and performance reasons.
   \item \code{beam}: a reference to the beam geometry (\code{drawingObject}).
   \item \code{gtImage}: a reference to the ground truth image (imageDrawingObject).
   \item \code{subregionRect}: a reference to the subregion bounds.
-  \item \code{imgParams}: a reference to function to call to get the rasterization
+  \item \code{imgParams}: a function to call to get the rasterization
     grid parameters (number of rows \code{imageRows} and columns \code{imageCols},
     and magnification (\code{imageMag}) 
     provided by \mref{M_params}
@@ -1352,7 +1352,7 @@ The \code{subregionRect} is smaller than the full extent of the ground truth ima
   but extended to the full extent of the ground truth image, keeping the same
   relative cell size (meaning more cells - or rows and columns - 
   that are ``smaller'' in the full image). 
-\item output: returns a reference to \code{updateConfigValues} to call
+\item output: an \code{updateConfigValues} function to call
   (by the Display Control \mref{M_dispControl}) when there is a change
   in the magnification (\code{imageMag}), the rasterization grid 
   (\code{imageRows} and \code{imageCols})
@@ -1360,7 +1360,7 @@ The \code{subregionRect} is smaller than the full extent of the ground truth ima
 \end{itemize}
 
 \subsubsection{Local Functions}
-\code{updateConfigValues()}: Update the drawing based on the state variables.
+\code{updateConfigValues()}: Update the values based on the state variables used for drawing.
 
 \newpage
 
