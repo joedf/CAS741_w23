@@ -842,21 +842,18 @@ A table of the results shall be presented in the VnV report \cite{VnV_report}.
 
 Type: Automatic
 
-Initial State: \an{Not running?}
-
 Input/Condition: The ground truth images \an{Prof says What image?}
   and multiple resampled images of varying and known quality.
 
 Output/Result: The higher quality image should return the lowest error (i.e. lowest MSE, RMSE, NRMSE) scores.
+values for SSIM \lrefp{lib_ssim} and SSIM \lrefp{lib_ssim1}...
 
 How test will be performed: Executing a suite of tests \an{Prof says What tests?}
   for the multiple images.
 
-\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metricControl}}: Control testing}
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric8}}: Control testing}
 
 Type: Automatic
-
-Initial State: \an{Not running?}
 
 Input: The ground truth image.
 
@@ -864,19 +861,6 @@ Output: an error score of zero \an{or the lowest error possible depending on the
 
 How test will be performed: Executing a suite of tests using the different metric to compare the 
 ground truth image to itself.
-
-\item{test-id\#\\}
-
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-be automatic}
-
-Initial State: 
-
-Input: 
-
-Output: 
-
-How test will be performed: SSIM \lrefp{lib_ssim} and SSIM \lrefp{lib_ssim1}
 
 \end{itemize}
 
@@ -923,7 +907,7 @@ When a component is changed, the elements marked with an ``X'' might need to be 
   \tref{T_linters}              & & & & & & & & & &X& \\ \hline
   \tref{T_codeReview}           & & & & & & & & & &X& \\ \hline
   \tref{T_portability}          & & & & & & & & & & &X\\ \hline
-  \utref{U_metric1} to \utref{U_metric7} & & & & & & &X&X& & & \\ \hline
+  \utref{U_metric1} to \utref{U_metric8} & & & & & & &X&X& & & \\ \hline
   \end{tabular}
   \caption{Traceability Matrix Showing the Connections Between the Tests and Requirements}
   \label{Table:A_trace}
@@ -945,9 +929,6 @@ user survey questions, as well as a code review checklist.
 
 \subsection{Usability Survey Questions} \label{survey_usability}
 
-\an{Prof says You should look to standard usability questionaires for inspiration.
-(you can find some on google)}
-
 \begin{itemize}
   \item{What web browser do you use and what version is it?}
   \item{What operating system do you use?}
@@ -962,6 +943,9 @@ user survey questions, as well as a code review checklist.
   \item{Would you consider using the software as a learning or teaching tool?}
   \item{Do you have any extra comments or thoughts you'd like to share?}
 \end{itemize}
+
+\noindent Alternatively, the ``Quick and Dirty Usability Scale'' \cite{qnd_usability} may be used
+instead.
 
 \subsection{Image Quality Survey Questions} \label{survey_metric}
 Given multiple images that are numbered and a ground truth image, 
@@ -982,8 +966,6 @@ the user shall answer the following questions?
 
 \subsection{Code Review Checklist} \label{checklist_codeReview}
 
-\an{Prof says You should look to find (via google) standard checklists.}
-
 \begin{itemize}
   \item{Does the code follow a consistent style?}
   \item{Are there any variables that should not be global?}
@@ -997,6 +979,8 @@ the user shall answer the following questions?
   \item{Is there any duplicate that code be avoided?}
   \item{Is there any use of jargon, domain-specific, or unclear terms?}
   \item{Is all of the code reachable?}
+  \item{Is the control flow convoluted?}
+  \item{Is there any unnecessarily obscure code? If necessary, is it commented and explained?}
   \item{Could programmer other than the author read the code and briefly understand it?}
   \item{Is there any leftover commented code that is not useful?}
 \end{itemize}
