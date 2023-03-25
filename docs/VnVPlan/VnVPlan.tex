@@ -3,6 +3,8 @@
 \usepackage{colortbl}
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{float}
+\usepackage{siunitx}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks,
@@ -13,6 +15,15 @@
 }
 % \usepackage[round]{natbib}
 \usepackage[numbers,square]{natbib}
+
+\usepackage{xr}
+\externaldocument{../SRS/SRS}
+\externaldocument{../Design/MG/MG}
+
+\newcommand{\rref}[1]{R\ref{#1}}
+\newcommand{\nfrref}[1]{NFR\ref{#1}}
+\newcommand{\mref}[1]{M\ref{#1}}
+
 
 \newcounter{testnum} %test Number
 \newcommand{\dthetestnum}{T\thetestnum}
@@ -59,6 +70,7 @@
 2023/03/24 & 1.1.0 & Incorporate feedback from Dr. Smith's review.\\
   & 1.1.1 & Added a code linting ruleset.\\
   & 1.1.2 & Added symbolic constants.\\
+2023/03/25 & 1.2.0 & Fill in unit testing information (section \ref{sec_unittest}). \\
 \bottomrule
 \end{tabularx}
 
@@ -648,41 +660,72 @@ environment of choice.
 
 
 
-
 \section{Unit Test Description} \label{sec_unittest}
 
-This section cannot not be filled or completed until the MIS (detailed design document) has been completed.
-\an{I did do some image metrics testing that can at least be partially documented here...}
+This section focuses on automated testing for individual modules as defined by the
+MG \cite{MG} and MIS \cite{MIS}. 
 
-\an{Prof says: The unit tests are decided by your module interfaces.}
+\subsection{Unit Testing Scope} \label{sec_unittest_scope}
 
-\an{TODO: add unit tests for black, white and half black+white images tests for control.
-and the various tests for og, fant, 10, 60, 120, etc. py and js tests.}
+Currently, there's only automated testing of the image metrics calculation (\mref{M_metric}).
+Much of the testing planned is manually due to the complex and subjective nature of 
+image quality. 
+Most of the drawing functionality is handled by the Konva javascript library \cite{konva_2021}
+and thus will not be verified.
+Although it is possible to test GUIs and visual fidelity to some degree, this
+is not planned here to due to limited resources (mainly time).
 
-\an{Mention sewar python package and the js libraries for comparison.}
+A suite of images (\ref{Tbl_TestImages}) is used for testing is provided (with the source code).
 
-\subsection{Unit Testing Scope}
+\begin{table}[H]
+  \centering
+  \begin{tabular}{L{4.5cm} L{1cm} L{7cm}}
+  \toprule
+    \textbf{File Name} & \textbf{Code} & \textbf{Description} \\
+  \midrule
+    \code{original\_500-crop.png} & \code{og} & a virtual image representing metallic grains. \\
+    \code{og-fant.png} & \code{fant} & the original image resampled using
+      Fant's algorithm \cite{fant_1986} as 50x50 pixel image 
+      and scaled back up using nearest neighbor. \\
+    \code{black.png} & \code{blak} & all black (\code{0x00} or \code{0}) pixels. \\
+    \code{white.png} & \code{wite} & all white (\code{0xFF} or \code{255}) pixels. \\
+    \code{half.png} & \code{half} & half white, half black pixels. \\
+    \code{gray.png} & \code{gray} & all pixels are gray (\code{0x80} or \code{128},
+      half of the ``colour range'' of the 8 bit depth). \\
+    \code{c10-010-010.png} & \code{c010} & 10x pixel size, sampled with a spot of 10\% by 10\% \\
+    \code{c10-060-060.png} & \code{c060} & 10x pixel size, sampled with a spot of 60\% by 60\% \\
+    \code{c10-100-100.png} & \code{c100} & 10x pixel size, sampled with a spot of 100\% by 100\% \\
+    \code{c10-120-120.png} & \code{c120} & 10x pixel size, sampled with a spot of 120\% by 120\% \\
+    \code{c10-130-130.png} & \code{c130} & 10x pixel size, sampled with a spot of 130\% by 130\% \\
+    \code{c10-500-500.png} & \code{c500} & 10x pixel size, sampled with a spot of 500\% by 500\% \\
+    \code{c10-060-500.png} & \code{c6a5} & 10x pixel size, sampled with a spot of 60 and 500\% at \ang{45}\\
+    \code{og-minor\_defects.png} & \code{mDef} & the original image manually
+      edited to have a few pixels set to white to simulate minor defects. \\
+  \bottomrule
+  \end{tabular}
+  \caption{The suite of test images used (all the same size, 500 x 500 px).}
+  \label{Tbl_TestImages}
+\end{table}
 
-\an{Other than the image metrics, I am not sure what else could be unit tested as of now?}
+\subsection{Tests for Functional and Nonfunctional Requirements}
 
-\wss{What modules are outside of the scope.  If there are modules that are
-  developed by someone else, then you would say here if you aren't planning on
-  verifying them.  There may also be modules that are part of your software, but
-  have a lower priority for verification than others.  If this is the case,
-  explain your rationale for the ranking of module importance.}
+See unit testing scope (\ref{sec_unittest_scope}) for more information.
+The image metrics is the only module that will be unit tested to
+satisfy both \rref{R_imageMetric} and \nfrref{NFR_Accuracy}, and thus will be described
+in this same section. 
+The image metric needs to be robust and accurate enough for our usecase.
+The \href{https://pypi.org/project/sewar}{sewar} python package 
+and following javascript libraries are used for ``oracle'' comparisons:
+\begin{itemize}
+  \item \href{https://github.com/obartra/ssim}{ssim.web-3.5.0.js}
+  \item \href{https://github.com/darosh/image-mse-js}{image-mse.js}
+  \item \href{https://github.com/darosh/image-ssim-js}{image-ssim.js}
+  \item \href{https://github.com/darosh/image-ms-ssim-js}{image-ms-ssim.js}
+\end{itemize}
 
-\subsection{Tests for Functional Requirements}
-
-\wss{Most of the verification will be through automated unit testing.  If
-  appropriate specific modules can be verified by a non-testing based
-  technique.  That can also be documented in this section.}
-
-\subsubsection{Module 1}
-
-\wss{Include a blurb here to explain why the subsections below cover the module.
-  References to the MIS would be good.  You will want tests from a black box
-  perspective and from a white box perspective.  Explain to the reader how the
-  tests were selected.}
+Various libraries with different algorithms/metrics are used here to see how each
+performs in terms of accuracy given our suite of test images.
+A table of the results shall be presented in the VnV report \cite{VnV_report}.
 
 \begin{enumerate}
 
@@ -836,7 +879,8 @@ When a component is changed, the elements marked with an ``X'' might need to be 
 \clearpage
 
 \bibliographystyle{plainnat}
-\bibliography{../../refs/References,../../refs/cas741}
+\bibliography{../../refs/References,../../refs/cas741,
+../../refs/algorithms,../../refs/programming}
 
 \newpage
 
