@@ -33,6 +33,11 @@
 \newcommand{\dtheunittestnum}{U\theunittestnum}
 \newcommand{\utref}[1]{U\ref{#1}}
 
+\newcounter{libnum} %lib Number
+\newcommand{\dthelibnum}{L\thelibnum}
+\newcommand{\lref}[1]{L\ref{#1}}
+\newcommand{\lrefp}[1]{(\lref{#1})}
+
 \input{../Comments}
 \input{../Common}
 
@@ -719,9 +724,9 @@ A table of the results shall be presented in the VnV report \cite{VnV_report}.
 
 \subsubsection{Module: Image Metrics Calculation (\mref{M_metric})}
 
-\begin{enumerate}
+\begin{itemize}
 
-\item{control - all black vs. all white}
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric1}}: control - all black vs. all white}
 
 Type: Automatic
 
@@ -734,7 +739,7 @@ Test Case Derivation: \wss{Justify the expected value given in the Output field}
 How test will be performed: 
 
 
-\item{control - all black vs. half black and white}
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric2}}: control - all black vs. half black and white}
 
 Type: Automatic
 
@@ -747,7 +752,7 @@ Test Case Derivation: \wss{Justify the expected value given in the Output field}
 How test will be performed: 
 
 
-\item{control - all white vs. half black and white}
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric3}}: control - all white vs. half black and white}
 
 Type: Automatic
 
@@ -760,7 +765,7 @@ Test Case Derivation: \wss{Justify the expected value given in the Output field}
 How test will be performed: 
 
 
-\item{control - all black vs. all gray}
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric4}}: control - all black vs. all gray}
 
 Type: Automatic
 
@@ -773,7 +778,7 @@ Test Case Derivation: \wss{Justify the expected value given in the Output field}
 How test will be performed: 
 
 
-\item{control - all white vs. all gray}
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric5}}: control - all white vs. all gray}
 
 Type: Automatic
 
@@ -786,7 +791,7 @@ Test Case Derivation: \wss{Justify the expected value given in the Output field}
 How test will be performed: 
 
 
-\item{control - all gray vs. half black and white}
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric6}}: control - all gray vs. half black and white}
 
 Type: Automatic
 
@@ -799,7 +804,7 @@ Test Case Derivation: \wss{Justify the expected value given in the Output field}
 How test will be performed: 
 
     
-\end{enumerate}
+\end{itemize}
 
 
 \subsection{Tests for Nonfunctional Requirements}
@@ -809,14 +814,16 @@ The image metrics is the only module that will be unit tested to
 satisfy \nfrref{NFR_Accuracy}.
 
 The image metric needs to be robust and accurate enough for our usecase.
-The \href{https://pypi.org/project/sewar}{sewar} python package 
+The \href{https://pypi.org/project/sewar}{sewar}
+(\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_sewar}})
+python package 
 and following javascript libraries are used for ``oracle'' comparisons
 to \progname{}'s NRMSE:
 \begin{itemize}
-  \item \href{https://github.com/obartra/ssim}{ssim.web-3.5.0.js}
-  \item \href{https://github.com/darosh/image-mse-js}{image-mse.js}
-  \item \href{https://github.com/darosh/image-ssim-js}{image-ssim.js}
-  \item \href{https://github.com/darosh/image-ms-ssim-js}{image-ms-ssim.js}
+  \item \href{https://github.com/obartra/ssim}{ssim.web-3.5.0.js} (\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_ssim}})
+  \item \href{https://github.com/darosh/image-mse-js}{image-mse.js} (\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_mse}})
+  \item \href{https://github.com/darosh/image-ssim-js}{image-ssim.js} (\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_ssim1}})
+  \item \href{https://github.com/darosh/image-ms-ssim-js}{image-ms-ssim.js} (\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_msssim}})
 \end{itemize}
 
 Various libraries with different algorithms/metrics are used here to see how each
@@ -829,9 +836,9 @@ A table of the results shall be presented in the VnV report \cite{VnV_report}.
 
 \subsubsection{Module: Image Metrics Calculation (\mref{M_metric})}
 
-\begin{enumerate}
+\begin{itemize}
 
-\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric1}}: Lowest/Highest MSE, RMSE and NRMSE scores\\}
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric7}}: Lowest/Highest MSE, RMSE and NRMSE scores}
 
 Type: Automatic
 
@@ -845,7 +852,7 @@ Output/Result: The higher quality image should return the lowest error (i.e. low
 How test will be performed: Executing a suite of tests \an{Prof says What tests?}
   for the multiple images.
 
-\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metricControl}}: Control testing \\}
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metricControl}}: Control testing}
 
 Type: Automatic
 
@@ -869,13 +876,10 @@ Input:
 
 Output: 
 
-How test will be performed: 
+How test will be performed: SSIM \lrefp{lib_ssim} and SSIM \lrefp{lib_ssim1}
 
-\end{enumerate}
+\end{itemize}
 
-\subsubsection{Module ?}
-
-...
 
 \newpage
 \clearpage
@@ -919,8 +923,7 @@ When a component is changed, the elements marked with an ``X'' might need to be 
   \tref{T_linters}              & & & & & & & & & &X& \\ \hline
   \tref{T_codeReview}           & & & & & & & & & &X& \\ \hline
   \tref{T_portability}          & & & & & & & & & & &X\\ \hline
-  \utref{U_metric1}             & & & & & & &X& & & &X\\ \hline
-  \utref{U_metricControl}       & & & & & & &X& & & &X\\ \hline
+  \utref{U_metric1} to \utref{U_metric7} & & & & & & &X&X& & & \\ \hline
   \end{tabular}
   \caption{Traceability Matrix Showing the Connections Between the Tests and Requirements}
   \label{Table:A_trace}
