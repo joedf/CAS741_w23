@@ -707,15 +707,111 @@ A suite of images (\ref{Tbl_TestImages}) is used for testing is provided (with t
   \label{Tbl_TestImages}
 \end{table}
 
-\subsection{Tests for Functional and Nonfunctional Requirements}
+\subsection{Tests for Functional Requirements} \label{sec_func_req_unittest}
+
+See unit testing scope (\ref{sec_unittest_scope}) for more information.
+\progname{}'s image metric is the only module that will be unit tested to
+satisfy \rref{R_imageMetric}. The metric is tested against the control images
+(\code{black.png}, \code{white.png}, and \code{gray.png})
+from the suite of test images, to assess whether the metric
+is working as anticipated.
+A table of the results shall be presented in the VnV report \cite{VnV_report}.
+
+\subsubsection{Module: Image Metrics Calculation (\mref{M_metric})}
+
+\begin{enumerate}
+
+\item{control - all black vs. all white}
+
+Type: Automatic
+
+Input: \code{black.png} and \code{white.png} (see \ref{Tbl_TestImages})
+
+Output: \wss{The expected result for the given inputs}
+
+Test Case Derivation: \wss{Justify the expected value given in the Output field}
+
+How test will be performed: 
+
+
+\item{control - all black vs. half black and white}
+
+Type: Automatic
+
+Input: \code{black.png} and \code{half.png} (see \ref{Tbl_TestImages})
+
+Output: \wss{The expected result for the given inputs}
+
+Test Case Derivation: \wss{Justify the expected value given in the Output field}
+
+How test will be performed: 
+
+
+\item{control - all white vs. half black and white}
+
+Type: Automatic
+
+Input: \code{white.png} and \code{half.png} (see \ref{Tbl_TestImages})
+
+Output: \wss{The expected result for the given inputs}
+
+Test Case Derivation: \wss{Justify the expected value given in the Output field}
+
+How test will be performed: 
+
+
+\item{control - all black vs. all gray}
+
+Type: Automatic
+
+Input: \code{black.png} and \code{half.png} (see \ref{Tbl_TestImages})
+
+Output: \wss{The expected result for the given inputs}
+
+Test Case Derivation: \wss{Justify the expected value given in the Output field}
+
+How test will be performed: 
+
+
+\item{control - all white vs. all gray}
+
+Type: Automatic
+
+Input: \code{white.png} and \code{half.png} (see \ref{Tbl_TestImages})
+
+Output: \wss{The expected result for the given inputs}
+
+Test Case Derivation: \wss{Justify the expected value given in the Output field}
+
+How test will be performed: 
+
+
+\item{control - all gray vs. half black and white}
+
+Type: Automatic
+
+Input: \code{white.png} and \code{half.png} (see \ref{Tbl_TestImages})
+
+Output: \wss{The expected result for the given inputs}
+
+Test Case Derivation: \wss{Justify the expected value given in the Output field}
+
+How test will be performed: 
+
+    
+\end{enumerate}
+
+
+\subsection{Tests for Nonfunctional Requirements}
 
 See unit testing scope (\ref{sec_unittest_scope}) for more information.
 The image metrics is the only module that will be unit tested to
-satisfy both \rref{R_imageMetric} and \nfrref{NFR_Accuracy}, and thus will be described
-in this same section. 
+satisfy \nfrref{NFR_Accuracy}.
+
 The image metric needs to be robust and accurate enough for our usecase.
 The \href{https://pypi.org/project/sewar}{sewar} python package 
-and following javascript libraries are used for ``oracle'' comparisons:
+and following javascript libraries are used for ``oracle'' comparisons
+to \progname{}'s NRMSE:
 \begin{itemize}
   \item \href{https://github.com/obartra/ssim}{ssim.web-3.5.0.js}
   \item \href{https://github.com/darosh/image-mse-js}{image-mse.js}
@@ -724,60 +820,15 @@ and following javascript libraries are used for ``oracle'' comparisons:
 \end{itemize}
 
 Various libraries with different algorithms/metrics are used here to see how each
-performs in terms of accuracy given our suite of test images.
+performs in terms of accuracy using the suite of test images.
+The expected output values presented here are qualitative as the specific values
+of each metric for following tests are unknown and may vary widely
+based on the given images (except for the control images).
+
 A table of the results shall be presented in the VnV report \cite{VnV_report}.
 
-\begin{enumerate}
+\subsubsection{Module: Image Metrics Calculation (\mref{M_metric})}
 
-\item{test-id1\\}
-
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-
-Initial State: 
-
-Input: 
-
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-How test will be performed: 
-
-\item{test-id2\\}
-
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-
-Initial State: 
-
-Input: 
-
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-How test will be performed: 
-
-\item{...\\}
-    
-\end{enumerate}
-
-
-\subsection{Tests for Nonfunctional Requirements}
-
-\wss{If there is a module that needs to be independently assessed for
-  performance, those test cases can go here.  In some projects, planning for
-  nonfunctional tests of units will not be that relevant.}
-
-\wss{These tests may involve collecting performance data from previously
-  mentioned functional tests.}
-
-\subsubsection{Module: Image Quality Metric}
-
-\an{I will likely use the ``reverse'' / ``inverse'' value as the image metric: \\
-$Metric = 1 - NRMSE$, where the ``NRMSE'' is RMSE normalized to a value between 0 and 1.}
-		
 \begin{enumerate}
 
 \item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric1}}: Lowest/Highest MSE, RMSE and NRMSE scores\\}
