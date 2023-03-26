@@ -80,7 +80,7 @@
 2023/03/25 & 1.2.0 & Fill in parts of the unit testing (section \ref{sec_unittest}). \\
   & 1.2.1 & Added details in the Appendix (\ref{sec_Appendix}). \\
 2023/03/26 & 1.2.2 & Fill in expected outputs and justifications for
-  the unit tests in section \ref{sec_func_req_unittest}. \\
+  the unit tests in section \ref{sec_func_req_unittest} and \ref{sec_nfr_unittest}. \\
 \bottomrule
 \end{tabularx}
 
@@ -751,7 +751,7 @@ A table of the results shall be presented in the VnV report \cite{VnV_report}.
 
 \begin{itemize}
 
-\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric1}}: control - ground truth vs. ground truth}
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric0A}}: control - ground truth vs. ground truth}
 
 Type: Automatic
 
@@ -765,7 +765,7 @@ Test Case Derivation: Should be the highest score/match possible
 How test will be performed: Running the javascript unit tests.
 
 
-\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric1}}: control - ground truth vs. minor defects}
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric0B}}: control - ground truth vs. minor defects}
 
 Type: Automatic
 
@@ -859,7 +859,7 @@ Input: \code{half.png} and \code{gray.png} (see \ttref{Tbl_TestImages})
 
 Output: \code{0.50} $\pm$ ERR\_MARGIN
 
-Test Case Derivation: One half of the pixel follow the justification of \utref{U_metric4},
+Test Case Derivation: One half of the pixels follow the justification of \utref{U_metric4},
 and the other half follow the justification of \utref{U_metric5}.
 
 How test will be performed: Running the javascript unit tests.
@@ -947,24 +947,63 @@ Caveats:
     would all be the same (or close to) by averaging/sampling all the same values and
     relative areas. That is, unless one test would sample with a 100 million percent
     (of the cell size) for the spot size...
-  \item The \code{fant} ground truth image is there for
+  \item The \code{fant} ground truth image is used as the "ideal scenario" for a
+    downsampled image, as the algorithm is
+    ``complete in the sense that all the pixels of the input 
+    image under the map of the output image fully contribute to the output image.''
+    as said by Karl Fant. This image is used to ensure a fairer comparison
+    and that any image resizing artifacts that we have introduced do not
+    significantly affect the order/trend of the scores. In preliminary tests,
+    the trend was observed to be largely preserved, but with the scores
+    being significantly higher overall.
+  \item Manually downsampling the ground truth image using different algorithms
+    in an image editor, artifacts such ``edge halos` (for ``Bilinear'' and ``Lanczos'')
+    and ``edge loss'' (for ``Nearest Neighbor'') were observed.
+    ``Bicubic'' performed relatively well, but had blurrier edges than using ``Fant''.
+    These images are provided with the source code, along with
+    instructions (on how they were produced).
 \end{enumerate}
 
 
 How test will be performed: Running the javascript and python tests.
 Executing this suite of tests will compare the ground truth image to each
-test image (as listed in \ttref{Tbl_TestImages}) using the different metrics
-(as mentioned earlier).
+test image (see \ttref{Tbl_TestImages}) using all the different metrics
+(\lref{lib_sewar} to \lref{lib_msssim}).
 
-\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric8}}: Control testing}
+
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric8}}:
+Control testing}
 
 Type: Automatic
 
-Input: The ground truth image.
+Input: The ground truth images (\code{og} and \code{fant}) compared to each of
+the control test images (as listed in Table \ref{Tbl_TestImages}).
+Except for using all the other metrics
+(\lref{lib_sewar} to \lref{lib_msssim}, except for \lref{lib_prog}),
+these are the same control tests as described earlier
+(\utref{U_metric0A} to \utref{U_metric6}).
 
-Output: an error score of zero \an{or the lowest error possible depending on the given metric}.
+Output:
+\begin{itemize}
+  \item \utref{U_metric0A} Test Variant: same output and justification.
+  \item \utref{U_metric0B} Test Variant: same output and justification.
+  \item \utref{U_metric1} Test Variant: same output and justification.
+  \item \utref{U_metric2} Test Variant: a lower score than the base variant,
+    since ``structural similarity'' is taken into account.
+  \item \utref{U_metric3} Test Variant: same as above.
+  \item \utref{U_metric4} Test Variant: same output and justification,
+    since the compared images have the same (``flat'') structure.
+  \item \utref{U_metric5} Test Variant: same as above.
+  \item \utref{U_metric6} Test Variant: a lower score than the base variant,
+    since ``structural similarity'' is taken into account.
+\end{itemize}
 
 How test will be performed: Running the javascript and python tests.
+Executing this suite of tests will compare the ``control images''
+to each over other (as described in \utref{U_metric0A} to \utref{U_metric6}),
+but using the different metrics
+(\lref{lib_sewar}, \lref{lib_ssim}, \lref{lib_mse},
+\lref{lib_ssim1}, and \lref{lib_msssim}).
 
 \end{itemize}
 
@@ -1129,7 +1168,7 @@ possibility of mistakes when updating this document.
 \begin{itemize}
   \item \code{SETUP\_MAX\_CLICKS = 4} clicks
   \item \code{SETUP\_MAX\_TIME = 3} minutes
-  \item \code{ERR\_MARGIN = 0.01} (1\%)
+  \item \code{ERR\_MARGIN = 0.02} (2\%)
 \end{itemize}
 
 

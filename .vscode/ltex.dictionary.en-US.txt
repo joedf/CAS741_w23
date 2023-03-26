@@ -16,3 +16,5 @@ ruleset
 Ruleset
 undersamples
 oversamples
+downsampled
+downsampling
