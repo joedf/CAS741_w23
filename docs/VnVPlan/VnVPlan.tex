@@ -97,19 +97,25 @@
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
-  MIS & Module Interface Specification \\
-  MG & Module Guide \\
-  MSE & Mean Squared Error\\
-  RMSE & Root Mean Square Error\\
-  NRMSE & Normalized Root Mean Square Error\\
-  NFR & Nonfunctional Requirement\\
   GUI & Graphical User Interface\\
+  MG & Module Guide \\
+  MIS & Module Interface Specification \\
+  MSE & Mean Squared Error\\
+  MS-SSIM & Multi-scale Structural Similarity\\
+  NFR & Nonfunctional Requirement\\
+  NRMSE & Normalized Root Mean Square Error\\
+  PSNR & Peak Signal-to-Noise Ratio\\
   R & Requirement\\
+  RMSE & Root Mean Square Error\\
   ROI & Region of Interest\\
+  SCC & Spatial Correlation Coefficient\\
   SRS & Software Requirements Specification\\
+  SSIM & Structural Similarity\\
   T & Test\\
   U & Unit test\\
   UI & User Interface\\
+  UIQ & Universal Image Quality\\
+  VIF & Visual Information Fidelity \\
   VnV & Verification and Validation\\
   \bottomrule
 \end{tabular}\\
@@ -832,14 +838,19 @@ satisfy \nfrref{NFR_Accuracy}.
 The image metric needs to be robust and accurate enough for our usecase.
 The \href{https://pypi.org/project/sewar}{sewar}
 (\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_sewar}})
-python package 
+python package (which implements MSE, RMSE, PSNR, UIQ, SSIM, MS-SSIM, SCC, VIF, and more)
 and following javascript libraries are used for ``oracle'' comparisons
-to \progname{}'s NRMSE:
+to \progname{}'s metric
+(\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_prog}}):
 \begin{itemize}
   \item \href{https://github.com/obartra/ssim}{ssim.web-3.5.0.js} (\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_ssim}})
+    -- implements SSIM
   \item \href{https://github.com/darosh/image-mse-js}{image-mse.js} (\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_mse}})
+    -- implements MSE, PNSR
   \item \href{https://github.com/darosh/image-ssim-js}{image-ssim.js} (\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_ssim1}})
+    -- implements SSIM
   \item \href{https://github.com/darosh/image-ms-ssim-js}{image-ms-ssim.js} (\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_msssim}})
+    -- implements MS-SSIM and SSIM
 \end{itemize}
 
 Various libraries with different algorithms/metrics are used here to see how each
