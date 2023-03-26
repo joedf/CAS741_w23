@@ -24,6 +24,8 @@
 \newcommand{\nfrref}[1]{NFR\ref{#1}}
 \newcommand{\mref}[1]{M\ref{#1}}
 
+\newcommand{\ttref}[1]{Table \ref{#1}}
+
 
 \newcounter{testnum} %test Number
 \newcommand{\dthetestnum}{T\thetestnum}
@@ -691,30 +693,41 @@ is not planned here to due to limited resources (mainly time).
 
 A suite of images (\ref{Tbl_TestImages}) is used for testing is provided (with the source code).
 
+\newcounter{tImg}
+\newcommand{\timg}{\stepcounter{tImg}\arabic{tImg}}
+
 \begin{table}[H]
   \centering
-  \begin{tabular}{L{4.5cm} L{1cm} L{7cm}}
+  \begin{tabular}{L{.75cm} L{4.5cm} L{1cm} L{7cm}}
   \toprule
-    \textbf{File Name} & \textbf{Code} & \textbf{Description} \\
+    \textbf{No.} & \textbf{File Name} & \textbf{Code} & \textbf{Description} \\
   \midrule
-    \code{original\_500-crop.png} & \code{og} & a virtual image representing metallic grains. \\
-    \code{og-fant.png} & \code{fant} & the original image resampled using
+  \multicolumn{4}{c}{Ground Truth Images} \\
+  \hline
+  \timg & \code{original\_500-crop.png} & \code{og} & a virtual image representing metallic grains. \\
+  \timg & \code{og-fant.png} & \code{fant} & the original image resampled using
       Fant's algorithm \cite{fant_1986} as 50x50 pixel image 
       and scaled back up using nearest neighbor. \\
-    \code{black.png} & \code{blak} & all black (\code{0x00} or \code{0}) pixels. \\
-    \code{white.png} & \code{wite} & all white (\code{0xFF} or \code{255}) pixels. \\
-    \code{half.png} & \code{half} & half white, half black pixels. \\
-    \code{gray.png} & \code{gray} & all pixels are gray (\code{0x80} or \code{128},
+  \hline
+  \multicolumn{4}{c}{Control Images} \\
+  \hline
+    \timg & \code{black.png} & \code{blak} & all black (\code{0x00} or \code{0}) pixels. \\
+    \timg & \code{white.png} & \code{wite} & all white (\code{0xFF} or \code{255}) pixels. \\
+    \timg & \code{half.png} & \code{half} & half white, half black pixels. \\
+    \timg & \code{gray.png} & \code{gray} & all pixels are gray (\code{0x80} or \code{128},
       half of the ``colour range'' of the 8 bit depth). \\
-    \code{c10-010-010.png} & \code{c010} & 10x pixel size, sampled with a spot of 10\% by 10\% \\
-    \code{c10-060-060.png} & \code{c060} & 10x pixel size, sampled with a spot of 60\% by 60\% \\
-    \code{c10-100-100.png} & \code{c100} & 10x pixel size, sampled with a spot of 100\% by 100\% \\
-    \code{c10-120-120.png} & \code{c120} & 10x pixel size, sampled with a spot of 120\% by 120\% \\
-    \code{c10-130-130.png} & \code{c130} & 10x pixel size, sampled with a spot of 130\% by 130\% \\
-    \code{c10-500-500.png} & \code{c500} & 10x pixel size, sampled with a spot of 500\% by 500\% \\
-    \code{c10-060-500.png} & \code{c6a5} & 10x pixel size, sampled with a spot of 60 and 500\% at \ang{45}\\
-    \code{og-minor\_defects.png} & \code{mDef} & the original image manually
+    \timg & \code{og-minor\_defects.png} & \code{mDef} & the original image manually
       edited to have a few pixels set to white to simulate minor defects. \\
+  \hline
+  \multicolumn{4}{c}{Test Images} \\
+  \hline
+    \timg & \code{c10-010-010.png} & \code{c010} & 10x pixel size, sampled with a spot of 10\% by 10\% \\
+    \timg & \code{c10-060-060.png} & \code{c060} & 10x pixel size, sampled with a spot of 60\% by 60\% \\
+    \timg & \code{c10-100-100.png} & \code{c100} & 10x pixel size, sampled with a spot of 100\% by 100\% \\
+    \timg & \code{c10-120-120.png} & \code{c120} & 10x pixel size, sampled with a spot of 120\% by 120\% \\
+    \timg & \code{c10-130-130.png} & \code{c130} & 10x pixel size, sampled with a spot of 130\% by 130\% \\
+    \timg & \code{c10-500-500.png} & \code{c500} & 10x pixel size, sampled with a spot of 500\% by 500\% \\
+    \timg & \code{c10-060-500.png} & \code{c6a5} & 10x pixel size, sampled with a spot of 60 and 500\% at \ang{45}\\
   \bottomrule
   \end{tabular}
   \caption{The suite of test images used (all the same size, 500 x 500 px).}
@@ -738,15 +751,43 @@ A table of the results shall be presented in the VnV report \cite{VnV_report}.
 
 \begin{itemize}
 
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric1}}: control - ground truth vs. ground truth}
+
+Type: Automatic
+
+Input: \code{original\_500-crop.png} and \code{original\_500-crop.png} (see \ttref{Tbl_TestImages})
+
+Output: \code{1.00} $\pm$ ERR\_MARGIN
+
+Test Case Derivation: Should be the highest score/match possible
+  since they are the same image / identical.
+
+How test will be performed: Running the javascript unit tests.
+
+
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric1}}: control - ground truth vs. minor defects}
+
+Type: Automatic
+
+Input: \code{original\_500-crop.png} and \code{og-minor\_defects.png} (see \ttref{Tbl_TestImages})
+
+Output: \code{0.99} $\pm$ ERR\_MARGIN
+
+Test Case Derivation: Should be very close to the highest score/match possible
+  since they are nearly identical.
+
+How test will be performed: Running the javascript unit tests.
+
+
 \item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric1}}: control - all black vs. all white}
 
 Type: Automatic
 
-Input: \code{black.png} and \code{white.png} (see \ref{Tbl_TestImages})
+Input: \code{black.png} and \code{white.png} (see \ttref{Tbl_TestImages})
 
 Output: \code{0.00} $\pm$ ERR\_MARGIN
 
-Test Case Derivation: Should the lowest score/match possible
+Test Case Derivation: Should be the lowest score/match possible
   since they are complete opposites.
 
 How test will be performed: Running the javascript unit tests.
@@ -756,7 +797,7 @@ How test will be performed: Running the javascript unit tests.
 
 Type: Automatic
 
-Input: \code{black.png} and \code{half.png} (see \ref{Tbl_TestImages})
+Input: \code{black.png} and \code{half.png} (see \ttref{Tbl_TestImages})
 
 Output: \code{0.29} $\pm$ ERR\_MARGIN
 
@@ -772,7 +813,7 @@ How test will be performed: Running the javascript unit tests.
 
 Type: Automatic
 
-Input: \code{white.png} and \code{half.png} (see \ref{Tbl_TestImages})
+Input: \code{white.png} and \code{half.png} (see \ttref{Tbl_TestImages})
 
 Output: \code{0.29} $\pm$ ERR\_MARGIN
 
@@ -785,7 +826,7 @@ How test will be performed: Running the javascript unit tests.
 
 Type: Automatic
 
-Input: \code{black.png} and \code{gray.png} (see \ref{Tbl_TestImages})
+Input: \code{black.png} and \code{gray.png} (see \ttref{Tbl_TestImages})
 
 Output: \code{0.50} $\pm$ ERR\_MARGIN
 
@@ -800,7 +841,7 @@ How test will be performed: Running the javascript unit tests.
 
 Type: Automatic
 
-Input: \code{white.png} and \code{gray.png} (see \ref{Tbl_TestImages})
+Input: \code{white.png} and \code{gray.png} (see \ttref{Tbl_TestImages})
 
 Output: \code{0.50} $\pm$ ERR\_MARGIN
 
@@ -810,11 +851,11 @@ with the slight difference that the MSE is $(255-128)^2 = 16129$.
 How test will be performed: Running the javascript unit tests.
 
 
-\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric6}}: control - all gray vs. half black and white}
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric6}}: control - half black and white vs. all gray}
 
 Type: Automatic
 
-Input: \code{gray.png} and \code{half.png} (see \ref{Tbl_TestImages})
+Input: \code{half.png} and \code{gray.png} (see \ttref{Tbl_TestImages})
 
 Output: \code{0.50} $\pm$ ERR\_MARGIN
 
@@ -861,22 +902,59 @@ based on the given images (except for the control images).
 
 A table of the results shall be presented in the VnV report \cite{VnV_report}.
 
+
+
 \subsubsection{Module: Image Metrics Calculation (\mref{M_metric})}
 
 \begin{itemize}
 
-\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric7}}: Lowest/Highest MSE, RMSE and NRMSE scores}
+\item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric7}}:
+Image quality ranking}
 
 Type: Automatic
 
-Input/Condition: The ground truth images \an{Prof says What image?}
-  and multiple resampled images of varying and known quality.
+Input/Condition: The ground truth images (\code{og} and \code{fant}) compared to each of
+  the resampled images of varying quality (the ``test images''
+  listed in Table \ref{Tbl_TestImages}).
 
-Output/Result: The higher quality image should return the lowest error (i.e. lowest MSE, RMSE, NRMSE) scores.
-values for SSIM \lrefp{lib_ssim} and SSIM \lrefp{lib_ssim1}...
 
-How test will be performed: Executing a suite of tests \an{Prof says What tests?}
-  for the multiple images.
+Output/Result: The expected order (from low to high) of the metric scores is
+$
+\code{c500} \le \code{c6a5} \le \code{c010} \le \code{c060} \le
+\code{c100} \le \code{c130} \le \code{c120}
+$.
+For the following reasons:
+\begin{itemize}
+  \item \code{c500} grossly oversamples in all directions
+  \item \code{c6a5} is the same, but moderately/reasonably undersamples in one direction
+  \item \code{c010} grossly undersamples, but conversely
+    the error is localized to each raster cell and not spread out
+  \item \code{c060} similar, but undersamples to a lesser degree
+  \item \code{c100} should score reasonably well
+  \item \code{c130} should score slightly better as there is more coverage, but may spread 
+    the error more
+  \item \code{c120} should score the highest as reasonable compromise between area coverage
+    and error spread
+\end{itemize}
+
+
+Caveats:
+\begin{enumerate}
+  \item These scores are dependent on the raster grid (number of cells and size of
+    the cell or ``pixels''). For example, if we only had one large pixel/cell, then
+    the whole image is averaged into one value/signal. If we had a 100 million cells/pixels
+    in both width and height on an image that was only 500 x 500 pixels, then the scores
+    would all be the same (or close to) by averaging/sampling all the same values and
+    relative areas. That is, unless one test would sample with a 100 million percent
+    (of the cell size) for the spot size...
+  \item The \code{fant} ground truth image is there for
+\end{enumerate}
+
+
+How test will be performed: Running the javascript and python tests.
+Executing this suite of tests will compare the ground truth image to each
+test image (as listed in \ttref{Tbl_TestImages}) using the different metrics
+(as mentioned earlier).
 
 \item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric8}}: Control testing}
 
@@ -886,10 +964,10 @@ Input: The ground truth image.
 
 Output: an error score of zero \an{or the lowest error possible depending on the given metric}.
 
-How test will be performed: Executing a suite of tests using the different metric to compare the 
-ground truth image to itself.
+How test will be performed: Running the javascript and python tests.
 
 \end{itemize}
+
 
 
 \newpage
@@ -1013,7 +1091,7 @@ the user shall answer the following questions?
 \end{itemize}
 
 \subsection{Code Linting Ruleset} \label{codelint_ruleset}
-The code linting ruleset should the default recommended ruleset plus the following:
+The code linting ruleset should be the default recommended ruleset plus the following:
 \begin{itemize}
   \item No lines longer than 120 characters.
   \item No function or variable names are at least 2 characters long and at most 40 characters long.
