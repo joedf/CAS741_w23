@@ -75,8 +75,10 @@
 2023/03/24 & 1.1.0 & Incorporate feedback from Dr. Smith's review.\\
   & 1.1.1 & Added a code linting ruleset.\\
   & 1.1.2 & Added symbolic constants.\\
-2023/03/25 & 1.2.0 & Fill in unit testing information (section \ref{sec_unittest}). \\
+2023/03/25 & 1.2.0 & Fill in parts of the unit testing (section \ref{sec_unittest}). \\
   & 1.2.1 & Added details in the Appendix (\ref{sec_Appendix}). \\
+2023/03/26 & 1.2.2 & Fill in expected outputs and justifications for
+  the unit tests in section \ref{sec_func_req_unittest}. \\
 \bottomrule
 \end{tabularx}
 
@@ -736,11 +738,12 @@ Type: Automatic
 
 Input: \code{black.png} and \code{white.png} (see \ref{Tbl_TestImages})
 
-Output: \wss{The expected result for the given inputs}
+Output: \code{0.00} $\pm$ ERR\_MARGIN
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Test Case Derivation: Should the lowest score/match possible
+  since they are complete opposites.
 
-How test will be performed: 
+How test will be performed: Running the javascript unit tests.
 
 
 \item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric2}}: control - all black vs. half black and white}
@@ -749,11 +752,14 @@ Type: Automatic
 
 Input: \code{black.png} and \code{half.png} (see \ref{Tbl_TestImages})
 
-Output: \wss{The expected result for the given inputs}
+Output: \code{0.29} $\pm$ ERR\_MARGIN
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Test Case Derivation: Should be $1 - \frac{1}{255} \sqrt{\text{MSE}}$ (following the formula for iNRMSE)
+as defined in the SRS \cite{SRS}), where the Mean Square Error (or difference)
+should be $\frac{1}{2} \cdot (255-0)^2 = 32512.5$ (i.e. half ``different''
+meaning half the maximum).
 
-How test will be performed: 
+How test will be performed: Running the javascript unit tests.
 
 
 \item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric3}}: control - all white vs. half black and white}
@@ -762,50 +768,54 @@ Type: Automatic
 
 Input: \code{white.png} and \code{half.png} (see \ref{Tbl_TestImages})
 
-Output: \wss{The expected result for the given inputs}
+Output: \code{0.29} $\pm$ ERR\_MARGIN
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Test Case Derivation: Same justification as \utref{U_metric2}.
 
-How test will be performed: 
+How test will be performed: Running the javascript unit tests.
 
 
 \item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric4}}: control - all black vs. all gray}
 
 Type: Automatic
 
-Input: \code{black.png} and \code{half.png} (see \ref{Tbl_TestImages})
+Input: \code{black.png} and \code{gray.png} (see \ref{Tbl_TestImages})
 
-Output: \wss{The expected result for the given inputs}
+Output: \code{0.50} $\pm$ ERR\_MARGIN
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Test Case Derivation: Should be $1 - \frac{1}{255} \sqrt{\text{MSE}}$ (following the formula for iNRMSE)
+as defined in the SRS \cite{SRS}), where the Mean Square Error (or difference)
+should be $(0-128)^2 = 16384$.
 
-How test will be performed: 
+How test will be performed: Running the javascript unit tests.
 
 
 \item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric5}}: control - all white vs. all gray}
 
 Type: Automatic
 
-Input: \code{white.png} and \code{half.png} (see \ref{Tbl_TestImages})
+Input: \code{white.png} and \code{gray.png} (see \ref{Tbl_TestImages})
 
-Output: \wss{The expected result for the given inputs}
+Output: \code{0.50} $\pm$ ERR\_MARGIN
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Test Case Derivation: Same justification as \utref{U_metric4}, 
+with the slight difference that the MSE is $(255-128)^2 = 16129$.
 
-How test will be performed: 
+How test will be performed: Running the javascript unit tests.
 
 
 \item{\textbf{U\refstepcounter{unittestnum}\theunittestnum \label{U_metric6}}: control - all gray vs. half black and white}
 
 Type: Automatic
 
-Input: \code{white.png} and \code{half.png} (see \ref{Tbl_TestImages})
+Input: \code{gray.png} and \code{half.png} (see \ref{Tbl_TestImages})
 
-Output: \wss{The expected result for the given inputs}
+Output: \code{0.50} $\pm$ ERR\_MARGIN
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Test Case Derivation: One half of the pixel follow the justification of \utref{U_metric4},
+and the other half follow the justification of \utref{U_metric5}.
 
-How test will be performed: 
+How test will be performed: Running the javascript unit tests.
 
     
 \end{itemize}
@@ -813,7 +823,7 @@ How test will be performed:
 
 \newpage
 
-\subsection{Tests for Nonfunctional Requirements}
+\subsection{Tests for Nonfunctional Requirements} \label{sec_nfr_unittest}
 
 See unit testing scope (\ref{sec_unittest_scope}) for more information.
 The image metrics is the only module that will be unit tested to
@@ -1030,6 +1040,7 @@ possibility of mistakes when updating this document.
 \begin{itemize}
   \item \code{SETUP\_MAX\_CLICKS = 4} clicks
   \item \code{SETUP\_MAX\_TIME = 3} minutes
+  \item \code{ERR\_MARGIN = 0.01} (1\%)
 \end{itemize}
 
 
