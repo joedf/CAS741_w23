@@ -45,7 +45,7 @@
 
 \begin{document}
 
-\title{System Verification and Validation Plan for \progname{}} 
+\title{Verification and Validation Plan for \progname{}} 
 \author{\authname}
 \date{\today}
 	
@@ -1158,6 +1158,7 @@ The code linting ruleset should be the default recommended ruleset plus the foll
     \end{itemize}
   \item Warn about global variables. Each shall be carefully considered whether it should remain
     a global variable. Library names are exempt.
+  \item (flake8 only): ignore indentation (tabs vs. spaces) style \code{--ignore=W191}.
 \end{itemize}
 
 
