@@ -1,5 +1,7 @@
 \documentclass[12pt, titlepage]{article}
 
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
@@ -12,6 +14,9 @@
 }
 % \usepackage[round]{natbib}
 \usepackage[numbers,square]{natbib}
+
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
 
 \input{../Comments}
 \input{../Common}
@@ -33,6 +38,8 @@
 \midrule
 2023/03/26 & 0.1.0 & Creation\\
 2023/04/02 & 0.1.1 & Start requirements testing sections\\
+2023/04/03 & 0.2.0 & Fill in the Functional Requirements Evaluation
+  section, along with test images\\
 \bottomrule
 \end{tabularx}
 
@@ -45,9 +52,10 @@
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
+  GUI & Graphical User Interface\\
   SRS & Software Requirements Specification\\
-  VnV & Verification and Validation\\
   T & Test\\
+  VnV & Verification and Validation\\
   \bottomrule
 \end{tabular}\\
 
@@ -79,42 +87,207 @@ available at: \url{https://github.com/joedf/ImgBeamer/tree/cas741}
 \section{Functional Requirements Evaluation}
 In this section, we report the measures that were taken to evaluate whether the
 functional requirements (as listed in the SRS \cite{SRS}) were met.
+Most of these tests were executed manually due to the complex nature of visual information, GUI testing, and
+the subjectivity of image quality.
 
 \subsection{Image Import and Export (R1 and R6)}
-...
-\subsubsection{T1}
-...
-\subsubsection{T2}
-...
+This section is focused on testing the image import and export functionalities.
+
+\subsubsection{T1: Test import for PNG/JPG/BMP format (R1)}
+The software could successfully load or import valid (non-corrupt) images files in the PNG, JPG, and BMP formats.
+An example is shown in figure \ref{fig_t1}.
+\begin{figure}[h!]
+  \begin{center}
+   \includegraphics[width=0.5\textwidth]{t1.png}
+  \caption{An example loaded test image.}
+  \label{fig_t1}
+  \end{center}
+\end{figure}
+
+
+\subsubsection{T2: Test PNG Image Export (R6)}
+The software could successfully export valid PNG image files of the resulting image (see figure \ref{fig_t2}).
+\begin{figure}[h!]
+  \begin{center}
+   \includegraphics[width=0.5\textwidth]{t2.png}
+  \caption{The image was faithfully reproduced (in grayscale with some imaging parameters change for clarity).}
+  \label{fig_t2}
+  \end{center}
+\end{figure}
 
 \subsection{Spot Profile and Imaging Parameters (R2, R3, R4, and R5)}
-...
-\subsubsection{T3}
-...
-\subsubsection{T4}
-...
-\subsubsection{T5}
-...
-\subsubsection{T6}
-...
-\subsubsection{T7}
-...
-\subsubsection{T8}
-...
-\subsubsection{T9}
-...
+This section focuses on testing the sampling and image rendering based on the given
+imaging parameters and subregion / ROI. The ground truth / input image used for these tests
+is depicted in figure \ref{fig_gt0} with the cyan overlay depicting the subregion area.
+
+\begin{figure}[h!]
+  \begin{center}
+   \includegraphics[width=0.5\textwidth]{gt0.png}
+  \caption{The ground truth image used for testing with the subregion set to cover the entire image.}
+  \label{fig_gt0} 
+  \end{center}
+\end{figure}
+
+
+\subsubsection{T3: Spot Width and Height - Exact-sampling (R2 and R5)}
+The test was passed as shown in figure \ref{fig_t3}.
+\begin{figure}[h!]
+  \begin{center}
+   \includegraphics[width=5cm]{t3a.png}
+   \includegraphics[width=5cm]{t3b.png}
+  \caption{The spot layout and resulting image matching the expected test result:
+  Spot size of 100 by 100\%.}
+  \label{fig_t3} 
+  \end{center}
+\end{figure}
+
+\subsubsection{T4: Spot Width and Height - Under-sampling (R2 and R5)}
+The test was passed as shown in figure \ref{fig_t4}.
+\begin{figure}[h!]
+  \begin{center}
+   \includegraphics[width=5cm]{t4a.png}
+   \includegraphics[width=5cm]{t4b.png}
+  \caption{The spot layout and resulting image matching the expected test result:
+  Spot size of 10 by 10\%.}
+  \label{fig_t4} 
+  \end{center}
+\end{figure}
+
+\subsubsection{T5: Spot Width and Height - Over-sampling (R2 and R5)}
+The test was passed as shown in figure \ref{fig_t5}.
+\begin{figure}[h!]
+  \begin{center}
+   \includegraphics[width=5cm]{t5a.png}
+   \includegraphics[width=5cm]{t5b.png}
+  \caption{The spot layout and resulting image matching the expected test result:
+  Spot size of 500 by 500\%.}
+  \label{fig_t5} 
+  \end{center}
+\end{figure}
+
+\subsubsection{T6: Spot Rotation - Astigmatism (R2 and R5)}
+The test was passed as shown in figure \ref{fig_t6}.
+\begin{figure}[h!]
+  \begin{center}
+   \includegraphics[width=5cm]{t6a.png}
+   \includegraphics[width=5cm]{t6b.png}
+  \caption{The spot layout and resulting image matching the expected test result:
+  Spot size of 60 by 500\% at 45 degrees rotation.}
+  \label{fig_t6} 
+  \end{center}
+\end{figure}
+
+\subsubsection{T7: Raster Grid / Pixel Size (R3 and R5)}
+The test was passed as shown in figure \ref{fig_t7}.
+\begin{figure}[h!]
+  \begin{center}
+   \includegraphics[width=5cm]{t7a.png}
+   \includegraphics[width=5cm]{t7b.png}
+  \caption{The spot layout and resulting image matching the expected test result: an 8 by 8 pixel image.}
+  \label{fig_t7} 
+  \end{center}
+\end{figure}
+
+\subsubsection{T8: Subregion / ROI (R4 and R5)}
+The test was passed as shown in figure \ref{fig_t8}.
+\begin{figure}[h!]
+  \begin{center}
+   \includegraphics[width=5cm]{t8a.png}
+   \includegraphics[width=5cm]{t8b.png}
+   \includegraphics[width=5cm]{t8c.png}
+   \includegraphics[width=5cm]{t8d.png}
+   \includegraphics[width=5cm]{t8e.png}
+  \caption{The spot layout, subregion, and resulting image matching the expected test result.}
+  \label{fig_t8} 
+  \end{center}
+\end{figure}
+
+\subsubsection{T9: Ground Truth Reproduction (R1, R2, R3, and R6)}
+The test was passed as shown in figure \ref{fig_t9}.
+\begin{figure}[h!]
+  \begin{center}
+   \includegraphics[width=5cm]{t9a.png}
+   \includegraphics[width=5cm]{t9b.png}
+  \caption{The expected test result: the ground image and resulting image are visually identical.}
+  \label{fig_t9} 
+  \end{center}
+\end{figure}
+
 
 \subsection{Image Quality Metric (R7)}
-...
-\subsubsection{T10}
-...
-\subsubsection{T11}
-...
-\subsubsection{T12}
-...
-\subsubsection{T13}
-...
+This section focuses on testing the image quality metric general cases. Naturally,
+this is no flawless or foolproof image quality metric. Over 20 different image metrics
+(some with a reference image and some without a reference) have been
+reviewed and compared by Jagalingam and Hegde in a 2015 paper,
+each with their different strengths and weaknesses \cite{JAGALINGAM2015133}.
 
+\subsubsection{T10: High metric value (approximate to exact-sampling)}
+The test was passed as shown in figure \ref{fig_t10}.
+\begin{figure}[h!]
+  \begin{center}
+   \includegraphics[width=4cm]{t10a.png}
+   \includegraphics[width=4cm]{t10b.png}
+   \includegraphics[width=4cm]{t10c.png}
+   \includegraphics[width=4cm]{t10d.png}
+   \includegraphics[width=4cm]{t10e.png}
+   \includegraphics[width=4cm]{t10f.png}
+  \caption{The spot layout, spot profile, subregion, and resulting image with a score equal or greater to
+  the expected test result of a ``0.8501'' minimum.}
+  \label{fig_t10} 
+  \end{center}
+\end{figure}
+
+\subsubsection{T11: Low metric value (under-sampling)}
+The test was passed as shown in figure \ref{fig_t11}.
+\begin{figure}[h!]
+  \begin{center}
+   \includegraphics[width=4cm]{t10a.png}
+   \includegraphics[width=4cm]{t10b.png}
+   \includegraphics[width=4cm]{t11c.png}
+   \includegraphics[width=4cm]{t11d.png}
+   \includegraphics[width=4cm]{t11e.png}
+   \includegraphics[width=4cm]{t11f.png}
+  \caption{The spot layout, spot profile, subregion, and resulting image with a score less or equal to
+  the expected test result of a ``0.8501'' maximum.}
+  \label{fig_t11} 
+  \end{center}
+\end{figure}
+
+\subsubsection{T12: Low metric value (over-sampling)}
+The test was passed as shown in figure \ref{fig_t12}.
+\begin{figure}[h!]
+  \begin{center}
+   \includegraphics[width=4cm]{t10a.png}
+   \includegraphics[width=4cm]{t10b.png}
+   \includegraphics[width=4cm]{t12c.png}
+   \includegraphics[width=4cm]{t12d.png}
+   \includegraphics[width=4cm]{t12e.png}
+   \includegraphics[width=4cm]{t12f.png}
+  \caption{The spot layout, spot profile, subregion, and resulting image with a score less or equal to
+  the expected test result of a ``0.8501'' maximum.}
+  \label{fig_t12} 
+  \end{center}
+\end{figure}
+
+\subsubsection{T13: Control metric value} \label{T13}
+The test was passed as shown in figure \ref{fig_t12}.
+\begin{figure}[h!]
+  \begin{center}
+   \includegraphics[width=5cm]{t13a.png}
+   \includegraphics[width=5cm]{t13b.png}
+   \includegraphics[width=5cm]{t13c.png}
+   \includegraphics[width=5cm]{t13d.png}
+  \caption{The spot layout, spot profile, subregion, and resulting image with a score greater or equal to
+  the expected test result of a ``0.9500'' minimum.}
+  \label{fig_t12} 
+  \end{center}
+\end{figure}
+
+
+
+
+\newpage
+\clearpage
 
 \section{Nonfunctional Requirements Evaluation}
 ...
@@ -148,6 +321,12 @@ This section will not be appropriate for every project.
 \section{Unit Testing}
 
 \section{Changes Due to Testing}
+\begin{enumerate}
+  \item The passing value for T13 (see \ref{T13}) had to be changed from ``0.9800'' to `0.9500' since the
+    resulting images look identical. The resulting value of `0.9617' seemed satisfactory and the original
+    expected test value was perhaps too constrained.
+\end{enumerate}
+
 
 \section{Automated Testing}
 		
@@ -159,7 +338,7 @@ This section will not be appropriate for every project.
 
 
 \bibliographystyle{plainnat}
-\bibliography{../../refs/References,../../refs/cas741}
+\bibliography{../../refs/References,../../refs/cas741,../../refs/algorithms}
 
 
 \newpage{}
