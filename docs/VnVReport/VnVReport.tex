@@ -216,8 +216,7 @@ The test was passed as shown in figure \ref{fig_t9}.
 
 \subsection{Image Quality Metric (R7)}
 This section focuses on testing the image quality metric general cases. Naturally,
-this is no flawless or foolproof image quality metric. Over 20 different image metrics
-(some with a reference image and some without a reference) have been
+this is no flawless or foolproof image quality metric. Over 20 different image metrics have been
 reviewed and compared by Jagalingam and Hegde in a 2015 paper,
 each with their different strengths and weaknesses \cite{JAGALINGAM2015133}.
 
@@ -290,28 +289,32 @@ The test was passed as shown in figure \ref{fig_t12}.
 \clearpage
 
 \section{Nonfunctional Requirements Evaluation}
-...
+This section focuses on the testing results verifying whether the nonfunctional requirements
+(as defined in the SRS \cite{SRS}) are met. Emphasis is put on the \textit{usability} and
+by extension \textit{portability}: The software should be easy to set up and use without
+having to worry about any technicalities that could otherwise hinder or completely
+prohibit non "tech-savvy" individuals from using the software.
 
 \subsection{Usability}
-...
-\subsubsection{T14}
-...
+\subsubsection{T14: Usability Survey (NFR2)}
+The usability survey was not completed. The software was casually reviewed in verbal discussion
+with the expert consultants (as listed in the VnV Plan \cite{VnV_plan})
+throughout the development of the software. Suggested features and minor issues has been
+implemented into the software such as: the ability to set a spot size by numeric input,
+draw the resulting row-by-row for responsiveness, and a display for spot shape eccentricity.
 
 \subsection{Accuracy}
-...
-\subsubsection{T15}
-...
+\subsubsection{T15: Image Metric Survey (NFR1)}
+The image quality survey was not executed, but shall be some time in the future.
 
 \subsection{Maintainability}
+\subsubsection{T16: Static code analysis (NFR3)}
 ...
-\subsubsection{T16}
-...
-\subsubsection{T17}
+\subsubsection{T17: Code Review (NFR3)}
 ...
 
 \subsection{Portability}
-...
-\subsubsection{T18}
+\subsubsection{T18: Various Platforms and Environments (NFR4)}
 ...
 	
 \section{Comparison to Existing Implementation}	
