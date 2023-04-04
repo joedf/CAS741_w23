@@ -82,6 +82,7 @@
 2023/03/26 & 1.2.2 & Fill in expected outputs and justifications for
   the unit tests in section \ref{sec_func_req_unittest} and \ref{sec_nfr_unittest}. \\
 2023/03/27 & 1.2.3 & Added web link pointing to unit test files. \\
+2023/04/04 & 1.2.4 & Minor tweaks \\
 \bottomrule
 \end{tabularx}
 
@@ -894,13 +895,13 @@ to \progname{}'s metric
 (\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_prog}}):
 \begin{itemize}
   \item \href{https://github.com/obartra/ssim}{ssim.web-3.5.0.js} (\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_ssim}})
-    -- implements SSIM
+    -- implements SSIM (by ``obartra'')
   \item \href{https://github.com/darosh/image-mse-js}{image-mse.js} (\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_mse}})
-    -- implements MSE, PNSR
+    -- implements MSE, PNSR (by ``darosh'')
   \item \href{https://github.com/darosh/image-ssim-js}{image-ssim.js} (\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_ssim1}})
-    -- implements SSIM
+    -- implements SSIM (by ``darosh'')
   \item \href{https://github.com/darosh/image-ms-ssim-js}{image-ms-ssim.js} (\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_msssim}})
-    -- implements MS-SSIM and SSIM
+    -- implements MS-SSIM and SSIM (by ``darosh'')
 \end{itemize}
 
 Various libraries with different algorithms/metrics are used here to see how each
@@ -929,9 +930,14 @@ Input/Condition: The ground truth images (\code{og} and \code{fant}) compared to
 
 Output/Result: The expected order (from low to high) of the metric scores is
 $
-\code{c500} \le \code{c6a5} \le \code{c010} \le \code{c060} \le
-\code{c100} \le \code{c130} \le \code{c120}
+\code{c500} \le \code{c6a5} \le \code{c010} \le \code{c060} \le \code{c100} \le
+\code{c130} \le \code{c120}
 $.
+If we include the ground truth test images, this continues with
+$
+... \le \code{fant} \le \code{mDef} \le \code{og}
+$
+
 For the following reasons:
 \begin{itemize}
   \item \code{c500} grossly oversamples in all directions
@@ -944,6 +950,12 @@ For the following reasons:
     the error more
   \item \code{c120} should score the highest as reasonable compromise between area coverage
     and error spread
+  \item \code{fant} should score even higher as it uses a complex high quality
+    algorithm \cite{fant} must is still downsampled for testing.
+  \item \code{mDef} should get an almost perfect score as it is not downsampled and only
+    a few pixels that are different.
+  \item \code{og} should be a perfect score as it is the exact same image as the original
+    ground truth image.
 \end{itemize}
 
 

@@ -1,0 +1,73 @@
+digraph G {
+concentrate=true;
+splines="ortho";
+rankdir="LR";
+subgraph legend{
+    rank = min;
+    label = "legend";
+    Legend [shape=none, margin=0, label = <
+        <table cellspacing="0" cellpadding="0" border="1"><tr><td>Code2flow Legend</td></tr><tr><td>
+        <table cellspacing="0">
+        <tr><td>Regular function</td><td width="50px" bgcolor='#cccccc'></td></tr>
+        <tr><td>Trunk function (called by GUI)</td><td bgcolor='#966F33'></td></tr>
+        <tr><td>Leaf function (this calls nothing else)</td><td bgcolor='#6db33f'></td></tr>
+        <tr><td>Function call</td><td><font color='black'>&#8594;</font></td></tr>
+        </table></td></tr></table>
+        >];
+}node_ef5fe8e1 [label="537: drawGroundtruthImage()" name="drawsteps::drawGroundtruthImage" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_49cf3752 [label="361: drawProbeLayout()" name="drawsteps::drawProbeLayout" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_5d1b0747 [label="452: drawProbeLayoutSampling()" name="drawsteps::drawProbeLayoutSampling" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_5ef3a7c3 [label="492: drawResampled()" name="drawsteps::drawResampled" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_9639829e [label="259: drawSpotContent()" name="drawsteps::drawSpotContent" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_7ec115d6 [label="43: drawSpotProfileEdit()" name="drawsteps::drawSpotProfileEdit" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_a3d0a548 [label="314: drawSpotSignal()" name="drawsteps::drawSpotSignal" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_0c58ec84 [label="157: drawSubregionImage()" name="drawsteps::drawSubregionImage" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_7ad68c64 [label="609: drawVirtualSEM()" name="drawsteps::drawVirtualSEM" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_f29280ed [label="0: (global)()" name="main::(global)" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_98f50322 [label="81: OnImageLoaded()" name="main::OnImageLoaded" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_9851a479 [label="65: UpdateBaseImage()" name="main::UpdateBaseImage" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_c8fc09f0 [label="148: Utils_SetSpotWidth()" name="main::Utils_SetSpotWidth" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_dbf131f2 [label="96: doUpdate()" name="main::doUpdate" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_bf247aa5 [label="111: promptForSpotWidth()" name="main::promptForSpotWidth" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_3b2d344c [label="236: updateBeams()" name="main::updateBeams" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_6bd75093 [label="25: GetOptimalBoxWidth()" name="utils::GetOptimalBoxWidth" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_f29280ed -> node_9851a479 [color="#0072B2" penwidth="2"];
+node_f29280ed -> node_6bd75093 [color="#0072B2" penwidth="2"];
+node_98f50322 -> node_ef5fe8e1 [color="#56B4E9" penwidth="2"];
+node_98f50322 -> node_49cf3752 [color="#56B4E9" penwidth="2"];
+node_98f50322 -> node_5d1b0747 [color="#56B4E9" penwidth="2"];
+node_98f50322 -> node_5ef3a7c3 [color="#56B4E9" penwidth="2"];
+node_98f50322 -> node_9639829e [color="#56B4E9" penwidth="2"];
+node_98f50322 -> node_7ec115d6 [color="#56B4E9" penwidth="2"];
+node_98f50322 -> node_a3d0a548 [color="#56B4E9" penwidth="2"];
+node_98f50322 -> node_0c58ec84 [color="#56B4E9" penwidth="2"];
+node_98f50322 -> node_7ad68c64 [color="#56B4E9" penwidth="2"];
+node_98f50322 -> node_dbf131f2 [color="#56B4E9" penwidth="2"];
+node_98f50322 -> node_dbf131f2 [color="#56B4E9" penwidth="2"];
+node_98f50322 -> node_3b2d344c [color="#56B4E9" penwidth="2"];
+node_9851a479 -> node_98f50322 [color="#E69F00" penwidth="2"];
+node_c8fc09f0 -> node_dbf131f2 [color="#000000" penwidth="2"];
+node_c8fc09f0 -> node_3b2d344c [color="#000000" penwidth="2"];
+node_bf247aa5 -> node_c8fc09f0 [color="#0072B2" penwidth="2"];
+subgraph cluster_1b89611d {
+    node_7ec115d6 node_0c58ec84 node_9639829e node_a3d0a548 node_49cf3752 node_5d1b0747 node_5ef3a7c3 node_ef5fe8e1 node_7ad68c64;
+    label="File: drawsteps";
+    name="drawsteps";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_8d6c9b99 {
+    node_9851a479 node_98f50322 node_dbf131f2 node_bf247aa5 node_c8fc09f0 node_3b2d344c node_f29280ed;
+    label="File: main";
+    name="main";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_bedf5d5a {
+    node_6bd75093;
+    label="File: utils";
+    name="utils";
+    style="filled";
+    graph[style=dotted];
+};
+}

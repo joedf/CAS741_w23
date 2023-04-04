@@ -54,6 +54,8 @@
   \textbf{symbol} & \textbf{description}\\
   \midrule 
   GUI & Graphical User Interface\\
+  MG & Module Guide\\
+  MIS & Module Interface Specification\\
   NFR & Non Functional Requirement\\
   R & Requirement\\
   SRS & Software Requirements Specification\\
@@ -339,37 +341,87 @@ This section is not applicable as an existing implementation for public use was 
 is not available for comparison.
 
 \section{Unit Testing}
+As stated, unit testing was limited to image metrics (as explained in the VnV Plan \cite{VnV_plan}).
+Unit tests for the image metrics are available under the \code{tests/image\_metrics} folder.
+
+\subsection{Testing Setup}
+The following are general instructions (repeated here for convenience to the reader)
+to run the tests (each in their own subfolder).
+\begin{itemize}
+  \item \code{js-tests/}: for javascript implementations
+  \begin{itemize}
+    \item open the \code{index.html} page (using a local web server as described above)
+      and look in the webconsole.
+    \item Optionally, an online hosted version exists
+    \href{https://joedf.github.io/ImgBeamer/tests/image_metrics/js-tests/}{here}.
+    \item mainly in the webconsole, you can use \code{run\_all(fant)} where if \code{fant}
+      is true, all the image comparison tests will be run using the ``fant-sampled'' image \cite{fant_1986} as
+      the ground truth. Otherwise (false), it will use the ``original'' image as the ground truth instead.
+  \end{itemize}
+  \item \code{py-tests/}: for python implementations
+  \begin{itemize}
+    \item Install Python v3.10.6 or better (has not been tested on other versions)
+    \item You'll likely need to run \code{pip install sewar} \textbf{once} to get the required
+      image metrics module/library.
+    \item run \code{imgquality.py}
+  \end{itemize}
+\end{itemize}
+
+\subsection{Results for Functional Requirements}
+\subsubsection{Control Unit Tests}
+...
+
+\subsection{Results for Nonfunctional Requirements}
+\subsubsection{Control Unit Tests}
+...
 
 \section{Changes Due to Testing}
 \begin{enumerate}
   \item The passing value for T13 (see \ref{T13}) had to be changed from ``0.9800'' to `0.9500' since the
     resulting images look identical. The resulting value of `0.9617' seemed satisfactory and the original
     expected test value was perhaps too constrained.
+  \item Code is cleaner/clearer and better commentated/documented after running code linting and
+    doing code review. Many unnecessary global variables have been eliminated.
 \end{enumerate}
 
 
 \section{Automated Testing}
-		
+Currently, this is no automated execution of the tests every time there is change.
+That said, the tests are easy to run (just executing two files) and could be set up with
+continuous integration some time in the future.
+
 \section{Trace to Requirements}
 		
 \section{Trace to Modules}		
 
 \section{Code Coverage Metrics}
+Code coverage was used as part of this project. However, callgraphs had been generated using
+\href{https://github.com/scottrogowski/code2flow}{Code2Flow}
+to verify the flow application with respect to the design (as per the MG \cite{MG} and MIS \cite{MIS}).
+An up-to-date but simplified (with limited search depth) callgraph is shown in figure \ref{fig_callgraph_simple}.
+An older (somewhat out-dated) callgraph but with greater detail is shown in figure \ref{fig_callgraph_old_full}.
 
+\begin{figure}[h!]
+  \begin{center}
+   \includegraphics[width=0.8\textwidth]{callgraph/simple.png}
+  \caption{An up-to-date callgraph generated using \href{https://github.com/scottrogowski/code2flow}{Code2Flow}}
+  \label{fig_callgraph_simple} 
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+   \includegraphics[width=0.8\textwidth]{callgraph/old-complex.png}
+  \caption{A somewhat out-dated but more detailed callgraph generated using \href{https://github.com/scottrogowski/code2flow}{Code2Flow}}
+  \label{fig_callgraph_old_full} 
+  \end{center}
+\end{figure}
+
+\newpage
+\clearpage
 
 \bibliographystyle{plainnat}
 \bibliography{../../refs/References,../../refs/cas741,../../refs/algorithms}
 
-
-\newpage{}
-\section*{Appendix --- Reflection}
-
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Lifelong Learning.  Please answer the following questions:
-
-\begin{enumerate}
-  \item 
-  \item 
-\end{enumerate}
 
 \end{document}
