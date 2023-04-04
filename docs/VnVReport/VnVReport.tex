@@ -40,6 +40,7 @@
 2023/04/02 & 0.1.1 & Start requirements testing sections\\
 2023/04/03 & 0.2.0 & Fill in the Functional Requirements Evaluation
   section, along with test images\\
+2023/04/02 & 0.3.0 & Complete NFR testing sections\\
 \bottomrule
 \end{tabularx}
 
@@ -53,6 +54,8 @@
   \textbf{symbol} & \textbf{description}\\
   \midrule 
   GUI & Graphical User Interface\\
+  NFR & Non Functional Requirement\\
+  R & Requirement\\
   SRS & Software Requirements Specification\\
   T & Test\\
   VnV & Verification and Validation\\
@@ -297,7 +300,8 @@ prohibit non "tech-savvy" individuals from using the software.
 
 \subsection{Usability}
 \subsubsection{T14: Usability Survey (NFR2)}
-The usability survey was not completed. The software was casually reviewed in verbal discussion
+The usability survey (see VnV Plan \cite{VnV_plan}) was not completed.
+The software was casually reviewed in verbal discussion
 with the expert consultants (as listed in the VnV Plan \cite{VnV_plan})
 throughout the development of the software. Suggested features and minor issues has been
 implemented into the software such as: the ability to set a spot size by numeric input,
@@ -305,21 +309,34 @@ draw the resulting row-by-row for responsiveness, and a display for spot shape e
 
 \subsection{Accuracy}
 \subsubsection{T15: Image Metric Survey (NFR1)}
-The image quality survey was not executed, but shall be some time in the future.
+The image quality survey (see VnV Plan \cite{VnV_plan}) was not executed, but shall be some time in the future.
 
 \subsection{Maintainability}
 \subsubsection{T16: Static code analysis (NFR3)}
-...
+ESList was used to analyze the JavaScript code, and flake8 to analyze the Python code (only the
+test code involves Python). ESLint reported 186 errors and 20 warnings. Flake8 reported
+10 issues. All of which have been resolved. The code linters now return zero issues.
+
 \subsubsection{T17: Code Review (NFR3)}
-...
+A code review was executed by the author, but should be done by another individual some time in the future.
+Nearly all code that did not respect the code checklist (from the VnV Plan \cite{VnV_plan})
+was rectified. In a few cases, some code has been marked for change with comments prefixed with
+\code{TODO:}. Otherwise, all functions except for a few non-design-dependent utility functions
+have been documented with \href{https://github.com/jsdoc/jsdoc}{JsDoc} style comments.
+As a result, code documentation has been generated and is published at:
+\url{https://joedf.github.io/ImgBeamer/jsdocs/index.html}
 
 \subsection{Portability}
 \subsubsection{T18: Various Platforms and Environments (NFR4)}
-...
+This test was executed by the author and was also indirectly tested successfully a number of times
+by the expert consultants \cite{VnV_plan}. Users simply need to navigate to the following link
+in any modern web browser to run and test the software:
+\url{https://joedf.github.io/ImgBeamer/app/index.html}
 	
 \section{Comparison to Existing Implementation}	
 
-This section will not be appropriate for every project.
+This section is not applicable as an existing implementation for public use was not found or
+is not available for comparison.
 
 \section{Unit Testing}
 
