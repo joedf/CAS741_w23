@@ -2,6 +2,8 @@
 
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 
+\usepackage{siunitx}
+
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
@@ -40,7 +42,8 @@
 2023/04/02 & 0.1.1 & Start requirements testing sections\\
 2023/04/03 & 0.2.0 & Fill in the Functional Requirements Evaluation
   section, along with test images\\
-2023/04/02 & 0.3.0 & Complete NFR testing sections\\
+2023/04/04 & 0.3.0 & Complete NFR testing sections\\
+           & 0.3.1 & Start unit testing section\\
 \bottomrule
 \end{tabularx}
 
@@ -344,6 +347,15 @@ is not available for comparison.
 As stated, unit testing was limited to image metrics (as explained in the VnV Plan \cite{VnV_plan}).
 Unit tests for the image metrics are available under the \code{tests/image\_metrics} folder.
 
+Some statistics on the unit tests:
+\begin{itemize}
+  \item A total of 247 tests (13 metric variants with 19 images comparisons each) were
+    executed in 931 \si{ms} for the image metrics implemented in JavaScript.
+  \item A total of 152 tests (8 metric variants with 19 images comparisons each) were
+    executed in 38.3125 \si{s} for the image metrics implemented in Python.
+\end{itemize}
+
+
 \subsection{Testing Setup}
 The following are general instructions (repeated here for convenience to the reader)
 to run the tests (each in their own subfolder).
@@ -368,11 +380,13 @@ to run the tests (each in their own subfolder).
 \end{itemize}
 
 \subsection{Results for Functional Requirements}
-\subsubsection{Control Unit Tests}
-...
+\subsubsection{Image Metric Control Testing}
+All these tests passed within the margin of error.
 
 \subsection{Results for Nonfunctional Requirements}
-\subsubsection{Control Unit Tests}
+\subsubsection{Image Metric Control Testing}
+...
+\subsubsection{Image Metric Experimental Testing}
 ...
 
 \section{Changes Due to Testing}
