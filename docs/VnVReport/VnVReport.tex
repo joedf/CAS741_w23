@@ -20,6 +20,14 @@
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
 
+\usepackage{xr}
+\externaldocument{../SRS/SRS}
+\externaldocument{../Design/MG/MG}
+
+\newcommand{\rref}[1]{R\ref{#1}}
+\newcommand{\nfrref}[1]{NFR\ref{#1}}
+\newcommand{\mref}[1]{M\ref{#1}}
+
 \input{../Comments}
 \input{../Common}
 
@@ -44,6 +52,7 @@
   section, along with test images\\
 2023/04/04 & 0.3.0 & Complete NFR testing sections\\
            & 0.3.1 & Start unit testing section\\
+2023/04/05 & 0.4.0 & Complete first revision\\
 \bottomrule
 \end{tabularx}
 
@@ -100,7 +109,7 @@ functional requirements (as listed in the SRS \cite{SRS}) were met.
 Most of these tests were executed manually due to the complex nature of visual information, GUI testing, and
 the subjectivity of image quality.
 
-\subsection{Image Import and Export (R1 and R6)}
+\subsection{Image Import and Export (R1 and R6)} \label{ss_inout}
 This section is focused on testing the image import and export functionalities.
 
 \subsubsection{T1: Test import for PNG/JPG/BMP format (R1)}
@@ -125,7 +134,7 @@ The software could successfully export valid PNG image files of the resulting im
   \end{center}
 \end{figure}
 
-\subsection{Spot Profile and Imaging Parameters (R2, R3, R4, and R5)}
+\subsection{Spot Profile and Imaging Parameters (R2, R3, R4, and R5)} \label{ss_params}
 This section focuses on testing the sampling and image rendering based on the given
 imaging parameters and subregion / ROI. The ground truth / input image used for these tests
 is depicted in figure \ref{fig_gt0} with the cyan overlay depicting the subregion area.
@@ -224,7 +233,7 @@ The test was passed as shown in figure \ref{fig_t9}.
 \end{figure}
 
 
-\subsection{Image Quality Metric (R7)}
+\subsection{Image Quality Metric (R7)} \label{ss_metrics}
 This section focuses on testing the image quality metric general cases. Naturally,
 this is no flawless or foolproof image quality metric. Over 20 different image metrics have been
 reviewed and compared by Jagalingam and Hegde in a 2015 paper,
@@ -305,7 +314,7 @@ by extension \textit{portability}: The software should be easy to set up and use
 having to worry about any technicalities that could otherwise hinder or completely
 prohibit non "tech-savvy" individuals from using the software.
 
-\subsection{Usability}
+\subsection{Usability} \label{ss_usability}
 \subsubsection{T14: Usability Survey (NFR2)}
 The usability survey (see VnV Plan \cite{VnV_plan}) was not completed.
 The software was casually reviewed in verbal discussion
@@ -314,11 +323,11 @@ throughout the development of the software. Suggested features and minor issues 
 implemented into the software such as: the ability to set a spot size by numeric input,
 draw the resulting row-by-row for responsiveness, and a display for spot shape eccentricity.
 
-\subsection{Accuracy}
+\subsection{Accuracy} \label{ss_accuracy}
 \subsubsection{T15: Image Metric Survey (NFR1)}
 The image quality survey (see VnV Plan \cite{VnV_plan}) was not executed, but shall be some time in the future.
 
-\subsection{Maintainability}
+\subsection{Maintainability} \label{ss_maintain}
 \subsubsection{T16: Static code analysis (NFR3)}
 ESList was used to analyze the JavaScript code, and flake8 to analyze the Python code (only the
 test code involves Python). ESLint reported 186 errors and 20 warnings. Flake8 reported
@@ -333,7 +342,7 @@ have been documented with \href{https://github.com/jsdoc/jsdoc}{JsDoc} style com
 As a result, code documentation has been generated and is published at:
 \url{https://joedf.github.io/ImgBeamer/jsdocs/index.html}
 
-\subsection{Portability}
+\subsection{Portability} \label{ss_portability}
 \subsubsection{T18: Various Platforms and Environments (NFR4)}
 This test was executed by the author and was also indirectly tested successfully a number of times
 by the expert consultants \cite{VnV_plan}. Users simply need to navigate to the following link
@@ -345,7 +354,7 @@ in any modern web browser to run and test the software:
 This section is not applicable as an existing implementation for public use was not found or
 is not available for comparison.
 
-\section{Unit Testing}
+\section{Unit Testing} \label{ss_unittest}
 As stated, unit testing was limited to image metrics (as explained in the VnV Plan \cite{VnV_plan}).
 Unit tests for the image metrics are available under the \code{tests/image\_metrics} folder.
 
@@ -477,6 +486,7 @@ relatively good fits. All other metrics did not fit the expected order at all.
   \item For similar reasons, the error margin for the unit tests was adjusted from $\pm$ 2\% to $\pm$ 5\%.
   \item Code is cleaner/clearer and better commentated/documented after running code linting and
     doing code review. Many unnecessary global variables have been eliminated.
+  \item Switching over to the UQI/UIQ or SSIM metrics may be worth considering.
 \end{enumerate}
 
 
@@ -485,9 +495,97 @@ Currently, this is no automated execution of the tests every time there is chang
 That said, the tests are easy to run (just executing two files) and could be set up with
 continuous integration some time in the future.
 
+
 \section{Trace to Requirements}
+In Table \ref{Table:R_trace}, the connections between the test sections and the requirements are shown.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+      \hline
+      Section &
+      \rref{R_Inputs} & \rref{R_userSpotProfile} & \rref{R_userPixelSize}
+      & \rref{R_subregion} & \rref{R_spotLayout} & \rref{R_resultImage} &
+      \rref{R_imageMetric} &
+      \nfrref{NFR_Accuracy} &
+      \nfrref{NFR_Usability} &
+      \nfrref{NFR_Maintainability} &
+      \nfrref{NFR_Portability}
+      \\
+      \hline
+       \ref{ss_inout}        &X& & & & &X& & & & & \\ \hline
+       \ref{ss_params}       & &X&X&X&X&X& & & & & \\ \hline
+       \ref{ss_metrics}      & & & & & & &X& & & & \\ \hline
+       \ref{ss_unittest}     & & & & & & &X& & & & \\ \hline
+       \ref{ss_accuracy}     & & & & & & & &X& & & \\ \hline
+       \ref{ss_usability}    & & & & & & & & &X& & \\ \hline
+       \ref{ss_maintain}     & & & & & & & & & &X& \\ \hline
+       \ref{ss_portability}  & & & & & & & & & & &X\\ \hline
+  \end{tabular}
+  \caption{Traceability Matrix Showing the Connections Between the Test Sections
+    and the Requirements}
+  \label{Table:R_trace}
+\end{table}
 
 \section{Trace to Modules}
+In Tables \ref{Table:M_trace} and \ref{Table:M_trace2},
+the connections between the test sections and the modules are shown.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+      \hline
+      Section &
+      \mref{M_HdwHide} &
+      \mref{M_control} &
+      \mref{M_imgGTInput} &
+      \mref{M_params} &
+      \mref{M_inSpotProfile} &
+      \mref{M_export} &
+      \mref{M_infoDisp} &
+      \mref{M_vizGT} &
+      \mref{M_vizSubregion} &
+      \mref{M_vizSpotProfile} &
+      \mref{M_vizSpotContent} &
+      \mref{M_vizSpotSignal}
+      \\
+      \hline
+       \ref{ss_inout}     &X& &X& & &X& & & & &X&X\\ \hline
+       \ref{ss_params}    &X& & &X&X& & &X&X&X&X&X\\ \hline
+       \ref{ss_metrics}   & & & & & & &X& & & & & \\ \hline
+       \ref{ss_unittest}  & & & & & & &X& & & & & \\ \hline
+  \end{tabular}
+  \caption{Traceability Matrix Showing the Connections Between the Test Sections
+    and the Modules (Part 1)}
+  \label{Table:M_trace}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+      \hline
+      Sections &
+      \mref{M_vizSpotLayout} &
+      \mref{M_vizSampledSub} &
+      \mref{M_vizResultSub} &
+      \mref{M_vizResultImg} &
+      \mref{M_dispControl} &
+      \mref{M_GUI} &
+      \mref{M_drawStage} &
+      \mref{M_rendering} &
+      \mref{M_metric}
+      \\
+      \hline
+       \ref{ss_inout}     & &X&X&X&X&X&X&X& \\ \hline
+       \ref{ss_params}    &X&X&X&X&X&X&X&X& \\ \hline
+       \ref{ss_metrics}   & & & & & &X&X&X&X\\ \hline
+       \ref{ss_unittest}  & & & & & &X&X&X&X\\ \hline
+  \end{tabular}
+  \caption{Traceability Matrix Showing the Connections Between the Test Sections
+    and the Modules (Part 2)}
+  \label{Table:M_trace2}
+\end{table}
+
 
 \section{Code Coverage Metrics}
 Code coverage was used as part of this project. However, callgraphs have been generated using
