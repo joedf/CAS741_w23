@@ -769,7 +769,7 @@ Type: Automatic
 
 Input: \code{original\_500-crop.png} and \code{original\_500-crop.png} (see \ttref{Tbl_TestImages})
 
-Output: \code{1.00} $\pm$ ERR\_MARGIN
+Output: \code{1.00} $\pm$ ERR\_MARGIN (or 100\% relative)
 
 Test Case Derivation: Should be the best score/match possible
   since they are the same image / identical.
@@ -783,7 +783,7 @@ Type: Automatic
 
 Input: \code{original\_500-crop.png} and \code{og-minor\_defects.png} (see \ttref{Tbl_TestImages})
 
-Output: \code{0.99} $\pm$ ERR\_MARGIN
+Output: \code{0.99} $\pm$ ERR\_MARGIN (or 99\% relative)
 
 Test Case Derivation: Should be very close to the best score/match possible
   since they are nearly identical.
@@ -811,7 +811,7 @@ Type: Automatic
 
 Input: \code{black.png} and \code{half.png} (see \ttref{Tbl_TestImages})
 
-Output: \code{0.29} $\pm$ ERR\_MARGIN
+Output: \code{0.29} $\pm$ ERR\_MARGIN (or 29\% relative)
 
 Test Case Derivation: Should be $1 - \frac{1}{255} \sqrt{\text{MSE}}$ (following the formula for iNRMSE)
 as defined in the SRS \cite{SRS}), where the Mean Square Error (or difference)
@@ -827,7 +827,7 @@ Type: Automatic
 
 Input: \code{white.png} and \code{half.png} (see \ttref{Tbl_TestImages})
 
-Output: \code{0.29} $\pm$ ERR\_MARGIN
+Output: \code{0.29} $\pm$ ERR\_MARGIN (or 29\% relative)
 
 Test Case Derivation: Same justification as \utref{U_metric2}.
 
@@ -840,7 +840,7 @@ Type: Automatic
 
 Input: \code{black.png} and \code{gray.png} (see \ttref{Tbl_TestImages})
 
-Output: \code{0.50} $\pm$ ERR\_MARGIN
+Output: \code{0.50} $\pm$ ERR\_MARGIN (or 50\% relative)
 
 Test Case Derivation: Should be $1 - \frac{1}{255} \sqrt{\text{MSE}}$ (following the formula for iNRMSE)
 as defined in the SRS \cite{SRS}), where the Mean Square Error (or difference)
@@ -855,7 +855,7 @@ Type: Automatic
 
 Input: \code{white.png} and \code{gray.png} (see \ttref{Tbl_TestImages})
 
-Output: \code{0.50} $\pm$ ERR\_MARGIN
+Output: \code{0.50} $\pm$ ERR\_MARGIN (or 50\% relative)
 
 Test Case Derivation: Same justification as \utref{U_metric4}, 
 with the slight difference that the MSE is $(255-128)^2 = 16129$.
@@ -869,7 +869,7 @@ Type: Automatic
 
 Input: \code{half.png} and \code{gray.png} (see \ttref{Tbl_TestImages})
 
-Output: \code{0.50} $\pm$ ERR\_MARGIN
+Output: \code{0.50} $\pm$ ERR\_MARGIN (or 50\% relative)
 
 Test Case Derivation: One half of the pixels follow the justification of \utref{U_metric4},
 and the other half follow the justification of \utref{U_metric5}.

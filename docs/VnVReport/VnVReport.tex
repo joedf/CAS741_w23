@@ -53,6 +53,7 @@
 2023/04/04 & 0.3.0 & Complete NFR testing sections\\
            & 0.3.1 & Start unit testing section\\
 2023/04/05 & 0.4.0 & Complete first revision\\
+           & 0.4.1 & Minor tweaks\\
 \bottomrule
 \end{tabularx}
 
@@ -492,8 +493,12 @@ relatively good fits. All other metrics did not fit the expected order at all.
 
 \section{Automated Testing}
 Currently, this is no automated execution of the tests every time there is change.
-That said, the tests are easy to run (just executing two files) and could be set up with
-continuous integration some time in the future.
+Automated testing using \href{https://pytest.org}{pytest} and \href{https://qunitjs.com}{QUnit}
+to display and calculate the test pass percentages and execution times would be helpful
+and is desired (perhaps sometime in the future),
+but have not been set up at this time due to a lack of time / resources.
+That said, the tests are easy to run (just executing two files)
+and could be set up with continuous integration some time in the future.
 
 
 \section{Trace to Requirements}
