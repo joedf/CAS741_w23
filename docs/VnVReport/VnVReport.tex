@@ -2,6 +2,7 @@
 
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 
+\usepackage{amsmath, mathtools}
 \usepackage{siunitx}
 \usepackage{pdflscape}
 \usepackage{booktabs}
@@ -484,6 +485,19 @@ relatively good fits. All other metrics did not fit the expected order at all.
   \item The passing value for T13 (see \ref{T13}) had to be changed from ``0.9800'' to `0.9500' since the
     resulting images look identical. The resulting value of `0.9617' seemed satisfactory and the original
     expected test value was perhaps too constrained.
+  \item Through manual testing (mainly section \ref{ss_metrics})
+    and watching for runtime warnings and errors,
+    a small discrepancy was found in the sizes of the compared images with
+    the image metrics: one image was 1-2 pixels taller depending on the size
+    of the web browser window. This was due to sub-pixel position calculations
+    of the canvas when the UI is first drawn. This has been rectified by
+    ensuring all values are rounded up to the nearest integers.
+  \item Manual testing (mainly section \ref{ss_metrics}) also
+    revealed a limitation in the MSE-based metrics (as used by \progname{}):
+    two images with very similar average gray values overall will
+    erroneously score a "good" score (e.g., $\ge 80\%$). This is a design
+    flaw or limitation likely documented in literature (but did not check),
+    stemming from the use of averaging.
   \item For similar reasons, the error margin for the unit tests was adjusted from $\pm$ 2\% to $\pm$ 5\%.
   \item Code is cleaner/clearer and better commentated/documented after running code linting and
     doing code review. Many unnecessary global variables have been eliminated.
