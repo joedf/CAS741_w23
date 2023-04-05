@@ -24,10 +24,12 @@
 \usepackage{xr}
 \externaldocument{../SRS/SRS}
 \externaldocument{../Design/MG/MG}
+\externaldocument{../VnVPlan/VnVPlan}
 
 \newcommand{\rref}[1]{R\ref{#1}}
 \newcommand{\nfrref}[1]{NFR\ref{#1}}
 \newcommand{\mref}[1]{M\ref{#1}}
+\newcommand{\lref}[1]{L\ref{#1}}
 
 \input{../Comments}
 \input{../Common}
@@ -55,6 +57,8 @@
            & 0.3.1 & Start unit testing section\\
 2023/04/05 & 0.4.0 & Complete first revision\\
            & 0.4.1 & Minor tweaks\\
+           & 0.4.2 & Use references for code libraries\\
+           & 0.4.3 & Added rank graphs\\
 \bottomrule
 \end{tabularx}
 
@@ -405,15 +409,15 @@ Failures found here may represent a misunderstanding by the author or a limitati
 Please refer to figures \ref{fig_js_results} and \ref{fig_py_results} for the results.
 \begin{itemize}
   \item All metrics passed U10 variants U1 to U3,
-    except for ``psnr (darosh)'' (from L4) and ``mssim (sewar)'' (from L1)
+    except for ``psnr (darosh)'' (from \lref{lib_mse}) and ``mssim (sewar)'' (from \lref{lib_sewar})
     which both failed U10 (variant U3).
   \item Nearly all metrics failed U10 variants U4 and U5,
-    except for ``(i)nrmse'' (from L2) and ``mssim (darosh)'' (from L6).
+    except for ``(i)nrmse'' (from \lref{lib_prog}) and ``mssim (darosh)'' (from \lref{lib_msssim}).
     That said, they all scored consistently (about equal).
     The MSE-based metric that failed were due to a different
     normalization step.
   \item Nearly all metrics failed U10 variants U6 and U7,
-    except for the metric used by \progname{} (L2).
+    except for the metric used by \progname{} (\ref{lib_prog}).
     MSE-based metrics all scored consistently. The SSIM-based and UQI
     metrics were not consistent at all, and seems to representing
     a limitation, design flaw, or an inappropriate test
@@ -427,7 +431,8 @@ Please refer to figures \ref{fig_js_results} and \ref{fig_py_results} for the re
 
 \subsubsection{Image Metric Experimental Testing}
 The values (figures \ref{fig_js_results} and \ref{fig_py_results}) were sorted into
-rank orders which be can viewer in figures \ref{fig_js_ranks} and \ref{fig_py_ranks}.
+rank orders which be can viewer in figures \ref{fig_js_ranks}, \ref{fig_py_ranks},
+\ref{fig_js_graph}, and \ref{fig_py_graph}.
 None of the metrics fit the expected rank order perfectly. That said,
 The MSE-based metrics, followed closely by UIQ then SSIM-based, fit closely; the discrepancies
 were all based on values that were within $\pm$ 0.02 of each other. These are otherwise considered
@@ -441,10 +446,10 @@ relatively good fits. All other metrics did not fit the expected order at all.
   \includegraphics[width=22cm]{test-analysis/js-tests-results.png}
   \caption{The results from the JavaScript tests.
   As indicated in the VnV Plan \cite{VnV_plan}:
-  ``ssim (obartra)'' refers to L3, ``ssim (darosh)'' refers to L5,
-  columns with ``jdf'' are metrics implemented by the author as L2,
-  ``mse and psnr (darosh)'' refer to L4, and
-  ``msssim and ssim (darosh)'' refer to L6.}
+  ``ssim (obartra)'' refers to \lref{lib_ssim}, ``ssim (darosh)'' refers to \lref{lib_ssim1},
+  columns with ``jdf'' are metrics implemented by the author as \lref{lib_prog},
+  ``mse and psnr (darosh)'' refer to \lref{lib_mse}, and
+  ``msssim and ssim (darosh)'' refer to \lref{lib_msssim}.}
   \label{fig_js_results}
   \end{center}
 \end{figure}
@@ -473,6 +478,26 @@ relatively good fits. All other metrics did not fit the expected order at all.
   \includegraphics[width=0.7\textwidth]{test-analysis/py-ranked.png}
   \caption{The ranked results from the Python tests.}
   \label{fig_py_ranks}
+  \end{center}
+\end{figure}
+
+
+\begin{figure}[h!]
+  \begin{center}
+  \includegraphics[width=0.7\textwidth]{test-analysis/js-graph.pdf}
+  \caption{A graph of the JavaScript test results of the normalized
+  image metrics (from \lref{lib_prog}, \lref{lib_ssim},
+  \lref{lib_ssim1} and \lref{lib_msssim}) versus the expected rank order.}
+  \label{fig_js_graph}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+  \includegraphics[width=0.7\textwidth]{test-analysis/py-graph.pdf}
+  \caption{A graph of the Python test results of the normalized
+  image metrics (from \lref{lib_sewar}) versus the expected rank order.}
+  \label{fig_py_graph}
   \end{center}
 \end{figure}
 
