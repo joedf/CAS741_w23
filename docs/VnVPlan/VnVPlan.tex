@@ -102,6 +102,7 @@
   \textbf{symbol} & \textbf{description}\\
   \midrule 
   GUI & Graphical User Interface\\
+  L & Library\\
   MG & Module Guide \\
   MIS & Module Interface Specification \\
   MSE & Mean Squared Error\\
@@ -119,6 +120,7 @@
   U & Unit test\\
   UI & User Interface\\
   UIQ & Universal Image Quality\\
+  UQI & Universal Quality Index\\
   VIF & Visual Information Fidelity \\
   VnV & Verification and Validation\\
   \bottomrule
@@ -769,7 +771,7 @@ Input: \code{original\_500-crop.png} and \code{original\_500-crop.png} (see \ttr
 
 Output: \code{1.00} $\pm$ ERR\_MARGIN
 
-Test Case Derivation: Should be the highest score/match possible
+Test Case Derivation: Should be the best score/match possible
   since they are the same image / identical.
 
 How test will be performed: Running the javascript unit tests.
@@ -783,7 +785,7 @@ Input: \code{original\_500-crop.png} and \code{og-minor\_defects.png} (see \ttre
 
 Output: \code{0.99} $\pm$ ERR\_MARGIN
 
-Test Case Derivation: Should be very close to the highest score/match possible
+Test Case Derivation: Should be very close to the best score/match possible
   since they are nearly identical.
 
 How test will be performed: Running the javascript unit tests.
@@ -797,7 +799,7 @@ Input: \code{black.png} and \code{white.png} (see \ttref{Tbl_TestImages})
 
 Output: \code{0.00} $\pm$ ERR\_MARGIN
 
-Test Case Derivation: Should be the lowest score/match possible
+Test Case Derivation: Should be the worst score/match possible
   since they are complete opposites.
 
 How test will be performed: Running the javascript unit tests.
@@ -889,7 +891,7 @@ satisfy \nfrref{NFR_Accuracy}.
 The image metric needs to be robust and accurate enough for our usecase.
 The \href{https://pypi.org/project/sewar}{sewar}
 (\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_sewar}})
-python package (which implements MSE, RMSE, PSNR, UIQ, SSIM, MS-SSIM, SCC, VIF, and more)
+python package (which implements MSE, RMSE, PSNR, UIQ/UQI, SSIM, MS-SSIM, SCC, VIF, and more)
 and following javascript libraries are used for ``oracle'' comparisons
 to \progname{}'s metric
 (\textbf{L\refstepcounter{libnum}\thelibnum \label{lib_prog}}):
@@ -928,7 +930,7 @@ Input/Condition: The ground truth images (\code{og} and \code{fant}) compared to
   listed in Table \ref{Tbl_TestImages}).
 
 
-Output/Result: The expected order (from low to high) of the metric scores is
+Output/Result: The expected order (from worst to best) of the metric scores is
 $
 \code{c500} \le \code{c6a5} \le \code{c010} \le \code{c060} \le \code{c100} \le
 \code{c130} \le \code{c120}
@@ -948,9 +950,9 @@ For the following reasons:
   \item \code{c100} should score reasonably well
   \item \code{c130} should score slightly better as there is more coverage, but may spread 
     the error more
-  \item \code{c120} should score the highest as reasonable compromise between area coverage
+  \item \code{c120} should score the highest/best as reasonable compromise between area coverage
     and error spread
-  \item \code{fant} should score even higher as it uses a complex high quality
+  \item \code{fant} should score even better as it uses a complex high quality
     algorithm \cite{fant} must is still downsampled for testing.
   \item \code{mDef} should get an almost perfect score as it is not downsampled and only
     a few pixels that are different.
@@ -976,7 +978,7 @@ Caveats:
     and that any image resizing artifacts that we have introduced do not
     significantly affect the order/trend of the scores. In preliminary tests,
     the trend was observed to be largely preserved, but with the scores
-    being significantly higher overall.
+    being significantly better/higher overall.
   \item Manually downsampling the ground truth image using different algorithms
     in an image editor, artifacts such ``edge halos` (for ``Bilinear'' and ``Lanczos'')
     and ``edge loss'' (for ``Nearest Neighbor'') were observed.
@@ -1009,13 +1011,13 @@ Output:
   \item \utref{U_metric0A} Test Variant: same output and justification.
   \item \utref{U_metric0B} Test Variant: same output and justification.
   \item \utref{U_metric1} Test Variant: same output and justification.
-  \item \utref{U_metric2} Test Variant: a lower score than the base variant,
+  \item \utref{U_metric2} Test Variant: a worse score than the base variant,
     since ``structural similarity'' is taken into account.
   \item \utref{U_metric3} Test Variant: same as above.
   \item \utref{U_metric4} Test Variant: same output and justification,
     since the compared images have the same (``flat'') structure.
   \item \utref{U_metric5} Test Variant: same as above.
-  \item \utref{U_metric6} Test Variant: a lower score than the base variant,
+  \item \utref{U_metric6} Test Variant: a worse score than the base variant,
     since ``structural similarity'' is taken into account.
 \end{itemize}
 

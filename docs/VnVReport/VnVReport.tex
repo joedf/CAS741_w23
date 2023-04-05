@@ -3,7 +3,7 @@
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 
 \usepackage{siunitx}
-
+\usepackage{pdflscape}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
@@ -57,8 +57,10 @@
   \textbf{symbol} & \textbf{description}\\
   \midrule 
   GUI & Graphical User Interface\\
+  L & Library\\
   MG & Module Guide\\
   MIS & Module Interface Specification\\
+  NaN & Not a Number\\
   NFR & Non Functional Requirement\\
   R & Requirement\\
   SRS & Software Requirements Specification\\
@@ -384,10 +386,88 @@ to run the tests (each in their own subfolder).
 All these tests passed within the margin of error.
 
 \subsection{Results for Nonfunctional Requirements}
+The tests are mostly experimental in nature help determine if there is a more fitting
+metric to use. Failures here do mean a failure for the software.
+Failures found here may represent a misunderstanding by the author or a limitation of the metrics.
+
 \subsubsection{Image Metric Control Testing}
-...
+Please refer to figures \ref{fig_js_results} and \ref{fig_py_results} for the results.
+\begin{itemize}
+  \item All metrics passed U10 variants U1 to U3,
+    except for ``psnr (darosh)'' (from L4) and ``mssim (sewar)'' (from L1)
+    which both failed U10 (variant U3).
+  \item Nearly all metrics failed U10 variants U4 and U5,
+    except for ``(i)nrmse'' (from L2) and ``mssim (darosh)'' (from L6).
+    That said, they all scored consistently (about equal).
+    The MSE-based metric that failed were due to a different
+    normalization step.
+  \item Nearly all metrics failed U10 variants U6 and U7,
+    except for the metric used by \progname{} (L2).
+    MSE-based metrics all scored consistently. The SSIM-based and UQI
+    metrics were not consistent at all, and seems to representing
+    a limitation, design flaw, or an inappropriate test
+    (likely was designed for different image types).
+  \item For U10 variants U8, same as above.
+  \item Other than the first two u10 test variants (U1 and U2),
+    the SCC and VIFP metrics scores were all failures:
+    all 0 or NaN (invalid, calculation could not be completed).
+\end{itemize}
+
+
 \subsubsection{Image Metric Experimental Testing}
-...
+The values (figures \ref{fig_js_results} and \ref{fig_py_results}) were sorted into
+rank orders which be can viewer in figures \ref{fig_js_ranks} and \ref{fig_py_ranks}.
+None of the metrics fit the expected rank order perfectly. That said,
+The MSE-based metrics, followed closely by UIQ then SSIM-based, fit closely; the discrepancies
+were all based on values that were within $\pm$ 0.02 of each other. These are otherwise considered
+relatively good fits. All other metrics did not fit the expected order at all.
+
+
+\begin{landscape}
+\vspace*{\fill}
+\begin{figure}[h!]
+  \begin{center}
+  \includegraphics[width=22cm]{test-analysis/js-tests-results.png}
+  \caption{The results from the JavaScript tests.
+  As indicated in the VnV Plan \cite{VnV_plan}:
+  ``ssim (obartra)'' refers to L3, ``ssim (darosh)'' refers to L5,
+  columns with ``jdf'' are metrics implemented by the author as L2,
+  ``mse and psnr (darosh)'' refer to L4, and
+  ``msssim and ssim (darosh)'' refer to L6.}
+  \label{fig_js_results}
+  \end{center}
+\end{figure}
+\vspace*{\fill}
+\end{landscape}
+
+\begin{figure}[h!]
+  \begin{center}
+  \includegraphics[width=1.0\textwidth]{test-analysis/py-tests-results.png}
+  \caption{The results from the Python tests.}
+  \label{fig_py_results}
+  \end{center}
+\end{figure}
+
+
+\begin{figure}[h!]
+  \begin{center}
+  \includegraphics[width=0.95\textwidth]{test-analysis/js-ranked.png}
+  \caption{The ranked results from the JavaScript tests.}
+  \label{fig_js_ranks}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+  \includegraphics[width=0.7\textwidth]{test-analysis/py-ranked.png}
+  \caption{The ranked results from the Python tests.}
+  \label{fig_py_ranks}
+  \end{center}
+\end{figure}
+
+
+\newpage
+\clearpage
 
 \section{Changes Due to Testing}
 \begin{enumerate}
@@ -406,8 +486,8 @@ That said, the tests are easy to run (just executing two files) and could be set
 continuous integration some time in the future.
 
 \section{Trace to Requirements}
-		
-\section{Trace to Modules}		
+
+\section{Trace to Modules}
 
 \section{Code Coverage Metrics}
 Code coverage was used as part of this project. However, callgraphs have been generated using
