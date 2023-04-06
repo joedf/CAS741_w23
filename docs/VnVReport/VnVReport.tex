@@ -59,6 +59,7 @@
            & 0.4.1 & Minor tweaks\\
            & 0.4.2 & Use references for code libraries\\
            & 0.4.3 & Added rank graphs\\
+2023/04/06 & 0.4.4 & Added another change/remark from testing\\
 \bottomrule
 \end{tabularx}
 
@@ -505,7 +506,7 @@ relatively good fits. All other metrics did not fit the expected order at all.
 \newpage
 \clearpage
 
-\section{Changes Due to Testing}
+\section{Remarks and Changes Due to Testing}
 \begin{enumerate}
   \item The passing value for T13 (see \ref{T13}) had to be changed from ``0.9800'' to `0.9500' since the
     resulting images look identical. The resulting value of `0.9617' seemed satisfactory and the original
@@ -527,6 +528,13 @@ relatively good fits. All other metrics did not fit the expected order at all.
   \item Code is cleaner/clearer and better commentated/documented after running code linting and
     doing code review. Many unnecessary global variables have been eliminated.
   \item Switching over to the UQI/UIQ or SSIM metrics may be worth considering.
+  \item Noticed from unit testing that some image metrics in javascript (js-tests) were somewhat
+    inconsistent with their python counterpart (py-tests) because of inaccurate pixel values being read. For example,
+    black pixels (0x000000) where read as (0x010101) or gray pixels (0x808080) being
+    read as (0x767676)... As a result, the output metric values were very liekly
+    off because of this. An \href{https://github.com/joedf/ImgBeamer/issues/25}{issue}
+    has been opened on the \href{https://github.com/joedf/ImgBeamer}{GitHub code repository}
+    to explore any possible mitigations.
 \end{enumerate}
 
 
