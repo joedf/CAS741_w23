@@ -7,7 +7,7 @@
 
 \author{\authname}
 
-\date{}
+\date{\today}
 
 \input{../Comments}
 \input{../Common}
@@ -18,19 +18,39 @@
 
 \section{Changes in Response to Feedback}
 
-\plt{Summarize the changes made over the course of the project in response to
-feedback from TAs, the instructor, teammates, other teams, the project
-supervisor (if present), and from user testers.}
-
-\plt{For those teams with an external supervisor, please highlight how the feedback 
-from the supervisor shaped your project.  In particular, you should highlight the 
-supervisor's response to your Rev 0 demonstration to them.}
-
-\subsection{SRS Analysis}
+\subsection{SRS}
+This course really drove me to better explain and share my thoughts. 
+I realize now that there are never too many figures. A good visual explanation
+really does say more than words could express. In response to some confusion,
+I create many figures that are now included in the SRS with many
+visual examples with a concise explanation for each of them.
+The wording for the problem and its solution was made a clearer.
+I had many minor issues with typos, inconsistencies with acronyms, and
+some missing and incomplete definitions.
+Following the "mantra" of "design for change",
+I realize the importance of making requirements and
+assumptions as atomic as possible: not only is it easier to reference, but it
+is easier to update.
 
 \subsection{Design and Design Documentation}
+By separating the responsibilities of the software into so-called modules,
+the code was updated to match and is now much clearer than it was before.
+As a result, it was easier for me to understand and see what 
+other changes were needed to improve maintainability.
+Needed changes (or identified flaws) that were
+not completed (or fixed) were at least noted in the
+code as ``to-do'' comments. Otherwise, some global variables were not even used
+and have been removed.
 
 \subsection{VnV Plan and Report}
+Direct feedback helped make clearer testing plan that I then followed myself.
+Had I not taken the time to address the changes to the VnV plan, I likely
+would not have found the several inconsistencies and small issues as noted
+in the VnV report.
+The tests should be numerous and each input and output needs to be justified.
+It is important to include tests even if we \textit{know} the ``answer'', since
+more often than not we are can be wrong and miss things... which I did ;-)
+
 
 \section{Design Iteration (LO11)}
 
@@ -56,6 +76,8 @@ technology?}
 \plt{What went wrong in terms of processes and technology?}
 
 \subsection{What Would you Do Differently Next Time?}
+I realize that it's better the wrong design decision and move forward than
+to hesitate. 
 
 \plt{What will you do differently for your next project?}
 
