@@ -43,42 +43,68 @@ code as ``to-do'' comments. Otherwise, some global variables were not even used
 and have been removed.
 
 \subsection{VnV Plan and Report}
-Direct feedback helped make clearer testing plan that I then followed myself.
+Direct feedback helped make a clearer testing plan that I then followed myself.
 Had I not taken the time to address the changes to the VnV plan, I likely
 would not have found the several inconsistencies and small issues as noted
-in the VnV report.
+in the VnV report. I cannot imagine how much worse it could have been otherwise,
+and if someone else had done the testing without these changes or the knowledge
+I have.
 The tests should be numerous and each input and output needs to be justified.
 It is important to include tests even if we \textit{know} the ``answer'', since
 more often than not we are can be wrong and miss things... which I did ;-)
 
 
 \section{Design Iteration}
-
-\plt{Explain how you arrived at your final design and implementation.  How did
-the design evolve from the first version to the final version?} 
+The first version was very rudimentary. It was only after multiple interactions
+with the "expert consultants" that the needs became clearer for all parties involved.
+This really goes to show what Dr.~Parnas meant why a "rational design" process
+needs to be "faked". Some requirements and even assumptions do not become clear
+till much later on. The original design was going to be a simple input-output
+program with two numbers: a pixel size and a relative spot size. This has now
+evolved into an interactive visualization program that allows for different
+spot shapes and display each part of the sampling process.
 
 \section{Design Decisions}
-
-\plt{Reflect and justify your design decisions.  How did limitations,
- assumptions, and constraints influence your decisions?}
+The original software was likely going to be in python due to the large
+repository of helpful libraries and preloaded modules.
+However, the idea of a web application came to mind, because of the
+built-in cross-platform design and its incredible
+ease to sharing information / webpages.
+It is \textit{by design}...
+During implementation, instead of just of displaying the resulting image,
+it became clear that it was very beneficial
+to show each step of the sampling and image formation process.
 
 \section{Reflection on Project Management}
-
-\plt{This question focuses on processes and tools used for project management.}
+One of the most the difficult tasks for me, is to estimate how much effort and time
+some things take. As a software developer, it is always so easy to fall into the 
+"trap" of feature creep. A scope needs to be well-defined, realistic, and justified:
+"done one thing and do it right". Over-committing and not having a realistic 
+scope can ultimately lead to the failure of the whole project. In some sense,
+I guess this is about "modular" project planning or risk management,
+where smaller manageable tasks mean smaller manageable possible failures.
 
 \subsection{What Went Well?}
-
-\plt{What went well for your project management in terms of processes and 
-technology?}
+By splitting up the design into separate documents with a clear purpose for each,
+it became clearer what was priority and what was not. This helped define the
+project scope. As for testing, I was relatively surprised what I could find.
+Even though most of the issues were minor, their sum effect lead to subtle
+but noticeable issues that I likely would have otherwise dismissed as
+simple "rounding issues" or "cosmic rays"...
 
 \subsection{What Went Wrong?}
-
-\plt{What went wrong in terms of processes and technology?}
+Naturally, I was overly ambitious with the original design with the time allotted.
+Much of the testing had to be limited and some features I wanted
+to implement had to be put aside, such as a coordinate system
+or noise simulation. 
 
 \subsection{What Would you Do Differently Next Time?}
-I realize that it's better the wrong design decision and move forward than
-to hesitate. 
-
-\plt{What will you do differently for your next project?}
+I realize that it is sometimes better to go ahead with small but wrong design decisions
+and move forward than to hesitate. Not everything is knowable from the start.
+I need to accept that we will to go back and change things.
+Next time, I should gradually grow of a list of potential items ordered by priority,
+but \textbf{estimate} the time (with extra leeway) it takes for each.
+Then, take the pragmatic approach of limiting or
+truncating the list to the time allotted.
 
 \end{document}
