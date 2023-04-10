@@ -3,6 +3,7 @@
 Developer Name: Joachim de Fourestier
 
 Date of project/course start: January 11th, 2023
+Course end: April 12th, 2023
 
 This project is a basic simulation and learning tool of the Scanning Electron Microscopy (SEM) image formation process.
 
