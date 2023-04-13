@@ -58,6 +58,7 @@
 2023/03/22 & 0.1.6 & Clarify \acref{AC_GUI} and \uref{UC_IO}.\\
            & 0.1.7 & Resolve some minor issues for clarity.\\
 2023/04/05 & 0.1.8 & Minor tweaks.\\
+2023/04/12 & 1.0.0 & Changes to address feedback from Dr.~Smith.\\
 \bottomrule
 \end{tabularx}
 
@@ -80,6 +81,7 @@ This section records information for easy reference.
   DAG & Directed Acyclic Graph \\
   DOM & Document Object Model \\
   GUI & Graphical User Interface \\
+  HID & Human Interface Device \\
   HTML & HyperText Markup Language \\
   \progname & \prognamelong{}\\
   M & Module \\
@@ -187,13 +189,14 @@ adopted here is called design for change.
     useful) be shown to the user. This information may include overall brightness and
     contrast values, the number of decimal places, image size, etc.
   \item[\refstepcounter{acnum} \actheacnum \label{AC_imgMetricAlgos}:] The ability
-    to use different image quality metrics.
+    to use different image quality metrics. Currently, only one is calculated and displayed.
+    An option could be added to change the displayed / calculated metric.
   \item[\refstepcounter{acnum} \actheacnum \label{AC_maskOpts}:] The implementation of rendering,
     compositing, clipping, or blending operations (e.g., ``Bit BLT'').
   \item[\refstepcounter{acnum} \actheacnum \label{AC_calcSignal}:] The calculation of the
     average pixel or signal (intensity) value sampled by the beam.
   \item[\refstepcounter{acnum} \actheacnum \label{AC_GUI}:] The implementation of graphical user
-    interface, meaning the programming language or UI/UX design ("look and feel").
+    interface, meaning the programming language or UI/UX design (``look and feel'').
 \end{description}
 
 \subsection{Unlikely Changes} \label{SecUchange}
@@ -220,7 +223,9 @@ decisions will be changed.
   \item[\refstepcounter{ucnum} \uctheucnum \label{UC_visualize}:] The software must be able
     to display a live visualization to the user while the imaging parameters are changed.
   \item[\refstepcounter{ucnum} \uctheucnum \label{UC_8bit}:] The software will only be dealing
-    with 8-bit depth images.
+    with 8-bit depth images. Currently, the
+    \href{https://html.spec.whatwg.org/multipage/canvas.html\#pixel-manipulation}{HTML5 canvas specification}
+    will always convert and return pixel values as integers from 0 to 255.
 \end{description}
 
 \section{Module Hierarchy} \label{SecMH}
@@ -291,6 +296,13 @@ Konva.js HTML5 2d canvas javascript library \cite{konva_2021}.
 Only the leaf modules in the hierarchy have to be implemented. If a dash
 (\emph{--}) is shown, this means that the module is not a leaf and will not have
 to be implemented.
+
+~\newline
+\textbf{Note:} The ``Abstract Object'' module type is used numerously, mainly the visualization
+and input modules. While it is possible to have multiple instances of each of these modules
+and to define them as ``Abstract Data Type'',
+it is assumed that there should only be one (singleton) of each.
+Otherwise, module type are explicitly stated as ``Abstract Data Type''.
 
 \subsection{Hardware-Hiding Modules (\mref{M_HdwHide})}
 
@@ -559,7 +571,15 @@ to be implemented.
 \section{Traceability Matrix} \label{SecTM}
 
 This section shows two traceability matrices: between the modules and the
-requirements and between the modules and the anticipated changes.
+requirements (Table \ref{TblRT}) and between the modules and the anticipated changes (Table \ref{TblACT}).
+
+~\newline
+\noindent\textbf{Note:} Generally, we should aim for one module per AC.
+However, this application has a GUI and renders
+images depending on the given inputs and user interactions with the program through said GUI.
+As a result, many of the AC \textit{will} relate to multiple modules (as listed in Table \ref{TblACT}),
+mainly \mref{M_GUI} \& \mref{M_drawStage} for displaying the GUI and images,
+and \mref{M_rendering} \& \mref{M_metric} for rendering and computing the images.
 
 % the table should use mref, the requirements should be named, use something
 % like fref
