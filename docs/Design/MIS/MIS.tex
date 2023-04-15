@@ -67,6 +67,7 @@ urlcolor=cyan          % color of external links
 2023/03/20 & 0.1.3 & Add in minor missing type information.\\
 2023/03/22 & 0.1.4 & Fix some typos, formatting, and various minor issues.\\
 2023/03/25 & 0.1.5 & Improve clarity and resolve minor issues.\\
+2023/04/15 & 1.0.0 & Changes to address feedback from Dr.~Smith.\\
 \bottomrule
 \end{tabularx}
 
@@ -138,14 +139,18 @@ imageData \cite{MDN_imagedata} & $\mathbb{I}_{w,h}$ & \code{data}: a one dimensi
 
 \noindent
 The specification of \progname \ uses some derived data types: sequences, strings,
-tuples, and \code{drawingObject}. Sequences are lists filled with elements of the same data type. Strings
+tuples, booleans, and \code{drawingObject}. Sequences are lists filled with elements
+of the same data type. Strings
 are sequences of characters. Tuples contain a list of values, potentially of
-different types. \code{drawingObject} is a geometry object (provided by Konva):
+different types. A boolean can be represented different ways but only has two possible values:
+true or false.
+\code{drawingObject} is a geometry object (provided by Konva):
 the fill can be an image, a colour, or even another shape. They can have a width, height,
 rotation, position (x,y), and many other properties.
 \code{imageDrawingObject} is essentially \code{drawingObject} with an image as the fill.
 \code{drawingLayer} is a layer on a drawing stage (provided by Konva).
 A drawing stage may have many layers.
+\code{drawingStage} is a sequence of \code{drawingLayer} where each can have different relative positioning and scaling.
 In addition, \progname \ uses functions, which
 are defined by the data types of their inputs and outputs. Local functions are
 described by giving their type signature followed by their specification.
@@ -192,6 +197,7 @@ None
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
 main & - & - & - \\
+UpdateBaseImage & - & - & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -214,12 +220,17 @@ None
 
 \noindent \code{main()}:
 \begin{itemize}
-\item transition: Initializes the GUI, modifies the state and environment variables of the GUI \msref{MS_GUI}.
+\item transition: Initializes the program and the GUI module \mreff{M_GUI}.
+\end{itemize}
+
+\noindent \code{UpdateBaseImage()}:
+\begin{itemize}
+\item transition: Updates the GUI and propagates a change in the input ground truth
+image throughout the application.
 \end{itemize}
 
 \subsubsection{Local Functions}
-\code{UpdateBaseImage()}: Updates the GUI and propagates a change in the input ground truth
-image throughout the application.
+None
 \newpage
 
 
@@ -244,7 +255,8 @@ image throughout the application.
 
 \subsubsection{Exported Constants}
 \begin{itemize}
-  \item \code{G\_BoxSize}: A value ($\mathbb{N}$) describing both the pixel width and height used for each visualization display ``box''.
+  \item \code{G\_BoxSize}: A value ($\mathbb{Z}_+$) describing both the width and height (in pixels)
+    used for each visualization display ``box'' (currently always square).
   \item \code{G\_MATH\_TOFIXED}: Used for display for fixed decimal number length
     rounding (ex. ``4.1234'' at fixed length ``2'' results in ``4.12'').
 \end{itemize}
@@ -263,12 +275,6 @@ image throughout the application.
 \end{center}
 
 \subsection{Semantics}
-\an{Didn't do MIS descriptions of the Input modules because they are essentially just
-buttons or text boxes with event handlers. Can be implemented however a developer wishes
-as long the SRS value constrains are followed...
-Or are full descriptions also needed for these?
-Not sure if they would add much value than already provided here or just informational noise.
-Maybe I can write this as a note here (instead of a comment)?}
 
 \subsubsection{State Variables}
 \begin{itemize}
@@ -285,10 +291,13 @@ Maybe I can write this as a note here (instead of a comment)?}
 
 \subsubsection{Environment Variables}
 \begin{itemize}
-  \item Keyboard
-  \item Mouse
-  \item Screen
-  \item File System
+  \item Keyboard ($\mathbb{Z}_+$ for key codes describing the key pressed)
+  \item Mouse (Boolean for click state and $\mathbb{Z}_+$ for cursor position)
+  \item Screen ($\mathbb{Z}_+$ for the width and height in pixels)
+  \item Button (String for a file location) to input an image for ground truth \mrefp{M_imgGTInput} from the File System.
+  \item Number entry control ($\mathbb{Z}_+$) to input imaging parameters \mrefp{M_params}
+  \item Shape node edit control to obtains ($\mathbb{Z}_+$) number describing the spot shape \mrefp{M_inSpotProfile}:
+    width, height, and rotation.
 \end{itemize}
 
 \subsubsection{Assumptions}
@@ -304,17 +313,17 @@ Maybe I can write this as a note here (instead of a comment)?}
 \noindent \code{OnImageLoaded()}:
 \begin{itemize}
   \item transition: Sets up user control event handlers (e.g., mouse clicks or drag, button presses, text input change, ...)
-    as needed for the user input modules (\mref{M_imgGTInput}, \mref{M_params} and \mref{M_inSpotProfile}),
+    as needed for the user input modules (\mref{M_imgGTInput}, \mref{M_params} and \mref{M_inSpotProfile})
+    as stated in the environment variables,
     initializes the Display Control \mreff{M_dispControl}
     with the individual GUI draw controls/locations for each visualization
     and obtains an update function reference for redraws or state changes.
     If another image is loaded (i.e. the image is changed),
     the Display Control is reinitialized with the new image.
-    \newline\an{I am not sure what transition means, couldn't find it as a defined term in the slides.
-    Defined what the function/method does. I hope this is right, continuing as so...}
   \item output: 
     \begin{itemize}
-      \item \code{doUpdate()}: notifies the Display Control \mreff{M_dispControl} to update / redraw the visualization displays.
+      \item \code{doUpdate()}: notifies the Display Control \mreff{M_dispControl} to update / redraw the visualization displays,
+        essentially by calling \code{updateAll()} from the Display control.
       \item \code{updateInfoDisplay()}: notifies the Information Display \mreff{M_infoDisp} to update when needed (such as
       an input value change from the mentioned input modules).
       \item \code{doExport()}: Event handler for the "Export" button press, it calls the Image Export \mreff{M_export}.
@@ -322,10 +331,13 @@ Maybe I can write this as a note here (instead of a comment)?}
 \end{itemize}
 
 \subsubsection{Local Functions}
-\begin{itemize}
-  \item \code{doUpdate()}: a local copy (of the function described above) to call for GUI events such as mouse clicks.
-  \item \code{updateInfoDisplay()} and \code{doExport()}: as described above.
-\end{itemize}
+None
+
+\subsubsection{Considerations}
+The input modules (\mref{M_imgGTInput}, \mref{M_params}, and \mref{M_inSpotProfile})
+are specified as environment variables because they are essentially just
+buttons or text boxes with event handlers. They can be implemented however a developer wishes
+as long the SRS value constrains are followed...
 
 \newpage
 
@@ -351,7 +363,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{updateInfo} & \code{textDisplayControl}, \code{baseImage} ($\mathbb{I}_{w,h}$), & - & - \\
+\code{updateInfo} & \code{textDisplayControl} (string), \code{baseImage} ($\mathbb{I}_{w,h}$), & - & - \\
                   & \code{resultImage} ($\mathbb{I}_{w,h}$), \code{imageMag} ($\mathbb{R}_+$) \\
 \hline
 \end{tabular}
@@ -363,7 +375,9 @@ None
 None
 
 \subsubsection{Environment Variables}
-The decimal length for rounding the number for display as defined by \msref{MS_GUI}.
+\begin{itemize}
+  \item \code{textDisplayControl} (string): a GUI control to display text (string).
+\end{itemize}
 
 \subsubsection{Assumptions}
 \begin{itemize}
@@ -377,7 +391,7 @@ The decimal length for rounding the number for display as defined by \msref{MS_G
 \begin{itemize}
 \item transition: Calls the Metrics Calculation \mreff{M_metric} to compare the given images
   (\code{baseImage} and \code{resultImage}) to get metric value ($\mathbb{R}$).
-  The magnification (\code{imageMag}) and metric values are then rounded 
+  The magnification (\code{imageMag}) and metric values are then rounded to \code{G\_MATH\_TO\_FIXED}
   and pushed as formatted descriptive text to \code{textDisplayControl}.
 \end{itemize}
 
@@ -408,7 +422,8 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{export} & \code{resultImage} ($\mathbb{I}_{w,h}$), \code{outputPath} (string) & ImageFile & \code{InvalidPath} \\
+\code{export} & \code{resultImage} ($\mathbb{I}_{w,h}$), \code{outputPath} (string)
+  & ImageFile ($\mathbb{I}_{w,h}$) & \code{InvalidPath} \\
 \hline
 \end{tabular}
 \end{center}
@@ -419,7 +434,9 @@ None
 None
 
 \subsubsection{Environment Variables}
-The File System.
+\begin{itemize}
+  \item outputPath: the File System path or location as a string pointing to where to write the export image file.
+\end{itemize}
 
 \subsubsection{Assumptions}
 The output location is valid, writable, and accessible.
@@ -472,7 +489,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{Init} & \code{gtImage} ($\mathbb{I}_{w,h}$),
+\code{Init} & \code{gtImage} (\code{imageDrawingObject}),
   \code{drawControls}: GUI controls for 2 to 10 in section \ref{USES_dispControl}
   & a \code{doUpdate} function for each visualization that has one & - \\
 \hline
@@ -485,7 +502,7 @@ None
 
 \subsubsection{State Variables}
 \begin{itemize}
-  \item References to drawing stages/canvases for all the visualization/display modules mentioned
+  \item \code{drawControls}: References to drawing stages/canvases for all the visualization/display modules mentioned
     in section \ref{USES_dispControl}
   \item ... and each corresponding update function (\code{doUpdate}) 
   \item \code{gtImage}: a reference to the ground truth image data (as provided by \mref{M_imgGTInput}).
@@ -507,7 +524,7 @@ None
 \noindent \code{Init(gtImage, drawControls...)}:
 \begin{itemize}
 \item transition: Initializes the drawing stages/canvases in each of the
-  draw-control locations (\code{drawControls})
+  draw-control locations (\code{drawControls} - see \ref{USES_dispControl})
   as provided by the GUI \mreff{M_GUI} and passes them to each corresponding visualization module.
 \item output: a \code{doUpdate} function for each of the visualization modules.
 \end{itemize}
@@ -547,9 +564,9 @@ None
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
 \code{init} & \code{container}, \code{width} ($\mathbb{Z}_+$), \code{height} ($\mathbb{Z}_+$)
-  & drawing stage & \code{ContainerNotFound} \\
+  & drawing stage (\code{drawingStage}) & \code{ContainerNotFound} \\
 \hline
-\code{getLayers} & - & array of the layers & - \\
+\code{getLayers} & - & array of the layers (sequence of \code{drawingLayer}) & - \\
 \hline
 \code{getContext} & - & drawing context \cite{html_std_canvas} & - \\
 \hline
@@ -557,7 +574,7 @@ None
 \hline
 \code{toCanvas} & - & canvasAPI object \cite{html_std_canvas} & - \\
 \hline
-\code{toDataURL} & - & a URL to an exported image \cite{html_std_canvas} & - \\
+\code{toDataURL} & - & a URL to an exported image \cite{html_std_canvas} (string) & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -668,7 +685,9 @@ Drawing Stage / Canvas \mreff{M_drawStage}
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-None.
+\begin{itemize}
+  \item \code{drawStage}: the stage or canvas (\code{drawingStage}) to draw on.
+\end{itemize}
 
 \subsubsection{Environment Variables}
 None
@@ -680,7 +699,7 @@ None
 
 \noindent \code{drawGrid(gridLayer, rect, rows, cols, lineColor = defaultLineColor)}:
 \begin{itemize}
-\item transition: Draws a line (optional colour \code{lineColor}) grid with the specified
+\item transition: On \code{drawStage}, draws a line (optional colour \code{lineColor}) grid with the specified
   number of \code{rows} and \code{cols} (columns) on the given drawing layer (\code{gridLayer})
   within the given grid rectangular bounds (\code{rect}).
 \item output: the computed size in pixel of a cell within the grid drawn.
@@ -690,7 +709,7 @@ None
 
 \noindent \code{repeatDrawOnGrid(layer, rect, rows, cols, shape)}:
 \begin{itemize}
-\item transition: Draw a given geometry (\code{shape}) or imageDrawingObject repeated over a grid pattern
+\item transition: On \code{drawStage}, draw a given geometry (\code{shape}) or imageDrawingObject repeated over a grid pattern
   with the specified number of \code{rows} and \code{cols} (columns) on the given drawing
   layer (\code{layer}) within the given grid rectangular bounds (\code{rect}).
 \item exception: \code{badGridParams} meaning non-integer or non-positive values were given for
@@ -699,7 +718,7 @@ None
 
 \noindent \code{ComputeProbeValue\_gs(image, probe)}:
 \begin{itemize}
-\item transition: internally uses \code{get\_avg\_pixel\_gs()} to calculate the pixel value
+\item Internally uses \code{get\_avg\_pixel\_gs()} to calculate the pixel value
   of a locally composited or ``stenciled'' or ``clipped'' image (for sampling the region
   defined by the shape or \code{probe}, like a cookie cutter).
   Pixels that have been ``stenciled'' out are set to blank pixels (where all RGBA components are equal to 0)
@@ -758,7 +777,7 @@ None
 
 \noindent \code{compare(image1, image2)}:
 \begin{itemize}
-\item transition: Compares the two images and computes a value representing the similarity.
+\item Compares the two images and computes a value representing the similarity.
 \item output: Gives a value ($\mathbb{A}$) where 1.0 means a perfect match and 0 means zero similarity.
 \item exception: \code{DifferentImageSizes} meaning the size of \code{image1} and
   \code{image2} do not match.
@@ -792,8 +811,9 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawGroundtruthImage} & \code{stage}, \code{gtImage}, \code{subregionImage}
-  & \code{imageDrawingObject}, \code{doUpdate} & - \\
+\code{drawGroundtruthImage} & \code{stage} (\code{drawingStage}),
+  \code{gtImage} (\code{imageDrawingObject}), \code{subregionImage} (\code{imageDrawingObject})
+  & gtImageDrawing (\code{imageDrawingObject}), \code{doUpdate} & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -804,7 +824,7 @@ None
 These are kept for mutation, update calls, and performance reasons.
 \begin{itemize}
   \item \code{stage}: a reference to drawing stage.
-  \item \code{rect}: a reference to a rectangle geometry.
+  \item \code{rect}: a reference to a rectangle geometry (\code{drawingObject}).
   \item \code{gtImage}: a reference to imageDrawingObject for the ground truth image.
   \item \code{subregionImage}: a reference to imageDrawingObject for the subregion image.
 \end{itemize}
@@ -816,7 +836,8 @@ None
 
 \noindent \code{drawGroundtruthImage(stage, gtImage, subregionImage)}:
 \begin{itemize}
-\item transition: Defines (in a function \code{doUpdate}) a drawing arrangement to fill the stage with the ground truth image
+\item transition: Defines (in a function \code{doUpdate}) a drawing arrangement to fill the \code{stage}
+  with the ground truth image
   (\code{gtImage} as provided by the Display Control \mref{M_dispControl})
   with a semi-transparent rectangle (\code{rect}) representing the bounds of the
   \code{subregionImage} (as provided by the Display Control \mref{M_dispControl}).
@@ -853,8 +874,9 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawSubregionImage} & \code{stage}, \code{gtImage}, \code{updateCallback}
-  & \code{subregionImage} & - \\
+\code{drawSubregionImage} & \code{stage} (\code{drawingStage}),
+  \code{gtImage} (\code{imageDrawingObject}), \code{updateCallback}
+  & \code{subregionImage} (\code{imageDrawingObject}) & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -923,7 +945,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawSpotProfile} & \code{stage} & \code{beam} (\code{drawingObject}) & - \\
+\code{drawSpotProfile} & \code{stage} (\code{drawingStage}) & \code{beam} (\code{drawingObject}) & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -982,9 +1004,10 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawSpotContent} & \code{stage}, \code{subregionImage}, \code{sBeam} (\code{drawingObject}),
+\code{drawSpotContent} & \code{stage} (\code{drawingStage}),
+  \code{subregionImage} (\code{imageDrawingObject}), \code{sBeam} (\code{drawingObject}),
   \code{updateCallback}
-  & \code{sImage} & - \\
+  & \code{sImage} (\code{imageDrawingObject}) & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -1051,7 +1074,9 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawSpotSignal} & \code{sourceStage}, \code{destStage}, \code{sBeam} (\code{drawingObject})
+\code{drawSpotSignal} &
+  \code{sourceStage} (\code{drawingStage}), \code{destStage} (\code{drawingStage}),
+  \code{sBeam} (\code{drawingObject})
   & \code{doUpdate} & - \\
 \hline
 \end{tabular}
@@ -1116,7 +1141,9 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawSpotLayout} & \code{drawStage}, \code{subregionImage}, \code{imgParams},
+\code{drawSpotLayout} & \code{drawStage} (\code{drawingStage}),
+  \code{subregionImage} (\code{imageDrawingObject}),
+  \code{imgParams} ($\mathbb{N}_+$, $\mathbb{N}_+$, $\mathbb{N}$),
   \code{beam} (\code{drawingObject})
   & \code{doUpdate} & - \\
 \hline
@@ -1146,7 +1173,7 @@ None
 
 \noindent \code{drawSpotLayout(drawStage, subregionImage, imgParams, beam)}:
 \begin{itemize}
-\item transition: On the given stage, draws a grid over the subregionImage with
+\item transition: On the given stage (\code{drawStage}), draws a grid over the \code{subregionImage} with
   the \code{beam} geometry clone in the center of each cell in the drawn grid
   representing the individual location beam/spot sampling location and spot area coverage.
 \item output: an update function (\code{doUpdate}).
@@ -1182,7 +1209,9 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawSampledSubregion} & \code{drawStage}, \code{subregionImage}, \code{imgParams},
+\code{drawSampledSubregion} & \code{drawStage} (\code{drawingStage}),
+  \code{subregionImage} (\code{imageDrawingObject}),
+  \code{imgParams} ($\mathbb{N}_+$, $\mathbb{N}_+$, $\mathbb{N}$),
   \code{beam} (\code{drawingObject}) & \code{doUpdate} & - \\
 \hline
 \end{tabular}
@@ -1211,7 +1240,8 @@ None
 
 \noindent \code{drawSampledSubregion(drawStage, subregionImage, imgParams, beam)}:
 \begin{itemize}
-\item transition: On the given stage, draws the subregionImage with ``stenciled''
+\item transition: On the given stage (\code{drawStage}),
+  draws the \code{subregionImage} with ``stenciled''
   or ``clipped'' the \code{beam} geometry clone at the center of each cell
   of the rasterization grid. This display represents
   the image content to be sampled by the beam/spot at discrete location
@@ -1249,8 +1279,11 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawResultingSubregion} & \code{stage}, \code{subregionRect},
-  \code{gtImage}, \code{imgParams}, \code{beam} (\code{drawingObject})
+\code{drawResultingSubregion} & \code{stage} (\code{drawingStage}),
+  \code{subregionRect} (\code{drawingObject}),
+  \code{gtImage} (\code{imageDrawingObject}),
+  \code{imgParams} ($\mathbb{N}_+$, $\mathbb{N}_+$, $\mathbb{N}$),
+  \code{beam} (\code{drawingObject})
   & \code{doUpdate} & - \\
 \hline
 \end{tabular}
@@ -1282,7 +1315,7 @@ None
 \begin{itemize}
 \item transition: On the given stage (\code{stage}), draws the resampled subregion
   (using \code{gtImage} cropped to the bounds of \code{subregionRect})
-  meaning each cell in the rasterization grid (as defined by \code(imgParams))
+  meaning each cell in the rasterization grid (as defined by \code{imgParams})
   is filled with the corresponding computed average pixel value using
   the ``stenciled'' or ``clipped'' image content with the \code{beam} geometry
   at the center of each cell as represented by the Sampled Subregion
@@ -1320,8 +1353,11 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\code{drawResultingImage} & \code{stage}, \code{beam}, \code{gtImage},
-  \code{subregionRect}, \code{imgParams} & \code{updateConfigValues} & - \\
+\code{drawResultingImage} & \code{stage} (\code{drawingStage}),
+  \code{beam} (\code{drawingObject}), \code{gtImage} (\code{imageDrawingObject}),
+  \code{subregionRect} (\code{drawingObject}),
+  \code{imgParams} ($\mathbb{N}_+$, $\mathbb{N}_+$, $\mathbb{N}$)
+  & \code{updateConfigValues} & - \\
 \hline
 \end{tabular}
 \end{center}
