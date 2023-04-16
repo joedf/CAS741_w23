@@ -60,6 +60,7 @@
            & 0.4.2 & Use references for code libraries\\
            & 0.4.3 & Added rank graphs\\
 2023/04/06 & 0.4.4 & Added another change/remark from testing\\
+2023/04/16 & 0.4.5 & Tweaks and fix some typos\\
 \bottomrule
 \end{tabularx}
 
@@ -358,8 +359,8 @@ in any modern web browser to run and test the software:
 	
 \section{Comparison to Existing Implementation}	
 
-This section is not applicable as an existing implementation for public use was not found or
-is not available for comparison.
+This section is not applicable as an existing implementation or similar application
+for public use was not found or is not available for comparison.
 
 \section{Unit Testing} \label{ss_unittest}
 As stated, unit testing was limited to image metrics (as explained in the VnV Plan \cite{VnV_plan}).
@@ -402,9 +403,10 @@ to run the tests (each in their own subfolder).
 All these tests passed within the margin of error.
 
 \subsection{Results for Nonfunctional Requirements}
-The tests are mostly experimental in nature help determine if there is a more fitting
-metric to use. Failures here do mean a failure for the software.
+The tests are experimental in nature to help determine if there is a more fitting
+metric to use. Failures here do not mean a failure for the software.
 Failures found here may represent a misunderstanding by the author or a limitation of the metrics.
+All tests passed unless otherwise stated below.
 
 \subsubsection{Image Metric Control Testing}
 Please refer to figures \ref{fig_js_results} and \ref{fig_py_results} for the results.
@@ -432,7 +434,7 @@ Please refer to figures \ref{fig_js_results} and \ref{fig_py_results} for the re
 
 \subsubsection{Image Metric Experimental Testing}
 The values (figures \ref{fig_js_results} and \ref{fig_py_results}) were sorted into
-rank orders which be can viewer in figures \ref{fig_js_ranks}, \ref{fig_py_ranks},
+rank orders which be can viewed in figures \ref{fig_js_ranks}, \ref{fig_py_ranks},
 \ref{fig_js_graph}, and \ref{fig_py_graph}.
 None of the metrics fit the expected rank order perfectly. That said,
 The MSE-based metrics, followed closely by UIQ then SSIM-based, fit closely; the discrepancies
@@ -445,7 +447,7 @@ relatively good fits. All other metrics did not fit the expected order at all.
 \begin{figure}[h!]
   \begin{center}
   \includegraphics[width=22cm]{test-analysis/js-tests-results.png}
-  \caption{The results from the JavaScript tests.
+  \caption{The results (metric values) from the JavaScript tests.
   As indicated in the VnV Plan \cite{VnV_plan}:
   ``ssim (obartra)'' refers to \lref{lib_ssim}, ``ssim (darosh)'' refers to \lref{lib_ssim1},
   columns with ``jdf'' are metrics implemented by the author as \lref{lib_prog},
@@ -460,7 +462,7 @@ relatively good fits. All other metrics did not fit the expected order at all.
 \begin{figure}[h!]
   \begin{center}
   \includegraphics[width=1.0\textwidth]{test-analysis/py-tests-results.png}
-  \caption{The results from the Python tests.}
+  \caption{The results (metric values) from the Python tests.}
   \label{fig_py_results}
   \end{center}
 \end{figure}
@@ -469,7 +471,8 @@ relatively good fits. All other metrics did not fit the expected order at all.
 \begin{figure}[h!]
   \begin{center}
   \includegraphics[width=0.95\textwidth]{test-analysis/js-ranked.png}
-  \caption{The ranked results from the JavaScript tests.}
+  \caption{The ranked results (metric values) from the JavaScript tests.
+  Red highlighted values are mismatches compared to the expected order.}
   \label{fig_js_ranks}
   \end{center}
 \end{figure}
@@ -477,7 +480,8 @@ relatively good fits. All other metrics did not fit the expected order at all.
 \begin{figure}[h!]
   \begin{center}
   \includegraphics[width=0.7\textwidth]{test-analysis/py-ranked.png}
-  \caption{The ranked results from the Python tests.}
+  \caption{The ranked results (metric values) from the Python tests.
+  Red highlighted values are mismatches compared to the expected order.}
   \label{fig_py_ranks}
   \end{center}
 \end{figure}
@@ -486,7 +490,7 @@ relatively good fits. All other metrics did not fit the expected order at all.
 \begin{figure}[h!]
   \begin{center}
   \includegraphics[width=0.7\textwidth]{test-analysis/js-graph.pdf}
-  \caption{A graph of the JavaScript test results of the normalized
+  \caption{A graph of the JavaScript test results (metric values) of the normalized
   image metrics (from \lref{lib_prog}, \lref{lib_ssim},
   \lref{lib_ssim1} and \lref{lib_msssim}) versus the expected rank order.}
   \label{fig_js_graph}
@@ -496,7 +500,7 @@ relatively good fits. All other metrics did not fit the expected order at all.
 \begin{figure}[h!]
   \begin{center}
   \includegraphics[width=0.7\textwidth]{test-analysis/py-graph.pdf}
-  \caption{A graph of the Python test results of the normalized
+  \caption{A graph of the Python test results (metric values) of the normalized
   image metrics (from \lref{lib_sewar}) versus the expected rank order.}
   \label{fig_py_graph}
   \end{center}
@@ -640,7 +644,7 @@ the connections between the test sections and the modules are shown.
 
 
 \section{Code Coverage Metrics}
-Code coverage was used as part of this project. However, callgraphs have been generated using
+Code coverage was not used as part of this project. However, callgraphs have been generated using
 \href{https://github.com/scottrogowski/code2flow}{Code2Flow}
 to verify the flow application with respect to the design (as per the MG \cite{MG} and MIS \cite{MIS}).
 An up-to-date but simplified (with limited search depth) callgraph is shown in figure \ref{fig_callgraph_simple}.
