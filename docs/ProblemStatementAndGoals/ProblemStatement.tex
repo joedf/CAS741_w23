@@ -13,8 +13,9 @@
 \maketitle
 
 \begin{table}[hp] \caption{Revision History} \label{TblRevisionHistory}
-\begin{tabularx}{\textwidth}{llX} \toprule \textbf{Date} & \textbf{Developer(s)}& \textbf{Change}\\ \midrule 2023/01/20 & Joachim de Fourestier & First
-version\\ %Date2 & Name(s) & Description of changes\\ ... & ... & ...\\
+\begin{tabularx}{\textwidth}{llX} \toprule \textbf{Date} & \textbf{Developer(s)}& \textbf{Change}\\ \midrule
+2023/01/20 & Joachim de Fourestier & First version\\
+2023/04/22 & Joachim de Fourestier & Fix minor issues and typos\\
 \bottomrule \end{tabularx} \end{table}
 
 \section{Problem Statement}
@@ -59,12 +60,12 @@ scanning pattern, and the Signal-to-Noise Ratio (SNR). There is a general invers
 relationship between resolution and SNR. For example, an image with a finer beam
 will produce an image of higher resolution but will have less signal resulting in a noisier
 image (low SNR). An image with a larger beam diameter will result in more
-signal(higher SNR), but this image will be of lower resolution
+signal (higher SNR), but this image will be of lower resolution
 \cite{jeol_scanning_2013}.
 
 Apart from resolution, the sampling pattern also affects the image quality.
 Each discrete location over which the beam scans, the spot profile (size and
-shape ofbeam) with respect to the pixel size (discrete location with the raster
+shape of beam) with respect to the pixel size (discrete location with the raster
 grid) may overlap already covered areas of the sample as it travels between each
 discrete location. This may result in over-sampling, producing a blurrier
 image. If the spot is too small, there is little or no overlap, the sample is
@@ -94,7 +95,7 @@ include disciplines such as materials science, biology, geology, and
 semiconductors.
 
 \subsection{Environment}
-Cross platform (i.e., Windows, Linux, or Mac), 
+Cross-platform (i.e., Windows, Linux, or Mac), 
 on any modern laptop or desktop computer.
 
 \section{Goals}
