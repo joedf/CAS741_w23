@@ -4,6 +4,7 @@ Developer Name: Joachim de Fourestier
 
 Date of project/course start: January 11th, 2023  
 Course end: April 12th, 2023
+The course description is available [here](https://academiccalendars.romcmaster.ca/preview_course_nopop.php?catoid=46&coid=235365).
 
 ## Description
 
