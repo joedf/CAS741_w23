@@ -23,10 +23,10 @@ The folders and files for this project are as follows:
 
 ## Documentation
 
-- Problem Statement and Goals: [ProblemStatement.pdf](docs\ProblemStatementAndGoals\ProblemStatement.pdf)
-- Software Requirements Specification: [SRS.pdf](docs\SRS\SRS.pdf)
-- Module Guide: [MG.pdf](docs\Design\MG\MG.pdf)
-- Module Interface Specification: [MIS.pdf](docs\Design\MIS\MIS.pdf)
-- Verification and Validation Plan: [VnVPlan.pdf](docs\VnVPlan\VnVPlan.pdf)
-- Verification and Validation Report: [VnVReport.pdf](docs\VnVReport\VnVReport.pdf)
-- Reflection Report: [Reflection.pdf](docs\Reflection\Reflection.pdf)
+- Problem Statement and Goals: [ProblemStatement.pdf](docs/ProblemStatementAndGoals/ProblemStatement.pdf)
+- Software Requirements Specification: [SRS.pdf](docs/SRS/SRS.pdf)
+- Module Guide: [MG.pdf](docs/Design/MG/MG.pdf)
+- Module Interface Specification: [MIS.pdf](docs/Design/MIS/MIS.pdf)
+- Verification and Validation Plan: [VnVPlan.pdf](docs/VnVPlan/VnVPlan.pdf)
+- Verification and Validation Report: [VnVReport.pdf](docs/VnVReport/VnVReport.pdf)
+- Reflection Report: [Reflection.pdf](docs/Reflection/Reflection.pdf)
